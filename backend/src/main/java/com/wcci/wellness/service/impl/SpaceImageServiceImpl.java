@@ -1,20 +1,20 @@
-package com.wcci.jac.service.impl;
+package com.wcci.wellness.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.wcci.jac.entity.SpaceImage;
-import com.wcci.jac.repository.SpaceImageRepository;
-import com.wcci.jac.service.SpaceImageService;
+import com.wcci.wellness.entity.SpaceImage;
+import com.wcci.wellness.repository.SpaceImageRepository;
+import com.wcci.wellness.service.SpaceImageService;
 
 @Service
 public class SpaceImageServiceImpl implements SpaceImageService {
     @Autowired
     private SpaceImageRepository spaceImageRepository;
 
-    @Override 
+    @Override
     public SpaceImage saveSpaceImage(SpaceImage spaceImage) {
         return spaceImageRepository.save(spaceImage);
     }
@@ -26,6 +26,7 @@ public class SpaceImageServiceImpl implements SpaceImageService {
 
     @Override
     public SpaceImage getSpaceImageById(Long id) {
-        return spaceImageRepository.findById(id).orElseThrow(() -> new RuntimeException("SpaceImage not found with id: " + id));
+        return spaceImageRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("SpaceImage not found with id: " + id));
     }
 }

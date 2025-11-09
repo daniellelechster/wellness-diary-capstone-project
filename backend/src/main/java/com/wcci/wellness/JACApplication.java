@@ -1,4 +1,4 @@
-package com.wcci.jac;
+package com.wcci.wellness;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

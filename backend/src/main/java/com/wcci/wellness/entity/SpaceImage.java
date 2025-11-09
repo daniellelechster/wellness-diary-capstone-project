@@ -1,4 +1,4 @@
-package com.wcci.jac.entity;
+package com.wcci.wellness.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

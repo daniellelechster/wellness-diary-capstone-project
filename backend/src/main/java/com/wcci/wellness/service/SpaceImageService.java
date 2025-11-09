@@ -1,8 +1,8 @@
-package com.wcci.jac.service;
+package com.wcci.wellness.service;
 
 import java.util.List;
 
-import com.wcci.jac.entity.SpaceImage;
+import com.wcci.wellness.entity.SpaceImage;
 
 public interface SpaceImageService {
     SpaceImage saveSpaceImage(SpaceImage spaceImage);
@@ -12,5 +12,3 @@ public interface SpaceImageService {
     SpaceImage getSpaceImageById(Long id);
 
 }
-
-

@@ -1,4 +1,4 @@
-package com.wcci.jac.controller;
+package com.wcci.wellness.controller;
 
 import java.util.List;
 
@@ -12,33 +12,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.wcci.jac.entity.SpaceImage;
-import com.wcci.jac.service.SpaceImageService;
+import com.wcci.wellness.entity.SpaceImage;
+import com.wcci.wellness.service.SpaceImageService;
 
 @RestController
 @RequestMapping("/api/jac")
 
 public class SpaceImageController {
-@Autowired
-private SpaceImageService spaceImageService;
+    @Autowired
+    private SpaceImageService spaceImageService;
 
-@PostMapping
-public ResponseEntity<SpaceImage> saveSpaceImage(@RequestBody SpaceImage spaceImage) {
-    SpaceImage savedSpaceImage = spaceImageService.saveSpaceImage(spaceImage);
-    return ResponseEntity.status(HttpStatus.CREATED).body(savedSpaceImage);
-}
+    @PostMapping
+    public ResponseEntity<SpaceImage> saveSpaceImage(@RequestBody SpaceImage spaceImage) {
+        SpaceImage savedSpaceImage = spaceImageService.saveSpaceImage(spaceImage);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedSpaceImage);
+    }
 
+    @GetMapping
+    public ResponseEntity<List<SpaceImage>> getAllSpaceImages() {
+        return ResponseEntity.ok(spaceImageService.getAllSpaceImages());
+    }
 
-@GetMapping
-public ResponseEntity<List<SpaceImage>> getAllSpaceImages() {
-    return ResponseEntity.ok(spaceImageService.getAllSpaceImages());
-}
-
-@GetMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<SpaceImage> getSpaceImageById(@PathVariable Long id) {
         return ResponseEntity.ok(spaceImageService.getSpaceImageById(id));
     }
 
-
 }
-
