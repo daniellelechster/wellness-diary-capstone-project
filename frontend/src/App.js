@@ -1,4 +1,4 @@
-// import {BrowserRouter as Router, Link, Routes, Route} from "react-router-dom"
+import {BrowserRouter as Router, Link, Routes, Route} from "react-router-dom"
 import About from "./components/About"
 import Contact from "./components/Contact"
 import Home from "./Home"
