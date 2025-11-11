@@ -1,6 +1,6 @@
 import React from "react";
 
-export function Calendar({ showWeekView }) {
+export function MoodCalendar({ showWeekView }) {
   return (
     <div className="calendarView">
       {showWeekView ? (
