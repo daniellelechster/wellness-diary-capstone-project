@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
-public class SpaceImage {
+public class Wellness {
 
     @Id
     @GeneratedValue
@@ -13,12 +13,12 @@ public class SpaceImage {
 
     private String imageUrl;
 
-    public SpaceImage() {
-    }
+    // public SpaceImage() {
+    // }
 
-    public SpaceImage(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+    // public SpaceImage(String imageUrl) {
+    //     this.imageUrl = imageUrl;
+    // }
 
     public Long getId() {
         return id;
