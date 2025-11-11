@@ -1,15 +1,15 @@
 import {BrowserRouter as Router, Link, Routes, Route} from "react-router-dom"
 import About from "./components/About"
 import Contact from "./components/Contact"
-import Home from "./Home"
+import Home from "./components/Home"
 
 function App() {
   return (
     <Router>
       <div className="app-container">
-        <Header />
+        
       <main className="main-content">
-        {/* <ul>
+        <ul>
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -19,7 +19,7 @@ function App() {
           <li>
             <Link to="/contact">Contact</Link>
           </li>
-        </ul> */}
+        </ul>
         <Routes>
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
