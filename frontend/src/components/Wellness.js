@@ -73,7 +73,6 @@ export function Wellness() {
 
   return (
     <div className="wellness-container">
-      {/* Overall Progress */}
       <div className="card progress-card">
         <h2>Daily Wellness Progress</h2>
         <p>Keep up the great work!</p>
@@ -81,7 +80,6 @@ export function Wellness() {
         <p>{Math.round(calculateCompletionRate())}% Complete</p>
       </div>
 
-      {/* Meditation Tracker */}
       <div className="card">
         <h3>🧠 Meditation & Mindfulness</h3>
         <div>
@@ -107,7 +105,6 @@ export function Wellness() {
         )}
       </div>
 
-      {/* Workout Tracker */}
       <div className="card">
         <h3>🏋️ Exercise & Movement</h3>
         <div>
@@ -139,7 +136,6 @@ export function Wellness() {
         )}
       </div>
 
-      {/* Meals Tracker */}
       <div className="card">
         <h3>🍽️ Meals & Nutrition</h3>
         {['breakfast', 'lunch', 'dinner'].map(meal => (
@@ -162,7 +158,6 @@ export function Wellness() {
         </div>
       </div>
 
-      {/* Water Tracker */}
       <div className="card">
         <h3>💧 Water Intake</h3>
         <p>Goal: 8 glasses per day</p>
