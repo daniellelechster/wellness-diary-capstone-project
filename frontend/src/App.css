@@ -55,7 +55,6 @@ body {
   color: #333;
 }
 
-/* === Card === */
 .home-card {
   background: white;
   border-radius: 12px;
@@ -87,14 +86,12 @@ body {
   font-size: 0.9rem;
 }
 
-/* === Grid Layout === */
 .home-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
 }
 
-/* === Card Sections === */
 .home-card-header {
   display: flex;
   justify-content: space-between;
@@ -185,20 +182,58 @@ body {
 }
 /* Header */
 
-/* Journal */
-
-.journals-page {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 1rem;
-  font-family: "Segoe UI", sans-serif;
-  color: #333;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fafafa; /* light background */
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #ddd;
+  font-family: 'Arial', sans-serif;
 }
 
-.page-title {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 2rem;
+/* Site title */
+.header h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+}
+
+/* Navigation list */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+/* Each link */
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* Hover effect */
+.nav-links a:hover {
+  background-color: #ffadad; /* soft red highlight */
+  color: #fff;
+}
+
+/* Optional: active link */
+.nav-links a.active {
+  background-color: #ff4d6d;
+  color: #fff;
 }
 
 /* JOURNAL SECTION */
