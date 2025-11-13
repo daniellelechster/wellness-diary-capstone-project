@@ -19,6 +19,7 @@ export function MoodSlider() {
         style={{ backgroundColor: moodColors[mood - 1] }}
       ></div>
       <p>Your current mood: {mood}</p>
+      <p>hi</p>
     </div>
   );
 }
