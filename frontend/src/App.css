@@ -44,6 +44,145 @@ body {
   color: #61dafb;
 }
 
+/* Home */
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 20px;
+  font-family: "Inter", sans-serif;
+  color: #333;
+}
+
+/* === Card === */
+.home-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.home-header-card {
+  text-align: center;
+  padding: 24px;
+}
+
+.home-gradient-bg {
+  background: linear-gradient(to right, #f3e8ff, #ffe4e6);
+  border: 1px solid #e9d5ff;
+}
+
+.home-header-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  background: linear-gradient(to right, #7c3aed, #ec4899);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.home-header-subtitle {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+/* === Grid Layout === */
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+/* === Card Sections === */
+.home-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.home-icon-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.home-icon {
+  font-size: 20px;
+}
+
+.home-icon.red {
+  color: #ec4899;
+}
+.home-icon.purple {
+  color: #8b5cf6;
+}
+.home-icon.blue {
+  color: #3b82f6;
+}
+.home-icon.indigo {
+  color: #6366f1;
+}
+
+.home-small-text {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.home-value {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.home-subtext {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+/* === Progress Bar === */
+.home-progress-bar {
+  background: #e5e7eb;
+  border-radius: 6px;
+  height: 8px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+.home-progress-fill {
+  background: #8b5cf6;
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.3s ease;
+}
+
+/* === Activities === */
+.home-activities {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.home-activity {
+  padding: 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  background: #f9fafb;
+  transition: 0.3s;
+}
+
+.home-activity-complete {
+  border-color: #c4b5fd;
+  background: #f3e8ff;
+}
+
+.home-activity-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+}
 /* Header */
 
 /* Journal */
@@ -215,4 +354,3 @@ button:hover {
 .water-buttons button {
   margin: 0 4px;
 }
-
