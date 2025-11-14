@@ -12,6 +12,7 @@ import Mood from "./components/Mood";
 import Wellness from "./components/Wellness";
 import Journals from "./components/Journals";
 import WeatherDisplay from "./components/WeatherDisplay";
+import Charts from "./components/Charts";
 
 function App() {
 
@@ -33,7 +34,9 @@ function App() {
           <Route path="/weatherDisplay" element={<WeatherDisplay />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/footer" element={<Footer />} />
+          <Route path="/charts" element={<Charts />} />
         </Routes>
+        
       </main>
 
       <Footer />
