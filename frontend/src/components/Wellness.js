@@ -73,6 +73,7 @@ export function Wellness() {
 
   return (
     <div className="wellness-container">
+      <h1>Your Wellness Home</h1>
       <div className="card progress-card">
         <h2>Daily Wellness Progress</h2>
         <p>Keep up the great work!</p>
