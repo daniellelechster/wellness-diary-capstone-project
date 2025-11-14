@@ -1,15 +1,27 @@
 import React, { useState } from "react";
+import "../Mood.css";
 
 export function MoodSlider() {
-  const [mood, setMood] = useState(5);
+  const [mood, setMood] = useState(9);
   const moodColors = ["#ff4d4d", "#ff944d", "#ffe14d", "#a1ff4d", "#4dff88"];
+  const moodLabels = [
+    "mood1 😢",
+    "mood2 😴",
+    "mood3 😴",
+    "mood4 😴",
+    "mood5 😊",
+    "mood6 😄",
+    "mood7 🤩",
+    "mood8 😄",
+    "mood9 🤩"
+  ];
 
-  return (
+return (
     <div className="moodSlider">
       <input
         type="range"
         min="1"
-        max="5"
+        max="9"
         value={mood}
         onChange={(e) => setMood(Number(e.target.value))}
         className="w-full"
@@ -18,8 +30,7 @@ export function MoodSlider() {
         className="moodStyle"
         style={{ backgroundColor: moodColors[mood - 1] }}
       ></div>
-      <p>Your current mood: {mood}</p>
-      <p>hi</p>
+      <p>Your current mood: <strong>{moodLabels[mood - 1]}</strong></p>
     </div>
   );
 }

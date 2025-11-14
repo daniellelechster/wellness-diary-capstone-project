@@ -1,0 +1,62 @@
+/* Mood */
+.moodSlider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+input[type="range"] {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  width: 100%;
+  margin: 1rem 0;
+  accent-color: #ffb4a2;
+}
+
+.moodStyle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.moodText {
+  font-size: 1.2rem;
+  color: #6d6875;
+}
+
+/* MoodIcons.css */
+.moodIconRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+}
+
+.moodIcon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60px;
+  font-size: 0.9rem;
+  color: #6d6875;
+}
+
+.emojiCircle {
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
