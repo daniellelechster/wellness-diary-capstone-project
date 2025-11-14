@@ -5,7 +5,7 @@ import marbue1 from "./images/marbue1.png";
 import nealsbiopic from "./images/nealsbiopic.png";
 import CodeBustersLogo from "./images/CodeBustersLogo.png";
 
-import "./About.css"; // Make sure you import the CSS file
+import "./About.css";
 
 function About() {
     return (
@@ -78,7 +78,7 @@ function About() {
                     <div className="name">Marbue Norman</div>
                     <img src={marbue1} alt="Marbue Norman" />
                     <p>
-                        Here lies Marbue's Bio!
+                       Marbue is an emerging Java developer currently immersed in We Can Code IT's intensive bootcamp, rapidly acquiring skills in software development and object-oriented programming. My background in healthcare has honed my attention to detail, adaptability, and commitment to excellence - qualities I'm now applying to the tech world. At We Can Code IT, I'm building a robust foundation in Java, Spring Framework, and full-stack development. My project portfolio is expanding weekly, showcasing my growing proficiency in creating efficient, scalable applications. Her unique blend of healthcare experience and budding tech skills positions her to bridge the gap between these two crucial sectors. My unique blend of healthcare experience and budding tech skills positions me to bridge the gap between these two crucial sectors. Currently seeking opportunities to contribute to innovative projects and continue my growth as a Java developer.
                     </p>
                 </div>
 
