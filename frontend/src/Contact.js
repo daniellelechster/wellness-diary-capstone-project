@@ -54,7 +54,7 @@ function Contact() {
                     </p>
                     <div className="contact-details">
                         <div className="contact-item">
-                            <strong>Email:</strong> support@wellnessdiary.com
+                            <strong>Email:</strong> email@example.com
                         </div>
                         <div className="contact-item">
                             <strong>Team:</strong> CodeBusters
