@@ -1,0 +1,96 @@
+.moodBox {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 75%;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+.moodHeader {
+    font-size: 1.6rem;
+    color: #6d6875;
+    margin-bottom: 1.5rem;
+}
+
+.emojiRow {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1rem;
+    height: 3rem;
+    padding: 0;
+}
+
+.emojiItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.9rem;
+    color: #6d6875;
+}
+
+.moodSlider {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    accent-color: #ffb4a2;
+    appearance: none;
+    margin-bottom: 2rem;
+}
+
+.moodSlider::-webkit-slider-runnable-track {  
+    background: #ddd;
+    border-radius: 10px;
+}
+
+.moodSlider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #ffb4a2;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.moodSlider::-moz-range-track {
+    height: 4px;
+    background: #ddd;
+    border-radius: 2px;
+}
+
+.moodFeedback {
+    font-size: 1.3rem;
+    padding: 1rem;
+    color: #6d6875;
+}
+
+.emojiNumberContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+.numberRow {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 4px;
+}
+
+.numberRow span {
+    font-size: 1rem;
+    color: #6d6875;
+}
+
+.moodSubmitButton {
+    /* background-color: #ff9494; */
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 2rem;
+    transition: background-color 0.3s ease;
+}
