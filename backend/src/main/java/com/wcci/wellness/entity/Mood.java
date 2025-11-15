@@ -1,6 +1,6 @@
 package com.wcci.wellness.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -11,19 +11,19 @@ public class Mood {
     @GeneratedValue
     private Long Id;
 
-    private LocalDate date;
+    private LocalDateTime date;
     private int rating;
 
-    public Mood(LocalDate date, int rating) {
+    public Mood(LocalDateTime date, int rating) {
         this.date = date;
         this.rating = rating;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
