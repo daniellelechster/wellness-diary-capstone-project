@@ -23,7 +23,6 @@ function App() {
       <main className="main-content">
 
         <Routes>
-          <Route path="/header" element={<Header />} />
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/journals" element={<Journals />} />
@@ -33,10 +32,9 @@ function App() {
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/weatherDisplay" element={<WeatherDisplay />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/footer" element={<Footer />} />
           <Route path="/charts" element={<Charts />} />
         </Routes>
-        
+
       </main>
 
       <Footer />

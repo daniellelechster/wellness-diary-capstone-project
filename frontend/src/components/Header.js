@@ -5,8 +5,8 @@ import '../App.css';
 function Header() {
   return (
     <header className="header">
-      <h1>Wellness Diary</h1>
-      <nav>
+      <h1 className="site-title">WELLNESS DIARY</h1>
+      <nav className="main-nav">
     <ul className="nav-links">
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
@@ -23,3 +23,5 @@ function Header() {
 }
 
 export default Header;
+
+

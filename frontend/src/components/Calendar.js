@@ -6,47 +6,70 @@ function Calendar({ entries = {}, selectedDate, onDateSelect }) {
     selectedDate ? new Date(selectedDate) : new Date(2025, 10, 1)
   );
 
+const getMoodColor = (mood) => {
+  switch(mood) {
+    case 1: return '#228B22'; // Excited - green
+    case 2: return '#ADFF2F'; // Content - light green
+    case 3: return '#FFFF00'; // Alright - yellow
+    case 4: return '#FFA500'; // Happy - orange
+    case 5: return '#FF4500'; // Sad - red-orange
+    case 6: return '#DC143C'; // Frustrated - crimson
+    case 7: return '#8B0000'; // Angry - dark red
+    case 8: return '#800080'; // Anxious - purple
+    case 9: return '#A9A9A9'; // Exhausted - gray
+    default: return '#fff';    // Undefined
+  }
+};
+
+  const pad = (n) => n.toString().padStart(2,'0');
+
+
   const changeMonth = (offset) => {
     const newDate = new Date(currentMonth);
     newDate.setMonth(newDate.getMonth() + offset);
     setCurrentMonth(newDate);
   };
 
-  const selectedEntry = entries[selectedDate];
+  const year = currentMonth.getFullYear();
+  const month = currentMonth.getMonth();
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  const startWeekday = month === 10 ? 6 : firstDay.getDay(); 
+  const daysInMonth = lastDay.getDate();
+
+  const calendarDays = Array.from({ length: startWeekday + daysInMonth }, (_, i) => {
+    if (i < startWeekday) return null; 
+    const day = i - startWeekday + 1;
+    const dateStr = `${year}-${month + 1}-${pad(day)}`;
+    const entry = entries[dateStr];
+    return { day, entry, moodColor: entry?.mood ? getMoodColor(entry.mood) : '#fff' };
+  });
 
   const monthEntries = Object.values(entries).filter(entry => {
     const entryDate = new Date(entry.date);
-    return (
-      entryDate.getMonth() === currentMonth.getMonth() &&
-      entryDate.getFullYear() === currentMonth.getFullYear()
-    );
+    return entryDate.getMonth() === month && entryDate.getFullYear() === year;
   });
 
   const avgMoodThisMonth =
     monthEntries.length > 0
       ? monthEntries.reduce((sum, e) => sum + (e.mood || 0), 0) / monthEntries.length
       : 0;
-
   const daysLogged = monthEntries.filter(e => e.mood).length;
 
-  const year = currentMonth.getFullYear();
-  const month = currentMonth.getMonth();
-  const firstDay = new Date(year, month, 1);
-  const lastDay = new Date(year, month + 1, 0);
-  const startWeekday = month === 10 ? 6 : firstDay.getDay(); // November starts on Saturday
+  
+  const moodLevels = [
+  { level: 1, label: 'Amazing', emoji: "😍" },
+  { level: 2, label: 'Very Good', emoji: "😄" },
+  { level: 3, label: 'Content', emoji: "😊" },
+  { level: 4, label: 'Okay', emoji: "😏" },
+  { level: 5, label: 'In the Middle', emoji: "😐" },
+  { level: 6, label: 'Meh', emoji: "😕" },
+  { level: 7, label: 'Frustrated', emoji: "😣" },
+  { level: 8, label: 'Down', emoji: "😢" },
+  { level: 9, label: 'Very Low', emoji: "😠" },
+  ];
 
-  const daysInMonth = lastDay.getDate();
-  const calendarDays = [];
-
-  for (let i = 0; i < startWeekday; i++) {
-    calendarDays.push(null);
-  }
-
-  for (let i = 1; i <= daysInMonth; i++) {
-    const dateStr = `${year}-${month + 1}-${i}`;
-    const entry = entries[dateStr];
-    calendarDays.push({ day: i, entry });
-  }
+  const selectedEntry = entries[selectedDate];
 
   return (
     <div className="calendar-page">
@@ -85,7 +108,8 @@ function Calendar({ entries = {}, selectedDate, onDateSelect }) {
             <div
               key={idx}
               className={`calendar-day ${d.entry ? 'logged' : ''}`}
-              onClick={() => onDateSelect && onDateSelect(`${year}-${month + 1}-${d.day}`)}
+              style={{ backgroundColor: d.moodColor }}
+              onClick={() => onDateSelect && onDateSelect(`${year}-${pad(month + 1)}-${pad(d.day)}`)}
             >
               {d.day}
             </div>
@@ -103,8 +127,24 @@ function Calendar({ entries = {}, selectedDate, onDateSelect }) {
           {selectedEntry.sleepHours && <p>Sleep: {selectedEntry.sleepHours} hours</p>}
         </div>
       )}
-    </div>
+
+     <div className="calendar-mood-legend">
+  <h4>Mood Legend</h4>
+  <div className="calendar-legend-grid">
+    {moodLevels.map(({ level, label, emoji }) => (
+      <div key={level} className="calendar-legend-item">
+        <div
+          className="calendar-legend-color"
+          style={{ backgroundColor: getMoodColor(level) }}
+        />
+        <span>{emoji} {label}</span>
+      </div>
+    ))}
+  </div>
+</div>
+</div>
   );
 }
 
 export default Calendar;
+
