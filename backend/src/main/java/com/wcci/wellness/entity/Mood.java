@@ -14,6 +14,10 @@ public class Mood {
     private LocalDateTime date;
     private int rating;
 
+    public Mood() {
+        
+    }
+
     public Mood(LocalDateTime date, int rating) {
         this.date = date;
         this.rating = rating;
