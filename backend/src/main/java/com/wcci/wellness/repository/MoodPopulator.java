@@ -1,4 +1,4 @@
-package com.wcci.wellness;
+package com.wcci.wellness.repository;
 
 import com.wcci.wellness.entity.Mood;
 import org.springframework.boot.CommandLineRunner;
