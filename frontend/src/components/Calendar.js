@@ -8,19 +8,19 @@ function Calendar({ entries = {}, selectedDate, onDateSelect }) {
 
 const getMoodColor = (mood) => {
   switch(mood) {
-    case 1: return '#228B22'; // Excited - green
-    case 2: return '#ADFF2F'; // Content - light green
-    case 3: return '#FFFF00'; // Alright - yellow
-    case 4: return '#FFA500'; // Happy - orange
+    case 1: return '#A9A9A9'; // Exhausted - gray
+    case 2: return '#800080'; // Anxious - purple
+    case 3: return '#8B0000'; // Angry - dark red
+    case 4: return '#DC143C'; // Frustrated - crimson
     case 5: return '#FF4500'; // Sad - red-orange
-    case 6: return '#DC143C'; // Frustrated - crimson
-    case 7: return '#8B0000'; // Angry - dark red
-    case 8: return '#800080'; // Anxious - purple
-    case 9: return '#A9A9A9'; // Exhausted - gray
+    case 6: return '#FFA500'; // Happy - orange
+    case 7: return '#FFFF00'; // Alright - yellow
+    case 8: return '#ADFF2F'; // Content - light green
+    case 9: return '#228B22'; // Excited - green
     default: return '#fff';    // Undefined
   }
 };
-
+  
   const pad = (n) => n.toString().padStart(2,'0');
 
 
@@ -58,15 +58,15 @@ const getMoodColor = (mood) => {
 
   
   const moodLevels = [
-  { level: 1, label: 'Amazing', emoji: "😍" },
-  { level: 2, label: 'Very Good', emoji: "😄" },
-  { level: 3, label: 'Content', emoji: "😊" },
-  { level: 4, label: 'Okay', emoji: "😏" },
-  { level: 5, label: 'In the Middle', emoji: "😐" },
-  { level: 6, label: 'Meh', emoji: "😕" },
-  { level: 7, label: 'Frustrated', emoji: "😣" },
-  { level: 8, label: 'Down', emoji: "😢" },
-  { level: 9, label: 'Very Low', emoji: "😠" },
+  { level: 1, label: "Very Low", emoji: "😠" },
+  { level: 2, label: "Down", emoji: "😢" },
+  { level: 3, label: "Frustrated", emoji: "😣" },
+  { level: 4, label: "Meh", emoji: "😕" },
+  { level: 5, label: "In the Middle", emoji: "😐" },
+  { level: 6, label: "Okay", emoji: "😏" },
+  { level: 7, label: "Content", emoji: "😊" },
+  { level: 8, label: "Very Good", emoji: "😄" },
+  { level: 9, label: "Amazing", emoji: "😍" },
   ];
 
   const selectedEntry = entries[selectedDate];
@@ -148,3 +148,77 @@ const getMoodColor = (mood) => {
 
 export default Calendar;
 
+
+
+
+
+
+
+
+
+// import React, { useState } from "react";
+// import "./Mood.css";
+
+// export default function MoodScale({ onSubmitMood }) {
+//   const [mood, setMood] = useState(5);
+//   // const handleSubmit = () => {
+//   //   // alert(`Mood submitted: ${moodMap[mood].label} ${moodMap[mood].emoji}`);
+//   // };
+  
+//   const moodMap = {
+//     1: { label: "Very Low", emoji: "😠" },
+//     2: { label: "Down", emoji: "😢" },
+//     3: { label: "Frustrated", emoji: "😣" },
+//     4: { label: "Meh", emoji: "😕" },
+//     5: { label: "In the Middle", emoji: "😐" },
+//     6: { label: "Okay", emoji: "😏" },
+//     7: { label: "Content", emoji: "😊" },
+//     8: { label: "Very Good", emoji: "😄" },
+//     9: { label: "Amazing", emoji: "😍" }
+//   };
+
+//   const handleSubmit = () => {
+//     const today = new Date().toISOString().split("T")[0];
+
+//     onSubmitMood(today, mood);
+
+//     alert(`Mood for today submitted: ${moodMap[mood].label} ${moodMap[mood].emoji}`);
+//   };
+
+
+//   return (
+//     <div className="moodBox">
+//       <h2 className="moodHeader">Mood Check-In</h2>
+
+//       <div className="emojiNumberContainer">
+//         <div className="emojiRow">
+//           {Object.values(moodMap).map((m, i) => (
+//             <span key={i} className="emojiItem">{m.emoji}</span>
+//           ))}
+//         </div>
+//         <div className="numberRow">
+//           {Object.keys(moodMap).map((num) => (
+//             <span key={num}>{num}</span>
+//           ))}
+//         </div>
+//       </div>
+
+//       <input
+//         type="range"
+//         min="1"
+//         max="9"
+//         step="1"
+//         value={mood}
+//         onChange={(e) => setMood(Number(e.target.value))}
+//         className="moodSlider"
+//       />
+
+//       <p className="moodFeedback">
+//         You feel: <strong>{moodMap[mood].label}</strong> {moodMap[mood].emoji}
+//       </p>  
+//       <button className="moodSubmitButton" onClick={() => handleSubmit()}>
+//         Submit
+//       </button>   
+//     </div>
+//   );
+// }
