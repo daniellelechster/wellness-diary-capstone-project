@@ -4,9 +4,9 @@ import "./Mood.css";
 export default function MoodScale() {
   const [mood, setMood] = useState(5);
   const handleSubmit = () => {
-    alert(`Mood submitted: ${moodMap[mood].label} ${moodMap[mood].emoji}`);
+    // alert(`Mood submitted: ${moodMap[mood].label} ${moodMap[mood].emoji}`);
   };
-
+  
   const moodMap = {
     1: { label: "Very Low", emoji: "😠" },
     2: { label: "Down", emoji: "😢" },
