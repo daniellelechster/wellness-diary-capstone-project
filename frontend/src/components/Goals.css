@@ -1,0 +1,32 @@
+.personalGoals {
+    padding: 28px;    
+}
+
+.addGoalSection {
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 8px;
+    margin-right: 10px;
+    width: 75%;
+    margin-top: 10px;
+}
+
+button {
+    padding: 8px 12px;
+}
+
+.goalsList li {
+    margin-bottom: 8px;
+}
+
+.personal-goals-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #fafafa, #ffadad);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", sans-serif;
+}
