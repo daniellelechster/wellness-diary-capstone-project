@@ -38,10 +38,10 @@ function Goals() {
   };
 
   return (
-    <div className="journals-container">
+    <div className="goals-container">
       <h1>Goals</h1>
 
-      <div className="journal-entry">
+      <div className="goal-entry">
         <h3>Add a Goal:</h3>
         <textarea
           value={goalText}
@@ -51,7 +51,7 @@ function Goals() {
         <button onClick={handleSaveGoal}>Save Goal</button>
       </div>
 
-      <div className="journal-history">
+      <div className="goal-section">
         <h3>Goal Tracker</h3>
         {goals.length === 0 ? (
           <p>No goals yet.</p>
@@ -59,7 +59,7 @@ function Goals() {
           <ul>
             {goals.map((goal) => (
               <li key={goal.id}>
-                <p>{goal.text}</p>
+                <p className="goal-text">{goal.text}</p>
                 <p>Status: <em>{goal.status}</em></p>
                 <div>
                   {goal.status !== "in progress" && (

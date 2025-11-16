@@ -1,27 +1,4 @@
-.personalGoals {
-    padding: 28px;    
-}
-
-.addGoalSection {
-    margin-bottom: 20px;
-}
-
-input {
-    padding: 8px;
-    margin-right: 10px;
-    width: 75%;
-    margin-top: 10px;
-}
-
-button {
-    padding: 8px 12px;
-}
-
-.goalsList li {
-    margin-bottom: 8px;
-}
-
-.personal-goals-container {
+.goals-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
@@ -31,11 +8,60 @@ button {
     font-family: "Segoe UI", sans-serif;
 }
 
-.journal-history li em {
-    font-weight: bold;
-    color: #555;
+h1,
+h3 {
+    text-align: center;
+    color: #333;
 }
 
-.journal-history li p:nth-child(3) {
-    margin-top: 0.5rem;    
+.goal-entry {
+    margin-top: 2rem;
+}
+
+.goal-entry textarea {
+    width: 100%;
+    height: 100px;
+    margin: 1rem 0;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    resize: vertical;
+}
+
+.goal-section {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 2px;  
+}
+
+.goal-text {
+    font-weight: bold;
+}
+
+.goal-section h3 {
+    color: #444;
+    margin-bottom: 1rem;
+}
+
+.goal-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.goal-section li {
+    border-radius: 8px;
+    background: linear-gradient(135deg, #fafafa, #ffadad);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.goal-section li p {
+    margin: 0.5rem 0;
+}
+
+.goal-section li em {
+    font-weight: bold;
+    color: #555;
 }
