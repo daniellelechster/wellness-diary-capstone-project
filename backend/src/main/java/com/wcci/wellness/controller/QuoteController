@@ -1,0 +1,13 @@
+// @RestController
+// @RequestMapping("/api")
+// public class QuoteController {
+
+//     @GetMapping("/daily-quote")
+//     public ResponseEntity<String> getQuote() {
+//         RestTemplate restTemplate = new RestTemplate();
+//         String url = "https://zenquotes.io/api/today";
+
+//         String response = restTemplate.getForObject(url, String.class);
+//         return ResponseEntity.ok(response);
+//     }
+// }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "../App.css";
+import DailyQuote from "./DailyQuote";
 
 function Journals() {
   const [entries, setEntries] = useState([]);
@@ -9,6 +10,7 @@ function Journals() {
   const [response, setResponse] = useState("");
   const [dailyQuote, setDailyQuote] = useState("");
   const [dailyQuotes, setDailyQuotes] = useState([]);
+  
 
   const todayKey = new Date().toISOString().split("T")[0];
 
@@ -140,7 +142,7 @@ function Journals() {
 
       <div className="daily-quote">
         <span role="img" aria-label="sun and moon">🌞🌙</span>
-        <strong> Daily Quote:</strong> {dailyQuote}
+        <strong> Daily Quote:</strong> <DailyQuote/>
       </div>
 
       <div className="journal-entry">

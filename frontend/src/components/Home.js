@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
+import WeatherDisplay from "./WeatherDisplay";
 
 export default function Home() {
   const [todaysMood, setTodaysMood] = useState(null);
@@ -145,6 +146,10 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      
+          <WeatherDisplay />
+
 
       <div className="home-card">
         <div className="home-card-header">
