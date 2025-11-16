@@ -52,33 +52,59 @@ function Goals() {
       </div>
 
       <div className="goal-section">
-        <h3>Goal Tracker</h3>
-        {goals.length === 0 ? (
-          <p>No goals yet.</p>
-        ) : (
-          <ul>
-            {goals.map((goal) => (
-              <li key={goal.id}>
-                <p className="goal-text">{goal.text}</p>
-                <p>Status: <em>{goal.status}</em></p>
-                <div>
-                  {goal.status !== "in progress" && (
-                    <button onClick={() => updateGoalStatus(goal.id, "in progress")}>
-                      Mark In Progress
-                    </button>
-                  )}
-                  {goal.status !== "completed" && (
-                    <button onClick={() => updateGoalStatus(goal.id, "completed")}>
-                      Mark Completed
-                    </button>
-                  )}
-                  <button onClick={() => handleDeleteGoal(goal.id)}>Delete</button>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
+        <h3>Added Goals</h3>
+        <ul>
+          {goals.filter(goal => goal.status === "added").map((goal) => (
+            <li key={goal.id}>
+              <p className="goal-text">{goal.text}</p>
+              <p>Status: <em>{goal.status}</em></p>
+              <div>
+                <button onClick={() => updateGoalStatus(goal.id, "in progress")}>
+                  Mark In Progress
+                </button>
+                <button onClick={() => updateGoalStatus(goal.id, "completed")}>
+                  Mark Completed
+                </button>
+                <button onClick={() => handleDeleteGoal(goal.id)}>Delete</button>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
+
+      <div className="goal-section">
+        <h3>Goals In Progress</h3>
+        <ul>
+          {goals.filter(goal => goal.status === "in progress").map((goal) => (
+            <li key={goal.id}>
+              <p className="goal-text">{goal.text}</p>
+              <p>Status: <em>{goal.status}</em></p>
+              <div>
+                <button onClick={() => updateGoalStatus(goal.id, "completed")}>
+                  Mark Completed
+                </button>
+                <button onClick={() => handleDeleteGoal(goal.id)}>Delete</button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="goal-section">
+        <h3>Completed Goals</h3>
+        <ul>
+          {goals.filter(goal => goal.status === "completed").map((goal) => (
+            <li key={goal.id}>
+              <p className="goal-text">{goal.text}</p>
+              <p>Status: <em>{goal.status}</em></p>
+              <div>
+                <button onClick={() => handleDeleteGoal(goal.id)}>Delete</button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
     </div>
   );
 }
