@@ -8,15 +8,15 @@ function Calendar({ entries = {}, selectedDate, onDateSelect }) {
 
 const getMoodColor = (mood) => {
   switch(mood) {
-    case 1: return '#A9A9A9'; // Exhausted - gray
-    case 2: return '#800080'; // Anxious - purple
-    case 3: return '#8B0000'; // Angry - dark red
-    case 4: return '#DC143C'; // Frustrated - crimson
-    case 5: return '#FF4500'; // Sad - red-orange
-    case 6: return '#FFA500'; // Happy - orange
-    case 7: return '#FFFF00'; // Alright - yellow
-    case 8: return '#ADFF2F'; // Content - light green
-    case 9: return '#228B22'; // Excited - green
+    case 1: return '#A9A9A9'; // Very Low - gray
+    case 2: return '#800080'; // Down - purple
+    case 3: return '#8B0000'; // Frustrated - dark red
+    case 4: return '#DC143C'; // Meh - crimson
+    case 5: return '#FF4500'; // In the Middle - red-orange
+    case 6: return '#FFA500'; // Okay - orange
+    case 7: return '#FFFF00'; // Content - yellow
+    case 8: return '#ADFF2F'; // Very Good - light green
+    case 9: return '#228B22'; // Amazing - green
     default: return '#fff';    // Undefined
   }
 };
