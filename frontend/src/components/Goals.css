@@ -22,11 +22,20 @@ button {
 }
 
 .personal-goals-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background: linear-gradient(135deg, #fafafa, #ffadad);
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  font-family: "Segoe UI", sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #fafafa, #ffadad);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    font-family: "Segoe UI", sans-serif;
+}
+
+.journal-history li em {
+    font-weight: bold;
+    color: #555;
+}
+
+.journal-history li p:nth-child(3) {
+    margin-top: 0.5rem;    
 }
