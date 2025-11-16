@@ -39,7 +39,7 @@ function Goals() {
         origin: { y: 0.6},
       })
       setCelebration("🎉 Goal completed! Great job!");
-      setTimeout(() => setCelebration(""), 3000); // Clear after 3 seconds
+      setTimeout(() => setCelebration(""), 3000);
     }
   };
 
