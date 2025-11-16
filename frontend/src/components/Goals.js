@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import confetti from "canvas-confetti";
 import "./Goals.css";
 
 function Goals() {
   const [goalText, setGoalText] = useState("");
   const [goals, setGoals] = useState([]);
+  const [celebration, setCelebration] = useState("");
 
   useEffect(() => {
     const savedGoals = JSON.parse(localStorage.getItem("goals-list")) || [];
@@ -29,6 +31,16 @@ function Goals() {
     );
     setGoals(updatedGoals);
     localStorage.setItem("goals-list", JSON.stringify(updatedGoals));
+
+    if (newStatus === "completed") {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6},
+      })
+      setCelebration("🎉 Goal completed! Great job!");
+      setTimeout(() => setCelebration(""), 3000); // Clear after 3 seconds
+    }
   };
 
   const handleDeleteGoal = (id) => {
@@ -40,6 +52,7 @@ function Goals() {
   return (
     <div className="goals-container">
       <h1>Goals</h1>
+      {celebration && <div className="goal-celebration">{celebration}</div>}
 
       <div className="goal-entry">
         <h3>Add a Goal:</h3>
