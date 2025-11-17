@@ -7,11 +7,12 @@ body,
 }
 
 body {
-  background: linear-gradient(135deg, #FBF6F6 0%, rgba(248, 215, 197) 70%);
+  /* background: linear-gradient(to bottom, #d2bb95 0%, #b05f33 95%); */
+  background: #b05f33;
   background-attachment: fixed;
   background-size: cover;
   font-family: "Inter", sans-serif;
-  color: #333;
+  color: #ffffff;
 }
 
 .App {
@@ -37,7 +38,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fafafa;
+  background-color: #d1ba94;
   padding: 1rem 2rem;
   border-bottom: 1px solid #ddd;
   font-family: "Arial", sans-serif;
@@ -46,7 +47,7 @@ body {
 .header h1 {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #333;
+  color: #d2c5ab;  
   padding-top: 10px;
   margin: 0;
 }
@@ -55,7 +56,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to right, #a855f7, #f472b6);
+  background: radial-gradient(circle,
+  #d1c4aa 0%, rgba(113, 110, 76) 100%);
   color: white;
   display: flex;
   flex-direction: column;
@@ -69,7 +71,7 @@ body {
   left: 0;
   bottom: 0;
   right: 0;
-  padding: 5;
+  padding: 10px;
 }
 
 .nav-list {
@@ -93,7 +95,7 @@ body {
 .nav-links {
   display: flex;
   list-style: none;
-  color: white;
+  color: #e3d5b9; 
   font-size: 18px;
   gap: 1rem;
   margin: 0;
@@ -110,8 +112,8 @@ body {
 }
 
 .nav-links a:hover {
-  background-color: #ffadad;
-  color: #fff;
+  background-color: #e0eae8;
+  color: #5e5e5e;
 }
 
 .nav-links a.active {
@@ -132,10 +134,16 @@ body {
 
 .home-container h1 {
   margin-top: -25px;
+  color: #d3c6ac;  
 }
 
 .home-card {
-  background: linear-gradient(to bottom, rgba(168, 202, 186), rgba(175, 203, 255));  border-radius: 12px;
+  background: linear-gradient(
+    to bottom,
+    rgba(251, 246, 246),
+    rgba(113, 110, 76)
+  );
+  border-radius: 12px;
   border: 1px solid #e2e8f0;
   padding: 16px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
@@ -157,19 +165,20 @@ body {
   justify-content: center;
   align-items: center;
   font-weight: 600;
-  background: linear-gradient(to right, #7c3aed, #ec4899);
-  color: white;
+  background: radial-gradient(circle,
+  #d1c4aa 0%, rgba(113, 110, 76) 85%);
+  color: black;
   border-radius: 25px;
   padding: 3px;
 }
 
 .home-header-subtitle {
   display: flex;
-  color: #6b7280;
+  color: #ffffff;
   font-size: 0.9rem;
   justify-content: center;
   align-items: center;
-  margin-top: 5px;
+  margin-top: 25px;
 }
 
 .home-grid {
@@ -210,7 +219,7 @@ body {
 
 .home-small-text {
   font-size: 0.8rem;
-  color: #6b7280;
+  color: #ffffff;
 }
 
 .home-value {
@@ -220,11 +229,12 @@ body {
 
 .home-subtext {
   font-size: 0.8rem;
-  color: #6b7280;
+  color: #e8dddd;  
+
 }
 
 .home-progress-bar {
-  background: #e5e7eb;
+  background: #fcf5e3;
   border-radius: 6px;
   height: 8px;
   margin-bottom: 8px;
@@ -243,19 +253,22 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 12px;
   margin-top: 12px;
+  background: #d1c6ab;  
+  border-radius: 20px;
 }
 
 .home-activity {
   padding: 12px;
   border: 2px solid #e5e7eb;
-  border-radius: 10px;
-  background: #f9fafb;
+  border-radius: 20px;
+  color: #d1c6ab;  
   transition: 0.3s;
 }
 
 .home-activity-complete {
   border-color: #c4b5fd;
   background: #f3e8ff;
+  border-radius: 20px;
 }
 
 .home-activity-header {
@@ -293,20 +306,33 @@ h3 {
   border-radius: 8px;
 }
 
+.journal-entry h3 {
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
 .journal-entry textarea {
   width: 100%;
   height: 120px;
   margin: 1rem 0;
-  padding: 0;
+  padding: 0.5rem;
   font-size: 1rem;
   border-radius: 8px;
+  background: linear-gradient(180deg, #fafafa, rgba(197, 209, 249));
+
   border: 1px solid #ccc;
+  resize: vertical;
+  box-sizing: border-box;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 button {
-  background-color: #ff9494;
+  background-color: rgba(224, 234, 232);
   border: none;
-  color: white;
+  color: rgba(94, 94, 94);
   padding: 0.5rem 1.5rem;
   border-radius: 8px;
   cursor: pointer;
@@ -328,7 +354,7 @@ button:hover {
 }
 
 .journal-history li {
-  background: white;
+  background: linear-gradient(180deg, #fafafa, rgba(197, 209, 249));
   border-radius: 8px;
   padding: 1rem;
   margin-bottom: 1rem;
@@ -376,17 +402,17 @@ button:hover {
 }
 
 .calendar-stats div {
-  display: flex;                 
-  flex-direction: column;       
-  justify-content: flex-start;       
-  align-items: center;           
-  height: 80px;                 
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 80px;
   padding: 16px;
   padding-top: 10px;
   border-radius: 18px;
   text-align: center;
-  background: linear-gradient(to bottom, #a855f7, #f472b6);
-  color: white;
+  background: linear-gradient(to bottom, #afcbff 0%, #d6cdea 60%);
+  color: #5e5e5e;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
 }
