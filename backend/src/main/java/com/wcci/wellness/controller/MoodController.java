@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/wellness")
+@RequestMapping("/api/mood")
 public class MoodController {
     
     private final MoodService moodService;
