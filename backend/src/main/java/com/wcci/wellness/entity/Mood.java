@@ -9,7 +9,7 @@ public class Mood {
 
     @Id
     @GeneratedValue
-    private Long Id;
+    private Long id;
 
     private LocalDateTime date;
     private int rating;
