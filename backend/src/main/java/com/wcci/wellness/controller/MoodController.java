@@ -16,7 +16,7 @@ public class MoodController {
         this.moodService = moodService;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Mood>> getAllMoods() {
         return ResponseEntity.ok(moodService.getAllMoods());
     }
