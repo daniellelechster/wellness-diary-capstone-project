@@ -8,7 +8,7 @@ export default function MoodScale({ onSubmitMood }) {
   // };
   
   const moodMap = {
-    1: { label: "Very Low", emoji: "😠" },
+    1: { label: "Very Low", emoji: "😒" },
     2: { label: "Down", emoji: "😢" },
     3: { label: "Frustrated", emoji: "😣" },
     4: { label: "Meh", emoji: "😕" },
