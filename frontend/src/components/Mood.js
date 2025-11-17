@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "./Mood.css";
 
-export default function MoodScale() {
+export default function MoodScale({ onSubmitMood }) {
   const [mood, setMood] = useState(5);
-  const handleSubmit = () => {
-    // alert(`Mood submitted: ${moodMap[mood].label} ${moodMap[mood].emoji}`);
-  };
+  // const handleSubmit = () => {
+  //   // alert(`Mood submitted: ${moodMap[mood].label} ${moodMap[mood].emoji}`);
+  // };
   
   const moodMap = {
     1: { label: "Very Low", emoji: "😠" },
@@ -17,6 +17,14 @@ export default function MoodScale() {
     7: { label: "Content", emoji: "😊" },
     8: { label: "Very Good", emoji: "😄" },
     9: { label: "Amazing", emoji: "😍" }
+  };
+
+  const handleSubmit = () => {
+    const today = new Date().toISOString().split("T")[0];
+
+    onSubmitMood(today, mood);
+
+    alert(`Mood for today submitted: ${moodMap[mood].label} ${moodMap[mood].emoji}`);
   };
 
   return (
