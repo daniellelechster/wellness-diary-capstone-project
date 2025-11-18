@@ -112,11 +112,8 @@ function Journals() {
     }
   }, [dailyQuotes, getPromptsForMood, todayKey]);
 
-  const getMoodLabel = (mood) => {
-    if (mood >= 8) return "Happy 😊";
-    if (mood >= 5) return "Okay 😌";
-    return "Low 😞";
-  };
+  const getMoodLabel = (mood) =>
+    ["Very Low 😒","Down 😢","Frustrated 😣","Meh 😕","In the Middle 😐","Okay 😏","Content 😊","Very Good 😄","Amazing 😍"][mood-1] || "Not tracked";
 
   const handleSaveEntry = () => {
     if (!response.trim()) return;
