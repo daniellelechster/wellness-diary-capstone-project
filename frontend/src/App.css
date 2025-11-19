@@ -6,7 +6,7 @@ body,
 }
 
 body {
-  background: linear-gradient(to bottom, #d1c6ab -50%, #D9926F 75%);
+  background: linear-gradient(to bottom, #d1c6ab -50%, #d9926f 75%);
   /* background: linear-gradient(to bottom, #d1c6ab -50%, #b05f33 75%); */
   background-attachment: fixed;
   background-size: cover;
@@ -19,7 +19,6 @@ body {
   text-align: center;
   max-width: 1200px;
   margin: 0 auto;
-
 }
 
 .App-logo {
@@ -66,19 +65,17 @@ body {
   margin: 0;
   color: #3a2b1e;
   font-weight: bold;
-  text-shadow:
-    1px 1px 1px rgba(255, 255, 255, 0.6),   /* highlight */
-    -1px -1px 1px rgba(143, 78, 43, 0.4); 
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6),
+    /* highlight */ -1px -1px 1px rgba(143, 78, 43, 0.4);
 }
 
 .main-nav {
   position: fixed;
-  top: 0;       
+  top: 0;
   left: 0;
   width: 100%;
   z-index: 999;
-  background: radial-gradient(circle,
-      #d1c4aa 0%, #A8C3A0 99%);
+  background: radial-gradient(circle, #d1c4aa 0%, #a8c3a0 99%);
   padding: 10px 0;
   display: flex;
   justify-content: center;
@@ -87,13 +84,12 @@ body {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 
-  box-shadow:
-    inset 0 -4px 6px rgba(0, 0, 0, 0.3),
+  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
     inset 0 -2px 2px rgba(255, 255, 255, 0.4);
 }
 
 .navbar-logo {
-  height: 40px;   /* choose any size */
+  height: 40px; /* choose any size */
   margin-right: 20px;
 }
 
@@ -156,23 +152,16 @@ body {
 
 .home-container h1 {
   margin-top: -25px;
-  color: rgb(143, 78, 43);  
-
+  color: rgb(143, 78, 43);
 }
 
 .home-card {
-  background: linear-gradient(
-    to bottom,
-    rgba(251, 246, 246),
-    #A8C3A0
-  );
+  background: linear-gradient(to bottom, rgba(251, 246, 246), #a8c3a0);
   border-radius: 12px;
   border: 1px solid #e2e8f0;
   padding: 16px;
-  box-shadow:     
-  inset 2px 2px 4px rgba(255, 255, 255, 0.7),   
-  inset -2px -2px 4px rgba(0, 0, 0, 0.25),    
-  2px 4px 10px rgba(0, 0, 0, 0.25); ;
+  box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.7),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.25), 2px 4px 10px rgba(0, 0, 0, 0.25);
 }
 
 .home-header-card {
@@ -191,16 +180,13 @@ body {
   justify-content: center;
   align-items: center;
   font-weight: 600;
-  background: radial-gradient(circle,
-  #d1c4aa 0%, #A8C3A0 85%);
+  background: radial-gradient(circle, #d1c4aa 0%, #a8c3a0 85%);
   color: black;
   border-radius: 25px;
   padding: 8px 15px;
   text-align: center;
-  box-shadow:     
-    inset 2px 2px 4px rgba(255, 255, 255, 0.7),   
-    inset -2px -2px 4px rgba(0, 0, 0, 0.25),    
-    2px 4px 10px rgba(0, 0, 0, 0.25); ;
+  box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.7),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.25), 2px 4px 10px rgba(0, 0, 0, 0.25);
 }
 
 .home-header-subtitle {
@@ -284,7 +270,7 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 12px;
   margin-top: 12px;
-  background: transparent;  
+  background: transparent;
   border-radius: 20px;
 }
 
@@ -292,7 +278,7 @@ body {
   padding: 12px;
   border: 2px solid #e5e7eb;
   border-radius: 20px;
-  color: #d1c6ab;  
+  color: #d1c6ab;
   transition: 0.3s;
 }
 
@@ -319,10 +305,10 @@ body {
 /* ABOUT */
 
 .about-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
 }
 
 .about-container h2 {
@@ -332,123 +318,117 @@ body {
   margin: 0;
   color: #3a2b1e;
   font-weight: bold;
-  text-shadow:
-    1px 1px 1px rgba(255, 255, 255, 0.6),   
-    -1px -1px 1px rgba(143, 78, 43, 0.4); 
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6),
+    -1px -1px 1px rgba(143, 78, 43, 0.4);
 }
 
 #codeEmail {
-    margin-bottom: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .about-body {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 40px;
 }
 
 .member-block {
-    background: #8d9491;
-    padding: 30px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: left;
-    border-radius: 14px;
-    box-shadow:
-    inset -4px -4px 8px rgba(255, 255, 255, 0.8),
-    inset 4px 4px 8px rgba(0, 0, 0, 0.35),
-    4px 6px 12px rgba(0, 0, 0, 0.2); 
+  background: #8d9491;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+  border-radius: 14px;
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
+    inset 4px 4px 8px rgba(0, 0, 0, 0.35), 4px 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .member-block:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
 }
 
 .member-block .name {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: rgb(143, 78, 43);  
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: rgb(143, 78, 43);
 
-    font-weight: bold;
-    text-shadow:
-    1px 1px 1px rgba(255, 255, 255, 0.6),   /* highlight */
-    -1px -1px 1px rgba(143, 78, 43, 0.4); 
-    margin-bottom: 20px;
-    text-align: center;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6),
+    /* highlight */ -1px -1px 1px rgba(143, 78, 43, 0.4);
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .member-block img {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 45%;
-    margin: 0 auto 20px;
-    display: block;
-    border: 4px solid #d1ba94;
-  box-shadow:
-    inset -10px -10px 15px rgba(255, 255, 255, 0.5),
-    inset 10px 10px 15px rgba(0, 0, 0, 0.2),
-    0 6px 12px rgba(0, 0, 0, 0.25);
-  }
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 45%;
+  margin: 0 auto 20px;
+  display: block;
+  border: 4px solid #d1ba94;
+  box-shadow: inset -10px -10px 15px rgba(255, 255, 255, 0.5),
+    inset 10px 10px 15px rgba(0, 0, 0, 0.2), 0 6px 12px rgba(0, 0, 0, 0.25);
+}
 
 .member-block p {
-    font-size: 1rem;
-    line-height: 1.8;
-    color: #ebe3cf;
-    text-align: justify;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #ebe3cf;
+  text-align: justify;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .about-container {
-        padding: 20px 15px;
-    }
+  .about-container {
+    padding: 20px 15px;
+  }
 
-    .about-container h2 {
-        font-size: 2rem;
-    }
+  .about-container h2 {
+    font-size: 2rem;
+  }
 
-    #codeEmail {
-        width: 200px;
-        height: 250px;
-    }
+  #codeEmail {
+    width: 200px;
+    height: 250px;
+  }
 
-    .member-block {
-        padding: 20px;
-    }
+  .member-block {
+    padding: 20px;
+  }
 
-    .member-block .name {
-        font-size: 1.5rem;
-    }
+  .member-block .name {
+    font-size: 1.5rem;
+  }
 
-    .member-block img {
-        width: 150px;
-        height: 150px;
-    }
+  .member-block img {
+    width: 150px;
+    height: 150px;
+  }
 
-    .member-block p {
-        font-size: 0.95rem;
-    }
+  .member-block p {
+    font-size: 0.95rem;
+  }
 }
 
 @media (max-width: 480px) {
-    .about-container h2 {
-        font-size: 1.75rem;
-    }
+  .about-container h2 {
+    font-size: 1.75rem;
+  }
 
-    #codeEmail {
-        width: 150px;
-        height: 187px;
-    }
+  #codeEmail {
+    width: 150px;
+    height: 187px;
+  }
 
-    .member-block img {
-        width: 120px;
-        height: 120px;
-    }
+  .member-block img {
+    width: 120px;
+    height: 120px;
+  }
 }
 
 /* JOURNAL SECTION */
@@ -465,11 +445,10 @@ body {
   background-repeat: no-repeat;
   min-height: 100vh;
   background-color: rgba(216, 213, 213, 0.7);
-  background-blend-mode:lighten;
+  background-blend-mode: lighten;
   border-radius: 12px;
   margin-bottom: 100px;
-    box-shadow:
-    inset 0 -4px 6px rgba(0, 0, 0, 0.3),
+  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
     inset 0 -2px 2px rgba(255, 255, 255, 0.4);
 }
 
@@ -486,21 +465,23 @@ h3 {
   font-style: italic;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
-  background: #A8C3A0;
+  background: #a8c3a0;
   padding: 1rem;
   border-radius: 8px;
-  box-shadow:
-    inset 0 -4px 6px rgba(0, 0, 0, 0.3),
+  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
     inset 0 -2px 2px rgba(255, 255, 255, 0.4);
-  background: linear-gradient(
-    to bottom,
-    rgba(251, 246, 246) 0%,
-    #A8C3A0 60%)
+  background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
 }
 
 .journal-entry h3 {
   font-size: 25px;
   margin-bottom: 20px;
+}
+
+.journal-entry p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: rgb(82, 81, 81);
 }
 
 .journal-entry textarea {
@@ -518,12 +499,11 @@ h3 {
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  box-shadow:
-    inset 0 -4px 6px rgba(0, 0, 0, 0.3),
+  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
     inset 0 -2px 2px rgba(255, 255, 255, 0.4);
 }
 
-.placeholder{
+.placeholder {
   color: rgb(39, 39, 39);
 }
 
@@ -537,17 +517,13 @@ button {
   font-size: 1rem;
   margin-left: 2%;
   margin-top: 10px;
-    box-shadow:
-    inset 0 -4px 6px rgba(0, 0, 0, 0.3),
+  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
     inset 0 -2px 2px rgba(255, 255, 255, 0.4);
-  background: linear-gradient(
-    to bottom,
-    rgba(251, 246, 246) 0%,
-    #A8C3A0 60%)
+  background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
 }
 
 button:hover {
-  background-color: #A8C3A0 ;
+  background-color: #a8c3a0;
 }
 
 .journal-history {
@@ -572,8 +548,7 @@ button:hover {
   padding: 1rem;
   margin-bottom: 1rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    box-shadow:
-    inset 0 -4px 6px rgba(0, 0, 0, 0.3),
+  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
     inset 0 -2px 2px rgba(255, 255, 255, 0.4);
 }
 
@@ -801,9 +776,9 @@ button:hover {
 /* CONTACT */
 
 .contact-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
 }
 
 .contact-container h2 {
@@ -815,162 +790,147 @@ button:hover {
   margin-bottom: 60px;
   color: #3a2b1e;
   font-weight: bold;
-  text-shadow:
-    1px 1px 1px rgba(255, 255, 255, 0.6),   
-    -1px -1px 1px rgba(143, 78, 43, 0.4); 
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6),
+    -1px -1px 1px rgba(143, 78, 43, 0.4);
 }
 
 .contact-body {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: start;
-    margin-bottom: 10%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+  margin-bottom: 10%;
 }
 
-
 @media (max-width: 768px) {
-    .contact-body {
-        grid-template-columns: 1fr;
-    }
+  .contact-body {
+    grid-template-columns: 1fr;
+  }
 }
 
 .contact-info {
-    background: #8d9491;
-    padding: 30px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: left;
-    border-radius: 14px;
-    box-shadow:
-    inset -4px -4px 8px rgba(255, 255, 255, 0.8),
-    inset 4px 4px 8px rgba(0, 0, 0, 0.35),
-    4px 6px 12px rgba(0, 0, 0, 0.2); 
+  background: #8d9491;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+  border-radius: 14px;
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
+    inset 4px 4px 8px rgba(0, 0, 0, 0.35), 4px 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-
 .contact-info h3 {
-    font-size: 1.8rem;
-    color: #ebe3cf;
-    margin-bottom: 20px;
+  font-size: 1.8rem;
+  color: #ebe3cf;
+  margin-bottom: 20px;
 }
 
 .contact-info p {
-    line-height: 1.8;
-    color: #ebe3cf;
-    margin-bottom: 30px;
+  line-height: 1.8;
+  color: #ebe3cf;
+  margin-bottom: 30px;
 }
 
-
 .contact-details {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .contact-item {
-    padding: 10px;
-    background: white;
-    border-radius: 5px;
-    color: #333;
+  padding: 10px;
+  background: white;
+  border-radius: 5px;
+  color: #333;
 }
-
 
 .contact-item strong {
   color: #3a2b1e;
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .contact-form-wrapper {
-    background: #8d9491;
-    padding: 30px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: left;
-    border-radius: 14px;
-    box-shadow:
-    inset -4px -4px 8px rgba(255, 255, 255, 0.8),
-    inset 4px 4px 8px rgba(0, 0, 0, 0.35),
-    4px 6px 12px rgba(0, 0, 0, 0.2); 
+  background: #8d9491;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+  border-radius: 14px;
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
+    inset 4px 4px 8px rgba(0, 0, 0, 0.35), 4px 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-
 .success-message {
-  color: #3a2b1e;    
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    text-align: center;
-    font-weight: 500;
+  color: #3a2b1e;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 500;
 }
 
 .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .form-group {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-group label {
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 8px;
-    font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
 }
 
 .form-group input,
 .form-group textarea {
-    padding: 12px 15px;
-    border: 2px solid #e5e7eb;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-family: inherit;
-    transition: border-color 0.3s ease;
+  padding: 12px 15px;
+  border: 2px solid #e5e7eb;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
 }
-
 
 .form-group input:focus,
 .form-group textarea:focus {
-    outline: none;
+  outline: none;
   color: #3a2b1e;
 }
 
-
 .form-group textarea {
-    resize: vertical;
-    min-height: 120px;
+  resize: vertical;
+  min-height: 120px;
 }
 
 .submit-button {
   color: #3a2b1e;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s ease;
-    margin-top: 10px;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-top: 10px;
 }
 
 .submit-button:hover {
-  color:  #f6f2e8;
+  color: #f6f2e8;
   border-radius: 10px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-    box-shadow:
-    inset -4px -4px 8px rgba(255, 255, 255, 0.8),
-    inset 4px 4px 8px rgba(0, 0, 0, 0.35),
-    4px 6px 12px rgba(0, 0, 0, 0.2); 
-
-;}
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
+    inset 4px 4px 8px rgba(0, 0, 0, 0.35), 4px 6px 12px rgba(0, 0, 0, 0.2);
+}
 
 .submit-button:active {
-    transform: scale(0.98);
+  transform: scale(0.98);
 }
 
 .now-playing-bar {
@@ -996,9 +956,18 @@ button:hover {
 }
 
 @keyframes pulseAnim {
-  0% { transform: scale(1); opacity: 0.6; }
-  50% { transform: scale(1.4); opacity: 1; }
-  100% { transform: scale(1); opacity: 0.6; }
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
 }
 
 .footer-container {
@@ -1013,12 +982,10 @@ button:hover {
   color: #333;
   align-items: center;
   font-size: 20px;
-  background: radial-gradient(circle,
-      #d1c4aa 0%, #A8C3A0 99%);
+  background: radial-gradient(circle, #d1c4aa 0%, #a8c3a0 99%);
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 
-  box-shadow:
-    inset 0 3px 3px rgba(255, 255, 255, 0.5),  
+  box-shadow: inset 0 3px 3px rgba(255, 255, 255, 0.5),
     inset 0 8px 10px rgba(0, 0, 0, 0.35);
 }
