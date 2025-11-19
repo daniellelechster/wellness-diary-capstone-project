@@ -42,13 +42,11 @@ export default function Home() {
     loadTodaysData();
   }, []);
 
-
   const getMoodEmoji = (mood) =>
     ["😒","😢","😣","😕","😐","😏","😊","😄","😍"][mood-1] || "—";
   
   const getMoodLabel = (mood) =>
     ["Very Low","Down","Frustrated","Meh","In the Middle","Okay","Content","Very Good","Amazing"][mood-1] || "Not tracked";
-
 
   const completedGoals = goals.filter((g) => g.completed).length;
   const goalProgress = goals.length > 0 ? (completedGoals / goals.length) * 100 : 0;
