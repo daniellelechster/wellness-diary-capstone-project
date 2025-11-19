@@ -1,10 +1,12 @@
 package com.wcci.wellness.entity;
 
 import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
+@Entity
 public class Mood {
 
     @Id
@@ -44,5 +46,5 @@ public class Mood {
 
     public void setId(Long id) {
         this.id = id;
-    }   
+    }    
 }
