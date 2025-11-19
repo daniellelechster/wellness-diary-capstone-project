@@ -11,8 +11,4 @@ public interface MoodService {
 
     Mood getMoodById(Long id);
 
-<<<<<<< HEAD
-=======
-    List<Mood> getMoodsByDate(LocalDate date);
->>>>>>> main
 }
