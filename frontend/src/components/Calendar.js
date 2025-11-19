@@ -78,12 +78,10 @@ const getMoodColor = (mood) => {
       <div className="calendar-stats">
         <div>
           <h4>Average Mood</h4>
-          <br></br>
           <p>{avgMoodThisMonth.toFixed(1)}/10</p>
         </div>
         <div>
           <h4>Days Logged</h4>
-          <br></br>
           <p>{daysLogged}</p>
         </div>
         <div>
@@ -148,4 +146,3 @@ const getMoodColor = (mood) => {
 }
 
 export default Calendar;
-
