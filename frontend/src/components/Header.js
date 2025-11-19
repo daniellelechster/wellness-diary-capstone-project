@@ -1,27 +1,29 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import '../App.css';
+import React from "react";
+import { Link } from "react-router-dom";   // <-- REQUIRED import
+import logo from "./images/logo.png"
+import "../App.css";
 
 function Header() {
   return (
     <header className="header">
-      <h1 className="site-title">WELLNESS DIARY</h1>
+
       <nav className="main-nav">
-    <ul className="nav-links">
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/journals">Journals</Link>
-        <Link to="/mood">Mood</Link>
-        <Link to="/wellness">Wellness</Link>
-        <Link to="/goals">Goals</Link>
-        <Link to="/calendar">Calendar</Link>
-        <Link to="/contact">Contact</Link>
-    </ul>
+      <img src={logo} alt="Logo" className="navbar-logo" />        
+        <h1 className="site-title">WELLNESS DIARY</h1>
+
+        <ul className="nav-links">
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/journals">Journal</Link></li>
+          <li><Link to="/mood">Mood</Link></li>
+          <li><Link to="/wellness">Wellness</Link></li>
+          <li><Link to="/goals">Goals</Link></li>
+          <li><Link to="/calendar">Calendar</Link></li>
+          <li><Link to="/contact">Contact</Link></li>
+        </ul>
       </nav>
     </header>
   );
 }
 
 export default Header;
-
-
