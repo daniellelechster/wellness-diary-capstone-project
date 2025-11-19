@@ -23,7 +23,6 @@ const getMoodColor = (mood) => {
   
   const pad = (n) => n.toString().padStart(2,'0');
 
-
   const changeMonth = (offset) => {
     const newDate = new Date(currentMonth);
     newDate.setMonth(newDate.getMonth() + offset);
@@ -79,12 +78,10 @@ const getMoodColor = (mood) => {
       <div className="calendar-stats">
         <div>
           <h4>Average Mood</h4>
-          <br></br>
           <p>{avgMoodThisMonth.toFixed(1)}/10</p>
         </div>
         <div>
           <h4>Days Logged</h4>
-          <br></br>
           <p>{daysLogged}</p>
         </div>
         <div>
@@ -130,7 +127,7 @@ const getMoodColor = (mood) => {
         </div>
       )}
 
-     <div className="calendar-mood-legend">
+    <div className="calendar-mood-legend">
   <h4>Mood Legend</h4>
   <div className="calendar-legend-grid">
     {moodLevels.map(({ level, label, emoji }) => (
@@ -149,7 +146,6 @@ const getMoodColor = (mood) => {
 }
 
 export default Calendar;
-
 
 
 
