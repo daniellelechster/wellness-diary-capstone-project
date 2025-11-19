@@ -609,7 +609,12 @@ button:hover {
 }
 
 .calendar-controls {
-  margin: 1rem 0;
+  margin: 1rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  gap: 1.5rem;
 }
 
 .calendar-controls button {
@@ -617,6 +622,7 @@ button:hover {
   margin-right: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 6px;
+  align-items: center;
   cursor: pointer;
 }
 
