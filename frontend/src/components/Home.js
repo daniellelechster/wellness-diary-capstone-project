@@ -57,8 +57,6 @@ export default function Home() {
     <div className="home-container">
       <h1>Your Wellness Home</h1>
 
-      <h1>Your Wellness Home</h1>
-
       <div className="home-card-header-card">
         <h2 className="home-header-title">Welcome to Your Wellness Dashboard</h2>
         <p className="home-header-subtitle">Here's a quick overview of your day</p>
