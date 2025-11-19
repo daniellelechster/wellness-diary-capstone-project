@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../App.css";
 
 export default function Home() {
+  
   const [todaysMood, setTodaysMood] = useState(null);
   const [goals, setGoals] = useState([]);
   const [wellness, setWellness] = useState({
@@ -54,6 +55,7 @@ export default function Home() {
   const wellnessProgress = (wellnessActivities / 3) * 100;
 
   return (
+    <div className="home-background">
     <div className="home-container">
       <h1>Your Wellness Home</h1>
 
@@ -174,6 +176,7 @@ export default function Home() {
           ))}
         </div>
       </div>
+    </div>
     </div>
   );
 }

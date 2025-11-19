@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Mood.css";
+import "../App.css";
 
 export default function MoodScale({ onSubmitMood }) {
   const [mood, setMood] = useState(5);
