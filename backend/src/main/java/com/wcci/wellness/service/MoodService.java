@@ -13,7 +13,4 @@ public interface MoodService {
     Mood getMoodById(Long id);
 
     List<Mood> getMoodsByDate(LocalDate date);
-
-    double getDailyAverage(LocalDate date);
-
 }
