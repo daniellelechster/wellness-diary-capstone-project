@@ -62,52 +62,55 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
   width: 100%;
   z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #d1ba94;
-  padding: 10px 20px;
-  border-bottom: 1px solid #ddd;
-  font-family: "Arial", sans-serif;
-  overflow-x: hidden;
-}
 
-.header h1 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: rgb(143, 78, 43);
-  color: #3a2b1e;
-  font-weight: bold;
-  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6),
-    /* highlight */ -1px -1px 1px rgba(143, 78, 43, 0.4);
-}
-
-.main-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 999;
   background: radial-gradient(circle, #d1c4aa 0%, #a8c3a0 99%);
   padding: 10px 0;
+
   display: flex;
   justify-content: center;
-  align-content: center;
   align-items: center;
+  box-sizing: border-box;
+
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 
-  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
-    inset 0 -2px 2px rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 -4px 6px rgba(0,0,0,0.2),
+              inset 0 -2px 2px rgba(255,255,255,0.4);
+
+  overflow-x: hidden; /* safety */
+  font-family: "Inter", sans-serif;
+}
+
+.header h1 {
+  flex: 1;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  color: #3a2b1e;
+  text-shadow: 1px 1px 1px rgba(255,255,255,0.6),
+              -1px -1px 1px rgba(143, 78, 43, 0.4);
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 20px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .navbar-logo {
-  height: 40px; /* choose any size */
-  margin-right: 20px;
+  height: 50px;
+  width: auto;
 }
 
 .nav-list {
@@ -142,7 +145,7 @@ body {
   color: #333;
   font-weight: 500;
   padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
+  border-radius: 8px;
   transition: background-color 0.2s, color 0.2s;
 }
 
@@ -165,12 +168,14 @@ body {
   padding: 20px;
   padding-top: 0;
   width: 100%;
+  box-sizing: border-box;   /* <-- FIXES the overflow */
   font-family: "Inter", sans-serif;
   color: #333;
 }
 
 .home-container h1 {
   color: rgb(143, 78, 43);
+  
 }
 
 .home-card {
