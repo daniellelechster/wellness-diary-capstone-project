@@ -7,12 +7,30 @@ body,
 
 body {
   background: linear-gradient(to bottom, #d1c6ab -50%, #d9926f 75%);
-  /* background: linear-gradient(to bottom, #d1c6ab -50%, #b05f33 75%); */
   background-attachment: fixed;
   background-size: cover;
   font-family: "Inter", sans-serif;
   color: #ffffff;
   padding-top: 140px;
+}
+
+.home-background {
+  background-image: url("./components/images/serene1.jpg");
+  background-blend-mode: overlay; 
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  font-family: "Inter", sans-serif;
+  justify-content: center;
+  font-family: "Inter", sans-serif;
+  height: 100vh;
+  width: 100%;
+  color: #ffffff;
+  padding-top: 140px;
+  margin-top: -100px
+
 }
 
 .App {
@@ -41,7 +59,7 @@ body {
 /* Header */
 
 .header {
-  position: relative;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -52,7 +70,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #d1ba94;
-  padding: 0 20px;
+  padding: 10px 20px;
   border-bottom: 1px solid #ddd;
   font-family: "Arial", sans-serif;
   overflow-x: hidden;
@@ -62,7 +80,6 @@ body {
   font-size: 2.5rem;
   font-weight: bold;
   color: rgb(143, 78, 43);
-  margin: 0;
   color: #3a2b1e;
   font-weight: bold;
   text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6),
@@ -146,12 +163,13 @@ body {
   flex-direction: column;
   gap: 24px;
   padding: 20px;
+  padding-top: 0;
+  width: 100%;
   font-family: "Inter", sans-serif;
   color: #333;
 }
 
 .home-container h1 {
-  margin-top: -25px;
   color: rgb(143, 78, 43);
 }
 
@@ -163,6 +181,7 @@ body {
   box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.7),
     inset -2px -2px 4px rgba(0, 0, 0, 0.25), 2px 4px 10px rgba(0, 0, 0, 0.25);
 }
+
 
 .home-header-card {
   text-align: center;
@@ -216,6 +235,18 @@ body {
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+
+.home-emoji {
+  margin-right: 5px;
+}
+
+.home-small-text {
+  margin-right: 5px;
+}
+
+.home-small-text {
+  margin-right: 5px;
 }
 
 .home-icon {
@@ -434,29 +465,26 @@ body {
 /* JOURNAL SECTION */
 
 .journals-container {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 50px auto;
   padding: 50px;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   font-family: "Segoe UI", sans-serif;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 100vh;
   background-color: rgba(216, 213, 213, 0.7);
-  background-blend-mode: lighten;
-  border-radius: 12px;
+  /* background-blend-mode: lighten; */
+  border-radius: 18px;
   margin-bottom: 100px;
   box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
     inset 0 -2px 2px rgba(255, 255, 255, 0.4);
 }
 
-h1,
-h2,
-h3 {
+.journals-container h1, h2, h3 {
   text-align: center;
-  color: #333;
+  color: #eae8e8;
   margin-top: 10px;
 }
 
@@ -475,14 +503,15 @@ h3 {
 
 .journal-entry h3 {
   font-size: 25px;
+  margin-top: 75px;
   margin-bottom: 20px;
+  color: #414040;
 }
 
 .journal-entry p {
   font-size: 18px;
   margin-bottom: 20px;
-  color: rgb(82, 81, 81);
-}
+  color: #eae8e8;}
 
 .journal-entry textarea {
   width: 100%;
@@ -529,11 +558,12 @@ button:hover {
 .journal-history {
   font-size: 20px;
   margin-top: 2rem;
-  color: rgb(39, 39, 39);
+  color: #eae8e8;
 }
 
 .journal-history h3 {
   margin-bottom: 15px;
+  color: #eae8e8;  
 }
 
 .journal-history ul {
@@ -693,34 +723,228 @@ button:hover {
   flex-shrink: 0;
 }
 
+/* Mood */
+.moodBox {
+  background-image: url("./components/images/mood1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 500px;
+  width: 1000px;
+  padding: 20px;
+  border-radius: 20px;
+  margin: 0 auto;
+  color: #fff;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  position: relative;
+  z-index: 1;
+}
+
+.moodBox h2,
+.moodBox h1 {
+  background: rgba(33, 33, 33, 0.6); 
+  border-radius: 10px;
+  display: inline-block;
+  backdrop-filter: blur(4px); 
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 5%;
+}
+
+.moodFeedback {
+  color: white;
+  position: relative;
+  z-index: 3;
+}
+
+.moodHeader {
+    font-size: 1.6rem;
+    color: #fbfcfd;
+    margin-bottom: 1.5rem;
+}
+
+.emojiRow {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1rem;
+    height: 3rem;
+    padding: 0;
+}
+
+.emojiItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.9rem;
+    color: #6d6875;
+}
+
+.moodSlider {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    accent-color: #ffb4a2;
+    appearance: none;
+    margin-bottom: 2rem;
+}
+
+.moodSlider::-webkit-slider-runnable-track {  
+    background: #ddd;
+    border-radius: 10px;
+}
+
+.moodSlider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #ffb4a2;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.moodSlider::-moz-range-track {
+    height: 4px;
+    background: #ddd;
+    border-radius: 2px;
+}
+
+.emojiNumberContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+.numberRow {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 4px;
+}
+
+.numberRow span {
+    font-size: 1rem;
+    color: #6d6875;
+}
+
+.moodSubmitButton {
+    /* background-color: #ff9494; */
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 2rem;
+    transition: background-color 0.3s ease;
+}
+
 /* Wellness */
 .wellness-container {
   margin: 0 auto;
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  background: linear-gradient(135deg, #fafafa, #ffadad);
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   font-family: "Segoe UI", sans-serif;
 }
 
-.card {
+.wellness-container h2 {
+  margin-top: 5%;
+}
+
+.wellness-container h3 {
+  padding: 1rem;
+  margin-top: 5%;
+}
+
+.exercise-card {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 350px;
   padding: 20px;
   margin-bottom: 20px;
-  border-radius: 8px;
-  background: linear-gradient(to right, #a855f7, #f472b6);
+  border-radius: 15px;
   color: white;
+  overflow: hidden;
+    backdrop-filter: blur(1px);
+  box-shadow:
+    inset -3px -3px 6px rgba(255, 255, 255, 1),
+    inset 3px 3px 6px rgba(0, 0, 0, 0.35),
+    0 5px 2px rgba(0, 0, 0, 0.15),
+    -3px -3px 7px rgba(255, 255, 255, 0.8),  
+     3px  3px 7px rgba(0, 0, 0, 0.4);      
+}
+
+.meditation-card {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 500px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  color: white;
+  overflow: hidden;
+    backdrop-filter: blur(1px);
+  box-shadow:
+    inset -3px -3px 6px rgba(255, 255, 255, 1),
+    inset 3px 3px 6px rgba(0, 0, 0, 0.35),
+    0 5px 2px rgba(0, 0, 0, 0.15),
+    -3px -3px 7px rgba(255, 255, 255, 0.8),  
+     3px  3px 7px rgba(0, 0, 0, 0.4);    
+}
+
+.waterdrop-card {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 350px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  color: rgb(57, 56, 56);
+  overflow: hidden;
+    backdrop-filter: blur(1px);
+  box-shadow:
+    inset -3px -3px 6px rgba(255, 255, 255, 1),
+    inset 3px 3px 6px rgba(0, 0, 0, 0.35),
+    0 5px 2px rgba(0, 0, 0, 0.15),
+    -3px -3px 7px rgba(255, 255, 255, 0.8),  
+     3px  3px 7px rgba(0, 0, 0, 0.4);    
+}
+
+.food-card {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 350px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  color: white;
+  overflow: hidden;
+    backdrop-filter: blur(1px);
+  box-shadow:
+    inset -3px -3px 6px rgba(255, 255, 255, 1),
+    inset 3px 3px 6px rgba(0, 0, 0, 0.35),
+    0 5px 2px rgba(0, 0, 0, 0.15),
+    -3px -3px 7px rgba(255, 255, 255, 0.8),  
+     3px  3px 7px rgba(0, 0, 0, 0.4);    
 }
 
 .progress-card {
-  background: linear-gradient(to right, #a855f7, #f472b6);
-  color: white;
+  background: linear-gradient(to bottom, #d6d6d7 0%, #5c7e92 99%);
+  color: rgb(255, 255, 255);
+  border-radius: 10px;
+  text-align: center;
 }
 
-.progress-bar {
-  width: 100%;
+.wellness-progress-bar {
+  width: 95%;
   height: 20px;
+  color: #3a2b1e;
 }
 
 .input-row {
@@ -749,7 +973,12 @@ button:hover {
 
 .water-display {
   text-align: center;
-  margin-top: 8px;
+  margin-top: 100px;
+}
+
+.water-card p {
+  font-size: 18px;
+  margin-top: 10px;
 }
 
 .water-count {
@@ -767,7 +996,7 @@ button:hover {
 
 .water-bar-fill {
   height: 100%;
-  background: cyan;
+  background: rgb(102, 216, 216);
 }
 
 .water-buttons {
@@ -779,6 +1008,14 @@ button:hover {
   margin: 0 4px;
 }
 
+.success-text {
+  color: #c8c5c5;
+}
+
+.timestamp {
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
 /* CONTACT */
 
 .contact-container {
