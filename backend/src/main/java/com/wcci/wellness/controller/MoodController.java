@@ -9,7 +9,7 @@ import com.wcci.wellness.service.MoodService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/wellness")
+@RequestMapping("/api/wellness/mood")
 public class MoodController {
     
     private MoodService moodService;
