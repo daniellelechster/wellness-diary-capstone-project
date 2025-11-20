@@ -3,6 +3,7 @@ import "../App.css";
 import WeatherDisplay from "./WeatherDisplay";
 
 export default function Home() {
+  
   const [todaysMood, setTodaysMood] = useState(null);
   const [goals, setGoals] = useState([]);
   const [wellness, setWellness] = useState({
@@ -12,45 +13,42 @@ export default function Home() {
   });
   const [journalEntry, setJournalEntry] = useState("");
 
-  useEffect(() => {
-    const today = new Date().toDateString();
+  // Function to load today's data
+  const loadTodaysData = () => {
+    const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD format
 
-    const moodData = localStorage.getItem("moodData");
-    if (moodData) {
-      const moods = JSON.parse(moodData);
-      const todayMood = moods.find((m) => m.date === today);
-      if (todayMood) setTodaysMood(todayMood.mood);
-    }
+    // Load mood
+    const moodData = JSON.parse(localStorage.getItem("moodData") || "[]");
+    const todayMood = moodData.find((m) => m.date === today);
+    setTodaysMood(todayMood ? todayMood.mood : null);
 
+    // Load goals
     const goalsData = localStorage.getItem("goals");
     if (goalsData) setGoals(JSON.parse(goalsData));
 
+    // Load wellness
     const wellnessData = localStorage.getItem(`wellness-${today}`);
     if (wellnessData) setWellness(JSON.parse(wellnessData));
 
+    // Load journal entry
     const journalData = localStorage.getItem("journalEntries");
     if (journalData) {
       const entries = JSON.parse(journalData);
       const todayEntry = entries.find((e) => e.date === today);
-      if (todayEntry) setJournalEntry(todayEntry.entry);
+      setJournalEntry(todayEntry ? todayEntry.entry : "");
     }
+  };
+
+  // Load data when component mounts
+  useEffect(() => {
+    loadTodaysData();
   }, []);
 
-  const getMoodEmoji = (mood) => {
-    if (mood <= 2) return "😢";
-    if (mood <= 4) return "😕";
-    if (mood <= 6) return "😐";
-    if (mood <= 8) return "🙂";
-    return "😊";
-  };
-
-  const getMoodLabel = (mood) => {
-    if (mood <= 2) return "Struggling";
-    if (mood <= 4) return "Low";
-    if (mood <= 6) return "Okay";
-    if (mood <= 8) return "Good";
-    return "Great";
-  };
+  const getMoodEmoji = (mood) =>
+    ["😒","😢","😣","😕","😐","😏","😊","😄","😍"][mood-1] || "—";
+  
+  const getMoodLabel = (mood) =>
+    ["Very Low","Down","Frustrated","Meh","In the Middle","Okay","Content","Very Good","Amazing"][mood-1] || "Not tracked";
 
   const completedGoals = goals.filter((g) => g.completed).length;
   const goalProgress = goals.length > 0 ? (completedGoals / goals.length) * 100 : 0;
@@ -58,18 +56,21 @@ export default function Home() {
   const wellnessProgress = (wellnessActivities / 3) * 100;
 
   return (
+    <div className="home-background">
     <div className="home-container">
-      <h1>You Wellness Home</h1>
+      <h1>Your Wellness Home</h1>
+
       <div className="home-card-header-card">
         <h2 className="home-header-title">Welcome to Your Wellness Dashboard</h2>
         <p className="home-header-subtitle">Here's a quick overview of your day</p>
       </div>
 
       <div className="home-grid">
+        {/* Mood Card */}
         <div className="home-card">
           <div className="home-card-header">
             <div className="home-icon-row">
-              <span className="home icon red">❤️</span>
+              <span className="home-icon red">❤️</span>
               <span className="home-emoji">{todaysMood ? getMoodEmoji(todaysMood) : "—"}</span>
             </div>
             <h3>Mood</h3>
@@ -82,6 +83,7 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Wellness Card */}
         <div className="home-card">
           <div className="home-card-header">
             <div className="home-icon-row">
@@ -104,6 +106,7 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Goals Card */}
         <div className="home-card">
           <div className="home-card-header">
             <div className="home-icon-row">
@@ -128,6 +131,7 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Journal Card */}
         <div className="home-card">
           <div className="home-card-header">
             <div className="home-icon-row">
@@ -147,10 +151,14 @@ export default function Home() {
         </div>
       </div>
 
+<<<<<<< HEAD
       
           <WeatherDisplay />
 
 
+=======
+      {/* Wellness Activities */}
+>>>>>>> origin/main
       <div className="home-card">
         <div className="home-card-header">
           <span className="home-icon purple">🌸</span>
@@ -177,5 +185,7 @@ export default function Home() {
         </div>
       </div>
     </div>
+    </div>
   );
 }
+

@@ -3,16 +3,16 @@ import kaylabiopic from "./images/kaylabiopic.png";
 import jaysensbiopic from "./images/jaysensbiopic.png";
 import marbue1 from "./images/marbuebiopic.jpeg";
 import nealsbiopic from "./images/nealsbiopic.png";
-import CodeBustersLogo from "./images/CodeBustersLogo.png";
+// import CodeBustersLogo from "./images/CodeBustersLogo.png";
 
-import "./About.css";
+import "../App.css";
 
 function About() {
   return (
     <div className="about-container">
       <h2>ABOUT</h2>
 
-      <div>
+      {/* <div>
         <img
           src={CodeBustersLogo}
           width={300}
@@ -20,7 +20,7 @@ function About() {
           id="codeEmail"
           alt="CodeBusters"
         />
-      </div>
+      </div> */}
 
       <div className="about-body">
         {/* Neal */}

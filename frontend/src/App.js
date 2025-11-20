@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './App.css';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 
@@ -14,11 +14,43 @@ import Wellness from "./components/Wellness";
 import Journals from "./components/Journals";
 import WeatherDisplay from "./components/WeatherDisplay";
 import Charts from "./components/Charts";
+import MusicToggle from "./components/MusicToggle";
+import musicFile from "./components/audio/music.mp3";
 
 function App() {
 
   const [entries, setEntries] = useState({});
   const [selectedDate, setSelectedDate] = useState(null);
+
+  const audioRef = useRef(null);
+  const [musicOn, setMusicOn] = useState(true);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+
+    if (musicOn) {
+      const playMusic = async () => {
+        try {
+          await audio.play();
+        } catch (err) {
+          console.log("Autoplay blocked — waiting for user interaction.");
+
+          const resumePlayback = () => {
+            audio.play();
+            window.removeEventListener("click", resumePlayback);
+          };
+
+          window.addEventListener("click", resumePlayback);
+        }
+      };
+
+      playMusic();
+    } else {
+      audio.pause();
+    }
+  }, [musicOn]);
+
+  const toggleMusic = () => setMusicOn(prev => !prev);
 
 const saveMood = (date, moodValue) => {
   setEntries(prev => ({
@@ -33,8 +65,21 @@ const saveMood = (date, moodValue) => {
 
   return (
     <Router> 
-      <div className="app-container"> 
+      <div className="app-container">
         <Header /> 
+
+        {/* 🎚 Toggle Switch */}
+        <MusicToggle musicOn={musicOn} toggleMusic={toggleMusic} />
+
+        {/* 🎵 Background Music */}
+        <audio
+          ref={audioRef}
+          src={musicFile}
+          loop
+          preload="auto"
+          style={{ display: "none" }}
+        />      
+        
       <main className="main-content">
 
         <Routes>
@@ -69,10 +114,3 @@ const saveMood = (date, moodValue) => {
   );
 }
 export default App;
-
-
-
-
-
-
-  

@@ -1,15 +1,17 @@
 package com.wcci.wellness.entity;
 
 import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
+@Entity
 public class Mood {
 
     @Id
     @GeneratedValue
-    private Long Id;
+    private Long id;
 
     private LocalDateTime date;
     private int rating;
@@ -37,5 +39,12 @@ public class Mood {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }    
 }
