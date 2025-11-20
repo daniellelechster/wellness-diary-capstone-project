@@ -5,7 +5,7 @@ export default function DailyQuote() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("https://zenquotes.io/api/today") // http://localhost:3000/api/daily-quote
+    fetch("http://localhost:3000/api/quote")
       .then(response => {
         if (!response.ok) {
           throw new Error("Failed to fetch quote");

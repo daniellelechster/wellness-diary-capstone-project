@@ -1,3 +1,4 @@
+package com.wcci.wellness.config;
 // package com.wcci.wellness.repository;
 
 // import com.wcci.wellness.entity.Mood;
