@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+import meditationImg from "./images/meditation.png";
+import RunningImg from "./images/Running.png";
+import nutritionImg from "./images/nutrition.png";
+import WaterImg from "./images/Water.png"
 
 // --- Default wellness structure ---
 const defaultWellness = {
@@ -35,6 +39,15 @@ function Wellness() {
   const formatTime = (ts) => {
     if (!ts) return "";
     return new Date(ts).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  };
+
+  const formatDate = (ts) => {
+    if (!ts) return "";
+    return new Date(ts).toLocaleDateString([], {
+      month: "short",
+      day: "numeric",
+      year: "numeric"
+    });
   };
 
   // --- Meditation update ---
@@ -114,22 +127,30 @@ function Wellness() {
   return (
     <div className="wellness-container">
       <h1>Your Wellness Home</h1>
+      <br />
+
+      <h2>Daily Wellness Progress</h2>
+      <br />
 
       {/* Progress Card */}
       <div className="card progress-card">
-        <h2>Daily Wellness Progress</h2>
-        <p>Keep up the great work!</p>
+        <p className="great-work">Keep up the great work!</p>
+
         <progress
           value={calculateCompletionRate()}
           max="100"
-          className="progress-bar"
+          className="wellness-progress-bar"
         />
         <p>{Math.round(calculateCompletionRate())}% Complete</p>
+        
       </div>
 
       {/* 🧘 Meditation */}
-      <div className="card">
-        <h3>🧠 Meditation & Mindfulness</h3>
+      <h3>🧠 Meditation & Mindfulness</h3>
+      <br />
+        <div className="meditation-card" style={{
+          backgroundImage: `url(${meditationImg})`
+        }}>
 
         <label>
           <input
@@ -159,19 +180,23 @@ function Wellness() {
             <p className="success-text">
               ✓ {wellness.meditation.minutes} minutes meditated today
             </p>
+
             {wellness.meditation.timestamp && (
               <p className="timestamp">
-                🕒 Logged at: {formatTime(wellness.meditation.timestamp)}
+                Date: {formatDate(wellness.meditation.timestamp)} / Time:{" "}
+                {formatTime(wellness.meditation.timestamp)}
               </p>
             )}
           </>
         )}
       </div>
 
-      {/* 🏋️ Exercise */}
-      <div className="card">
-        <h3>🏋️ Exercise & Movement</h3>
-
+      {/* 🏋️ Workout */}
+      <h3>🏋️ Exercise & Movement</h3>
+      <br />
+        <div className="exercise-card" style={{
+          backgroundImage: `url(${RunningImg})`
+        }}>
         <label>
           <input
             type="checkbox"
@@ -193,6 +218,7 @@ function Wellness() {
             }
             placeholder="Type (Running, Yoga)"
           />
+
           <input
             type="number"
             value={wellness.workout.minutes}
@@ -207,6 +233,7 @@ function Wellness() {
             }
             placeholder="Minutes"
           />
+
           <button
             onClick={() =>
               updateWorkout(
@@ -224,9 +251,11 @@ function Wellness() {
             <p className="success-text">
               ✓ {wellness.workout.type} for {wellness.workout.minutes} minutes
             </p>
+
             {wellness.workout.timestamp && (
               <p className="timestamp">
-                🕒 Logged at: {formatTime(wellness.workout.timestamp)}
+                Date: {formatDate(wellness.workout.timestamp)} / Time:{" "}
+                {formatTime(wellness.workout.timestamp)}
               </p>
             )}
           </>
@@ -234,9 +263,12 @@ function Wellness() {
       </div>
 
       {/* 🍽 Meals */}
-      <div className="card">
-        <h3>🍽 Meals & Nutrition</h3>
-
+      <h3>🍽 Meals & Nutrition</h3>
+      <br />
+        <div className="food-card" style={{
+          backgroundImage: `url(${nutritionImg})`
+        }}>
+      <div className="meals-card">
         {["breakfast", "lunch", "dinner"].map((meal) => (
           <div key={meal}>
             <label>
@@ -250,7 +282,7 @@ function Wellness() {
 
             {wellness.meals[`${meal}Timestamp`] && (
               <p className="timestamp">
-                🕒 Logged at:{" "}
+                {formatDate(wellness.meals[`${meal}Timestamp`])} — {" "}
                 {formatTime(wellness.meals[`${meal}Timestamp`])}
               </p>
             )}
@@ -299,7 +331,13 @@ function Wellness() {
 
           {wellness.meals.snacksTimestamps.length > 0 && (
             <p className="timestamp">
-              Latest snack at:{" "}
+              {" "}
+              Date: {formatDate(
+                wellness.meals.snacksTimestamps[
+                  wellness.meals.snacksTimestamps.length - 1
+                ]
+              )}{" "}
+              / Time:{" "}
               {formatTime(
                 wellness.meals.snacksTimestamps[
                   wellness.meals.snacksTimestamps.length - 1
@@ -309,10 +347,15 @@ function Wellness() {
           )}
         </div>
       </div>
+    </div>
 
       {/* 💧 Water Intake */}
-      <div className="card">
-        <h3>💧 Water Intake</h3>
+      <h3>💧 Water Intake</h3>
+      <br />
+        <div className="waterdrop-card" style={{
+          backgroundImage: `url(${WaterImg})`
+        }}>
+      <div className="water-card">
         <p>Goal: 8 glasses per day</p>
 
         <div className="water-display">
@@ -328,11 +371,13 @@ function Wellness() {
 
         <div className="water-buttons">
           <button onClick={() => updateWater(1)}>+ Add Glass</button>
+
           {wellness.water > 0 && (
             <button onClick={() => updateWater(-1)}>- Remove</button>
           )}
         </div>
       </div>
+    </div>
     </div>
   );
 }

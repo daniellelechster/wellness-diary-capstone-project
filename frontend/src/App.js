@@ -114,10 +114,3 @@ const saveMood = (date, moodValue) => {
   );
 }
 export default App;
-
-
-
-
-
-
-  
