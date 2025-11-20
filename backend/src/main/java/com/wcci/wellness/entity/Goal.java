@@ -58,4 +58,14 @@ public class Goal {
     public void setDate(String text) {
         this.text = text;
     }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    
 }
