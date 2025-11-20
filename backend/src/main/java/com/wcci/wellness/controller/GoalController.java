@@ -9,7 +9,7 @@ import com.wcci.wellness.service.GoalService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/wellness")
+@RequestMapping("/api/wellness/goal")
 public class GoalController {
     
     private GoalService goalService;
