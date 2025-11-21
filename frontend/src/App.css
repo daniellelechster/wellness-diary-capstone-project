@@ -479,7 +479,6 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  /* background-blend-mode: lighten;    */
   min-height: 100vh;
   background-color: rgba(216, 213, 213, 0.7);
   background-blend-mode: lighten;
@@ -740,10 +739,11 @@ button:hover {
 /* Mood */
 .moodBox {
   /* background-image: url("./components/images/mood1.jpg"); */
-  background-image: url("./components/images/mood6.jpg");
+  background-image: url("./components/images/mood2.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+    background-blend-mode: lighten 20%;
   min-height: 500px;
   height: auto;
   width: 100%;

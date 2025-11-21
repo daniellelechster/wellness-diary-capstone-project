@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
-// import serenity1 from "./images/serenity1.jpg";
-// import neverstop from "./images/neverstop.jpg"
-// import writesomething from "./images/writesomething.jpg";
-// import retrowrite from "./images/retrowrite.jpg";
-import typewriter from "./images/typewriter.jpg";
+import serenity1 from "./images/serenity1.jpg";
+
 
 function Journals() {
   const [entries, setEntries] = useState([]);
@@ -187,7 +184,7 @@ function Journals() {
   return (
     <div
       className="journals-container"
-      style={{ backgroundImage: `url(${typewriter})` }}
+      style={{ backgroundImage: `url(${serenity1})` }}
     >
       <h1>Today's Journal</h1>
       <h2>Mood: {moodLabel}</h2>
