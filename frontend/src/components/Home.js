@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
 import "../App.css";
 
 export default function Home() {
@@ -119,6 +120,7 @@ export default function Home() {
       <div className="home-grid">
 
         {/* Mood Card */}
+      <Link to="/mood" className="home-card-link">
         <div className="home-card">
           <div className="home-card-header">
             <div className="home-icon-row">
@@ -130,12 +132,14 @@ export default function Home() {
           <div className="home-card-content">
             <p className="home-value">{todaysMood ? getMoodLabel(todaysMood) : "Not tracked"}</p>
             <p className="home-subtext">
-              {todaysMood ? `Level ${todaysMood}/10` : "Track your mood today"}
+              {todaysMood ? `Level ${todaysMood}/9` : "Track your mood today"}
             </p>
           </div>
         </div>
+      </Link>
 
         {/* Wellness Card */}
+      <Link to="/wellness" className="home-card-link">
         <div className="home-card">
           <div className="home-card-header">
             <div className="home-icon-row">
@@ -157,8 +161,10 @@ export default function Home() {
             </p>
           </div>
         </div>
+      </Link>
 
         {/* Goals Card */}
+      <Link to="/goals" className="home-card-link">
         <div className="home-card">
           <div className="home-card-header">
             <div className="home-icon-row">
@@ -182,8 +188,10 @@ export default function Home() {
             </p>
           </div>
         </div>
+      </Link>
 
         {/* Journal Card */}
+      <Link to="/journals" className="home-card-link">
         <div className="home-card">
           <div className="home-card-header">
             <div className="home-icon-row">
@@ -199,10 +207,12 @@ export default function Home() {
             </p>
           </div>
         </div>
+        </Link>
       </div>
+    
 
       {/* Wellness Activities */}
-      <div className="home-card">
+      <div className="wellness-home-card">
         <div className="home-card-header">
           <span className="home-icon purple">🌸</span>
           <h3>Wellness Activities</h3>
