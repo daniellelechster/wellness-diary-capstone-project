@@ -151,14 +151,11 @@ export default function Home() {
         </div>
       </div>
 
-<<<<<<< HEAD
       
           <WeatherDisplay />
 
 
-=======
       {/* Wellness Activities */}
->>>>>>> origin/main
       <div className="home-card">
         <div className="home-card-header">
           <span className="home-icon purple">🌸</span>

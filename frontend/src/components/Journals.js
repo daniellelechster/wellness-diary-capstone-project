@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
-<<<<<<< HEAD
 import "../App.css";
 import DailyQuote from "./DailyQuote";
-=======
 import serenity from "./images/serenity.jpg";
->>>>>>> origin/main
 
 function Journals() {
   const [entries, setEntries] = useState([]);
@@ -19,28 +16,28 @@ function Journals() {
   const todayKey = new Date().toISOString().split("T")[0];
 
   /* -------------------------
-     Load Quotes (Mock API)
+    Load Quotes (Mock API)
   --------------------------*/
   useEffect(() => {
     async function fetchQuotes() {
-      const mockQuotes = [
-        "Take a deep breath. You are doing great.",
-        "Progress, not perfection.",
-        "Be kind to yourself today.",
-        "Even the smallest step forward is progress.",
-        "You are enough, exactly as you are.",
-        "You are stronger than you think.",
-        "Take it one step at a time.",
-        "Even small progress is progress.",
-        "Breathe. You're doing better than you think.",
-        "Focus on the step in front of you, not the whole staircase.",
-        "You deserve kindness — especially from yourself.",
-        "Every day is a fresh start.",
-        "Peace begins the moment you choose it.",
-        "Let go of what you can't control.",
-      ];
+      // const mockQuotes = [
+      //   "Take a deep breath. You are doing great.",
+      //   "Progress, not perfection.",
+      //   "Be kind to yourself today.",
+      //   "Even the smallest step forward is progress.",
+      //   "You are enough, exactly as you are.",
+      //   "You are stronger than you think.",
+      //   "Take it one step at a time.",
+      //   "Even small progress is progress.",
+      //   "Breathe. You're doing better than you think.",
+      //   "Focus on the step in front of you, not the whole staircase.",
+      //   "You deserve kindness — especially from yourself.",
+      //   "Every day is a fresh start.",
+      //   "Peace begins the moment you choose it.",
+      //   "Let go of what you can't control.",
+      // ];
       await new Promise((res) => setTimeout(res, 300));
-      setDailyQuotes(mockQuotes);
+      setDailyQuotes(DailyQuote);
     }
     fetchQuotes();
   }, []);
@@ -175,7 +172,7 @@ function Journals() {
   };
 
   /* -------------------------
-     Delete Entry
+    Delete Entry
   --------------------------*/
   const handleDeleteEntry = (index) => {
     const updatedEntries = entries.filter((_, i) => i !== index);
@@ -184,7 +181,7 @@ function Journals() {
   };
 
   /* -------------------------
-     UI
+    UI
   --------------------------*/
   return (
     <div
@@ -195,15 +192,10 @@ function Journals() {
       <h2>Mood: {moodLabel}</h2>
 
       <div className="daily-quote">
-<<<<<<< HEAD
-        <span role="img" aria-label="sun and moon">🌞🌙</span>
-        <strong> Daily Quote:</strong> <DailyQuote/>
-=======
         <span role="img" aria-label="sun and moon">
           🌞🌙
         </span>
         <strong> Daily Quote:</strong> {dailyQuote}
->>>>>>> origin/main
       </div>
 
       {/* Journal Entry */}
