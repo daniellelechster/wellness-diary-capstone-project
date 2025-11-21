@@ -130,7 +130,7 @@ export default function Home() {
           <div className="home-card-content">
             <p className="home-value">{todaysMood ? getMoodLabel(todaysMood) : "Not tracked"}</p>
             <p className="home-subtext">
-              {todaysMood ? `Level ${todaysMood}/10` : "Track your mood today"}
+              {todaysMood ? `Level ${todaysMood}/9` : "Track your mood today"}
             </p>
           </div>
         </div>
