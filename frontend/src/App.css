@@ -175,7 +175,7 @@ body {
 
 .home-container h1 {
   color: rgb(143, 78, 43);
-  
+  margin-top: -3%;
 }
 
 .home-card {
@@ -236,6 +236,12 @@ body {
   margin-bottom: 8px;
 }
 
+.home-card-content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .home-icon-row {
   display: flex;
   justify-content: space-between;
@@ -262,23 +268,24 @@ body {
   color: #ec4899;
 }
 .home-icon.purple {
-  color: #8b5cf6;
+  color: #f29df3;
 }
 .home-icon.blue {
   color: #3b82f6;
 }
 .home-icon.indigo {
-  color: #6366f1;
+  color: ec4899;
 }
 
 .home-small-text {
   font-size: 0.8rem;
-  color: #ffffff;
+  color: #151515;
 }
 
 .home-value {
   font-size: 1.2rem;
   font-weight: 500;
+  margin-top: none;
 }
 
 .home-subtext {
@@ -295,7 +302,7 @@ body {
 }
 
 .home-progress-fill {
-  background: #8b5cf6;
+  background: #ec4899;
   height: 100%;
   border-radius: 6px;
   transition: width 0.3s ease;

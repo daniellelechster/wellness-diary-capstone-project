@@ -53,6 +53,12 @@ function App() {
   const toggleMusic = () => setMusicOn(prev => !prev);
 
 const saveMood = (date, moodValue) => {
+  const storedMoods = JSON.parse(localStorage.getItem("moods") || "{}");
+
+  storedMoods[date] = moodValue;
+
+  localStorage.setItem("moods", JSON.stringify(storedMoods));
+
   setEntries(prev => ({
     ...prev,
     [date]: {
@@ -62,6 +68,7 @@ const saveMood = (date, moodValue) => {
     }
   }));
 };
+
 
   return (
     <Router> 
