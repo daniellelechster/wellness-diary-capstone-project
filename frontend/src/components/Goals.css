@@ -22,10 +22,10 @@ h3 {
 }
 
 .goal-entry textarea {
-    width: 100%;
+    width: 95%;
     height: 100px;
     margin: 1rem 0;
-    padding: 0.75rem;
+    padding: 1rem;
     font-size: 1rem;
     border-radius: 8px;
     border: 1px solid #ccc;
@@ -40,6 +40,7 @@ h3 {
 
 .goal-text {
     font-weight: bold;
+    color: #444;
 }
 
 .goal-section h3 {
@@ -49,6 +50,7 @@ h3 {
 
 .goal-section ul {
     list-style-type: none;
+    color: #444;
     padding: 0;
 }
 
@@ -65,7 +67,7 @@ h3 {
 }
 
 .goal-section li em {
-    font-weight: bold;
+    /* font-weight: bold; */
     color: #555;
 }
 
