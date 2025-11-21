@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import calendarImg from "./images/calendarImg.jpg";
 import '../App.css';
 
 function Calendar({ entries = {}, selectedDate, onDateSelect }) {
@@ -17,7 +18,7 @@ const getMoodColor = (mood) => {
     case 7: return '#FFFF00'; // Content - yellow
     case 8: return '#ADFF2F'; // Very Good - light green
     case 9: return '#228B22'; // Amazing - green
-    default: return '#fff';    // Undefined
+    default: return '#f2f2f2';    // Undefined
   }
 };
   
@@ -73,9 +74,15 @@ const getMoodColor = (mood) => {
   return (
     <div className="calendar-page">
       <h2>Your Calendar</h2>
+      <img 
+      src={calendarImg} 
+      alt="Calendar Img" 
+      className="calendar-image"
+    />
       <p>Track your emotional journey over time</p>
 
       <div className="calendar-stats">
+      
         <div>
           <h4>Average Mood</h4>
           <p>{avgMoodThisMonth.toFixed(1)}/10</p>
@@ -107,7 +114,7 @@ const getMoodColor = (mood) => {
             <div
               key={idx}
               className={`calendar-day ${d.entry ? 'logged' : ''}`}
-              style={{ backgroundColor: d.moodColor }}
+              style={d.entry ? { backgroundColor: d.moodColor } : {}}
               onClick={() => onDateSelect && onDateSelect(`${year}-${pad(month + 1)}-${pad(d.day)}`)}
             >
               {d.day}
