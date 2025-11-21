@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "../App.css";
+import MoodHistoryChart from "./MoodHistoryChart";
 
-export default function MoodScale({ onSubmitMood }) {
+export default function MoodScale({ onSubmitMood, entries }) {
   const [mood, setMood] = useState(5);
   // const handleSubmit = () => {
   //   // alert(`Mood submitted: ${moodMap[mood].label} ${moodMap[mood].emoji}`);
@@ -59,7 +60,9 @@ export default function MoodScale({ onSubmitMood }) {
       </p>  
       <button className="moodSubmitButton" onClick={() => handleSubmit()}>
         Submit
-      </button>   
+      </button>
+
+      <MoodHistoryChart entries={entries} />
     </div>
   );
 }
