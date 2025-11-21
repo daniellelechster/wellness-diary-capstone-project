@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import serenity from "./images/serenity.jpg";
+import serenity1 from "./images/serenity1.jpg";
 
 function Journals() {
   const [entries, setEntries] = useState([]);
@@ -183,7 +183,7 @@ function Journals() {
   return (
     <div
       className="journals-container"
-      style={{ backgroundImage: `url(${serenity})` }}
+      style={{ backgroundImage: `url(${serenity1})` }}
     >
       <h1>Today's Journal</h1>
       <h2>Mood: {moodLabel}</h2>
