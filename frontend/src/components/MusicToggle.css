@@ -47,3 +47,13 @@ input:checked + .slider:before {
   font-size: 14px;
   font-weight: 500;
 }
+
+.music-toggle-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.music-toggle-container .switch {
+  transform: scale(0.9);
+}
