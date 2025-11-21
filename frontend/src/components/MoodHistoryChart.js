@@ -27,19 +27,17 @@ export default function MoodHistoryChart({ entries = {} }) {
         <h3 className="moodHeader">Mood History</h3>
 
         <div style={{ 
-            width: "100%",
-            height: "300px",
+            width: "98%",
+            height: "15rem",
             backgroundColor: "white",
-            padding: ".5rem",
+            padding: "1rem",
             borderRadius: "12px",
-            boxShadow: "0 2px 6px rgba(0,0,0,0.1)"
+            boxShadow: "0 2px 6px rgba(0,1,1,1)"
             }}
         >
-        <div className="moodHistoryWrapper">
-            <div className="chartInnerContainer">
             <ResponsiveContainer>
             <LineChart data={data}>
-                <CartesianGrid strokeDasharray="3 3" />
+                <CartesianGrid strokeDasharray="2 2" />
                 <XAxis 
                     dataKey="date"
                     style={{ fontWeight: "bold" }}
@@ -55,13 +53,11 @@ export default function MoodHistoryChart({ entries = {} }) {
                     stroke="#ff6b6b"
                     strokeWidth={4}
                     dot={{ r: 6 }}
-                    activeDot={{ r: 8}}
+                    activeDot={{ r: 1}}
                 />
             </LineChart>
             </ResponsiveContainer>
         </div>
-    </div>
-    </div>
     </div>
     );
 }
