@@ -14,7 +14,7 @@ import Wellness from "./components/Wellness";
 import Journals from "./components/Journals";
 import WeatherDisplay from "./components/WeatherDisplay";
 import Charts from "./components/Charts";
-import MusicToggle from "./components/MusicToggle";
+// import MusicToggle from "./components/MusicToggle";
 import musicFile from "./components/audio/music.mp3";
 
 function App() {
@@ -66,11 +66,9 @@ const saveMood = (date, moodValue) => {
   return (
     <Router> 
       <div className="app-container">
-        <Header /> 
+        <Header musicOn={musicOn} toggleMusic={toggleMusic} /> 
 
         {/* 🎚 Toggle Switch */}
-        <MusicToggle musicOn={musicOn} toggleMusic={toggleMusic} />
-
         {/* 🎵 Background Music */}
         <audio
           ref={audioRef}
