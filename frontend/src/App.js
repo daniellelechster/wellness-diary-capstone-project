@@ -91,11 +91,7 @@ const saveMood = (date, moodValue) => {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/journals" element={<Journals />} />
-          <Route path="/mood" element={<Mood 
-                  onSubmitMood={saveMood}
-                  selectedDate={selectedDate} />
-                  } />
-
+          
           <Route path="/wellness" element={<Wellness />} />
           <Route path="/goals" element={<Goals />} />
           <Route path="/calendar" element={<Calendar 
@@ -109,6 +105,16 @@ const saveMood = (date, moodValue) => {
           <Route path="/charts" element={<Charts 
                   entries={entries} />} 
                   />
+          <Route 
+            path="/mood" 
+            element={
+              <Mood 
+                onSubmitMood={saveMood}
+                selectedDate={selectedDate}
+                entries={entries}
+              />
+            }
+          />
         </Routes>
 
       </main>
