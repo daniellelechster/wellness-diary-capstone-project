@@ -12,7 +12,6 @@ function Journals() {
   const [response, setResponse] = useState("");
   const [dailyQuote, setDailyQuote] = useState("");
   const [dailyQuotes, setDailyQuotes] = useState([]);
-  
 
   const todayKey = new Date().toISOString().split("T")[0];
 
