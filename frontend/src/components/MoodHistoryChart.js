@@ -10,16 +10,9 @@ import {
 } from "recharts";
 
 export default function MoodHistoryChart({ entries = {} }) {
-    const data = Object.values(entries)
-    .sort((a, b) => a.date.localeCompare(b.date))
-    .map(entry => ({
-        ...entry,
-        // Convert "YYYY-MM-DD" → "MM/DD"
-        date: new Date(entry.date).toLocaleDateString("en-US", {
-        month: "numeric",
-        day: "numeric"
-        })
-    }));
+    const data = Object.values(entries).sort((a, b) =>
+  a.date.localeCompare(b.date)
+);
 
     return (
         
