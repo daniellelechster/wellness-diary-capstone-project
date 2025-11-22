@@ -45,8 +45,8 @@ export default function WeatherDisplay() {
   }, []);
 
   return (
-    <div className="home-card">
-      <div className="home-card-header">
+    <div className="home-card weather-card">
+      <div className="home-card weather-card-header">
         <span className="home-icon indigo">⛅</span>
         <h3>Weather Overview</h3>
       </div>
@@ -55,7 +55,7 @@ export default function WeatherDisplay() {
       {weatherError && <p className="home-subtext">Unable to load weather, please check your API key.</p>}
 
       {weather && (
-        <div className="home-card-content">
+        <div className="home-card weather-card-content">
           <div className="weather-row">
             <img
               src={`https://openweathermap.org/img/wn/${weather.current.weather[0].icon}@2x.png`}

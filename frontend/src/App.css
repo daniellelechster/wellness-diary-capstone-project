@@ -1115,18 +1115,100 @@ button:hover {
 .water-buttons button {
   margin: 0 4px;
 }
-.weekly-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-  gap: 10px;
-  margin-top: 10px;
-  text-align: center;
+
+.success-text {
+  color: #c8c5c5;
 }
 
-.forecast-item {
+.timestamp {
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+/* CONTACT */
+
+.contact-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.contact-container h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: rgb(143, 78, 43);
+  margin: 0;
+  margin-top: 0;
+  margin-bottom: 60px;
+  color: #3a2b1e;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6),
+    -1px -1px 1px rgba(143, 78, 43, 0.4);
+}
+
+.contact-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+  margin-bottom: 10%;
+}
+
+@media (max-width: 768px) {
+  .contact-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contact-info {
+  background: #8d9491;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+  border-radius: 14px;
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
+    inset 4px 4px 8px rgba(0, 0, 0, 0.35), 4px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.contact-info h3 {
+  font-size: 1.8rem;
+  color: #ebe3cf;
+  margin-bottom: 20px;
+}
+
+.contact-info p {
+  line-height: 1.8;
+  color: #ebe3cf;
+  margin-bottom: 30px;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-item {
   padding: 10px;
-  border-radius: 8px;
-  background: #f5f5f5;
+  background: white;
+  border-radius: 5px;
+  color: #333;
+}
+
+.contact-item strong {
+  color: #3a2b1e;
+  margin-right: 10px;
+}
+
+.contact-form-wrapper {
+  background: #8d9491;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+  border-radius: 14px;
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
+    inset 4px 4px 8px rgba(0, 0, 0, 0.35), 4px 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .success-message {
