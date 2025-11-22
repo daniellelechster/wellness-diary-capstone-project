@@ -3,7 +3,7 @@ package com.wcci.wellness.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import java.time.LocalDateTime;
+// import java.time.LocalDateTime;
 
 @Entity
 public class Journal {
@@ -17,7 +17,7 @@ public class Journal {
     private String prompt;
     private String text;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    // private LocalDateTime createdAt = LocalDateTime.now();
 
     public Journal() {
     }
@@ -27,7 +27,6 @@ public class Journal {
         this.time = time;
         this.prompt = prompt;
         this.text = text;
-        this.createdAt = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -68,13 +67,5 @@ public class Journal {
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 }
