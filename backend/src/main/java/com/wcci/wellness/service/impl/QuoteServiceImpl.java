@@ -34,7 +34,7 @@ public class QuoteServiceImpl implements QuoteService {
             Quote today = new Quote();
             today.setText(obj.get("q").asText());
             today.setAuthor(obj.get("a").asText());
-
+            
             return today;
 
         } catch (Exception e) {

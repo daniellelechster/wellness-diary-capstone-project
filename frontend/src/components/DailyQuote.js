@@ -4,21 +4,30 @@ export default function DailyQuote() {
   const [quote, setQuote] = useState(null);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetch("http://localhost:3000/api/quote")
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch quote");
-        }
-        return response.json();
-      })
-      .then(data => {
-        if (Array.isArray(data) && data.length > 0) {
-          setQuote(data[0]);
-        }
-      })
-      .catch(err => setError(err.message));
-  }, []);
+useEffect(() => {
+  console.log("DailyQuote mounted");
+
+  fetch("http://localhost:8080/api/quote")
+    .then(response => {
+      console.log("Fetch response:", response);
+      if (!response.ok) {
+        throw new Error("Failed to fetch quote");
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log("Fetched JSON:", data);
+      if (data && data.text && data.author) {
+        console.log("Setting quote to:", data.text);
+        setQuote(data);
+      }
+    })
+    .catch(err => {
+      console.log("Fetch error:", err);
+      setError(err.message);
+    });
+}, []);
+
 
   if (error) {
     return (
@@ -35,8 +44,8 @@ export default function DailyQuote() {
   return (
     <div className="quote-card">
       <h2>Daily Inspiration</h2>
-      <p style={{ fontStyle: "italic" }}>"{quote.q}"</p>
-      <p>- {quote.a}</p>
+      <p style={{ fontStyle: "italic" }}>"{quote.text}"</p>
+      <p>- {quote.author}</p>
     </div>
   );
 }

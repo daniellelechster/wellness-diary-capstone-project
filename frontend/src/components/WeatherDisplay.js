@@ -31,7 +31,7 @@ export default function WeatherDisplay() {
   useEffect(() => {
     const lat = 41.4993; // example (CLE)
     const lon = 81.6944;
-    const apiKey = "fc441a9252274941253dd899336b6c31";
+    const apiKey = process.env.REACT_APP_API_KEY;
 
     fetch(
       `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&units=imperial&appid=${apiKey}`
@@ -52,7 +52,7 @@ export default function WeatherDisplay() {
       </div>
 
       {!weather && !weatherError && <p className="home-subtext">Loading weather...</p>}
-      {weatherError && <p className="home-subtext">Unable to load weather</p>}
+      {weatherError && <p className="home-subtext">Unable to load weather, please check your API key.</p>}
 
       {weather && (
         <div className="home-card-content">

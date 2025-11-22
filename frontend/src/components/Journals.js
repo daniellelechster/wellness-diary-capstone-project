@@ -18,29 +18,7 @@ function Journals() {
   /* -------------------------
     Load Quotes (Mock API)
   --------------------------*/
-  useEffect(() => {
-    async function fetchQuotes() {
-      // const mockQuotes = [
-      //   "Take a deep breath. You are doing great.",
-      //   "Progress, not perfection.",
-      //   "Be kind to yourself today.",
-      //   "Even the smallest step forward is progress.",
-      //   "You are enough, exactly as you are.",
-      //   "You are stronger than you think.",
-      //   "Take it one step at a time.",
-      //   "Even small progress is progress.",
-      //   "Breathe. You're doing better than you think.",
-      //   "Focus on the step in front of you, not the whole staircase.",
-      //   "You deserve kindness — especially from yourself.",
-      //   "Every day is a fresh start.",
-      //   "Peace begins the moment you choose it.",
-      //   "Let go of what you can't control.",
-      // ];
-      await new Promise((res) => setTimeout(res, 300));
-      setDailyQuotes(DailyQuote);
-    }
-    fetchQuotes();
-  }, []);
+  
 
   /* -------------------------
      Prompts Based on Mood
@@ -191,12 +169,10 @@ function Journals() {
       <h1>Today's Journal</h1>
       <h2>Mood: {moodLabel}</h2>
 
-      <div className="daily-quote">
-        <span role="img" aria-label="sun and moon">
-          🌞🌙
-        </span>
-        <strong> Daily Quote:</strong> {dailyQuote}
-      </div>
+<div className="daily-quote">
+  <DailyQuote />
+</div>
+
 
       {/* Journal Entry */}
       <div className="journal-entry">
