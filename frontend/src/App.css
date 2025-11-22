@@ -155,7 +155,7 @@ body {
 }
 
 .nav-links a.active {
-  background-color: #ff4d6d;
+  background-color: #f483ac;
   color: #fff;
 }
 
@@ -859,10 +859,10 @@ button:hover {
 }
 
 .moodSlider {
-    width: 97%;
+    width: 98%;
     margin: auto;
     padding: 0;
-    accent-color: #f483ac;
+    accent-color: #ff4d6d;
     appearance: none;
     margin-bottom: 2rem;
     background: none;    
@@ -899,13 +899,13 @@ button:hover {
 .numberRow {
   display: flex;
   justify-content: space-between;
-  width: 97%;
+  width: 98%;
   margin: 0 auto;
   padding: 4px 4px;
 }
 
 .numberRow span {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: #000000;
 }
 
