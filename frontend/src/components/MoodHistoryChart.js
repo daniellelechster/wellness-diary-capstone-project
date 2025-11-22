@@ -10,16 +10,9 @@ import {
 } from "recharts";
 
 export default function MoodHistoryChart({ entries = {} }) {
-    const data = Object.values(entries)
-    .sort((a, b) => a.date.localeCompare(b.date))
-    .map(entry => ({
-        ...entry,
-        // Convert "YYYY-MM-DD" → "MM/DD"
-        date: new Date(entry.date).toLocaleDateString("en-US", {
-        month: "numeric",
-        day: "numeric"
-        })
-    }));
+    const data = Object.values(entries).sort((a, b) =>
+  a.date.localeCompare(b.date)
+);
 
     return (
         
@@ -28,9 +21,9 @@ export default function MoodHistoryChart({ entries = {} }) {
 
         <div style={{ 
             width: "98%",
-            height: "15rem",
+            height: "18rem",
             backgroundColor: "white",
-            padding: "1rem",
+            padding: ".5rem",
             borderRadius: "12px",
             boxShadow: "0 2px 6px rgba(0,1,1,1)"
             }}

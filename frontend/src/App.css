@@ -155,7 +155,7 @@ body {
 }
 
 .nav-links a.active {
-  background-color: #ff4d6d;
+  background-color: #f483ac;
   color: #fff;
 }
 
@@ -810,11 +810,8 @@ button:hover {
   position: relative;
   z-index: 1;
   margin-bottom: 120px;
-}
-
-
-.moodBox:hover {
-  transform: scale(1.02);
+  display: flex;
+  flex-direction: column;
 }
 
 .moodBox h2,
@@ -833,7 +830,9 @@ button:hover {
   color: rgb(24, 23, 23);
   font-size: 20px;
   position: relative;
+  margin-top: 1rem;
   z-index: 3;
+  align-items: center;
 }
 
 .moodHeader {
@@ -860,14 +859,13 @@ button:hover {
 }
 
 .moodSlider {
-    width: 100%;
-    margin: 0;
+    width: 98%;
+    margin: auto;
     padding: 0;
-    accent-color: #f483ac;
+    accent-color: #ff4d6d;
     appearance: none;
     margin-bottom: 2rem;
-    background: none;
-    
+    background: none;    
 }
 
 .moodSlider::-webkit-slider-runnable-track {  
@@ -891,34 +889,60 @@ button:hover {
     border-radius: 2px;
 }
 
-.emojiNumberContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 0.5rem;
+.moodFeedback {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 20px;
+  color: rgb(24, 23, 23);
 }
+
 .numberRow {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 0 4px;
+  display: flex;
+  justify-content: space-between;
+  width: 98%;
+  margin: 0 auto;
+  padding: 4px 4px;
 }
 
 .numberRow span {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     color: #000000;
 }
 
 .moodSubmitButton {
-    /* background-color: #ff9494; */
+    display: block;
     color: #fff;
     border: none;
     padding: 0.6rem 1.2rem;
     border-radius: 8px;
     font-size: 1rem;
     cursor: pointer;
-    margin-top: .1rem;
-    transition: background-color 0.3s ease;
+    margin: .2rem auto;
+    transition: background-color 0.3s ease;    
+}
+
+.moodHistoryBox h3 {
+    font-size: 1.6rem;
+    color: black;
+    margin-top: 4rem;
+    padding: .1rem;
+}
+
+.recharts-default-tooltip {
+    background: #ffffff !important;
+    border: 1px solid #ddd !important;
+    border-radius: 6px !important;
+    padding: 6px !important;
+    color: #6d6875 !important;
+}
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+    stroke: #f1e9e9;
+}
+
+.recharts-line {
+    stroke-linecap: round;
 }
 
 /* Wellness */
