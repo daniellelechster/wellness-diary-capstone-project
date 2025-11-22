@@ -1,48 +1,89 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
 import "../App.css";
 import WeatherDisplay from "./WeatherDisplay";
 
 export default function Home() {
-  
+
   const [todaysMood, setTodaysMood] = useState(null);
   const [goals, setGoals] = useState([]);
-  const [wellness, setWellness] = useState({
-    meditation: false,
-    workout: false,
-    healthyEating: false,
-  });
+  const [wellnessSummary, setWellnessSummary] = useState(null);
   const [journalEntry, setJournalEntry] = useState("");
 
-  // Function to load today's data
-  const loadTodaysData = () => {
-    const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD format
+  // Format wellness summaries
+  const getWellnessSummary = (w) => {
+    if (!w) return null;
 
-    // Load mood
-    const moodData = JSON.parse(localStorage.getItem("moodData") || "[]");
-    const todayMood = moodData.find((m) => m.date === today);
-    setTodaysMood(todayMood ? todayMood.mood : null);
+    return {
+      meditation: w.meditation?.completed
+        ? `${w.meditation.minutes} min meditated`
+        : "Not completed",
 
-    // Load goals
-    const goalsData = localStorage.getItem("goals");
-    if (goalsData) setGoals(JSON.parse(goalsData));
+      workout: w.workout?.completed
+        ? `${w.workout.type} • ${w.workout.minutes} min`
+        : "Not completed",
 
-    // Load wellness
-    const wellnessData = localStorage.getItem(`wellness-${today}`);
-    if (wellnessData) setWellness(JSON.parse(wellnessData));
-
-    // Load journal entry
-    const journalData = localStorage.getItem("journalEntries");
-    if (journalData) {
-      const entries = JSON.parse(journalData);
-      const todayEntry = entries.find((e) => e.date === today);
-      setJournalEntry(todayEntry ? todayEntry.entry : "");
-    }
+      healthyEating:
+        w.meals?.breakfast || w.meals?.lunch || w.meals?.dinner
+          ? `${[
+              w.meals.breakfast && "Breakfast",
+              w.meals.lunch && "Lunch",
+              w.meals.dinner && "Dinner",
+            ]
+              .filter(Boolean)
+              .join(", ")} eaten`
+          : "None logged",
+    };
   };
 
-  // Load data when component mounts
+  // Load today's data
+  const loadTodaysData = useCallback(() => {
+    const today = new Date().toISOString().split("T")[0];
+
+    // Mood
+    const moodData = JSON.parse(localStorage.getItem("moods") || "{}");
+
+    if (moodData[today]) {
+      setTodaysMood(moodData[today]); // mood value (1–9)
+    } else {
+      setTodaysMood(null);
+    }
+
+    // Goals
+    const goalsData = localStorage.getItem("goals-list");
+    if (goalsData) setGoals(JSON.parse(goalsData));
+
+    // Wellness
+    const wellnessData = localStorage.getItem(`wellness-${today}`);
+    if (wellnessData) {
+      const w = JSON.parse(wellnessData);
+      setWellnessSummary(getWellnessSummary(w));
+    }
+
+    // Journal — collect ALL of today’s entries
+    const journalData = localStorage.getItem("journal-entries");
+    if (journalData) {
+      const entries = JSON.parse(journalData);
+
+      const todaysEntries = entries.filter((e) => e.date === today);
+
+      if (todaysEntries.length > 0) {
+        const combinedSnippet = todaysEntries
+          .map((e) =>
+            e.text.length > 60 ? e.text.substring(0, 60) + "..." : e.text
+          )
+          .join(" • ");
+
+        setJournalEntry(combinedSnippet);
+      } else {
+        setJournalEntry("");
+      }
+    }
+  }, []); // No dependencies, safe memoization
+
   useEffect(() => {
     loadTodaysData();
-  }, []);
+  }, [loadTodaysData]);
 
   const getMoodEmoji = (mood) =>
     ["😒","😢","😣","😕","😐","😏","😊","😄","😍"][mood-1] || "—";
@@ -50,9 +91,21 @@ export default function Home() {
   const getMoodLabel = (mood) =>
     ["Very Low","Down","Frustrated","Meh","In the Middle","Okay","Content","Very Good","Amazing"][mood-1] || "Not tracked";
 
-  const completedGoals = goals.filter((g) => g.completed).length;
-  const goalProgress = goals.length > 0 ? (completedGoals / goals.length) * 100 : 0;
-  const wellnessActivities = Object.values(wellness).filter(Boolean).length;
+  // --- Updated goal logic ---
+  const completedGoals = goals.filter((g) => g.status === "completed").length;
+  const inProgressGoals = goals.filter((g) => g.status === "in progress").length;
+
+  const goalProgress =
+    goals.length > 0 ? (completedGoals / goals.length) * 100 : 0;
+
+  const wellnessActivities = wellnessSummary
+    ? [
+        wellnessSummary.meditation !== "Not completed",
+        wellnessSummary.workout !== "Not completed",
+        wellnessSummary.healthyEating !== "None logged",
+      ].filter(Boolean).length
+    : 0;
+
   const wellnessProgress = (wellnessActivities / 3) * 100;
 
   return (
@@ -66,7 +119,9 @@ export default function Home() {
       </div>
 
       <div className="home-grid">
+
         {/* Mood Card */}
+      <Link to="/mood" className="home-card-link">
         <div className="home-card">
           <div className="home-card-header">
             <div className="home-icon-row">
@@ -78,12 +133,14 @@ export default function Home() {
           <div className="home-card-content">
             <p className="home-value">{todaysMood ? getMoodLabel(todaysMood) : "Not tracked"}</p>
             <p className="home-subtext">
-              {todaysMood ? `Level ${todaysMood}/10` : "Track your mood today"}
+              {todaysMood ? `Level ${todaysMood}/9` : "Track your mood today"}
             </p>
           </div>
         </div>
+      </Link>
 
         {/* Wellness Card */}
+      <Link to="/wellness" className="home-card-link">
         <div className="home-card">
           <div className="home-card-header">
             <div className="home-icon-row">
@@ -105,8 +162,10 @@ export default function Home() {
             </p>
           </div>
         </div>
+      </Link>
 
         {/* Goals Card */}
+      <Link to="/goals" className="home-card-link">
         <div className="home-card">
           <div className="home-card-header">
             <div className="home-icon-row">
@@ -126,12 +185,14 @@ export default function Home() {
                 ? "No goals set"
                 : completedGoals === goals.length
                 ? "All goals achieved!"
-                : `${goals.length - completedGoals} remaining`}
+                : `${inProgressGoals} in progress`}
             </p>
           </div>
         </div>
+      </Link>
 
         {/* Journal Card */}
+      <Link to="/journals" className="home-card-link">
         <div className="home-card">
           <div className="home-card-header">
             <div className="home-icon-row">
@@ -143,42 +204,52 @@ export default function Home() {
           <div className="home-card-content">
             <p className="home-value">{journalEntry ? "Written" : "Not started"}</p>
             <p className="home-subtext">
-              {journalEntry
-                ? `${journalEntry.length} characters`
-                : "Write your thoughts"}
+              {journalEntry ? `"${journalEntry}"` : "Write your thoughts"}
             </p>
           </div>
         </div>
+        </Link>
       </div>
+    
 
       
           <WeatherDisplay />
 
 
       {/* Wellness Activities */}
-      <div className="home-card">
+      <div className="wellness-home-card">
         <div className="home-card-header">
           <span className="home-icon purple">🌸</span>
           <h3>Wellness Activities</h3>
         </div>
         <p className="home-subtext">Your self-care for today</p>
+
         <div className="home-activities">
-          {["meditation", "workout", "healthyEating"].map((key) => (
+
+          {[
+            { key: "meditation", label: "Meditation", value: wellnessSummary?.meditation },
+            { key: "workout", label: "Workout", value: wellnessSummary?.workout },
+            { key: "healthyEating", label: "Healthy Eating", value: wellnessSummary?.healthyEating }
+          ].map((item) => (
             <div
-              key={key}
+              key={item.key}
               className={`home-activity ${
-                wellness[key] ? "activity-complete" : "activity-incomplete"
+                item.value && !item.value.includes("Not") 
+                  ? "activity-complete" 
+                  : "activity-incomplete"
               }`}
             >
               <div className="home-activity-header">
-                <span>{key === "healthyEating" ? "Healthy Eating" : key.charAt(0).toUpperCase() + key.slice(1)}</span>
-                <span>{wellness[key] ? "✓" : "○"}</span>
+                <span>{item.label}</span>
+                <span>
+                  {item.value && !item.value.includes("Not") ? "✓" : "○"}
+                </span>
               </div>
-              <p className="home-subtext">
-                {wellness[key] ? "Completed" : "Not yet"}
-              </p>
+
+              <p className="home-subtext">{item.value || "No data"}</p>
             </div>
           ))}
+
         </div>
       </div>
     </div>
@@ -186,3 +257,266 @@ export default function Home() {
   );
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState, useEffect } from "react";
+// import "../App.css";
+
+// export default function Home() {
+
+//   const [todaysMood, setTodaysMood] = useState(null);
+//   const [goals, setGoals] = useState([]);
+//   const [, setWellness] = useState(null);
+//   const [wellnessSummary, setWellnessSummary] = useState(null);
+//   const [journalEntry, setJournalEntry] = useState("");
+
+//   // Format wellness summaries
+//   const getWellnessSummary = (w) => {
+//     if (!w) return null;
+
+//     return {
+//       meditation: w.meditation?.completed
+//         ? `${w.meditation.minutes} min meditated`
+//         : "Not completed",
+
+//       workout: w.workout?.completed
+//         ? `${w.workout.type} • ${w.workout.minutes} min`
+//         : "Not completed",
+
+//       healthyEating:
+//         w.meals?.breakfast || w.meals?.lunch || w.meals?.dinner
+//           ? `${[
+//               w.meals.breakfast && "Breakfast",
+//               w.meals.lunch && "Lunch",
+//               w.meals.dinner && "Dinner",
+//             ]
+//               .filter(Boolean)
+//               .join(", ")} eaten`
+//           : "None logged",
+//     };
+//   };
+
+//   // Load today's data
+//   const loadTodaysData = () => {
+//     const today = new Date().toISOString().split("T")[0];
+
+//     // Mood
+// const moodData = JSON.parse(localStorage.getItem("moods") || "{}");
+
+// if (moodData[today]) {
+//   setTodaysMood(moodData[today]); // mood value (1–9)
+// } else {
+//   setTodaysMood(null);
+// }
+
+
+//     // Goals (correct key: "goals-list")
+//     const goalsData = localStorage.getItem("goals-list");
+//     if (goalsData) setGoals(JSON.parse(goalsData));
+
+//     // Wellness
+//     const wellnessData = localStorage.getItem(`wellness-${today}`);
+//     if (wellnessData) {
+//       const w = JSON.parse(wellnessData);
+//       setWellness(w);
+//       setWellnessSummary(getWellnessSummary(w));
+//     }
+
+//     // Journal — collect ALL of today’s entries
+//     const journalData = localStorage.getItem("journal-entries");
+//     if (journalData) {
+//       const entries = JSON.parse(journalData);
+
+//       const todaysEntries = entries.filter((e) => e.date === today);
+
+//       if (todaysEntries.length > 0) {
+//         const combinedSnippet = todaysEntries
+//           .map((e) =>
+//             e.text.length > 60 ? e.text.substring(0, 60) + "..." : e.text
+//           )
+//           .join(" • ");
+
+//         setJournalEntry(combinedSnippet);
+//       } else {
+//         setJournalEntry("");
+//       }
+//     }
+//   };
+
+//   useEffect(() => {
+//     loadTodaysData();
+//   }, []);
+
+//   const getMoodEmoji = (mood) =>
+//     ["😒","😢","😣","😕","😐","😏","😊","😄","😍"][mood-1] || "—";
+  
+//   const getMoodLabel = (mood) =>
+//     ["Very Low","Down","Frustrated","Meh","In the Middle","Okay","Content","Very Good","Amazing"][mood-1] || "Not tracked";
+
+//   // --- Updated goal logic ---
+//   const completedGoals = goals.filter((g) => g.status === "completed").length;
+//   const inProgressGoals = goals.filter((g) => g.status === "in progress").length;
+
+//   const goalProgress =
+//     goals.length > 0 ? (completedGoals / goals.length) * 100 : 0;
+
+//   const wellnessActivities = wellnessSummary
+//     ? [
+//         wellnessSummary.meditation !== "Not completed",
+//         wellnessSummary.workout !== "Not completed",
+//         wellnessSummary.healthyEating !== "None logged",
+//       ].filter(Boolean).length
+//     : 0;
+
+//   const wellnessProgress = (wellnessActivities / 3) * 100;
+
+//   return (
+//     <div className="home-background">
+//     <div className="home-container">
+//       <h1>Your Wellness Home</h1>
+
+//       <div className="home-card-header-card">
+//         <h2 className="home-header-title">Welcome to Your Wellness Dashboard</h2>
+//         <p className="home-header-subtitle">Here's a quick overview of your day</p>
+//       </div>
+
+//       <div className="home-grid">
+
+//         {/* Mood Card */}
+//         <div className="home-card">
+//           <div className="home-card-header">
+//             <div className="home-icon-row">
+//               <span className="home-icon red">❤️</span>
+//               <span className="home-emoji">{todaysMood ? getMoodEmoji(todaysMood) : "—"}</span>
+//             </div>
+//             <h3>Mood</h3>
+//           </div>
+//           <div className="home-card-content">
+//             <p className="home-value">{todaysMood ? getMoodLabel(todaysMood) : "Not tracked"}</p>
+//             <p className="home-subtext">
+//               {todaysMood ? `Level ${todaysMood}/10` : "Track your mood today"}
+//             </p>
+//           </div>
+//         </div>
+
+//         {/* Wellness Card */}
+//         <div className="home-card">
+//           <div className="home-card-header">
+//             <div className="home-icon-row">
+//               <span className="home-icon purple">✨</span>
+//               <span className="home-small-text">{wellnessActivities}/3</span>
+//             </div>
+//             <h3>Wellness</h3>
+//           </div>
+//           <div className="home-card-content">
+//             <div className="home-progress-bar">
+//               <div className="home-progress-fill" style={{ width: `${wellnessProgress}%` }}></div>
+//             </div>
+//             <p className="home-subtext">
+//               {wellnessActivities === 3
+//                 ? "All activities complete!"
+//                 : wellnessActivities > 0
+//                 ? "Keep going!"
+//                 : "Start your wellness journey"}
+//             </p>
+//           </div>
+//         </div>
+
+//         {/* Goals Card */}
+//         <div className="home-card">
+//           <div className="home-card-header">
+//             <div className="home-icon-row">
+//               <span className="home-icon blue">🎯</span>
+//               <span className="home-small-text">
+//                 {completedGoals}/{goals.length}
+//               </span>
+//             </div>
+//             <h3>Goals</h3>
+//           </div>
+//           <div className="home-card-content">
+//             <div className="home-progress-bar">
+//               <div className="home-progress-fill" style={{ width: `${goalProgress}%` }}></div>
+//             </div>
+//             <p className="home-subtext">
+//               {goals.length === 0
+//                 ? "No goals set"
+//                 : completedGoals === goals.length
+//                 ? "All goals achieved!"
+//                 : `${inProgressGoals} in progress`}
+//             </p>
+//           </div>
+//         </div>
+
+//         {/* Journal Card */}
+//         <div className="home-card">
+//           <div className="home-card-header">
+//             <div className="home-icon-row">
+//               <span className="home-icon indigo">📖</span>
+//               <span className="home-small-text">{journalEntry ? "✓" : "○"}</span>
+//             </div>
+//             <h3>Journal</h3>
+//           </div>
+//           <div className="home-card-content">
+//             <p className="home-value">{journalEntry ? "Written" : "Not started"}</p>
+//             <p className="home-subtext">
+//               {journalEntry ? `"${journalEntry}"` : "Write your thoughts"}
+//             </p>
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Wellness Activities */}
+//       <div className="home-card">
+//         <div className="home-card-header">
+//           <span className="home-icon purple">🌸</span>
+//           <h3>Wellness Activities</h3>
+//         </div>
+//         <p className="home-subtext">Your self-care for today</p>
+
+//         <div className="home-activities">
+
+//           {[
+//             { key: "meditation", label: "Meditation", value: wellnessSummary?.meditation },
+//             { key: "workout", label: "Workout", value: wellnessSummary?.workout },
+//             { key: "healthyEating", label: "Healthy Eating", value: wellnessSummary?.healthyEating }
+//           ].map((item) => (
+//             <div
+//               key={item.key}
+//               className={`home-activity ${
+//                 item.value && !item.value.includes("Not") 
+//                   ? "activity-complete" 
+//                   : "activity-incomplete"
+//               }`}
+//             >
+//               <div className="home-activity-header">
+//                 <span>{item.label}</span>
+//                 <span>
+//                   {item.value && !item.value.includes("Not") ? "✓" : "○"}
+//                 </span>
+//               </div>
+
+//               <p className="home-subtext">{item.value || "No data"}</p>
+//             </div>
+//           ))}
+
+//         </div>
+//       </div>
+//     </div>
+//     </div>
+//   );
+// }

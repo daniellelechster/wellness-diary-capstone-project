@@ -14,7 +14,7 @@ import Wellness from "./components/Wellness";
 import Journals from "./components/Journals";
 import WeatherDisplay from "./components/WeatherDisplay";
 import Charts from "./components/Charts";
-import MusicToggle from "./components/MusicToggle";
+// import MusicToggle from "./components/MusicToggle";
 import musicFile from "./components/audio/music.mp3";
 
 function App() {
@@ -53,6 +53,12 @@ function App() {
   const toggleMusic = () => setMusicOn(prev => !prev);
 
 const saveMood = (date, moodValue) => {
+  const storedMoods = JSON.parse(localStorage.getItem("moods") || "{}");
+
+  storedMoods[date] = moodValue;
+
+  localStorage.setItem("moods", JSON.stringify(storedMoods));
+
   setEntries(prev => ({
     ...prev,
     [date]: {
@@ -63,14 +69,13 @@ const saveMood = (date, moodValue) => {
   }));
 };
 
+
   return (
     <Router> 
       <div className="app-container">
-        <Header /> 
+        <Header musicOn={musicOn} toggleMusic={toggleMusic} /> 
 
         {/* 🎚 Toggle Switch */}
-        <MusicToggle musicOn={musicOn} toggleMusic={toggleMusic} />
-
         {/* 🎵 Background Music */}
         <audio
           ref={audioRef}
@@ -86,11 +91,7 @@ const saveMood = (date, moodValue) => {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/journals" element={<Journals />} />
-          <Route path="/mood" element={<Mood 
-                  onSubmitMood={saveMood}
-                  selectedDate={selectedDate} />
-                  } />
-
+          
           <Route path="/wellness" element={<Wellness />} />
           <Route path="/goals" element={<Goals />} />
           <Route path="/calendar" element={<Calendar 
@@ -104,6 +105,16 @@ const saveMood = (date, moodValue) => {
           <Route path="/charts" element={<Charts 
                   entries={entries} />} 
                   />
+          <Route 
+            path="/mood" 
+            element={
+              <Mood 
+                onSubmitMood={saveMood}
+                selectedDate={selectedDate}
+                entries={entries}
+              />
+            }
+          />
         </Routes>
 
       </main>
