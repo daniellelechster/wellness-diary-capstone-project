@@ -9,10 +9,8 @@ import {
     ResponsiveContainer
 } from "recharts";
 
-export default function MoodHistoryChart({ entries = {} }) {
-    const data = Object.values(entries).sort((a, b) =>
-  a.date.localeCompare(b.date)
-);
+export default function MoodHistoryChart({ entries = [] }) {
+  const data = [...entries].sort((a, b) => a.date.localeCompare(b.date));
 
     return (
         
@@ -46,7 +44,7 @@ export default function MoodHistoryChart({ entries = {} }) {
                     stroke="#ff6b6b"
                     strokeWidth={4}
                     dot={{ r: 6 }}
-                    activeDot={{ r: 1}}
+                    // activeDot={{ r: 1}}
                 />
             </LineChart>
             </ResponsiveContainer>
