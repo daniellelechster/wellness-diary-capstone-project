@@ -26,4 +26,14 @@ public class ArticleController {
     public Article getDepressionArticle() throws IOException {
         return articleService.getArticleByKeyword("Depression");
     }
+
+    @GetMapping("/anxiety")
+    public Article getAnxietyArticle() throws IOException {
+        return articleService.getArticleByKeyword("Anxiety");
+    }
+
+    @GetMapping("/stress")
+    public Article getStressArticle() throws IOException {
+        return articleService.getArticleByKeyword("Stress");
+    }
 }

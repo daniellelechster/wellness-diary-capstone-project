@@ -15,6 +15,8 @@ import Journals from "./components/Journals";
 import WeatherDisplay from "./components/WeatherDisplay";
 import Charts from "./components/Charts";
 import musicFile from "./components/audio/music.mp3";
+import Articles from "./components/Articles";
+
 
 function App() {
   // 🎵 Audio state
@@ -112,6 +114,7 @@ useEffect(() => {
             <Route path="/contact" element={<Contact />} />
             <Route path="/charts" element={<Charts />} />
             <Route path="/mood" element={<Mood entries={entries} setEntries={setEntries} />} />
+            <Route path="/articles" element={<Articles />} />
           </Routes>
         </main>
 
