@@ -44,58 +44,78 @@ export default function WeatherDisplay() {
       .catch((err) => setWeatherError(err.message));
   }, []);
 
-  return (
-    <div className="home-card weather-card">
-      <div className="home-card weather-card-header">
-        <span className="home-icon indigo">⛅</span>
-        <h3>Weather Overview</h3>
-      </div>
+return (
+  <div className="weather-container">
 
-      {!weather && !weatherError && <p className="home-subtext">Loading weather...</p>}
-      {weatherError && <p className="home-subtext">Unable to load weather, please check your API key.</p>}
+    {!weather && !weatherError && (
+      <p className="weather-text">Loading weather...</p>
+    )}
 
-      {weather && (
-        <div className="home-card weather-card-content">
-          <div className="weather-row">
-            <img
-              src={`https://openweathermap.org/img/wn/${weather.current.weather[0].icon}@2x.png`}
-              alt="weather icon"
-            />
-            <div>
-              <p className="home-value">{weather.current.temp}°F</p>
-              <p className="home-subtext">{weather.current.weather[0].description}</p>
-            </div>
-          </div>
+    {weatherError && (
+      <p className="weather-error-text">
+        Unable to load weather, please check your API key.
+      </p>
+    )}
 
-          <p className="home-subtext">Feels like: {weather.current.feels_like}°F</p>
-          <p className="home-subtext">Sunrise: {formatTime(weather.current.sunrise)}</p>
-          <p className="home-subtext">Sunset: {formatTime(weather.current.sunset)}</p>
+    {weather && (
+      <div className="weather-block">
 
-          <hr style={{ margin: "1rem 0" }} />
+        {/* Current Conditions */}
+        <div className="weather-current">
+          <img
+            className="weather-icon-large"
+            src={`https://openweathermap.org/img/wn/${weather.current.weather[0].icon}@2x.png`}
+            alt="weather icon"
+          />
 
-          <h4>🌙 Lunar Cycle</h4>
-          <p className="home-subtext">
-            {getMoonPhase(weather.daily[0].moon_phase)}
-          </p>
-
-          <hr style={{ margin: "1rem 0" }} />
-
-          <h4>7-Day Forecast</h4>
-          <div className="weekly-grid">
-            {weather.daily.slice(1, 8).map((day, index) => (
-              <div key={index} className="forecast-item">
-                <p className="home-subtext">{formatDay(day.dt)}</p>
-                <img
-                  src={`https://openweathermap.org/img/wn/${day.weather[0].icon}.png`}
-                  alt="forecast icon"
-                />
-                <p className="home-subtext">High: {day.temp.max}°F</p>
-                <p className="home-subtext">Low: {day.temp.min}°F</p>
-              </div>
-            ))}
+          <div className="weather-current-info">
+            <p className="weather-temp">{weather.current.temp}°F</p>
+            <p className="weather-description">
+              {weather.current.weather[0].description}
+            </p>
+            <p className="weather-details">
+              Feels like: {weather.current.feels_like}°F
+            </p>
+            <p className="weather-details">
+              Sunrise: {formatTime(weather.current.sunrise)}
+            </p>
+            <p className="weather-details">
+              Sunset: {formatTime(weather.current.sunset)}
+            </p>
           </div>
         </div>
-      )}
-    </div>
-  );
+
+        <hr className="weather-divider" />
+
+        {/* Moon Phase */}
+        <h4 className="weather-section-title">🌙 Lunar Cycle</h4>
+        <p className="weather-text">
+          {getMoonPhase(weather.daily[0].moon_phase)}
+        </p>
+
+        <hr className="weather-divider" />
+
+        {/* 7-Day Forecast */}
+        <h4 className="weather-section-title">7-Day Forecast</h4>
+        <div className="weather-forecast-grid">
+          {weather.daily.slice(1, 8).map((day, index) => (
+            <div key={index} className="weather-forecast-item">
+              <p className="weather-forecast-day">{formatDay(day.dt)}</p>
+
+              <img
+                className="weather-forecast-icon"
+                src={`https://openweathermap.org/img/wn/${day.weather[0].icon}.png`}
+                alt="forecast icon"
+              />
+
+              <p className="weather-forecast-text">High: {day.temp.max}°F</p>
+              <p className="weather-forecast-text">Low: {day.temp.min}°F</p>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    )}
+  </div>
+);
 }
