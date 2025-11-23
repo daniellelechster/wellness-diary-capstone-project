@@ -1,9 +1,9 @@
 package com.wcci.wellness.entity;
 
+import java.time.LocalDate;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import java.time.LocalDateTime;
 
 @Entity
 public class Goal {
@@ -11,10 +11,9 @@ public class Goal {
     @Id
     @GeneratedValue
     private Long id;
-
     private String text;
     private String status;
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDate createdAt;
 
 
     public Goal() {
@@ -24,7 +23,6 @@ public class Goal {
     public Goal(String text, String status) {
         this.text = text;
         this.status = status;
-        this.createdAt = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -51,19 +49,11 @@ public class Goal {
         this.status = status;
     }
 
-    // public String getDate() {
-    //     return text;
-    // }
-
-    // public void setDate(String text) {
-    //     this.text = text;
-    // }
-
-    public LocalDateTime getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 

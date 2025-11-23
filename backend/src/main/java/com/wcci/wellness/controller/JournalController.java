@@ -48,9 +48,6 @@ public class JournalController {
     public ResponseEntity<Journal> updateJournal(@PathVariable Long id, @RequestBody Journal updated) {
         Journal journal = journalService.getJournalById(id);
         journal.setText(updated.getText());
-        journal.setPrompt(updated.getPrompt());
-        journal.setDate(updated.getDate());
-        journal.setTime(updated.getTime());
         Journal saved = journalService.createJournal(journal);
         return ResponseEntity.ok(saved);
     }
