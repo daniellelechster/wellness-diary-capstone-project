@@ -8,9 +8,17 @@ import {
     CartesianGrid,
     ResponsiveContainer
 } from "recharts";
+import { moodMap } from "./MoodUtils";
 
 export default function MoodHistoryChart({ entries = [] }) {
-  const data = [...entries].sort((a, b) => a.date.localeCompare(b.date));
+  const data = [...entries]
+  .sort((a, b) => a.date.localeCompare(b.date))
+  .map((entry) => ({
+    ...entry,
+    color: moodMap[entry.mood]?.color,
+    emoji: moodMap[entry.mood]?.emoji,
+    label: moodMap[entry.mood]?.label,
+  }));
 
     return (
         
@@ -37,14 +45,36 @@ export default function MoodHistoryChart({ entries = [] }) {
                     domain={[1, 9]}                
                     style={{ fontWeight: "bold" }}
                 />
-                <Tooltip />
+                <Tooltip
+                    formatter={(value) => {
+                        const mood = moodMap[value];
+                        return `${mood.label}`;
+                    }}
+                    contentStyle={{ backgroundColor: "{mood.color}", borderRadius: "8px" }}
+                    itemStyle={(value) => {
+                        const mood = moodMap[value];
+                        return { color: mood.color };
+                    }}
+
+                />
                 <Line 
                     type="monotone"
                     dataKey="mood"
                     stroke="#ff6b6b"
                     strokeWidth={4}
-                    dot={{ r: 6 }}
-                    // activeDot={{ r: 1}}
+                    dot={({ cx, cy, value }) => {
+                        const mood = moodMap[value];
+                        return (
+                        <circle
+                            cx={cx}
+                            cy={cy}
+                            r={6}                 // radius of the dot
+                            fill='white'     // use the mapped color
+                            stroke={mood.color}        // optional outline
+                            strokeWidth={6}
+                        />
+                        );
+                    }}
                 />
             </LineChart>
             </ResponsiveContainer>

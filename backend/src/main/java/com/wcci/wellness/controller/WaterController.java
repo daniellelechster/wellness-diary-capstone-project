@@ -2,9 +2,14 @@ package com.wcci.wellness.controller;
 
 import com.wcci.wellness.entity.Water;
 import com.wcci.wellness.service.WaterService;
+
+import java.time.LocalDate;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @RestController
 @RequestMapping("/api/wellness/water")
@@ -25,6 +30,14 @@ public class WaterController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/date/{date}")
+    public ResponseEntity<Water> getWaterByDate(@PathVariable String date) {
+        LocalDate waterDate = LocalDate.parse(date);
+        Water water = waterService.getWaterByDate(waterDate);
+        return ResponseEntity.ok(water);
+    }
+    
 
     @PostMapping("/{id}/add")
     public ResponseEntity<Water> addGlass(@PathVariable Long id) {
