@@ -14,68 +14,83 @@ import Wellness from "./components/Wellness";
 import Journals from "./components/Journals";
 import WeatherDisplay from "./components/WeatherDisplay";
 import Charts from "./components/Charts";
-// import MusicToggle from "./components/MusicToggle";
 import musicFile from "./components/audio/music.mp3";
 
 function App() {
-
-  const [entries, setEntries] = useState({});
-  const [selectedDate, setSelectedDate] = useState(null);
-
+  // 🎵 Audio state
   const audioRef = useRef(null);
   const [musicOn, setMusicOn] = useState(true);
 
+  // 🎚 Mood entries state (Step 1)
+  const [entries, setEntries] = useState({});
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  // 🎯 Goals state
+  const [goals, setGoals] = useState([]);
+
+useEffect(() => {
+  fetch("http://localhost:8080/api/wellness/goal/all")
+    .then((res) => res.json())
+    .then((data) => setGoals(data))
+    .catch((err) => console.error("Error fetching goals:", err));
+}, []);
+
+  // --- Fetch moods once on load ---
+  useEffect(() => {
+    fetch("http://localhost:8080/api/wellness/mood/all")
+      .then((res) => res.json())
+      .then((data) => {
+        const mapped = {};
+        data.forEach((m) => {
+          const dateStr = m.date.split("T")[0]; // YYYY-MM-DD
+          mapped[dateStr] = {
+            date: dateStr,
+            mood: m.rating,
+          };
+        });
+        setEntries(mapped);
+      })
+      .catch((err) => console.error("Error fetching moods:", err));
+  }, []);
+
+  // --- Fetch goals once on load ---
+  useEffect(() => {
+    fetch("http://localhost:8080/api/wellness/goal/all")
+      .then((res) => res.json())
+      .then((data) => setGoals(data))
+      .catch((err) => console.error("Error fetching goals:", err));
+  }, []);
+
+
+  // --- Audio effect ---
   useEffect(() => {
     const audio = audioRef.current;
-
     if (musicOn) {
       const playMusic = async () => {
         try {
           await audio.play();
         } catch (err) {
           console.log("Autoplay blocked — waiting for user interaction.");
-
           const resumePlayback = () => {
             audio.play();
             window.removeEventListener("click", resumePlayback);
           };
-
           window.addEventListener("click", resumePlayback);
         }
       };
-
       playMusic();
     } else {
       audio.pause();
     }
   }, [musicOn]);
 
-  const toggleMusic = () => setMusicOn(prev => !prev);
-
-const saveMood = (date, moodValue) => {
-  const storedMoods = JSON.parse(localStorage.getItem("moods") || "{}");
-
-  storedMoods[date] = moodValue;
-
-  localStorage.setItem("moods", JSON.stringify(storedMoods));
-
-  setEntries(prev => ({
-    ...prev,
-    [date]: {
-      ...(prev[date] || {}),
-      date: date,
-      mood: moodValue
-    }
-  }));
-};
-
+  const toggleMusic = () => setMusicOn((prev) => !prev);
 
   return (
-    <Router> 
+    <Router>
       <div className="app-container">
-        <Header musicOn={musicOn} toggleMusic={toggleMusic} /> 
+        <Header musicOn={musicOn} toggleMusic={toggleMusic} />
 
-        {/* 🎚 Toggle Switch */}
         {/* 🎵 Background Music */}
         <audio
           ref={audioRef}
@@ -83,45 +98,92 @@ const saveMood = (date, moodValue) => {
           loop
           preload="auto"
           style={{ display: "none" }}
-        />      
-        
-      <main className="main-content">
+        />
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/journals" element={<Journals />} />
-          
-          <Route path="/wellness" element={<Wellness />} />
-          <Route path="/goals" element={<Goals />} />
-          <Route path="/calendar" element={<Calendar 
-                  entries={entries}
-                  selectedDate={selectedDate}
-                  onDateSelect={setSelectedDate}/>
-                  } />
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Home entries={entries} goals={goals} />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/journals" element={<Journals />} />
+            <Route path="/wellness" element={<Wellness />} />            
+            <Route path="/goals" element={<Goals goals={goals} setGoals={setGoals} />} />
+            <Route path="/calendar" element={<Calendar entries={entries} selectedDate={selectedDate} onDateSelect={setSelectedDate} />} />
+            <Route path="/weatherDisplay" element={<WeatherDisplay />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/charts" element={<Charts />} />
+            <Route path="/mood" element={<Mood entries={entries} setEntries={setEntries} />} />
+          </Routes>
+        </main>
 
-          <Route path="/weatherDisplay" element={<WeatherDisplay />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/charts" element={<Charts 
-                  entries={entries} />} 
-                  />
-          <Route 
-            path="/mood" 
-            element={
-              <Mood 
-                onSubmitMood={saveMood}
-                selectedDate={selectedDate}
-                entries={entries}
-              />
-            }
-          />
-        </Routes>
-
-      </main>
-
-      <Footer />
+        <Footer />
       </div>
     </Router>
   );
 }
+
 export default App;
+
+
+// const saveMood = (date, moodValue) => {
+//   const storedMoods = JSON.parse(localStorage.getItem("moods") || "{}");
+
+//   storedMoods[date] = moodValue;
+
+//   localStorage.setItem("moods", JSON.stringify(storedMoods));
+
+//   setEntries(prev => ({
+//     ...prev,
+//     [date]: {
+//       ...(prev[date] || {}),
+//       date: date,
+//       mood: moodValue
+//     }
+//   }));
+// };
+
+
+//   return (
+//     <Router> 
+//       <div className="app-container">
+//         <Header musicOn={musicOn} toggleMusic={toggleMusic} /> 
+
+//         {/* 🎚 Toggle Switch */}
+//         {/* 🎵 Background Music */}
+//         <audio
+//           ref={audioRef}
+//           src={musicFile}
+//           loop
+//           preload="auto"
+//           style={{ display: "none" }}
+//         />      
+        
+//       <main className="main-content">
+
+//         <Routes>
+//           <Route path="/" element={<Home />} />
+//           <Route path="/about" element={<About />} />
+//           <Route path="/journals" element={<Journals />} />
+          
+//           <Route path="/wellness" element={<Wellness />} />
+//           <Route path="/goals" element={<Goals />} />
+//           <Route path="/calendar" element={<Calendar 
+//                   entries={entries}
+//                   selectedDate={selectedDate}
+//                   onDateSelect={setSelectedDate}/>
+//                   } />
+
+//           <Route path="/weatherDisplay" element={<WeatherDisplay />} />
+//           <Route path="/contact" element={<Contact />} />
+//           <Route path="/charts" element={<Charts />} />
+//           <Route path="/mood" element={<Mood />} />
+          
+//         </Routes>
+
+//       </main>
+
+//       <Footer />
+//       </div>
+//     </Router>
+//   );
+// }
+// export default App;

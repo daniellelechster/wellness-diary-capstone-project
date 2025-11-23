@@ -51,13 +51,13 @@ public class Goal {
         this.status = status;
     }
 
-    public String getDate() {
-        return text;
-    }
+    // public String getDate() {
+    //     return text;
+    // }
 
-    public void setDate(String text) {
-        this.text = text;
-    }
+    // public void setDate(String text) {
+    //     this.text = text;
+    // }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
