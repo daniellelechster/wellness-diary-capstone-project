@@ -1,9 +1,10 @@
 package com.wcci.wellness.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-// import java.time.LocalDateTime;
+import java.time.LocalDateTime;
 
 @Entity
 public class Journal {
@@ -11,22 +12,18 @@ public class Journal {
     @Id
     @GeneratedValue
     private Long id;
-
-    private String date;
-    private String time;
     private String prompt;
+    @Column(length=2147483647)
     private String text;
-
-    // private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
 
     public Journal() {
     }
 
-    public Journal(String date, String time, String prompt, String text) {
-        this.date = date;
-        this.time = time;
+    public Journal(String prompt, String text) {
         this.prompt = prompt;
         this.text = text;
+        this.createdAt = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -35,22 +32,6 @@ public class Journal {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     public String getPrompt() {
@@ -68,4 +49,13 @@ public class Journal {
     public void setText(String text) {
         this.text = text;
     }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+    
 }
