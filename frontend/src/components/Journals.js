@@ -102,9 +102,10 @@ function Journals() {
       <h1>Today's Journal</h1>
       <h2>Mood: {moodLabel}</h2>
 
-      <div className="daily-quote">
-        🌞🌙 <strong>Daily Quote:</strong> {dailyQuote}
-      </div>
+<div className="daily-quote">
+  <DailyQuote />
+</div>
+
 
       {/* Journal Entry */}
       <div className="journal-entry">
