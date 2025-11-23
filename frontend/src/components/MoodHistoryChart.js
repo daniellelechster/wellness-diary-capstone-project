@@ -8,22 +8,17 @@ import {
     CartesianGrid,
     ResponsiveContainer
 } from "recharts";
-
-// map mood number → color + emoji
-const moodStyles = {
-  1: { color: "#a80000", emoji: "😖" },
-  2: { color: "#c70000", emoji: "😢" },
-  3: { color: "#e04f4f", emoji: "😣" },
-  4: { color: "#e88f3a", emoji: "😕" },
-  5: { color: "#f0c040", emoji: "😐" },
-  6: { color: "#c7d840", emoji: "🙂" },
-  7: { color: "#8fd35d", emoji: "😊" },
-  8: { color: "#59c87a", emoji: "😄" },
-  9: { color: "#1bbf68", emoji: "😍" }
-};
+import { moodMap } from "./MoodUtils";
 
 export default function MoodHistoryChart({ entries = [] }) {
-  const data = [...entries].sort((a, b) => a.date.localeCompare(b.date));
+  const data = [...entries]
+  .sort((a, b) => a.date.localeCompare(b.date))
+  .map((entry) => ({
+    ...entry,
+    color: moodMap[entry.mood]?.color,
+    emoji: moodMap[entry.mood]?.emoji,
+    label: moodMap[entry.mood]?.label,
+  }));
 
     return (
         
@@ -50,14 +45,36 @@ export default function MoodHistoryChart({ entries = [] }) {
                     domain={[1, 9]}                
                     style={{ fontWeight: "bold" }}
                 />
-                <Tooltip />
+                <Tooltip
+                    formatter={(value) => {
+                        const mood = moodMap[value];
+                        return `${mood.label}`;
+                    }}
+                    contentStyle={{ backgroundColor: "{mood.color}", borderRadius: "8px" }}
+                    itemStyle={(value) => {
+                        const mood = moodMap[value];
+                        return { color: mood.color };
+                    }}
+
+                />
                 <Line 
                     type="monotone"
                     dataKey="mood"
                     stroke="#ff6b6b"
                     strokeWidth={4}
-                    dot={{ r: 6 }}
-                    // activeDot={{ r: 1}}
+                    dot={({ cx, cy, value }) => {
+                        const mood = moodMap[value];
+                        return (
+                        <circle
+                            cx={cx}
+                            cy={cy}
+                            r={6}                 // radius of the dot
+                            fill='white'     // use the mapped color
+                            stroke={mood.color}        // optional outline
+                            strokeWidth={6}
+                        />
+                        );
+                    }}
                 />
             </LineChart>
             </ResponsiveContainer>
