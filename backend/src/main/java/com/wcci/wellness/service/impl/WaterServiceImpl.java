@@ -3,6 +3,9 @@ package com.wcci.wellness.service.impl;
 import com.wcci.wellness.entity.Water;
 import com.wcci.wellness.service.WaterService;
 import com.wcci.wellness.repository.WaterRepository;
+
+import java.time.LocalDate;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,6 +23,17 @@ public class WaterServiceImpl implements WaterService {
                 .orElseThrow(() -> new RuntimeException("Water entry not found with id: " + id));
     }
 
+    @Override
+    public Water getWaterByDate(LocalDate date) {
+        Water water = waterRepository.findByCreatedAt(date);
+
+        if (water == null) {
+            water = new Water(0);
+            water.setCreatedAt(date);
+            water = waterRepository.save(water);
+        }
+        return water;
+    }
 
     @Override
     public Water addGlass(Long id) {
