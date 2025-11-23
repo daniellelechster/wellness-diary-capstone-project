@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
+import "../App.css";
+import DailyQuote from "./DailyQuote";
 import serenity1 from "./images/serenity1.jpg";
 
 function Journals() {
@@ -93,16 +95,17 @@ function Journals() {
   };
 
   /* -------------------------
-     UI
+    UI
   --------------------------*/
   return (
     <div className="journals-container" style={{ backgroundImage: `url(${serenity1})` }}>
       <h1>Today's Journal</h1>
       <h2>Mood: {moodLabel}</h2>
 
-      <div className="daily-quote">
-        🌞🌙 <strong>Daily Quote:</strong> {dailyQuote}
-      </div>
+<div className="daily-quote">
+  <DailyQuote />
+</div>
+
 
       {/* Journal Entry */}
       <div className="journal-entry">
