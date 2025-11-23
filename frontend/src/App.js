@@ -16,6 +16,7 @@ import WeatherDisplay from "./components/WeatherDisplay";
 import Charts from "./components/Charts";
 // import MusicToggle from "./components/MusicToggle";
 import musicFile from "./components/audio/music.mp3";
+// import SaveButton from './components/SaveGoalsButton';
 
 function App() {
   // 🎵 Audio state
@@ -25,6 +26,16 @@ function App() {
   // 🎚 Mood entries state (Step 1)
   const [entries, setEntries] = useState({});
   const [selectedDate, setSelectedDate] = useState(null);
+
+  // 🎯 Goals state
+  const [goals, setGoals] = useState([]);
+
+useEffect(() => {
+  fetch("http://localhost:8080/api/wellness/goal/all")
+    .then((res) => res.json())
+    .then((data) => setGoals(data))
+    .catch((err) => console.error("Error fetching goals:", err));
+}, []);
 
   // --- Fetch moods once on load ---
   useEffect(() => {
@@ -43,6 +54,15 @@ function App() {
       })
       .catch((err) => console.error("Error fetching moods:", err));
   }, []);
+
+  // --- Fetch goals once on load ---
+  useEffect(() => {
+    fetch("http://localhost:8080/api/wellness/goal/all")
+      .then((res) => res.json())
+      .then((data) => setGoals(data))
+      .catch((err) => console.error("Error fetching goals:", err));
+  }, []);
+
 
   // --- Audio effect ---
   useEffect(() => {
@@ -84,11 +104,15 @@ function App() {
 
         <main className="main-content">
           <Routes>
-            <Route path="/" element={<Home entries={entries} />} />
+            <Route path="/" element={<Home entries={entries} goals={goals} />} />
             <Route path="/about" element={<About />} />
             <Route path="/journals" element={<Journals />} />
             <Route path="/wellness" element={<Wellness />} />
-            <Route path="/goals" element={<Goals />} />
+            {/* <Route path="/goals" element={<Goals />} /> */}
+            {/* <Route path="/" element={<Home entries={entries} goals={goals} />} /> */}
+            <Route path="/goals" element={<Goals goals={goals} setGoals={setGoals} />} />
+
+
             <Route
               path="/calendar"
               element={

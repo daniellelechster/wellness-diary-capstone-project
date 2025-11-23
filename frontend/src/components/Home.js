@@ -2,9 +2,9 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
 
-export default function Home({ entries }) {
+export default function Home({ entries, goals = [] }) {
   const [todaysMood, setTodaysMood] = useState(null);
-  const [goals, setGoals] = useState([]);
+  // const [goals, setGoals] = useState([]);
   const [wellnessSummary, setWellnessSummary] = useState(null);
   const [journalEntry, setJournalEntry] = useState("");
 
@@ -35,8 +35,8 @@ export default function Home({ entries }) {
     const today = new Date().toISOString().split("T")[0];
 
     // Goals
-    const goalsData = localStorage.getItem("goals-list");
-    if (goalsData) setGoals(JSON.parse(goalsData));
+    // const goalsData = localStorage.getItem("goals-list");
+    // if (goalsData) setGoals(JSON.parse(goalsData));
 
     // Wellness
     const wellnessData = localStorage.getItem(`wellness-${today}`);
