@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import confetti from "canvas-confetti";
 import "./Goals.css";
-import "../App.css";
+// import "../App.css";
 import SaveButton from "./SaveGoalsButton";
 
 export default function Goals({ goals = [], setGoals }) {
