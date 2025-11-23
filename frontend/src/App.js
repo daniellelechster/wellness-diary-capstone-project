@@ -14,9 +14,7 @@ import Wellness from "./components/Wellness";
 import Journals from "./components/Journals";
 import WeatherDisplay from "./components/WeatherDisplay";
 import Charts from "./components/Charts";
-// import MusicToggle from "./components/MusicToggle";
 import musicFile from "./components/audio/music.mp3";
-// import SaveButton from './components/SaveGoalsButton';
 
 function App() {
   // 🎵 Audio state
@@ -107,27 +105,13 @@ useEffect(() => {
             <Route path="/" element={<Home entries={entries} goals={goals} />} />
             <Route path="/about" element={<About />} />
             <Route path="/journals" element={<Journals />} />
-            <Route path="/wellness" element={<Wellness />} />
-            {/* <Route path="/goals" element={<Goals />} /> */}
-            {/* <Route path="/" element={<Home entries={entries} goals={goals} />} /> */}
+            <Route path="/wellness" element={<Wellness />} />            
             <Route path="/goals" element={<Goals goals={goals} setGoals={setGoals} />} />
-
-
-            <Route
-              path="/calendar"
-              element={
-                <Calendar
-                  entries={entries}
-                  selectedDate={selectedDate}
-                  onDateSelect={setSelectedDate}
-                />
-              }
-            />
+            <Route path="/calendar" element={<Calendar entries={entries} selectedDate={selectedDate} onDateSelect={setSelectedDate} />} />
             <Route path="/weatherDisplay" element={<WeatherDisplay />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/charts" element={<Charts />} />
             <Route path="/mood" element={<Mood entries={entries} setEntries={setEntries} />} />
-
           </Routes>
         </main>
 
