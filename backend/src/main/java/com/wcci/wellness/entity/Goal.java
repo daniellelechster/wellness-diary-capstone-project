@@ -1,5 +1,6 @@
 package com.wcci.wellness.entity;
 
+import java.time.LocalDate;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -10,9 +11,10 @@ public class Goal {
     @Id
     @GeneratedValue
     private Long id;
-
     private String text;
     private String status;
+    private LocalDate createdAt;
+
 
     public Goal() {
         
@@ -47,11 +49,13 @@ public class Goal {
         this.status = status;
     }
 
-    public String getDate() {
-        return text;
+    public LocalDate getCreatedAt() {
+        return createdAt;
     }
 
-    public void setDate(String text) {
-        this.text = text;
+    public void setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
     }
+
+    
 }

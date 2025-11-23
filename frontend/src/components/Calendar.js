@@ -85,7 +85,7 @@ const getMoodColor = (mood) => {
       
         <div>
           <h4>Average Mood</h4>
-          <p>{avgMoodThisMonth.toFixed(1)}/10</p>
+          <p>{avgMoodThisMonth.toFixed(1)}/9</p>
         </div>
         <div>
           <h4>Days Logged</h4>
