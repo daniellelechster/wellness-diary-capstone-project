@@ -1546,7 +1546,7 @@ button:hover {
 
 .article-container {
   margin-top: 20px;
-  background: linear-gradient(to bottom, #fafafa, #a8c3a0);
+  background: linear-gradient(to bottom, #fafafa9c, #a8c3a0);
   border-radius: 12px;
   padding: 20px;
   box-shadow: inset 0 -4px 6px rgba(0,0,0,0.2),
