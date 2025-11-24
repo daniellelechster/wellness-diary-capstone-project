@@ -967,8 +967,10 @@ button:hover {
   gap: 30px;
   flex-wrap: wrap;
   margin-top: 25px;
-  background: linear-gradient(to right, #a855f7, #f472b6);
-  color: rgb(220, 216, 216);
+    box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
+    inset 0 -2px 2px rgba(255, 255, 255, 0.4);
+  background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a2d2ff 60%);
+  color: rgb(61, 61, 61);
   padding: 15px;
   border-radius: 50px;
 }
@@ -988,6 +990,189 @@ button:hover {
   margin-bottom: 4px;
   flex-shrink: 0;
 }
+
+/* ============================================
+   CALENDAR PAGE RESPONSIVE STYLES
+   ============================================ */
+
+/* Medium screens */
+@media (max-width: 992px) {
+
+  .calendar-image {
+    max-width: 100%;
+    max-height: 220px;
+  }
+
+  .calendar-stats {
+    max-width: 90%;
+    height: auto;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 12px;
+  }
+
+  .calendar-stats div {
+    width: 45%;
+    height: auto;
+    margin: 0;
+  }
+
+  .calendar-grid {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+  }
+
+  .calendar-day {
+    padding: 3rem 0;
+  }
+}
+
+/* Small tablets & large phones */
+@media (max-width: 768px) {
+
+  .calendar-page {
+    padding: 1.5rem 1rem;
+  }
+
+  .calendar-image {
+    max-height: 180px;
+    margin-top: -15px;
+  }
+
+  .calendar-stats {
+    max-width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .calendar-stats div {
+    width: 48%;
+    padding: 12px;
+  }
+
+  /* 7-column calendar shrinks proportionally */
+  .calendar-grid {
+    grid-template-columns: repeat(7, minmax(35px, 1fr));
+    gap: 4px;
+  }
+
+  .calendar-day {
+    padding: 2.5rem 0;
+    font-size: 0.8rem;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 500px) {
+
+  .calendar-image {
+    max-height: 150px;
+  }
+
+  .calendar-stats {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .calendar-stats div {
+    width: 90%;
+  }
+
+  /* Still 7 columns, just tiny but readable */
+  .calendar-grid {
+    grid-template-columns: repeat(7, minmax(25px, 1fr));
+    gap: 3px;
+  }
+
+  .calendar-day {
+    padding: 1.2rem 0;
+    font-size: 0.75rem;
+  }
+}
+
+/* ============================================
+   CALENDAR LEGEND RESPONSIVE STYLES
+   ============================================ */
+
+/* Medium screens */
+@media (max-width: 992px) {
+  .calendar-mood-legend {
+    padding: 0.5rem;
+  }
+
+  .calendar-legend-grid {
+    gap: 20px;
+    padding: 12px;
+    border-radius: 40px;
+  }
+
+  .calendar-legend-item {
+    min-width: 80px;
+  }
+
+  .calendar-legend-color {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Tablets & small laptops */
+@media (max-width: 768px) {
+
+  .calendar-legend-grid {
+    gap: 16px;
+    padding: 10px;
+    flex-wrap: wrap;
+  }
+
+  .calendar-legend-item {
+    min-width: 70px;
+  }
+
+  .calendar-mood-legend h4 {
+    font-size: 22px;
+  }
+
+  .calendar-legend-color {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 500px) {
+
+  .calendar-mood-legend {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+
+  .calendar-legend-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    padding: 10px;
+    border-radius: 30px;
+  }
+
+  .calendar-legend-item {
+    min-width: 60px;
+    font-size: 0.85rem;
+  }
+
+  .calendar-legend-color {
+    width: 14px;
+    height: 14px;
+  }
+
+  .calendar-mood-legend h4 {
+    font-size: 20px;
+  }
+}
+
 
 /* Mood */
 .moodBox {
