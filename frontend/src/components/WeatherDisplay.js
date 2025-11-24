@@ -88,10 +88,12 @@ return (
         <hr className="weather-divider" />
 
         {/* Moon Phase */}
-        <h4 className="weather-section-title">🌙 Lunar Cycle</h4>
+        <div className="weather-lunar">
+        <h4 className="weather-lunar-title">🌙 Lunar Cycle</h4>
         <p className="weather-text">
           {getMoonPhase(weather.daily[0].moon_phase)}
         </p>
+        </div>
 
         <hr className="weather-divider" />
 

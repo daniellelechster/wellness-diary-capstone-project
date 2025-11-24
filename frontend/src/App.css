@@ -11,12 +11,12 @@ body {
   background-size: cover;
   font-family: "Inter", sans-serif;
   color: #ffffff;
-  padding-top: 140px;
+  padding-top: 80px;
 }
 
 .home-background {
   background-image: url("./components/images/serene1.jpg");
-  background-blend-mode: overlay; 
+  background-blend-mode: overlay;
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
@@ -31,7 +31,6 @@ body {
   padding-top: 140px;
   padding-bottom: 120px;
   margin-top: 0;
-
 }
 
 .App {
@@ -77,8 +76,8 @@ body {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 
-  box-shadow: inset 0 -4px 6px rgba(0,0,0,0.2),
-              inset 0 -2px 2px rgba(255,255,255,0.4);
+  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.2),
+    inset 0 -2px 2px rgba(255, 255, 255, 0.4);
 
   overflow-x: hidden; /* safety */
   font-family: "Inter", sans-serif;
@@ -91,8 +90,8 @@ body {
   font-weight: bold;
   margin: 0;
   color: #3a2b1e;
-  text-shadow: 1px 1px 1px rgba(255,255,255,0.6),
-              -1px -1px 1px rgba(143, 78, 43, 0.4);
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6),
+    -1px -1px 1px rgba(143, 78, 43, 0.4);
 }
 
 .main-nav {
@@ -169,7 +168,7 @@ body {
   padding: 20px;
   padding-top: 0;
   width: 100%;
-  box-sizing: border-box;   /* <-- FIXES the overflow */
+  box-sizing: border-box; /* <-- FIXES the overflow */
   font-family: "Inter", sans-serif;
   color: #333;
 }
@@ -183,15 +182,16 @@ body {
   background: linear-gradient(to bottom, rgba(251, 246, 246), #a8c3a0);
   border-radius: 12px;
   border: 1px solid #e2e8f0;
-  height: 150px;
+  height: auto;
+  min-height: 150px;
   padding: 16px;
   box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.7),
     inset -2px -2px 4px rgba(0, 0, 0, 0.25), 2px 4px 10px rgba(0, 0, 0, 0.25);
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .home-card-link {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .wellness-home-card {
@@ -243,7 +243,6 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
   background: transparent;
-  
 }
 
 .home-card-header {
@@ -362,29 +361,55 @@ body {
   color: rgb(31, 31, 31);
 }
 
+.home-card.weather {
+  min-height: 300px;
+  margin-bottom: 50px;
+}
+
+
 /*weather/home*/
+/* ============================
+   MAIN LAYOUT
+============================ */
 .weather-container {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  flex-direction: row; /* row layout */
+  align-items: flex-start; /* align tops */
+  justify-content: flex-start;
+  width: 100%;
+  gap: 1rem; /* small gap between sections */
+  flex-wrap: wrap; /* wraps on small screens */
 }
 
 .weather-block {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  flex-direction: row; /* Desktop = one row */
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 0.1rem 0.1rem;
 }
 
-/* CURRENT CONDITIONS */
+/* ============================
+   CURRENT CONDITIONS
+============================ */
 .weather-current {
+  flex: 1 1 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  justify-content: flex-start;
+  margin-top: -10px;
+  gap: 0.2rem;
+  padding-right: 1rem;
+  /* border-right: 2px solid rgba(0, 0, 0, 0.2); first divider */
+  
 }
 
 .weather-icon-large {
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
+  margin-bottom: none;
 }
 
 .weather-current-info {
@@ -400,7 +425,7 @@ body {
 }
 
 .weather-description {
-  font-size: 1rem;
+  font-size: .5rem;
   text-transform: capitalize;
   margin: 0;
 }
@@ -411,26 +436,67 @@ body {
   margin: 0;
 }
 
-/* DIVIDER */
-.weather-divider {
-  border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+.weather-lunar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 1rem;
+  margin-left: -15px;
 }
 
-/* HEADERS */
+/* ============================
+   DIVIDERS (VERTICAL ON DESKTOP)
+============================ */
+.weather-divider {
+  height: 200px;
+  width: 3px;
+  border: none;
+  border-right: 2px solid rgba(0, 0, 0, 0.25);
+  margin: 0 1rem;
+}
+
+.weather-current,
+.weather-lunar,
+.weather-forecast-wrapper {
+  flex: 0.4 0.4 0; /* flex-grow:1, flex-shrink:1, flex-basis:0 */
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+/* ============================
+   HEADERS
+============================ */
 .weather-section-title {
-  margin-top: 0.5rem;
-  margin-bottom: 0.3rem;
+  display: flex;
   font-size: 1.1rem;
   font-weight: 600;
+  margin: 0.1 0.1 0.3rem 0.1;
+  align-items: center;
+  justify-items: center;
+  justify-content: flex-start;
+  padding: 3.2rem;
+  margin-left: -25px;
 }
 
-/* 7-DAY FORECAST */
+/* ============================
+   MOON PHASE
+============================ */
+.weather-text {
+  opacity: 0.8;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* ============================
+   7-DAY FORECAST
+============================ */
 .weather-forecast-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 1rem;
-  width: 100%;
+  display: flex;
+  flex-wrap: wrap; /* Horizontal row */
+  flex-direction: row;
+  gap: 0.5rem;
 }
 
 .weather-forecast-item {
@@ -459,15 +525,42 @@ body {
   font-size: 0.9rem;
 }
 
-/* LOADING & ERROR */
-.weather-text {
-  opacity: 0.8;
-  font-size: 0.95rem;
-}
-
+/* ============================
+   LOADING / ERROR
+============================ */
 .weather-error-text {
   color: #ff8080;
   font-size: 0.95rem;
+}
+
+/* ============================
+   RESPONSIVE (MOBILE STACK)
+============================ */
+@media (max-width: 900px) {
+  .weather-container,
+  .weather-block {
+    flex-direction: column; /* Stack vertically */
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .weather-divider {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 5px solid rgba(14, 14, 14, 0.25);
+    margin: 0;
+  }
+
+  .weather-forecast-grid {
+    flex-wrap: wrap; /* Wrap forecast tiles on mobile */
+    justify-content: center;
+  }
+
+  .weather-forecast-item {
+    width: 100px;
+  }
 }
 
 /* ABOUT */
@@ -477,7 +570,7 @@ body {
   margin: 0 auto;
   padding: 40px 20px;
   text-align: center;
-    margin-bottom: 120px;
+  margin-bottom: 120px;
 }
 
 .about-container h2 {
@@ -618,15 +711,16 @@ body {
   margin-bottom: 100px;
   box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
     inset 0 -2px 2px rgba(255, 255, 255, 0.4);
-    transition: transform 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
 /* .journals-container:hover {
   transform: scale(1.02);
 } */
 
-
-.journals-container h1, h2, h3 {
+.journals-container h1,
+h2,
+h3 {
   text-align: center;
   color: #181818;
   margin-top: 10px;
@@ -655,7 +749,8 @@ body {
 .journal-entry p {
   font-size: 18px;
   margin-bottom: 20px;
-  color: #181818;}
+  color: #181818;
+}
 
 .journal-entry textarea {
   width: 100%;
@@ -707,7 +802,7 @@ button:hover {
 
 .journal-history h3 {
   margin-bottom: 15px;
-  color: #050505;  
+  color: #050505;
 }
 
 .journal-history ul {
@@ -732,7 +827,7 @@ button:hover {
   padding: 2rem;
   font-family: Arial, sans-serif;
   text-align: center;
-    margin-bottom: 120px;
+  margin-bottom: 120px;
 }
 
 .calendar-page h2 {
@@ -757,7 +852,7 @@ button:hover {
   height: 150px;
   justify-content: center;
   align-items: center;
-  gap: 1rem;       
+  gap: 1rem;
   padding: 10px;
   margin: 0 auto;
   margin-top: -15px;
@@ -771,10 +866,8 @@ button:hover {
   max-width: 900px;
   max-height: 275px;
   border-radius: 25px;
-  box-shadow:
-    inset -4px -4px 8px rgba(255, 255, 255, 0.8),
-    inset 4px 4px 8px rgba(0, 0, 0, 0.25),
-    0 8px 18px rgba(0, 0, 0, 0.2);
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
+    inset 4px 4px 8px rgba(0, 0, 0, 0.25), 0 8px 18px rgba(0, 0, 0, 0.2);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -796,10 +889,8 @@ button:hover {
   padding: 16px 20px;
   margin: 0 10px;
   color: #181818;
-  box-shadow:
-    inset -4px -4px 8px rgba(255, 255, 255, 0.8),
-    inset 4px 4px 8px rgba(0, 0, 0, 0.25),
-    0 8px 18px rgba(0, 0, 0, 0.2);
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
+    inset 4px 4px 8px rgba(0, 0, 0, 0.25), 0 8px 18px rgba(0, 0, 0, 0.2);
 }
 
 .calendar-stats p {
@@ -905,7 +996,7 @@ button:hover {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-    background-blend-mode: lighten;
+  background-blend-mode: lighten;
   min-height: 500px;
   height: auto;
   width: 100%;
@@ -925,7 +1016,7 @@ button:hover {
 
 .moodBox h2,
 .moodBox h1 {
-  background: none; 
+  background: none;
   border-radius: 10px;
   display: inline-block;
   /* backdrop-filter: blur(4px);  */
@@ -945,57 +1036,57 @@ button:hover {
 }
 
 .moodHeader {
-    font-size: 1.6rem;
-    color: #0b0b0b;
-    margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  color: #0b0b0b;
+  margin-bottom: 1.5rem;
 }
 
 .emojiRow {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 1rem;
-    height: 3rem;
-    padding: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 1rem;
+  height: 3rem;
+  padding: 0;
 }
 
 .emojiItem {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 1.9rem;
-    color: #6d6875;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.9rem;
+  color: #6d6875;
 }
 
 .moodSlider {
-    width: 98%;
-    margin: auto;
-    padding: 0;
-    accent-color: #ff4d6d;
-    appearance: none;
-    margin-bottom: 2rem;
-    background: none;    
+  width: 98%;
+  margin: auto;
+  padding: 0;
+  accent-color: #ff4d6d;
+  appearance: none;
+  margin-bottom: 2rem;
+  background: none;
 }
 
-.moodSlider::-webkit-slider-runnable-track {  
-    background: #a8c3a0;
-    border-radius: 10px;
-      box-shadow: inset 0 -4px 6px rgba(0,0,0,0.2),
-              inset 0 -2px 2px rgba(255,255,255,0.4);
+.moodSlider::-webkit-slider-runnable-track {
+  background: #a8c3a0;
+  border-radius: 10px;
+  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.2),
+    inset 0 -2px 2px rgba(255, 255, 255, 0.4);
 }
 
 .moodSlider::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    background: #ffb4a2;
-    border-radius: 50%;
-    cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background: #ffb4a2;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .moodSlider::-moz-range-track {
-    height: 4px;
-    background: #ddd;
-    border-radius: 2px;
+  height: 4px;
+  background: #ddd;
+  border-radius: 2px;
 }
 
 .moodFeedback {
@@ -1014,44 +1105,44 @@ button:hover {
 }
 
 .numberRow span {
-    font-size: 1.3rem;
-    color: #000000;
+  font-size: 1.3rem;
+  color: #000000;
 }
 
 .moodSubmitButton {
-    display: block;
-    color: #fff;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    margin: .2rem auto;
-    transition: background-color 0.3s ease;    
+  display: block;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 0.2rem auto;
+  transition: background-color 0.3s ease;
 }
 
 .moodHistoryBox h3 {
-    font-size: 1.6rem;
-    color: black;
-    margin-top: 4rem;
-    padding: .1rem;
+  font-size: 1.6rem;
+  color: black;
+  margin-top: 4rem;
+  padding: 0.1rem;
 }
 
 .recharts-default-tooltip {
-    background: #ffffff !important;
-    border: 1px solid #ddd !important;
-    border-radius: 6px !important;
-    padding: 6px !important;
-    color: #6d6875 !important;
+  background: #ffffff !important;
+  border: 1px solid #ddd !important;
+  border-radius: 6px !important;
+  padding: 6px !important;
+  color: #6d6875 !important;
 }
 
 .recharts-cartesian-grid-horizontal line,
 .recharts-cartesian-grid-vertical line {
-    stroke: #f1e9e9;
+  stroke: #f1e9e9;
 }
 
 .recharts-line {
-    stroke-linecap: round;
+  stroke-linecap: round;
 }
 
 /* Wellness */
@@ -1083,13 +1174,10 @@ button:hover {
   border-radius: 15px;
   color: white;
   overflow: hidden;
-    backdrop-filter: blur(1px);
-  box-shadow:
-    inset -3px -3px 6px rgba(255, 255, 255, 1),
-    inset 3px 3px 6px rgba(0, 0, 0, 0.35),
-    0 5px 2px rgba(0, 0, 0, 0.15),
-    -3px -3px 7px rgba(255, 255, 255, 0.8),  
-     3px  3px 7px rgba(0, 0, 0, 0.4);      
+  backdrop-filter: blur(1px);
+  box-shadow: inset -3px -3px 6px rgba(255, 255, 255, 1),
+    inset 3px 3px 6px rgba(0, 0, 0, 0.35), 0 5px 2px rgba(0, 0, 0, 0.15),
+    -3px -3px 7px rgba(255, 255, 255, 0.8), 3px 3px 7px rgba(0, 0, 0, 0.4);
 }
 
 .meditation-card {
@@ -1102,13 +1190,10 @@ button:hover {
   border-radius: 15px;
   color: white;
   overflow: hidden;
-    backdrop-filter: blur(1px);
-  box-shadow:
-    inset -3px -3px 6px rgba(255, 255, 255, 1),
-    inset 3px 3px 6px rgba(0, 0, 0, 0.35),
-    0 5px 2px rgba(0, 0, 0, 0.15),
-    -3px -3px 7px rgba(255, 255, 255, 0.8),  
-     3px  3px 7px rgba(0, 0, 0, 0.4);    
+  backdrop-filter: blur(1px);
+  box-shadow: inset -3px -3px 6px rgba(255, 255, 255, 1),
+    inset 3px 3px 6px rgba(0, 0, 0, 0.35), 0 5px 2px rgba(0, 0, 0, 0.15),
+    -3px -3px 7px rgba(255, 255, 255, 0.8), 3px 3px 7px rgba(0, 0, 0, 0.4);
 }
 
 .waterdrop-card {
@@ -1121,13 +1206,10 @@ button:hover {
   border-radius: 15px;
   color: rgb(57, 56, 56);
   overflow: hidden;
-    backdrop-filter: blur(1px);
-  box-shadow:
-    inset -3px -3px 6px rgba(255, 255, 255, 1),
-    inset 3px 3px 6px rgba(0, 0, 0, 0.35),
-    0 5px 2px rgba(0, 0, 0, 0.15),
-    -3px -3px 7px rgba(255, 255, 255, 0.8),  
-    3px  3px 7px rgba(0, 0, 0, 0.4);    
+  backdrop-filter: blur(1px);
+  box-shadow: inset -3px -3px 6px rgba(255, 255, 255, 1),
+    inset 3px 3px 6px rgba(0, 0, 0, 0.35), 0 5px 2px rgba(0, 0, 0, 0.15),
+    -3px -3px 7px rgba(255, 255, 255, 0.8), 3px 3px 7px rgba(0, 0, 0, 0.4);
 }
 
 .food-card {
@@ -1140,13 +1222,10 @@ button:hover {
   border-radius: 15px;
   color: white;
   overflow: hidden;
-    backdrop-filter: blur(1px);
-  box-shadow:
-    inset -3px -3px 6px rgba(255, 255, 255, 1),
-    inset 3px 3px 6px rgba(0, 0, 0, 0.35),
-    0 5px 2px rgba(0, 0, 0, 0.15),
-    -3px -3px 7px rgba(255, 255, 255, 0.8),  
-     3px  3px 7px rgba(0, 0, 0, 0.4);    
+  backdrop-filter: blur(1px);
+  box-shadow: inset -3px -3px 6px rgba(255, 255, 255, 1),
+    inset 3px 3px 6px rgba(0, 0, 0, 0.35), 0 5px 2px rgba(0, 0, 0, 0.15),
+    -3px -3px 7px rgba(255, 255, 255, 0.8), 3px 3px 7px rgba(0, 0, 0, 0.4);
 }
 
 .progress-card {
@@ -1154,8 +1233,8 @@ button:hover {
   color: rgb(32, 31, 31);
   border-radius: 10px;
   text-align: center;
-    box-shadow: inset 0 -4px 6px rgba(0,0,0,0.2),
-              inset 0 -2px 2px rgba(255,255,255,0.4);
+  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.2),
+    inset 0 -2px 2px rgba(255, 255, 255, 0.4);
 }
 
 .wellness-progress-bar {
@@ -1449,4 +1528,227 @@ button:hover {
 
   box-shadow: inset 0 3px 3px rgba(255, 255, 255, 0.5),
     inset 0 8px 10px rgba(0, 0, 0, 0.35);
+}
+
+
+/* ============================================
+   📌 LARGE TABLETS / SMALL LAPTOPS
+   max-width: 1200px
+============================================ */
+@media (max-width: 1200px) {
+
+  .home-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .home-activities {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .home-card {
+    padding: 14px;
+  }
+}
+
+
+/* ============================================
+   📌 TABLETS
+   max-width: 900px
+============================================ */
+@media (max-width: 900px) {
+
+  .home-container {
+    padding: 16px;
+    gap: 20px;
+  }
+
+  .home-header-title {
+    font-size: 1.3rem;
+    padding: 6px 14px;
+  }
+
+  .home-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+  }
+
+  .home-card,
+  .wellness-home-card {
+    height: auto;
+    min-height: 140px;
+    padding: 14px;
+  }
+
+  .home-activities {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+  }
+
+  .header h1 {
+    font-size: 1.6rem;
+  }
+
+  .nav-links {
+    gap: 0.5rem;
+  }
+}
+
+/* ============================================
+   📌 MOBILE PHONES
+   max-width: 600px
+============================================ */
+@media (max-width: 600px) {
+
+  .home-container {
+    padding: 12px;
+    gap: 16px;
+  }
+
+  .home-header-title {
+    font-size: 1.1rem;
+    padding: 6px 12px;
+  }
+
+  .home-card,
+  .wellness-home-card {
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .home-grid {
+    grid-template-columns: 1fr;   /* 1-column layout */
+    gap: 12px;
+  }
+
+  .home-activities {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+  }
+
+  .home-activity {
+    padding: 10px;
+  }
+
+  .home-card-header h3 {
+    font-size: 1rem;
+  }
+
+  .home-icon {
+    font-size: 18px;
+  }
+
+  .home-value {
+    font-size: 1rem;
+  }
+
+  .header {
+    padding: 8px 0;
+  }
+
+  .header h1 {
+    font-size: 1.3rem;
+  }
+
+  .nav-links a {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.85rem;
+  }
+
+  .nav-right {
+    gap: 0.5rem;
+  }
+
+  .navbar-logo {
+    height: 40px;
+  }
+}
+
+@media (max-width: 750px) {
+  /* Make header flow top-to-bottom (title first, nav below) */
+  .header {
+    position: relative;         /* allow normal flow so nav pushes under title */
+    display: flex;
+    flex-direction: column;     /* stack title then nav */
+    align-items: stretch;
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  /* Title stays centered and on its own row */
+  .header h1 {
+    order: 0;
+    text-align: center;
+    margin: 0;
+    font-size: 1.3rem;
+    flex: none;                 /* don't stretch */
+  }
+
+  /* Main nav becomes a block under the title */
+  .main-nav {
+    display: flex;
+    flex-direction: column;     /* stack children vertically */
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    gap: 8px;
+    order: 1;
+    box-sizing: border-box;
+  }
+
+  /* Right side (logo + links) stacks vertically and takes full width */
+  .nav-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+  }
+
+  /* Make nav-links a vertical full-width list */
+  .nav-links {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    align-items: stretch;
+  }
+
+  /* Each link becomes a full-width button so they don't overlap */
+  .nav-links a {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    border-radius: 8px;
+    text-align: center;
+    background: transparent;
+    margin: 0;
+  }
+
+  /* If you want a visible background for links on mobile, enable this: */
+  /* .nav-links a { background: rgba(255,255,255,0.85); } */
+
+  /* Keep logo size sensible */
+  .navbar-logo {
+    height: 44px;
+    width: auto;
+  }
+
+  /* Prevent z-index / fixed header overlap with page content on small screens */
+  .header {
+    z-index: 1000;
+  }
+
+  /* If header was previously 'position: fixed', keep it fixed but allow stacking
+     and prevent overlapping content by adding top padding to body/main content:
+     (uncomment the next block if header remains fixed)
+  */
+  
+  body {
+    padding-top: 15px; 
+  }
 }
