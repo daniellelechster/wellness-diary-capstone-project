@@ -12,7 +12,7 @@ function Journals({ journals, setJournals }) {
   const [editingText, setEditingText] = useState("");
 
 
-  const todayKey = new Date().toISOString().split("T")[0];
+  // const todayKey = new Date().toISOString().split("T")[0];
 
   /* -------------------------
      Prompts Based on Mood
