@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000") // allow frontend dev server
 @RestController
 @RequestMapping("/api/wellness/journal")
 public class JournalController {
@@ -34,6 +35,7 @@ public class JournalController {
 
     @PostMapping
     public ResponseEntity<Journal> saveJournal(@RequestBody Journal journal) {
+        // server will set createdAt if null
         Journal savedJournal = journalService.createJournal(journal);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedJournal);
     }
@@ -45,11 +47,9 @@ public class JournalController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Journal> updateJournal(@PathVariable Long id, @RequestBody Journal updated) {
-        Journal journal = journalService.getJournalById(id);
-        journal.setText(updated.getText());
-        Journal saved = journalService.createJournal(journal);
-        return ResponseEntity.ok(saved);
-    }
-
+    public ResponseEntity<Journal> updateJournal(
+        @PathVariable Long id,
+        @RequestBody Journal updatedJournal) {
+    return ResponseEntity.ok(journalService.updateJournal(id, updatedJournal));
+}
 }

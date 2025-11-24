@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import WeatherDisplay from "./WeatherDisplay";   // <-- ADDED
 import "../App.css";
 
-export default function Home({ entries, goals = [] }) {
+export default function Home({ entries, goals = [], journals = [] }) {
   const [todaysMood, setTodaysMood] = useState(null);
   const [wellnessSummary, setWellnessSummary] = useState(null);
   const [journalEntry, setJournalEntry] = useState("");
@@ -40,23 +40,6 @@ export default function Home({ entries, goals = [] }) {
       const w = JSON.parse(wellnessData);
       setWellnessSummary(getWellnessSummary(w));
     }
-
-    // Journal
-    const journalData = localStorage.getItem("journal-entries");
-    if (journalData) {
-      const entries = JSON.parse(journalData);
-      const todaysEntries = entries.filter((e) => e.date === today);
-      if (todaysEntries.length > 0) {
-        const combinedSnippet = todaysEntries
-          .map((e) =>
-            e.text.length > 60 ? e.text.substring(0, 60) + "..." : e.text
-          )
-          .join(" • ");
-        setJournalEntry(combinedSnippet);
-      } else {
-        setJournalEntry("");
-      }
-    }
   }, []);
 
   useEffect(() => {
@@ -72,6 +55,23 @@ export default function Home({ entries, goals = [] }) {
       setTodaysMood(null);
     }
   }, [entries]);
+
+  // --- Update journal snippet for today ---
+  useEffect(() => {
+    const today = new Date().toISOString().split("T")[0];
+
+    if (Array.isArray(journals)) {
+      const todaysEntries = journals.filter((j) => j.date === today);
+      if (todaysEntries.length > 0) {
+        const latest = todaysEntries[0]; // newest first
+        const snippet =
+          latest.text.length > 60 ? latest.text.substring(0, 60) + "..." : latest.text;
+        setJournalEntry(snippet);
+      } else {
+        setJournalEntry("");
+      }
+    }
+  }, [journals]);
 
   const getMoodEmoji = (mood) =>
     ["😒", "😢", "😣", "😕", "😐", "😏", "😊", "😄", "😍"][mood - 1] || "—";

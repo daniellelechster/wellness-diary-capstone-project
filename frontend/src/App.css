@@ -821,6 +821,35 @@ button:hover {
     inset 0 -2px 2px rgba(255, 255, 255, 0.4);
 }
 
+.journal-history li.editing {
+  border: 2px solid #a8c3a0;
+  /* background: #fdfdfd; */
+
+}
+
+.journal-history li textarea {  
+  min-height: 80px;
+  margin-top: 0.5rem;
+  padding: .1rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: linear-gradient(180deg, #fafafa, #e6f0ff);
+  box-shadow: inset 0 -2px 4px rgba(0,0,0,0.2);
+}
+
+.journal-history li button.save-btn {
+  background: #a8c3a0;
+  color: #181818;
+  margin-right: 8px;
+}
+
+.journal-history li button.cancel-btn {
+  background: #f2dede;
+  color: #181818;
+}
+
+
 /* Calendar */
 
 .calendar-page {
