@@ -68,21 +68,16 @@ body {
   left: 0;
   width: 100%;
   z-index: 9999;
-
   background: radial-gradient(circle, #d1c4aa 0%, #a8c3a0 99%);
   padding: 10px 20px;
-
   display: flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-
   box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.2),
     inset 0 -2px 2px rgba(255, 255, 255, 0.4);
-
   overflow-x: hidden;
   font-family: "Inter", sans-serif;
 }
@@ -96,6 +91,10 @@ body {
   color: #3a2b1e;
   text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6),
     -1px -1px 1px rgba(143, 78, 43, 0.4);
+  pointer-events: none;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .main-nav {
@@ -112,17 +111,12 @@ body {
   height: 60px;
 }
 
-.site-title {
-  font-size: 32px;
-  text-align: center;
-  flex: 1;
-  pointer-events: none;
-}
-
 .nav-right {
   display: flex;
   align-items: center;
   gap: 1rem;
+  flex-shrink: 1;
+  min-width: 0;
 }
 
 /* ------------------------- */
@@ -135,6 +129,10 @@ body {
   gap: 1.2rem;
   margin: 0;
   padding: 0;
+  overflow: hidden;
+  flex-shrink: 1;
+  min-width: 0;
+  white-space: nowrap; /* prevent wrapping */
 }
 
 .nav-links li a {
@@ -189,8 +187,7 @@ body {
 /* MOBILE SLIDE-OUT NAV      */
 /* ------------------------- */
 
-/* MOBILE SLIDE-OUT NAV FIX */
-@media (max-width: 900px) {
+@media (max-width: 1150px) { /* updated breakpoint to prevent rollover */
 
   .nav-links {
     position: fixed;
@@ -203,7 +200,7 @@ body {
     padding: 3rem 1.2rem;
     gap: 1.5rem;
     display: flex;
-    z-index: 3000; /* make sure it's above everything else */
+    z-index: 3000;
     transition: right 0.35s ease;
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
     pointer-events: auto;
@@ -214,11 +211,11 @@ body {
   }
 
   .nav-links li {
-    width: 100%; /* full width so links are easy to click */
+    width: 100%;
   }
 
   .nav-links li a {
-    display: block; /* ensures the entire area is clickable */
+    display: block;
     width: 100%;
     font-size: 20px;
     font-weight: bold;
@@ -227,7 +224,6 @@ body {
     pointer-events: auto;
   }
 
-  /* hamburger visible */
   .hamburger {
     position: fixed;
     display: flex;
@@ -237,10 +233,9 @@ body {
   }
 
   .nav-right > .nav-links {
-  display: flex; /* still flex for drawer, but hidden offscreen */
+    display: flex;
   }
 
-  /* adjust title */
   .site-title {
     font-size: 24px;
     margin: 0 10px;
@@ -248,7 +243,6 @@ body {
     text-align: center;
   }
 
-  /* nav-right flex */
   .nav-right {
     flex-direction: row;
     align-items: center;
@@ -256,6 +250,7 @@ body {
     pointer-events: auto;
   }
 }
+
 /* Home */
 
 .home-container {
