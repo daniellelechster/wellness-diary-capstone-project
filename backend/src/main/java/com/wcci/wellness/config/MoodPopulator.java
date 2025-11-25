@@ -27,7 +27,7 @@ public class MoodPopulator implements CommandLineRunner {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
 
-        for (int i = 0; i < daysBack; i++) {
+        for (int i = 1; i < daysBack; i++) { 
 
             LocalDateTime base = LocalDateTime.now().minusDays(i);
 
