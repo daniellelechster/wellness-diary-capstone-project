@@ -1508,26 +1508,6 @@ button:hover {
   }
 }
 
-/* .moodPrompt {  
-  color: grey;
-  padding: 12px 16px;
-  border-radius: 6px;
-  border: 1px solid #ffeeba;
-  font-weight: bold;
-  text-align: center;
-  font-size: 1.1em;
-  font-style: italic;
-} */
-
-.moodPrompt {
-  background-color: #f8d7da; /* light red */
-  color: #721c24;            /* dark red text */
-  padding: 12px 16px;
-  border-radius: 6px;
-  border: 1px solid #f5c6cb;
-  font-weight: bold;
-  text-align: center;
-}
 
 
 
@@ -2189,4 +2169,15 @@ button:hover {
   body {
     padding-top: 15px; 
   }
+}
+
+
+.moodPrompt {
+  background-color: #f8d7da; /* light red */
+  color: #721c24;            /* dark red text */
+  padding: 12px 16px;
+  border-radius: 6px;
+  border: 1px solid #f5c6cb;
+  font-weight: bold;
+  text-align: center;
 }
