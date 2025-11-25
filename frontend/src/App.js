@@ -130,7 +130,7 @@ useEffect(() => {
           <Routes>
             <Route path="/" element={<Home entries={entries} goals={goals} journals={journals} />} />
             <Route path="/about" element={<About />} />
-            <Route path="/journals" element={<Journals journals={journals} setJournals={setJournals} />} />
+            <Route path="/journals" element={<Journals journals={journals} setJournals={setJournals} entries={entries} />}/>
             <Route path="/wellness" element={<Wellness />} />            
             <Route path="/goals" element={<Goals goals={goals} setGoals={setGoals} />} />
             <Route path="/calendar" element={<Calendar entries={entries} selectedDate={selectedDate} onDateSelect={setSelectedDate} />} />
