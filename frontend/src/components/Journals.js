@@ -36,6 +36,8 @@ function Journals({ journals, setJournals, entries }) {
       setCurrentPrompt(prompts[Math.floor(Math.random() * prompts.length)]);
     } else {
       setMoodLabel("Not tracked");
+      // ✅ Provide a fallback prompt
+      setCurrentPrompt("Write anything that’s on your mind today.");
     }
   }, [todaysMood, getPromptsForMood]);
 
