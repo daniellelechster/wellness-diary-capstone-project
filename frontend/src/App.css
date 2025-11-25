@@ -2181,3 +2181,29 @@ button:hover {
   font-weight: bold;
   text-align: center;
 }
+
+.moodNotification {
+  background-color: #e6ffed;
+  color: #2d7a2d;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-top: 12px;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+.moodNotification.fadeOut {
+  animation: fadeOut 0.3s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-5px); }
+}

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "../App.css";
 import MoodHistoryChart from "./MoodHistoryChart";
 
-// Define moodMap here or import from MoodUtils if shared
 const moodMap = {
   1: { label: "Very Low", emoji: "😒", color: "#8b0000" },
   2: { label: "Down", emoji: "😢", color: "#b22222" },
@@ -19,14 +18,15 @@ export default function Mood({ entries, setEntries }) {
   const today = new Date().toISOString().split("T")[0];
   const todaysMood = entries[today]?.mood;
 
-  // ✅ Initialize safely: use today's mood if it exists, otherwise default to 5
   const [mood, setMood] = useState(todaysMood ?? 5);
+  const [notification, setNotification] = useState("");
+  const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
     if (todaysMood) {
       setMood(todaysMood);
     } else {
-      setMood(5); // default if no mood yet
+      setMood(5);
     }
   }, [todaysMood]);
 
@@ -44,21 +44,28 @@ export default function Mood({ entries, setEntries }) {
         const saved = await res.json();
         const dateStr = saved.date.split("T")[0];
 
-        // 🔑 Update shared entries in App.js
         setEntries(prev => ({
           ...prev,
           [dateStr]: { date: dateStr, mood: saved.rating }
         }));
 
-        // ✅ Guard against undefined moodMap
         if (moodMap[mood]) {
-          alert(`Mood submitted: ${moodMap[mood].label} ${moodMap[mood].emoji}`);
+          setNotification(`Mood submitted: ${moodMap[mood].label} ${moodMap[mood].emoji}`);
         } else {
-          alert(`Mood submitted: ${mood}`);
+          setNotification(`Mood submitted: ${mood}`);
         }
+
+        setFadeOut(false);
+
+        setTimeout(() => setFadeOut(true), 2700);
+        setTimeout(() => setNotification(""), 3000);
       }
     } catch (err) {
       console.error("Error saving mood:", err);
+      setNotification("Error saving mood. Please try again.");
+      setFadeOut(false);
+      setTimeout(() => setFadeOut(true), 2700);
+      setTimeout(() => setNotification(""), 3000);
     }
   };
 
@@ -66,7 +73,6 @@ export default function Mood({ entries, setEntries }) {
     <div className="moodBox">
       <h2 className="moodHeader">Mood Check-In</h2>
 
-      {/* ✅ Prompt if no mood yet */}
       {!todaysMood && (
         <p className="moodPrompt">
           No mood submitted yet for today — please check in below!
@@ -92,7 +98,7 @@ export default function Mood({ entries, setEntries }) {
         max="9"
         step="1"
         value={mood}
-        onChange={(e) => setMood(Number(e.target.value))} // ✅ ensure numeric
+        onChange={(e) => setMood(Number(e.target.value))}
         className="moodSlider"
       />
 
@@ -105,7 +111,12 @@ export default function Mood({ entries, setEntries }) {
         Submit
       </button>
 
-      {/* Chart now uses shared entries */}
+      {notification && (
+        <div className={`moodNotification ${fadeOut ? "fadeOut" : ""}`}>
+          {notification}
+        </div>
+      )}
+
       <MoodHistoryChart entries={Object.values(entries)} />
     </div>
   );
