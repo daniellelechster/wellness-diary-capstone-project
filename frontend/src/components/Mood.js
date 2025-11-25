@@ -1,24 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
 import MoodHistoryChart from "./MoodHistoryChart";
 
-export default function Mood({ entries, setEntries }) {
-  const [mood, setMood] = useState(5);
+// Define moodMap here or import from MoodUtils if shared
+const moodMap = {
+  1: { label: "Very Low", emoji: "😒", color: "#8b0000" },
+  2: { label: "Down", emoji: "😢", color: "#b22222" },
+  3: { label: "Frustrated", emoji: "😣", color: "#ff4500" },
+  4: { label: "Meh", emoji: "😕", color: "#ffa500" },
+  5: { label: "In the Middle", emoji: "😐", color: "#cccc00" },
+  6: { label: "Okay", emoji: "😏", color: "#9acd32" },
+  7: { label: "Content", emoji: "😊", color: "#32cd32" },
+  8: { label: "Very Good", emoji: "😄", color: "#00fa9a" },
+  9: { label: "Amazing", emoji: "😍", color: "#00ced1" }
+};
 
-  const moodMap = {
-    1: { label: "Very Low", emoji: "😒" },
-    2: { label: "Down", emoji: "😢" },
-    3: { label: "Frustrated", emoji: "😣" },
-    4: { label: "Meh", emoji: "😕" },
-    5: { label: "In the Middle", emoji: "😐" },
-    6: { label: "Okay", emoji: "😏" },
-    7: { label: "Content", emoji: "😊" },
-    8: { label: "Very Good", emoji: "😄" },
-    9: { label: "Amazing", emoji: "😍" }
-  };
+export default function Mood({ entries, setEntries }) {
+  const today = new Date().toISOString().split("T")[0];
+  const todaysMood = entries[today]?.mood;
+
+  // ✅ Initialize safely: use today's mood if it exists, otherwise default to 5
+  const [mood, setMood] = useState(todaysMood ?? 5);
+
+  useEffect(() => {
+    if (todaysMood) {
+      setMood(todaysMood);
+    } else {
+      setMood(5); // default if no mood yet
+    }
+  }, [todaysMood]);
 
   const handleSubmit = async () => {
-    const today = new Date().toISOString().split("T")[0];
     const payload = { date: today + "T00:00:00", rating: mood };
 
     try {
@@ -38,7 +50,12 @@ export default function Mood({ entries, setEntries }) {
           [dateStr]: { date: dateStr, mood: saved.rating }
         }));
 
-        alert(`Mood submitted: ${moodMap[mood].label} ${moodMap[mood].emoji}`);
+        // ✅ Guard against undefined moodMap
+        if (moodMap[mood]) {
+          alert(`Mood submitted: ${moodMap[mood].label} ${moodMap[mood].emoji}`);
+        } else {
+          alert(`Mood submitted: ${mood}`);
+        }
       }
     } catch (err) {
       console.error("Error saving mood:", err);
@@ -48,6 +65,13 @@ export default function Mood({ entries, setEntries }) {
   return (
     <div className="moodBox">
       <h2 className="moodHeader">Mood Check-In</h2>
+
+      {/* ✅ Prompt if no mood yet */}
+      {!todaysMood && (
+        <p className="moodPrompt">
+          No mood submitted yet for today — please check in below!
+        </p>
+      )}
 
       <div className="emojiNumberContainer">
         <div className="emojiRow">
@@ -68,12 +92,13 @@ export default function Mood({ entries, setEntries }) {
         max="9"
         step="1"
         value={mood}
-        onChange={(e) => setMood(Number(e.target.value))}
+        onChange={(e) => setMood(Number(e.target.value))} // ✅ ensure numeric
         className="moodSlider"
       />
 
       <p className="moodFeedback">
-        You feel: <strong>{moodMap[mood].label}</strong> {moodMap[mood].emoji}
+        You feel: <strong>{moodMap[mood]?.label || "Unknown"}</strong>{" "}
+        {moodMap[mood]?.emoji || ""}
       </p>
 
       <button className="moodSubmitButton" onClick={handleSubmit}>
