@@ -83,18 +83,16 @@ function About() {
           <p>
             Marbue is an emerging Java developer currently immersed in We Can
             Code IT's intensive bootcamp, rapidly acquiring skills in software
-            development and object-oriented programming. My background in
+            development and object-oriented programming. Her background in
             healthcare has honed my attention to detail, adaptability, and
-            commitment to excellence - qualities I'm now applying to the tech
-            world. At We Can Code IT, I'm building a robust foundation in Java,
-            Spring Framework, and full-stack development. My project portfolio
-            is expanding weekly, showcasing my growing proficiency in creating
+            commitment to excellence - qualities she is now applying to the tech
+            world. At We Can Code IT, she is building a robust foundation in Java,
+            Spring Framework, and full-stack development. Her project portfolio
+            is expanding weekly, showcasing her growing proficiency in creating
             efficient, scalable applications. Her unique blend of healthcare
             experience and budding tech skills positions her to bridge the gap
-            between these two crucial sectors. My unique blend of healthcare
-            experience and budding tech skills positions me to bridge the gap
             between these two crucial sectors. Currently seeking opportunities
-            to contribute to innovative projects and continue my growth as a
+            to contribute to innovative projects and continue her growth as a
             Java developer.
           </p>
         </div>
