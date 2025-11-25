@@ -58,6 +58,10 @@ body {
 
 /* Header */
 
+/* ------------------------- */
+/* HEADER BASE STYLES        */
+/* ------------------------- */
+
 .header {
   position: fixed;
   top: 0;
@@ -66,7 +70,7 @@ body {
   z-index: 9999;
 
   background: radial-gradient(circle, #d1c4aa 0%, #a8c3a0 99%);
-  padding: 10px 0;
+  padding: 10px 20px;
 
   display: flex;
   justify-content: center;
@@ -79,7 +83,7 @@ body {
   box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.2),
     inset 0 -2px 2px rgba(255, 255, 255, 0.4);
 
-  overflow-x: hidden; /* safety */
+  overflow-x: hidden;
   font-family: "Inter", sans-serif;
 }
 
@@ -99,7 +103,20 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 10px 20px;
+  max-width: 1300px;
+  position: relative;
+  padding: 10px 0;
+}
+
+.nav-logo img {
+  height: 60px;
+}
+
+.site-title {
+  font-size: 32px;
+  text-align: center;
+  flex: 1;
+  pointer-events: none;
 }
 
 .nav-right {
@@ -108,55 +125,135 @@ body {
   gap: 1rem;
 }
 
-.navbar-logo {
-  height: 50px;
-  width: auto;
-}
-
-.nav-list {
-  list-style: none;
-  padding: 0;
-  margin: 10px 0 0 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.nav-list a {
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-}
-
-.nav-list a:hover {
-  color: #007bff;
-}
+/* ------------------------- */
+/* NAV LINKS - DESKTOP       */
+/* ------------------------- */
 
 .nav-links {
   display: flex;
-  gap: 1rem;
   list-style: none;
+  gap: 1.2rem;
   margin: 0;
   padding: 0;
 }
 
-.nav-links a {
+.nav-links li a {
   text-decoration: none;
+  font-weight: bold;
   color: #333;
-  font-weight: 500;
   padding: 0.5rem 1rem;
   border-radius: 8px;
   transition: background-color 0.2s, color 0.2s;
 }
 
-.nav-links a:hover {
+.nav-links li a:hover {
   background-color: #e0eae8;
   color: #5e5e5e;
 }
 
-.nav-links a.active {
+.nav-links li a.active {
   background-color: #f483ac;
   color: #fff;
+}
+
+/* ------------------------- */
+/* HAMBURGER BUTTON          */
+/* ------------------------- */
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 2001;
+}
+
+.hamburger span {
+  width: 28px;
+  height: 3px;
+  background: #333;
+  transition: transform 0.3s ease, opacity 0.2s ease;
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ------------------------- */
+/* MOBILE SLIDE-OUT NAV      */
+/* ------------------------- */
+
+@media (max-width: 900px) {
+
+  /* hide desktop nav */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -1000px; /* hidden offscreen */
+    width: 280px;
+    height: 100vh;
+    flex-direction: column;
+    background: radial-gradient(circle, #d1c4aa 0%, #a8c3a0 99%);
+    padding: 3rem 1.2rem;
+    gap: 1.5rem;
+    transition: right 0.35s ease;
+    display: flex;
+    z-index: 2000;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);    
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+
+  /* overlay */
+  .drawer-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1500;
+  }
+
+  .drawer-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  /* hamburger visible */
+  .hamburger {
+    display: flex;
+  }
+
+  /* adjust title */
+  .site-title {
+    font-size: 24px;
+    margin: 0 10px;
+    flex: 1;
+    text-align: center;
+  }
+
+  /* nav-right flex */
+  .nav-right {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.6rem;
+  }
 }
 
 /* Home */
@@ -1204,28 +1301,32 @@ button:hover {
 
 
 /* Mood */
+
 .moodBox {
-  /* background-image: url("./components/images/mood1.jpg"); */
   background-image: url("./components/images/mood2.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-blend-mode: lighten;
+
   min-height: 500px;
   height: auto;
   width: 100%;
   max-width: 1000px;
+
   padding: 20px 20px 100px;
   border-radius: 20px;
   margin: 80px auto 0;
   color: #fff;
+
   justify-content: center;
+  display: flex;
+  flex-direction: column;
+
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   position: relative;
   z-index: 1;
   margin-bottom: 120px;
-  display: flex;
-  flex-direction: column;
 }
 
 .moodBox h2,
@@ -1233,11 +1334,9 @@ button:hover {
   background: none;
   border-radius: 10px;
   display: inline-block;
-  /* backdrop-filter: blur(4px);  */
-  justify-content: center;
-  align-items: center;
   width: 100%;
   margin-top: 5%;
+  text-align: center;
 }
 
 .moodFeedback {
@@ -1245,8 +1344,8 @@ button:hover {
   font-size: 20px;
   position: relative;
   margin-top: 1rem;
+  text-align: center;
   z-index: 3;
-  align-items: center;
 }
 
 .moodHeader {
@@ -1286,7 +1385,7 @@ button:hover {
   background: #a8c3a0;
   border-radius: 10px;
   box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.2),
-    inset 0 -2px 2px rgba(255, 255, 255, 0.4);
+              inset 0 -2px 2px rgba(255, 255, 255, 0.4);
 }
 
 .moodSlider::-moz-range-thumb {
@@ -1301,13 +1400,6 @@ button:hover {
   height: 4px;
   background: #ddd;
   border-radius: 2px;
-}
-
-.moodFeedback {
-  text-align: center;
-  margin-top: 1rem;
-  font-size: 20px;
-  color: rgb(24, 23, 23);
 }
 
 .numberRow {
@@ -1357,6 +1449,114 @@ button:hover {
 
 .recharts-line {
   stroke-linecap: round;
+}
+
+/* ------------------------------------------------------ */
+/* RESPONSIVE BEHAVIOR                                    */
+/* ------------------------------------------------------ */
+
+/* Tablets — max-width 900px */
+@media (max-width: 900px) {
+  .moodBox {
+    padding: 20px 15px 80px;
+    margin-top: 40px;
+    max-width: 95%;
+  }
+
+  .moodHeader {
+    font-size: 1.4rem;
+  }
+
+  .emojiItem {
+    font-size: 1.6rem;
+  }
+
+  .numberRow span {
+    font-size: 1.1rem;
+  }
+
+  .moodSlider {
+    width: 100%;
+  }
+}
+
+/* Small Tablets & Large Phones — max-width 600px */
+@media (max-width: 600px) {
+  .moodBox {
+    padding: 15px 10px 70px;
+  }
+
+  .emojiRow {
+    gap: 4px;
+  }
+
+  .emojiItem {
+    font-size: 1.4rem;
+  }
+
+  .numberRow span {
+    font-size: 1rem;
+  }
+
+  .moodFeedback {
+    font-size: 18px;
+  }
+
+  .moodSubmitButton {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* Mobile Phones — max-width 430px */
+@media (max-width: 430px) {
+  .moodBox {
+    padding: 12px 8px 60px;
+    margin-top: 20px;
+  }
+
+  .moodHeader {
+    font-size: 1.2rem;
+  }
+
+  .emojiRow {
+    gap: 2px;
+  }
+
+  .emojiItem {
+    font-size: 1.2rem;
+  }
+
+  .numberRow span {
+    font-size: 0.9rem;
+  }
+
+  .moodSlider {
+    margin-bottom: 1.5rem;
+  }
+
+  .moodSubmitButton {
+    width: 90%;
+  }
+}
+
+/* Very Small Phones — max-width 360px */
+@media (max-width: 360px) {
+  .emojiRow {
+    height: 2rem;
+  }
+
+  .emojiItem {
+    font-size: 1rem;
+  }
+
+  .numberRow span {
+    font-size: 0.8rem;
+  }
+
+  .moodFeedback {
+    font-size: 16px;
+  }
 }
 
 /* Wellness */
