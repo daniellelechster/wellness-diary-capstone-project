@@ -206,6 +206,7 @@ body {
     z-index: 3000; /* make sure it's above everything else */
     transition: right 0.35s ease;
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+    pointer-events: auto;
   }
 
   .nav-links.active {
@@ -252,7 +253,7 @@ body {
     flex-direction: row;
     align-items: center;
     gap: 0.6rem;
-    pointer-events: none;
+    pointer-events: auto;
   }
 }
 /* Home */
