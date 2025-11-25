@@ -12,16 +12,18 @@ public class Article {
     private String description;
     private String imageUrl;
     private String content;
+    private String accessibleVersion;
 
     public Article() {
     }
 
-    public Article(String id, String title, String description, String imageUrl, String content) {
+    public Article(String id, String title, String description, String imageUrl, String content, String accessibleVersion) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.imageUrl = imageUrl;
         this.content = content;
+        this.accessibleVersion = accessibleVersion;
     }
 
     public String getId() {
@@ -62,5 +64,13 @@ public class Article {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getAccessibleVersion() {
+        return accessibleVersion;
+    }
+
+    public void setAccessibleVersion(String accessibleVersion) {
+        this.accessibleVersion = accessibleVersion;
     }
 }

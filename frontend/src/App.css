@@ -1746,132 +1746,110 @@ button:hover {
 
 /* Articles Page */
 .articles-page {
-  padding: 2rem;
-  font-family: "Inter", sans-serif;
-}
-
-.articles-title {
+  padding: 20px;
   text-align: center;
-  margin-bottom: 2rem;
 }
 
 .mental-buttons-container {
-  text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 25px;
 }
 
 .article-buttons-row {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 15px;
 }
 
 .mental-button {
-  padding: 0.5rem 1rem;
+  padding: 12px 20px;
   border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: 0.2s;
-  background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
-  color: #333;
-}
-
-.mental-button:hover {
-  background-color: #a8c3a0;
-  color: #fff;
-}
-
-.loading-text {
-  text-align: center;
-  font-size: 1rem;
-  margin-top: 1rem;
-}
-
-.article-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 1rem;
-  background: #f9f9f9;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.article-title {
-  margin-bottom: 1rem;
-}
-
-.article-content {
-  line-height: 1.6;
-  color: #333;
-}
-
-.articles-page {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: "Inter", sans-serif;
-  color: #333;
-}
-
-.article-buttons-row {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-}
-
-.mental-button {
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
-  border: none;
   cursor: pointer;
-  font-size: 1rem;
-  background: linear-gradient(to bottom, rgba(251,246,246,1) 0%, #a8c3a0 60%);
-  color: #3a2b1e;
-  transition: background 0.3s ease;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  background: radial-gradient(circle, #d1c4aa 0%, #a8c3a0 99%);
+  transition: 0.2s;
 }
 
 .mental-button:hover {
-  background: #a8c3a0;
-  color: #fff;
+  transform: translateY(-2px);
+  background: #e0eae8;
 }
 
+/* Article container */
 .article-container {
-  margin-top: 20px;
-  background: linear-gradient(to bottom, #fafafa9c, #a8c3a0);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: inset 0 -4px 6px rgba(0,0,0,0.2),
-              inset 0 -2px 2px rgba(255,255,255,0.4),
-              2px 4px 10px rgba(0,0,0,0.25);
+  margin: 40px auto;
+  padding: 25px;
+  width: 80%;
+  max-width: 800px;
+  background: radial-gradient(circle, #d1c4aa 0%, #a8c3a0 99%);
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  position: relative;
 }
 
+/* Placeholder logo (shows before clicking) */
+.article-placeholder {
+  width: 100%;
+  height: 300px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 140px;
+  opacity: 1;
+  filter: none;
+}
+
+/* Article content styling */
+.article-title {
+  margin-top: 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.article-desc {
+  margin: 10px 0;
+  font-size: 18px;
+  opacity: 0.85;
+}
+
+.no-content-msg {
+  margin-top: 10px;
+  font-style: italic;
+  opacity: 0.7;
+  color: black;
+}
+
+/* Article image — FIXED */
 .article-image {
+  display: block;
   max-width: 100%;
-  border-radius: 12px;
-  margin: 15px 0;
+  height: auto;
+  object-fit: contain;
+  margin: 20px auto;
+  border-radius: 10px;
 }
 
-.article-description {
-  font-size: 1rem;
-  margin-bottom: 15px;
-}
 
-.read-more-button {
+/* Link */
+.article-link-button {
   display: inline-block;
-  padding: 0.5rem 1rem;
-  background: #f483ac;
+  margin-top: 15px;
+  padding: 10px 18px;
+  background: #4b79a1;
   color: white;
-  border-radius: 8px;
   text-decoration: none;
-  font-weight: 600;
-  transition: background 0.3s ease;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: 0.2s;
 }
 
-.read-more-button:hover {
-  background: #d25a8c;
+.article-link-button:hover {
+  background: #3a5d78;
 }
+
+
 
 /* ============================================
    📌 LARGE TABLETS / SMALL LAPTOPS

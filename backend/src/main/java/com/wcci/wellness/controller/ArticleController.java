@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,10 +18,11 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
-    @GetMapping
-    public Article getArticle(String keyword) throws IOException {
-        return articleService.getArticleByKeyword(keyword);
-    }
+    @GetMapping("/{keyword}")
+public Article getArticle(@PathVariable String keyword) throws IOException {
+    return articleService.getArticleByKeyword(keyword);
+}
+
 
     @GetMapping("/depression")
     public Article getDepressionArticle() throws IOException {

@@ -2,6 +2,8 @@ package com.wcci.wellness.service.impl;
 
 import java.net.URI;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -18,8 +20,9 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Article getArticleByKeyword(String keyword) {
         try {
-            String apiUrl = "https://odphp.health.gov/myhealthfinder/api/v4/topicsearch.json?keyword="
-                    + keyword.replace(" ", "%20");
+            // Encode keyword for URL
+            String encodedKeyword = URLEncoder.encode(keyword, StandardCharsets.UTF_8);
+            String apiUrl = "https://odphp.health.gov/myhealthfinder/api/v4/topicsearch.json?keyword=" + encodedKeyword;
 
             URI uri = URI.create(apiUrl);
             URL url = uri.toURL();
@@ -32,7 +35,8 @@ public class ArticleServiceImpl implements ArticleService {
                 return new Article("0", "No article available",
                         "No description available",
                         "",
-                        "Unable to retrieve content.");
+                        "Unable to retrieve content.",
+                        "");
             }
 
             ObjectMapper mapper = new ObjectMapper();
@@ -44,19 +48,21 @@ public class ArticleServiceImpl implements ArticleService {
                 return new Article("0", "No article found",
                         "No description available",
                         "",
-                        "No matching content.");
+                        "No matching content.",
+                        "");
             }
 
             JsonNode articleNode = result.get(0);
 
+            // Extract fields
             String id = articleNode.path("Id").asText();
             String title = articleNode.path("Title").asText();
             String description = articleNode.path("Teaser").asText();
             String imageUrl = articleNode.path("ImageUrl").asText();
 
+            // Extract sections and build content
             JsonNode sections = articleNode.path("Sections").path("Section");
             StringBuilder contentBuilder = new StringBuilder();
-
             if (sections.isArray()) {
                 for (JsonNode section : sections) {
                     String sectionTitle = section.path("Title").asText();
@@ -70,17 +76,30 @@ public class ArticleServiceImpl implements ArticleService {
                     }
                 }
             }
-
             String content = contentBuilder.toString().trim();
 
-            return new Article(id, title, description, imageUrl, content);
+            String accessibleVersion = "";
+            JsonNode accessNode = articleNode.path("AccessibleVersion");
+
+            if (accessNode.isTextual()) {
+                accessibleVersion = accessNode.asText();
+            } else if (accessNode.isObject()) {
+                accessibleVersion = accessNode.path("Url").asText("");
+            }
+
+
+
+            conn.disconnect(); // Close connection
+
+            return new Article(id, title, description, imageUrl, content, accessibleVersion);
 
         } catch (Exception e) {
             e.printStackTrace();
             return new Article("0", "No article available",
                     "No description available",
                     "",
-                    "Unable to retrieve content.");
+                    "Unable to retrieve content.",
+                    "");
         }
     }
 }
