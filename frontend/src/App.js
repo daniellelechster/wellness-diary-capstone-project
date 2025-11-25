@@ -69,26 +69,19 @@ useEffect(() => {
 
   // Fetch journals
   useEffect(() => {
-    fetch("http://localhost:8080/api/wellness/journal/all")
+    fetch("http://localhost:8080/api/wellness/mood/all")
       .then((res) => res.json())
       .then((data) => {
-        const mapped = data
-          .map((j) => {
-            const created = j.createdAt ? new Date(j.createdAt) : new Date();
-            return {
-              id: j.id,
-              prompt: j.prompt,
-              text: j.text,
-              createdAt: j.createdAt,
-              date: created.toISOString().split("T")[0],
-              time: created.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }),
-            };
-          })
-          .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
-        setJournals(mapped);
+        const mapped = {};
+        data.forEach((m) => {
+          const dateStr = m.date.split("T")[0];
+          mapped[dateStr] = { date: dateStr, mood: m.rating };
+        });
+        setEntries(mapped);
       })
-      .catch((err) => console.error("Error fetching journals:", err));
+      .catch((err) => console.error("Error fetching moods:", err));
   }, []);
+
 
   // --- Audio effect ---
   useEffect(() => {
@@ -132,7 +125,7 @@ useEffect(() => {
           <Routes>
             <Route path="/" element={<Home entries={entries} goals={goals} journals={journals} />} />
             <Route path="/about" element={<About />} />
-            <Route path="/journals" element={<Journals journals={journals} setJournals={setJournals} />} />
+            <Route path="/journals" element={<Journals journals={journals} setJournals={setJournals} entries={entries} />}/>
             <Route path="/wellness" element={<Wellness />} />            
             <Route path="/goals" element={<Goals goals={goals} setGoals={setGoals} />} />
             <Route path="/calendar" element={<Calendar entries={entries} selectedDate={selectedDate} onDateSelect={setSelectedDate} />} />

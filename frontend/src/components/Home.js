@@ -52,9 +52,10 @@ export default function Home({ entries, goals = [], journals = [] }) {
     if (entries[today]) {
       setTodaysMood(entries[today].mood);
     } else {
-      setTodaysMood(null);
+      setTodaysMood(null); // explicitly “no mood”
     }
   }, [entries]);
+
 
   // --- Update journal snippet for today ---
   useEffect(() => {
