@@ -33,19 +33,6 @@ function Header({ musicOn, toggleMusic }) {
             <img src={logo} alt="Logo" className="navbar-logo" />
           </div>
 
-  {/* RIGHT: Nav Links + Music Toggle */}
-  <div className="nav-right">
-    <ul className="nav-links">
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="/journals">Journal</Link></li>
-      <li><Link to="/mood">Mood</Link></li>
-      <li><Link to="/wellness">Wellness</Link></li>
-      <li><Link to="/goals">Goals</Link></li>
-      <li><Link to="/calendar">Calendar</Link></li>
-      <li><Link to="/about">About</Link></li>
-      <li><Link to="/contact">Contact</Link></li>
-      <li><Link to="/articles">Articles</Link></li>
-    </ul>
           {/* MIDDLE: Title */}
           <h1 className="site-title">WELLNESS DIARY</h1>
 
@@ -74,7 +61,7 @@ function Header({ musicOn, toggleMusic }) {
 
             <MusicToggle musicOn={musicOn} toggleMusic={toggleMusic} />
           </div>
-    </div>
+
         </nav>
       </header>
 
