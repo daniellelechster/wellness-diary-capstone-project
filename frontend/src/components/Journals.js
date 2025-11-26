@@ -3,7 +3,7 @@ import "../App.css";
 import DailyQuote from "./DailyQuote";
 import serenity1 from "./images/serenity1.jpg";
 
-function Journals({ journals, setJournals }) {
+function Journals({ journals, setJournals, entries }) {
   const [moodLabel, setMoodLabel] = useState("");
   const [currentPrompt, setCurrentPrompt] = useState("");
   const [response, setResponse] = useState("");
@@ -11,6 +11,9 @@ function Journals({ journals, setJournals }) {
   const [editingEntryId, setEditingEntryId] = useState(null);
   const [editingText, setEditingText] = useState("");
 
+  const today = new Date().toISOString().split("T")[0];
+  const todaysMood = entries[today]?.mood;
+  
   /* -------------------------
      Prompts Based on Mood
   --------------------------*/
@@ -24,7 +27,22 @@ function Journals({ journals, setJournals }) {
     ["Very Low 😒","Down 😢","Frustrated 😣","Meh 😕","In the Middle 😐","Okay 😏","Content 😊","Very Good 😄","Amazing 😍"][mood - 1] || "Not tracked";
 
   /* -------------------------
-     Load Entries from Backend
+     Update mood + prompt when entries change
+  --------------------------*/
+  useEffect(() => {
+    if (todaysMood) {
+      setMoodLabel(getMoodLabel(todaysMood));
+      const prompts = getPromptsForMood(todaysMood);
+      setCurrentPrompt(prompts[Math.floor(Math.random() * prompts.length)]);
+    } else {
+      setMoodLabel("Not tracked");
+      // ✅ Provide a fallback prompt
+      setCurrentPrompt("Write anything that’s on your mind today.");
+    }
+  }, [todaysMood, getPromptsForMood]);
+
+  /* -------------------------
+     Load journal entries from backend
   --------------------------*/
   useEffect(() => {
     async function fetchEntries() {
@@ -55,11 +73,6 @@ function Journals({ journals, setJournals }) {
     }
     fetchEntries();
 
-    // Mock mood + prompt for now
-    const mood = 5;
-    setMoodLabel(getMoodLabel(mood));
-    const prompts = getPromptsForMood(mood);
-    setCurrentPrompt(prompts[Math.floor(Math.random() * prompts.length)]);
     setDailyQuote("Every day is a fresh start.");
   }, [getPromptsForMood, setJournals]);
 
@@ -69,10 +82,7 @@ function Journals({ journals, setJournals }) {
   const handleSaveEntry = async () => {
     if (!response.trim()) return;
 
-    const payload = {
-      prompt: currentPrompt,
-      text: response,
-    };
+    const payload = { prompt: currentPrompt, text: response };
 
     try {
       const res = await fetch("http://localhost:8080/api/wellness/journal", {
@@ -94,7 +104,7 @@ function Journals({ journals, setJournals }) {
         time: created.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }),
       };
 
-      setJournals((prev) => [frontendEntry, ...prev]); // update App state
+      setJournals((prev) => [frontendEntry, ...prev]);
       setResponse("");
     } catch (err) {
       console.error("Error saving entry:", err);
@@ -166,7 +176,7 @@ function Journals({ journals, setJournals }) {
           {currentPrompt}
           <button
             onClick={() => {
-              const prompts = getPromptsForMood(5);
+              const prompts = getPromptsForMood(todaysMood || "Not Tracked");
               const randomPrompt = prompts[Math.floor(Math.random() * prompts.length)];
               setCurrentPrompt(randomPrompt);
               setResponse("");

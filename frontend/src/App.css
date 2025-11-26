@@ -1503,6 +1503,10 @@ button:hover {
   }
 }
 
+
+
+
+
 /* Mobile Phones — max-width 430px */
 @media (max-width: 430px) {
   .moodBox {
@@ -2161,3 +2165,34 @@ button:hover {
     padding-top: 15px; 
   }
 }
+
+.moodNotification {
+  position: absolute;
+  bottom: 1rem;        /* floats above the chart */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #e6ffed;
+  color: #2d7a2d;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  animation: fadeIn 0.3s ease-in-out forwards;
+  z-index: 10; /* ensures it overlays chart */
+}
+
+.moodNotification.fadeOut {
+  animation: fadeOut 0.3s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, -5px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: translate(-50%, 0); }
+  to { opacity: 0; transform: translate(-50%, -5px); }
+}
+
