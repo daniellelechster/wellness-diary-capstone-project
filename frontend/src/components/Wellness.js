@@ -52,10 +52,9 @@ function Wellness({ meditation, setMeditation }) {
           "-" +
           String(todayDate.getDate()).padStart(2, "0");
 
-        const res = await fetch("http://localhost:8080/api/wellness/water/date/" + today);
+      const res = await fetch("http://localhost:8080/api/wellness/water/date/" + today);
         if (!res.ok) throw new Error("Failed to fetch hydration history");
-
-        const data = await res.json();
+      const data = await res.json();
         if (data && typeof data === "object" && data.glasses !== undefined) {
           setHydrationHistory(data);
           setWellness((prev) => ({ ...prev, water: data.glasses ?? 0 }));
