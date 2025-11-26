@@ -4,7 +4,6 @@ import com.wcci.wellness.entity.Exercise;
 import com.wcci.wellness.repository.ExerciseRepository;
 import com.wcci.wellness.service.ExerciseService;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.List;
 
