@@ -29,6 +29,10 @@ function Wellness() {
   const [hydrationError, setHydrationError] = useState(null);
   const [hydrationLoading, setHydrationLoading] = useState(true);
 
+  // --- Meditation API states ---
+  const [meditationError, setMeditationError] = useState(null);
+  const [meditationLoading, setMeditationLoading] = useState(true);
+
   // --- Load hydration history from API ---
   useEffect(() => {
     async function fetchHydration() {
@@ -84,35 +88,85 @@ function Wellness() {
     fetchHydration();
   }, []);
 
+  // --- Load meditation for today ---
+  useEffect(() => {
+    async function fetchMeditation() {
+      try {
+        setMeditationLoading(true);
+        const today = new Date().toISOString().slice(0, 10);
+
+        const res = await fetch(
+          `http://localhost:8080/api/wellness/meditation/date/${today}`
+        );
+        if (!res.ok) throw new Error("Failed to fetch meditation data");
+
+        const data = await res.json();
+        if (data && typeof data === "object") {
+          setWellness((prev) => ({
+            ...prev,
+            meditation: {
+              completed: data.completed ?? false,
+              minutes: data.minutes ?? 0,
+              timestamp: data.createdAt ?? today,
+            },
+          }));
+        }
+        setMeditationError(null);
+      } catch (err) {
+        setMeditationError(err.message);
+      } finally {
+        setMeditationLoading(false);
+      }
+    }
+
+    fetchMeditation();
+  }, []);
+
   const formatTime = (ts) => {
     if (!ts) return "";
-    return new Date(ts).toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
+    return new Date(ts).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
   };
 
   const formatDate = (ts) => {
     if (!ts) return "";
-    return new Date(ts).toLocaleDateString([], {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    });
+    return new Date(ts).toLocaleDateString([], { month: "short", day: "numeric", year: "numeric" });
   };
 
-  // --- Meditation update ---
-  const updateMeditation = (minutes) => {
-    const updated = {
-      ...wellness,
-      meditation: {
-        completed: true,
-        minutes,
-        timestamp: new Date().toISOString(),
-      },
-    };
-    setWellness(updated);
+  // --- Meditation update hooked to backend ---
+  const updateMeditation = async (minutes) => {
+    const today = new Date().toISOString().slice(0, 10);
+    const payload = { completed: true, minutes, createdAt: today };
+
+    // Optimistic UI
+    setWellness((prev) => ({
+      ...prev,
+      meditation: { completed: true, minutes, timestamp: today },
+    }));
+
+    try {
+      const res = await fetch("http://localhost:8080/api/wellness/meditation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) throw new Error("Failed to save meditation");
+
+      const data = await res.json();
+      setWellness((prev) => ({
+        ...prev,
+        meditation: {
+          completed: data.completed ?? true,
+          minutes: data.minutes ?? minutes,
+          timestamp: data.createdAt ?? today,
+        },
+      }));
+    } catch (err) {
+      console.error("Meditation update failed:", err);
+      setMeditationError(err.message);
+    }
   };
+
 
   // --- Workout update ---
   const updateWorkout = (minutes, type) => {
@@ -209,12 +263,10 @@ function Wellness() {
       {/* 🧘 Meditation */}
       <h3>🧠 Meditation & Mindfulness</h3>
       <br />
-      <div
-        className="meditation-card"
-        style={{
-          backgroundImage: `url(${meditationImg})`,
-        }}
-      >
+      <div className="meditation-card" style={{ backgroundImage: `url(${meditationImg})` }}>
+        {meditationLoading && <p>Loading meditation history...</p>}
+        {meditationError && <p className="error">Failed to load meditation data</p>}
+
         <label>
           <input
             type="checkbox"
