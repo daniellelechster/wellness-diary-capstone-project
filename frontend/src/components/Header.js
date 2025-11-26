@@ -57,6 +57,7 @@ function Header({ musicOn, toggleMusic }) {
               <li><Link to="/calendar" onClick={closeMenu}>Calendar</Link></li>
               <li><Link to="/about" onClick={closeMenu}>About</Link></li>
               <li><Link to="/contact" onClick={closeMenu}>Contact</Link></li>
+              <li><Link to="/articles" onClick={closeMenu}>Articles</Link></li>
             </ul>
 
             <MusicToggle musicOn={musicOn} toggleMusic={toggleMusic} />
