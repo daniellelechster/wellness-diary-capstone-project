@@ -6,7 +6,6 @@ import WaterImg from "./images/Water.png";
 
 // --- Default wellness structure ---
 const defaultWellness = {
-  meditation: { completed: false, minutes: 0, timestamp: null },
   workout: { completed: false, type: "", minutes: 0, timestamp: null },
   meals: {
     breakfast: false,
@@ -21,7 +20,8 @@ const defaultWellness = {
   water: 0,
 };
 
-function Wellness() {
+function Wellness({ meditation, setMeditation }) {
+  // ✅ Local state for workout, meals, hydration
   const [wellness, setWellness] = useState(defaultWellness);
 
   // --- Hydration API states ---
@@ -29,14 +29,22 @@ function Wellness() {
   const [hydrationError, setHydrationError] = useState(null);
   const [hydrationLoading, setHydrationLoading] = useState(true);
 
+  // --- Meditation API states ---
+  const [meditationError, setMeditationError] = useState(null);
+  const [meditationLoading, setMeditationLoading] = useState(true);
+
+  // --- Helpers ---
+  const formatTime = (ts) =>
+    ts ? new Date(ts).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
+  const formatDate = (ts) =>
+    ts ? new Date(ts).toLocaleDateString([], { month: "short", day: "numeric", year: "numeric" }) : "";
+
   // --- Load hydration history from API ---
   useEffect(() => {
     async function fetchHydration() {
       try {
         setHydrationLoading(true);
-
         const todayDate = new Date();
-
         const today =
           todayDate.getFullYear() +
           "-" +
@@ -44,34 +52,16 @@ function Wellness() {
           "-" +
           String(todayDate.getDate()).padStart(2, "0");
 
-        const res = await fetch(
-          "http://localhost:8080/api/wellness/water/date/" + today
-        );
-
+      const res = await fetch("http://localhost:8080/api/wellness/water/date/" + today);
         if (!res.ok) throw new Error("Failed to fetch hydration history");
-
-        const data = await res.json();
-        console.log(data);
-        // 🔥 EXPECTED BACKEND RESPONSE (single JSON):
-        // { id, date, glasses, createdAt }
-
+      const data = await res.json();
         if (data && typeof data === "object" && data.glasses !== undefined) {
           setHydrationHistory(data);
-
-          setWellness((prev) => ({
-            ...prev,
-            water: data.glasses ?? 0,
-          }));
-
+          setWellness((prev) => ({ ...prev, water: data.glasses ?? 0 }));
           setHydrationError(null);
         } else {
-          // Backend returned null or empty response
           setHydrationHistory(null);
-
-          setWellness((prev) => ({
-            ...prev,
-            water: 0,
-          }));
+          setWellness((prev) => ({ ...prev, water: 0 }));
         }
       } catch (err) {
         setHydrationError(err.message);
@@ -80,38 +70,56 @@ function Wellness() {
         setHydrationLoading(false);
       }
     }
-
     fetchHydration();
   }, []);
 
-  const formatTime = (ts) => {
-    if (!ts) return "";
-    return new Date(ts).toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  };
+  // --- Load meditation for today ---
+  useEffect(() => {
+    async function fetchMeditation() {
+      try {
+        setMeditationLoading(true);
+        const today = new Date().toISOString().slice(0, 10);
 
-  const formatDate = (ts) => {
-    if (!ts) return "";
-    return new Date(ts).toLocaleDateString([], {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    });
-  };
+        const res = await fetch(`http://localhost:8080/api/wellness/meditation/date/${today}`);
+        if (!res.ok) throw new Error("Failed to fetch meditation data");
 
-  // --- Meditation update ---
-  const updateMeditation = (minutes) => {
-    const updated = {
-      ...wellness,
-      meditation: {
-        completed: true,
-        minutes,
-        timestamp: new Date().toISOString(),
-      },
-    };
-    setWellness(updated);
+        const data = await res.json();
+        if (data && typeof data === "object") {
+          setMeditation({
+            completed: data.completed ?? false,
+            minutes: data.minutes ?? 0,
+            createdAt: data.createdAt ?? today,
+          });
+        }
+        setMeditationError(null);
+      } catch (err) {
+        setMeditationError(err.message);
+      } finally {
+        setMeditationLoading(false);
+      }
+    }
+    fetchMeditation();
+  }, [setMeditation]);
+
+  // --- Meditation update hooked to backend ---
+  const updateMeditation = async (minutes) => {
+    const today = new Date().toISOString().split("T")[0];
+    const payload = { completed: true, minutes, createdAt: today };
+
+    // Optimistic UI
+    setMeditation({ completed: true, minutes, createdAt: today });
+
+    try {
+      const res = await fetch("http://localhost:8080/api/wellness/meditation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      setMeditation(data);
+    } catch (err) {
+      console.error("Meditation update failed:", err);
+    }
   };
 
   // --- Workout update ---
@@ -135,9 +143,7 @@ function Wellness() {
       meals: {
         ...wellness.meals,
         [meal]: !wellness.meals[meal],
-        [`${meal}Timestamp`]: !wellness.meals[meal]
-          ? new Date().toISOString()
-          : null,
+        [`${meal}Timestamp`]: !wellness.meals[meal] ? new Date().toISOString() : null,
       },
     };
     setWellness(updated);
@@ -146,19 +152,12 @@ function Wellness() {
   // --- Water update hooked to backend ---
   const updateWater = async (amount) => {
     const newAmount = Math.max(0, wellness.water + amount);
-
-    // Update UI immediately
     setWellness({ ...wellness, water: newAmount });
 
     try {
-      await fetch(
-        "http://localhost:8080/api/wellness/water/" +
-          hydrationHistory.id +
-          "/add",
-        {
-          method: "POST",
-        }
-      );
+      await fetch("http://localhost:8080/api/wellness/water/" + hydrationHistory.id + "/add", {
+        method: "POST",
+      });
     } catch (err) {
       console.error("Hydration update failed:", err);
     }
@@ -170,7 +169,7 @@ function Wellness() {
     let completed = 0;
 
     total += 1;
-    if (wellness.meditation.completed) completed++;
+    if (meditation?.completed) completed++;
 
     total += 1;
     if (wellness.workout.completed) completed++;
@@ -190,67 +189,48 @@ function Wellness() {
     <div className="wellness-container">
       <h1>Your Wellness Home</h1>
       <br />
-
       <h2>Daily Wellness Progress</h2>
       <br />
 
       {/* Progress Card */}
       <div className="card progress-card">
         <p className="great-work">Keep up the great work!</p>
-
-        <progress
-          value={calculateCompletionRate()}
-          max="100"
-          className="wellness-progress-bar"
-        />
+        <progress value={calculateCompletionRate()} max="100" className="wellness-progress-bar" />
         <p>{Math.round(calculateCompletionRate())}% Complete</p>
       </div>
 
       {/* 🧘 Meditation */}
       <h3>🧠 Meditation & Mindfulness</h3>
       <br />
-      <div
-        className="meditation-card"
-        style={{
-          backgroundImage: `url(${meditationImg})`,
-        }}
-      >
+      <div className="meditation-card" style={{ backgroundImage: `url(${meditationImg})` }}>
         <label>
-          <input
-            type="checkbox"
-            checked={wellness.meditation.completed}
-            onChange={() => {}}
-          />{" "}
+          <input type="checkbox" checked={meditation?.completed || false} readOnly />
           Meditation session completed
         </label>
 
         <div className="input-row">
           <input
             type="number"
-            value={wellness.meditation.minutes}
+            value={meditation?.minutes || 0}
             onChange={(e) => updateMeditation(parseInt(e.target.value) || 0)}
             placeholder="Minutes"
           />
-          <button onClick={() => updateMeditation(wellness.meditation.minutes)}>
-            Log
-          </button>
+          <button onClick={() => updateMeditation(meditation?.minutes || 0)}>Log</button>
         </div>
 
-        {wellness.meditation.completed && (
+        {meditation?.completed && (
           <>
-            <p className="success-text">
-              ✓ {wellness.meditation.minutes} minutes meditated today
-            </p>
-
-            {wellness.meditation.timestamp && (
+            <p className="success-text">✓ {meditation.minutes} minutes meditated today</p>
+            {meditation.createdAt && (
               <p className="timestamp">
-                Date: {formatDate(wellness.meditation.timestamp)} / Time:{" "}
-                {formatTime(wellness.meditation.timestamp)}
+                Date: {formatDate(meditation.createdAt)} / Time: {formatTime(meditation.createdAt)}
               </p>
             )}
           </>
         )}
       </div>
+
+
 
       {/* 🏋️ Workout */}
       <h3>🏋️ Exercise & Movement</h3>

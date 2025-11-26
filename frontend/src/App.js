@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import About from "./components/About"
-import Contact from "./components/Contact"
-import Home from "./components/Home"
+import About from "./components/About";
+import Contact from "./components/Contact";
+import Home from "./components/Home";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Calendar from "./components/Calendar"
+import Calendar from "./components/Calendar";
 import Goals from "./components/Goals";
 import Mood from "./components/Mood";
 import Wellness from "./components/Wellness";
@@ -30,6 +30,10 @@ function App() {
 
   // Journal entries state
   const [journals, setJournals] = useState([]);
+
+  // Meditation state 
+  const [meditation, setMeditation] = useState(null);
+
 
 // Fetch goals
 useEffect(() => {
@@ -55,6 +59,15 @@ useEffect(() => {
         setEntries(mapped);
       })
       .catch((err) => console.error("Error fetching moods:", err));
+  }, []);
+
+  // --- Fetch today's meditation once on load ---
+  useEffect(() => {
+    const today = new Date().toISOString().split("T")[0];
+    fetch(`http://localhost:8080/api/wellness/meditation/date/${today}`)
+      .then(res => res.json())
+      .then(data => setMeditation(data))
+      .catch(err => console.error("Error fetching meditation:", err));
   }, []);
 
   // --- Fetch goals once on load ---
@@ -121,10 +134,10 @@ useEffect(() => {
 
         <main className="main-content">
           <Routes>
-            <Route path="/" element={<Home entries={entries} goals={goals} journals={journals} />} />
+            <Route path="/" element={<Home entries={entries} goals={goals} journals={journals} meditation={meditation} />} />
             <Route path="/about" element={<About />} />
-            <Route path="/journals" element={<Journals journals={journals} setJournals={setJournals} entries={entries} />}/>
-            <Route path="/wellness" element={<Wellness />} />            
+            <Route path="/journals" element={<Journals journals={journals} setJournals={setJournals} entries={entries} />} />
+            <Route path="/wellness" element={<Wellness meditation={meditation} setMeditation={setMeditation} />} />
             <Route path="/goals" element={<Goals goals={goals} setGoals={setGoals} />} />
             <Route path="/calendar" element={<Calendar entries={entries} selectedDate={selectedDate} onDateSelect={setSelectedDate} />} />
             <Route path="/weatherDisplay" element={<WeatherDisplay />} />
