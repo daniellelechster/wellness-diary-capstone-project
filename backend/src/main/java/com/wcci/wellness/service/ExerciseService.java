@@ -12,7 +12,7 @@ public interface ExerciseService {
 
     List<Exercise> getAllExercises();
 
-    Exercise saveExercise(Exercise Exercise);
+    Exercise saveExercise(Exercise exercise);
 
     Exercise logMinutes(LocalDate date, int minutes);
 
