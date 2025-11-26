@@ -31,6 +31,10 @@ function App() {
   // Journal entries state
   const [journals, setJournals] = useState([]);
 
+  // Meditation state 
+  const [meditation, setMeditation] = useState(null);
+
+
 // Fetch goals
 useEffect(() => {
   fetch("http://localhost:8080/api/wellness/goal/all")
@@ -56,6 +60,18 @@ useEffect(() => {
       })
       .catch((err) => console.error("Error fetching moods:", err));
   }, []);
+
+  // --- Fetch today's meditation once on load ---
+useEffect(() => {
+  fetch("http://localhost:8080/api/wellness/meditation/all")
+    .then(res => res.json())
+    .then(data => {
+      const today = new Date().toISOString().split("T")[0];
+      const todaysMeditation = data.find(m => m.date.split("T")[0] === today);
+      setMeditation(todaysMeditation || null);
+    })
+    .catch(err => console.error("Error fetching meditation:", err));
+}, []);
 
   // --- Fetch goals once on load ---
   useEffect(() => {
@@ -121,10 +137,10 @@ useEffect(() => {
 
         <main className="main-content">
           <Routes>
-            <Route path="/" element={<Home entries={entries} goals={goals} journals={journals} />} />
+            <Route path="/" element={<Home entries={entries} goals={goals} journals={journals} meditation={meditation} />}/>
             <Route path="/about" element={<About />} />
             <Route path="/journals" element={<Journals journals={journals} setJournals={setJournals} entries={entries} />}/>
-            <Route path="/wellness" element={<Wellness />} />            
+            <Route path="/wellness" element={<Wellness meditation={meditation} setMeditation={setMeditation} />} />            
             <Route path="/goals" element={<Goals goals={goals} setGoals={setGoals} />} />
             <Route path="/calendar" element={<Calendar entries={entries} selectedDate={selectedDate} onDateSelect={setSelectedDate} />} />
             <Route path="/weatherDisplay" element={<WeatherDisplay />} />

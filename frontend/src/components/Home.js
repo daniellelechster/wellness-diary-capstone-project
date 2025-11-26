@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import WeatherDisplay from "./WeatherDisplay";   // <-- ADDED
 import "../App.css";
 
-export default function Home({ entries, goals = [], journals = [] }) {
+export default function Home({ entries, goals = [], journals = [], meditation = []}) {
   const [todaysMood, setTodaysMood] = useState(null);
   const [wellnessSummary, setWellnessSummary] = useState(null);
   const [journalEntry, setJournalEntry] = useState("");
@@ -28,24 +28,27 @@ export default function Home({ entries, goals = [], journals = [] }) {
               .join(", ")} eaten`
           : "None logged",
     };
+    };
+    
+
+const loadOtherData = useCallback(() => {
+
+  const getWellnessData = (w, wellnessData) => {
+    if (!w) return null;
+    setWellnessSummary(getWellnessSummary(w));
   };
 
-  // --- Load other Home data (goals, wellness, journal) once ---
-  const loadOtherData = useCallback(() => {
-    const today = new Date().toISOString().split("T")[0];
-
-    // Wellness
-    const wellnessData = localStorage.getItem(`wellness-${today}`);
-    if (wellnessData) {
-      const w = JSON.parse(wellnessData);
-      setWellnessSummary(getWellnessSummary(w));
-    }
-  }, []);
+  fetch("http://localhost:8080/api/wellness/meditation/today")
+    .then(res => res.json())
+    .then(data => getWellnessData(data))
+    .catch(err => console.error("Error fetching wellness:", err));
+}, []);
 
   useEffect(() => {
     loadOtherData();
   }, [loadOtherData]);
 
+  
   // --- Update mood whenever entries changes ---
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
