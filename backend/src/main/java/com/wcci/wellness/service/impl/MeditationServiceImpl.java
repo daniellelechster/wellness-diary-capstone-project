@@ -5,7 +5,7 @@ import com.wcci.wellness.repository.MeditationRepository;
 import com.wcci.wellness.service.MeditationService;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
-
+import java.util.List;
 
 @Service
 public class MeditationServiceImpl implements MeditationService {
@@ -34,10 +34,26 @@ public class MeditationServiceImpl implements MeditationService {
     }
 
     @Override
+    public List<Meditation> getAllMeditations() {
+        return meditationRepository.findAll();
+    }
+
+    @Override
+    public Meditation saveMeditation(Meditation meditation) {
+        Meditation existing = meditationRepository.findByCreatedAt(meditation.getCreatedAt());
+        if (existing != null) {
+            existing.setMinutes(meditation.getMinutes());
+            existing.setCompleted(meditation.isCompleted());
+            return meditationRepository.save(existing);
+        } else {
+            return meditationRepository.save(meditation);
+        }
+    }
+
+    @Override
     public Meditation logMinutes(LocalDate date, int minutes) {
         Meditation meditation = getMeditationByDate(date);
         meditation.setMinutes(minutes);
-        meditation.setCompleted(true);
         return meditationRepository.save(meditation);
     }
 
@@ -45,11 +61,6 @@ public class MeditationServiceImpl implements MeditationService {
     public Meditation toggleCompleted(LocalDate date) {
         Meditation meditation = getMeditationByDate(date);
         meditation.setCompleted(!meditation.isCompleted());
-        return meditationRepository.save(meditation);
-    }
-
-    @Override
-    public Meditation saveMeditation(Meditation meditation) {
         return meditationRepository.save(meditation);
     }
 }
