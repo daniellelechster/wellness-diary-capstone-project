@@ -3,51 +3,18 @@ import { Link } from "react-router-dom";
 import WeatherDisplay from "./WeatherDisplay";   // <-- ADDED
 import "../App.css";
 
-export default function Home({ entries, goals = [], journals = [], meditation = []}) {
-  const [todaysMood, setTodaysMood] = useState(null);
-  const [wellnessSummary, setWellnessSummary] = useState(null);
+export default function Home({ entries, goals = [], journals = [], meditation }) {
+  const [todaysMood, setTodaysMood] = useState(null);  
   const [journalEntry, setJournalEntry] = useState("");
 
-  const getWellnessSummary = (w) => {
-    if (!w) return null;
-    return {
-      meditation: w.meditation?.completed
-        ? `${w.meditation.minutes} min meditated`
-        : "Not completed",
-      workout: w.workout?.completed
-        ? `${w.workout.type} • ${w.workout.minutes} min`
-        : "Not completed",
-      healthyEating:
-        w.meals?.breakfast || w.meals?.lunch || w.meals?.dinner
-          ? `${[
-              w.meals.breakfast && "Breakfast",
-              w.meals.lunch && "Lunch",
-              w.meals.dinner && "Dinner",
-            ]
-              .filter(Boolean)
-              .join(", ")} eaten`
-          : "None logged",
-    };
-    };
-    
-
-const loadOtherData = useCallback(() => {
-
-  const getWellnessData = (w, wellnessData) => {
-    if (!w) return null;
-    setWellnessSummary(getWellnessSummary(w));
+  // --- Build wellness summary directly from props ---
+  const wellnessSummary = {
+    meditation: meditation?.completed
+      ? `${meditation.minutes} min meditated`
+      : "Not completed",
+    workout: "Not completed",
+    healthyEating: "None logged",
   };
-
-  fetch("http://localhost:8080/api/wellness/meditation/today")
-    .then(res => res.json())
-    .then(data => getWellnessData(data))
-    .catch(err => console.error("Error fetching wellness:", err));
-}, []);
-
-  useEffect(() => {
-    loadOtherData();
-  }, [loadOtherData]);
-
   
   // --- Update mood whenever entries changes ---
   useEffect(() => {
@@ -95,8 +62,7 @@ const loadOtherData = useCallback(() => {
 
   const completedGoals = goals.filter((g) => g.status === "completed").length;
   const inProgressGoals = goals.filter((g) => g.status === "in progress").length;
-  const goalProgress =
-    goals.length > 0 ? (completedGoals / goals.length) * 100 : 0;
+  const goalProgress = goals.length > 0 ? (completedGoals / goals.length) * 100 : 0;
 
   const wellnessActivities = wellnessSummary
     ? [
