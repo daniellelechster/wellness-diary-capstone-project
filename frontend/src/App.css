@@ -2171,9 +2171,20 @@ button:hover {
   }
 }
 
+
+.moodPrompt {
+  background-color: #f8d7da; /* light red */
+  color: #721c24;            /* dark red text */
+  padding: 12px 16px;
+  border-radius: 6px;
+  border: 1px solid #f5c6cb;
+  font-weight: bold;
+  text-align: center;
+}
+
 .moodNotification {
   position: absolute;
-  bottom: 1rem;        /* floats above the chart */
+  bottom: 26.7rem;        
   left: 50%;
   transform: translateX(-50%);
   background-color: #e6ffed;
@@ -2200,4 +2211,3 @@ button:hover {
   from { opacity: 1; transform: translate(-50%, 0); }
   to { opacity: 0; transform: translate(-50%, -5px); }
 }
-
