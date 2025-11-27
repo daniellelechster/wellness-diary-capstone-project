@@ -78,14 +78,6 @@ export default function Articles() {
               />
             )}
 
-            {!article.content && (
-              <p className="no-content-msg">
-                Full article content is not provided by the API.  
-                <br />
-                Click the button below to read it on Health.gov.
-              </p>
-            )}
-
             <button
               className="article-link-button"
               onClick={() => {
