@@ -102,7 +102,7 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 1500px;
+  max-width: 1300px;
   position: relative;
   padding: 10px 0;
 }
@@ -193,12 +193,12 @@ body {
     position: fixed;
     top: 0;
     right: -1000px; /* offscreen */
-    width: 280px;
+    width: 200px;
     height: 100vh;
     flex-direction: column;
     background: radial-gradient(circle, #d1c4aa 0%, #a8c3a0 99%);
     padding: 3rem 1.2rem;
-    gap: 1.5rem;
+    gap: 1rem;
     display: flex;
     z-index: 3000;
     transition: right 0.35s ease;
@@ -237,7 +237,7 @@ body {
   }
 
   .site-title {
-    font-size: 24px;
+    font-size: 20px;
     margin: 0 10px;
     flex: 1;
     text-align: center;
