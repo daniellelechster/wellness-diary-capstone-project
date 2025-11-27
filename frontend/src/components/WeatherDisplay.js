@@ -30,7 +30,7 @@ export default function WeatherDisplay() {
 
   useEffect(() => {
     const lat = 41.4993; // example (CLE)
-    const lon = 81.6944;
+    const lon = -81.6944;
     const apiKey = process.env.REACT_APP_API_KEY;
 
     fetch(
