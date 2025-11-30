@@ -35,10 +35,24 @@ export default function MoodHistoryChart({ entries = [] }) {
   }}
 >
   <ResponsiveContainer width="100%" height={250}>
-    <LineChart data={data}>
+    <LineChart data={data}
+    margin={{ top: 20, right: 20, left: 0, bottom: 5 }}
+    >
       <CartesianGrid strokeDasharray="2 2" />
-      <XAxis dataKey="date" style={{ fontWeight: "bold" }} />
-      <YAxis domain={[1, 9]} style={{ fontWeight: "bold" }} />
+<XAxis
+  dataKey="date"
+  style={{ fontWeight: "normal", fontSize: "12px"  }}
+  tickFormatter={(dateStr) => {
+    const date = new Date(dateStr);
+    const month = date.getMonth() + 1; // getMonth() is 0-indexed
+    const day = date.getDate();
+    return `${month}/${day}`; // format as MM/DD
+  }}
+  angle={-45}    // rotate labels
+  textAnchor="end" // align rotated text
+/>
+
+      <YAxis domain={[1, 9]} style={{ fontWeight: "none", fontSize: "12px" }} />
       <Tooltip
         formatter={(value) => {
           const mood = moodMap[value];

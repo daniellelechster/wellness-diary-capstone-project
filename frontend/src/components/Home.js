@@ -77,11 +77,11 @@ export default function Home({ entries, goals = [], journals = [], meditation })
   return (
     <div className="home-background">
       <div className="home-container">
-        <h1>Your Wellness Home</h1>
+
 
         <div className="home-card-header-card">
           <h2 className="home-header-title">Welcome to Your Wellness Dashboard</h2>
-          <p className="home-header-subtitle">Here's a quick overview of your day</p>
+          {/* <h2 className="home-header-subtitle">Here's a quick overview of your day</h2> */}
         </div>
 
         <div className="home-grid">

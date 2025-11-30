@@ -78,7 +78,7 @@ body {
   border-bottom-right-radius: 10px;
   box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.2),
     inset 0 -2px 2px rgba(255, 255, 255, 0.4);
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   font-family: "Inter", sans-serif;
 }
 
@@ -92,9 +92,10 @@ body {
   text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6),
     -1px -1px 1px rgba(143, 78, 43, 0.4);
   pointer-events: none;
-  min-width: 0;
-  overflow: hidden;
+  /* min-width: 0; */
+  /* overflow: hidden; */
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .main-nav {
@@ -102,20 +103,22 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 1500px;
+  max-width: 1800px;
+  gap: 1rem;
   position: relative;
-  padding: 10px 0;
+  /*padding: 10px 0; */
 }
 
 .nav-logo img {
   height: 60px;
+  flex-shrink: 0;
 }
 
 .nav-right {
   display: flex;
   align-items: center;
   gap: 1rem;
-  flex-shrink: 1;
+  flex-shrink: 0;
   min-width: 0;
 }
 
@@ -126,10 +129,11 @@ body {
 .nav-links {
   display: flex;
   list-style: none;
-  gap: 1.2rem;
+  align-items: center;
+  gap: -.1rem;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  overflow: visible;
   flex-shrink: 1;
   min-width: 0;
   white-space: nowrap; /* prevent wrapping */
@@ -189,25 +193,58 @@ body {
 
 @media (max-width: 1150px) { /* updated breakpoint to prevent rollover */
 
+  .main-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .nav-logo {
+    order: 0;
+  }
+
+  .header h1 {
+    order: 1;
+    width: 100%;
+    text-align: center;
+    flex-basis: 100%;
+    margin: 0 0 8px 0;
+  }
+
+  .music-toggle {
+    order: 2;
+    width: 100%;
+    display: flex;
+    justify-content: center; /* center it horizontally */
+    margin-bottom: 8px;    
+  }
+
   .nav-links {
     position: fixed;
     top: 0;
-    right: -1000px; /* offscreen */
-    width: 280px;
+    right: -1000px; 
+    width: 200px;
     height: 100vh;
     flex-direction: column;
     background: radial-gradient(circle, #d1c4aa 0%, #a8c3a0 99%);
-    padding: 3rem 1.2rem;
-    gap: 1.5rem;
-    display: flex;
+    padding: 4rem 1.5rem;
+    gap: 1rem;
+    display: none;
     z-index: 3000;
     transition: right 0.35s ease;
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
-    pointer-events: auto;
+    align-items: center;  
   }
 
   .nav-links.active {
+    display: flex;
     right: 0;
+  }
+
+  .nav-links.active.dropdown {
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   .nav-links li {
@@ -217,7 +254,7 @@ body {
   .nav-links li a {
     display: block;
     width: 100%;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
     color: #333;
     text-decoration: none;
@@ -225,29 +262,151 @@ body {
   }
 
   .hamburger {
+    order: 3;
     position: fixed;
     display: flex;
     top: 20px;
+    flex-direction: column;
+    gap: 5px;
     right: 20px;
     z-index: 3501;
+    align-items: center;
+    justify-content: center;
   }
 
   .nav-right > .nav-links {
-    display: flex;
+    display: none;
   }
 
   .site-title {
-    font-size: 24px;
+    font-size: 20px;
     margin: 0 10px;
     flex: 1;
     text-align: center;
   }
 
   .nav-right {
-    flex-direction: row;
+    flex-direction: column;
+    display: flex;
     align-items: center;
     gap: 0.6rem;
     pointer-events: auto;
+  }
+}
+
+/* ------------------------- */
+/* DROPDOWN MENU (DESKTOP)   */
+/* ------------------------- */
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-title {
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  display: block;
+  user-select: none;
+  color: #333;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropdown-title:hover {
+  background-color: #e0eae8;
+  color: #5e5e5e;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #8d9491;
+  color: rgb(236, 234, 234);
+  list-style: none;
+  padding: 0.5rem 0;
+  margin: 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  display: none;
+  min-width: 150px;
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 0.6rem 1rem;
+  color: #e0e0e0;
+  text-decoration: none;
+
+}
+
+.dropdown-menu li a:hover {
+  background: #e0eae8;
+}
+
+/* Show on hover */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+@media (max-width: 1150px) {
+
+  .dropdown {
+    position: relative;
+    width: auto;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    background: none;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: none;
+    padding: 0;
+    width: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: #8d9491;
+  }
+
+  .dropdown-menu li {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .dropdown.open .dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dropdown-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+  }
+
+  .nav-links.active.dropdown {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -313,7 +472,7 @@ body {
   align-items: center;
   font-weight: 600;
   background: radial-gradient(circle, #d1c4aa 0%, #a8c3a0 85%);
-  color: black;
+  color: rgb(31, 31, 31);
   border-radius: 25px;
   padding: 8px 15px;
   text-align: center;
@@ -824,6 +983,7 @@ h3 {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   background: #a8c3a0;
+  color: rgb(31, 31, 31);
   padding: 1rem;
   border-radius: 8px;
   box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
@@ -867,23 +1027,45 @@ h3 {
   color: rgb(39, 39, 39);
 }
 
-button {
-  background-color: rgba(224, 234, 232);
-  border: none;
-  color: rgba(94, 94, 94);
-  padding: 0.5rem 1.5rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1rem;
-  margin-left: 2%;
-  margin-top: 10px;
-  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
-    inset 0 -2px 2px rgba(255, 255, 255, 0.4);
-  background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
+/* Apply smooth hover transitions to all buttons in journal */
+.journals-container button {
+    background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
+    border: 1px solid #b9b8b8;
+    color: rgba(94, 94, 94);
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: 2%;
+    margin-top: 10px;
+    box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
+                inset 0 -2px 2px rgba(255, 255, 255, 0.4);
+    transform: scale(1); /* default scale */
+    transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-button:hover {
-  background-color: #a8c3a0;
+/* Hover effect for all journal buttons */
+.journals-container button:hover {
+    background-color: #a8c3a0;
+    transform: scale(1.05);
+    border-color: #888;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Optional: specific styling for save/cancel buttons while keeping hover effect */
+.journal-history li button.save-btn,
+.journal-history li button.cancel-btn {
+    transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.journal-history li button.save-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.journal-history li button.cancel-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 .journal-history {
@@ -949,6 +1131,7 @@ button:hover {
   font-family: Arial, sans-serif;
   text-align: center;
   margin-bottom: 120px;
+  margin-top: 35px;
 }
 
 .calendar-page h2 {
@@ -1029,15 +1212,23 @@ button:hover {
   align-items: center;
   width: fit-content;
   gap: 1.5rem;
-}
+  cursor: pointer;
+transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;}
 
 .calendar-controls button {
   padding: 0.5rem 1rem;
   margin-right: 0.5rem;
   border: 1px solid #b9b8b8;
   border-radius: 6px;
-  align-items: center;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;  align-items: center;
+  cursor: pointer;
+}
+
+.calendar-controls button:hover {
+  background-color: #e0e0e0; /* change to see transition */
+  border-color: #888;
+  transform: scale(1.05);
 }
 
 .calendar-grid {
@@ -1411,15 +1602,26 @@ button:hover {
 }
 
 .moodSubmitButton {
-  display: block;
-  color: #fff;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  margin: 0.2rem auto;
-  transition: background-color 0.3s ease;
+    display: block;
+    color: #fff;
+    border: 1px solid #b9b8b8;
+    background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 0.2rem auto;
+    transform: scale(1); /* default scale */
+    box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
+                inset 0 -2px 2px rgba(255, 255, 255, 0.4);
+    transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.moodSubmitButton:hover {
+    background-color: #a8c3a0;
+    transform: scale(1.05);
+    border-color: #888;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 .moodHistoryBox h3 {
@@ -1445,6 +1647,11 @@ button:hover {
 .recharts-line {
   stroke-linecap: round;
 }
+
+.recharts-responsive-container {
+  margin-top: 25px;
+}
+
 
 /* ------------------------------------------------------ */
 /* RESPONSIVE BEHAVIOR                                    */
@@ -1570,6 +1777,7 @@ button:hover {
 
 .wellness-container h2 {
   margin-top: none;
+  color: #333;
 }
 
 .wellness-container h3 {
@@ -1725,6 +1933,30 @@ button:hover {
   margin-bottom: 10px;
   margin-top: 5px;
 }
+
+.wellness-container button {
+    background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
+    border: 1px solid #b9b8b8;
+    color: rgba(94, 94, 94);
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+    box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
+                inset 0 -2px 2px rgba(255, 255, 255, 0.4);
+    transform: scale(1); /* default scale */
+    transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for all wellness buttons */
+.wellness-container button:hover {
+    background-color: #a8c3a0;
+    transform: scale(1.05);
+    border-color: #888;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
 /* CONTACT */
 
 .contact-container {
