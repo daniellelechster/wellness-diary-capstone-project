@@ -37,7 +37,7 @@ function App() {
   const [meditation, setMeditation] = useState(null);
 
 
-// Fetch goals
+// Fetch goals once on load ---
 useEffect(() => {
   fetch("http://localhost:8080/api/wellness/goal/all")
     .then((res) => res.json())
@@ -72,28 +72,29 @@ useEffect(() => {
       .catch(err => console.error("Error fetching meditation:", err));
   }, []);
 
-  // --- Fetch goals once on load ---
-  useEffect(() => {
-    fetch("http://localhost:8080/api/wellness/goal/all")
-      .then((res) => res.json())
-      .then((data) => setGoals(data))
-      .catch((err) => console.error("Error fetching goals:", err));
-  }, []);
-
   // Fetch journals
   useEffect(() => {
-    fetch("http://localhost:8080/api/wellness/mood/all")
-      .then((res) => res.json())
-      .then((data) => {
-        const mapped = {};
-        data.forEach((m) => {
-          const dateStr = m.date.split("T")[0];
-          mapped[dateStr] = { date: dateStr, mood: m.rating };
-        });
-        setEntries(mapped);
-      })
-      .catch((err) => console.error("Error fetching moods:", err));
-  }, []);
+  fetch("http://localhost:8080/api/wellness/journal/all")
+    .then((res) => res.json())
+    .then((data) => {
+      const mapped = data
+        .map((j) => {
+          const created = j.createdAt ? new Date(j.createdAt) : new Date();
+          return {
+            id: j.id,
+            prompt: j.prompt,
+            text: j.text,
+            createdAt: j.createdAt,
+            date: created.toISOString().split("T")[0],
+            time: created.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }),
+          };
+        })
+        .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
+      setJournals(mapped);
+    })
+    .catch((err) => console.error("Error fetching journals:", err));
+}, []);
+
 
 
   // --- Audio effect ---
