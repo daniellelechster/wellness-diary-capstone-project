@@ -170,9 +170,11 @@ function Wellness({ meditation, setMeditation }) {
     setWellness({ ...wellness, water: newAmount });
 
     try {
-      await fetch("http://localhost:8080/api/wellness/water/" + hydrationHistory.id + "/add", {
-        method: "POST",
-      });
+      const endpoint =
+        amount > 0
+        ? `http://localhost:8080/api/wellness/water/${hydrationHistory.id}/add`
+        : `http://localhost:8080/api/wellness/water/${hydrationHistory.id}/remove`;
+      await fetch(endpoint, { method: "POST" });
     } catch (err) {
       console.error("Hydration update failed:", err);
     }
@@ -245,28 +247,36 @@ function Wellness({ meditation, setMeditation }) {
       <h3>🧠 Meditation & Mindfulness</h3>
       <br />
       <div className="meditation-card" style={{ backgroundImage: `url(${meditationImg})` }}>
-        <label>
-          <input type="checkbox" checked={meditation?.completed || false} readOnly />
-          Meditation session completed
-        </label>
+        {meditationLoading ? (
+          <p>Loading meditation ... </p>
+        ) : meditationError ? (
+          <p className="error">{meditationError}</p>
+        ) : (
+          <>      
+            <label>
+              <input type="checkbox" checked={meditation?.completed || false} readOnly />
+              Meditation session completed
+            </label>
 
-        <div className="input-row">
-          <input
-            type="number"
-            value={meditation?.minutes || 0}
-            onChange={(e) => updateMeditation(parseInt(e.target.value) || 0)}
-            placeholder="Minutes"
-          />
-          <button onClick={() => updateMeditation(meditation?.minutes || 0)}>Log</button>
-        </div>
+            <div className="input-row">
+              <input
+                type="number"
+                value={meditation?.minutes || 0}
+                onChange={(e) => updateMeditation(parseInt(e.target.value) || 0)}
+                placeholder="Minutes"
+              />
+              <button onClick={() => updateMeditation(meditation?.minutes || 0)}>Log</button>
+            </div>
 
-        {meditation?.completed && (
-          <>
-            <p className="success-text">✓ {meditation.minutes} minutes meditated today</p>
-            {meditation.createdAt && (
-              <p className="timestamp">
-                Date: {formatDate(meditation.createdAt)} / Time: {formatTime(meditation.createdAt)}
-              </p>
+            {meditation?.completed && (
+              <>
+                <p className="success-text">✓ {meditation.minutes} minutes meditated today</p>
+                {meditation.createdAt && (
+                  <p className="timestamp">
+                    Date: {formatDate(meditation.createdAt)} / Time: {formatTime(meditation.createdAt)}
+                  </p>
+                )}
+              </>
             )}
           </>
         )}
