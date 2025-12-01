@@ -19,17 +19,11 @@ const defaultWellness = {
   water: 0,
 };
 
-function Wellness({ meditation, setMeditation }) {
+function Wellness({ meditation, setMeditation, exercise, setExercise }) {
   // ✅ Local state for meals, hydration
   const [wellness, setWellness] = useState(defaultWellness);
 
   // --- Exercise API state ---
-  const [exercise, setExercise] = useState({
-    completed: false,
-    text: "",
-    minutes: 0,
-    createdAt: null,
-  });
   const [exerciseLoading, setExerciseLoading] = useState(true);
   const [exerciseError, setExerciseError] = useState(null);
 
@@ -227,7 +221,7 @@ function Wellness({ meditation, setMeditation }) {
       }
     }
     fetchExercise();
-  }, []);
+  }, [setExercise]);
 
   return (
     <div className="wellness-container">

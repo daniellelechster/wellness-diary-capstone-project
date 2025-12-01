@@ -1,20 +1,24 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import WeatherDisplay from "./WeatherDisplay";   // <-- ADDED
 import "../App.css";
 
-export default function Home({ entries, goals = [], journals = [], meditation }) {
+export default function Home({ entries, goals = [], journals = [], meditation, exercise }) {
   const [todaysMood, setTodaysMood] = useState(null);  
   const [journalEntry, setJournalEntry] = useState("");
 
   // --- Build wellness summary directly from props ---
-  const wellnessSummary = {
-    meditation: meditation?.completed
-      ? `${meditation.minutes} min meditated`
-      : "Not completed",
-    workout: "Not completed",
-    healthyEating: "None logged",
-  };
+const wellnessSummary = {
+  meditation: meditation?.completed
+    ? `${meditation.minutes} min meditated`
+    : "Not completed",
+
+  workout: exercise?.completed
+    ? `${exercise.minutes} min ${exercise.text || "exercise"}`
+    : "Not completed",
+
+  healthyEating: "None logged",
+};
   
   // --- Update mood whenever entries changes ---
   useEffect(() => {

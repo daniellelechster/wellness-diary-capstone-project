@@ -274,7 +274,7 @@ body {
     justify-content: center;
   }
 
-  .nav-right > .nav-links {
+  .nav-right > .nav-links:not(.active){
     display: none;
   }
 
