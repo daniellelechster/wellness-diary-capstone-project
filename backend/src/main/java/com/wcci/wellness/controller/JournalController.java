@@ -1,11 +1,13 @@
 package com.wcci.wellness.controller;
 
-import com.wcci.wellness.entity.Journal;
-import com.wcci.wellness.service.JournalService;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
+
+import com.wcci.wellness.entity.Journal;
+import com.wcci.wellness.service.JournalService;
 
 @CrossOrigin(origins = "http://localhost:3000") // allow frontend dev server
 @RestController
@@ -35,7 +37,6 @@ public class JournalController {
 
     @PostMapping
     public ResponseEntity<Journal> saveJournal(@RequestBody Journal journal) {
-        // server will set createdAt if null
         Journal savedJournal = journalService.createJournal(journal);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedJournal);
     }
@@ -48,8 +49,8 @@ public class JournalController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Journal> updateJournal(
-        @PathVariable Long id,
-        @RequestBody Journal updatedJournal) {
-    return ResponseEntity.ok(journalService.updateJournal(id, updatedJournal));
-}
+            @PathVariable Long id,
+            @RequestBody Journal updatedJournal) {
+        return ResponseEntity.ok(journalService.updateJournal(id, updatedJournal));
+    }
 }

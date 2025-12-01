@@ -19,10 +19,9 @@ public class ArticleController {
     private ArticleService articleService;
 
     @GetMapping("/{keyword}")
-public Article getArticle(@PathVariable String keyword) throws IOException {
-    return articleService.getArticleByKeyword(keyword);
-}
-
+    public Article getArticle(@PathVariable String keyword) throws IOException {
+        return articleService.getArticleByKeyword(keyword);
+    }
 
     @GetMapping("/depression")
     public Article getDepressionArticle() throws IOException {

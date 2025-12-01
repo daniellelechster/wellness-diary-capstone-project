@@ -1,9 +1,11 @@
 package com.wcci.wellness.repository;
 
-import com.wcci.wellness.entity.Exercise;
+import java.time.LocalDate;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import java.time.LocalDate;
+
+import com.wcci.wellness.entity.Exercise;
 
 @Repository
 public interface ExerciseRepository extends JpaRepository<Exercise, Long> {

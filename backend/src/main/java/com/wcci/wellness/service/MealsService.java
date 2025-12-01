@@ -1,7 +1,8 @@
 package com.wcci.wellness.service;
 
-import com.wcci.wellness.entity.Meals;
 import java.util.List;
+
+import com.wcci.wellness.entity.Meals;
 
 public interface MealsService {
 

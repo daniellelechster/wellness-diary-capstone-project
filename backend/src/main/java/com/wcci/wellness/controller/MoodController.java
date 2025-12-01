@@ -3,6 +3,7 @@ package com.wcci.wellness.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import com.wcci.wellness.entity.Mood;
 import com.wcci.wellness.service.MoodService;
 
