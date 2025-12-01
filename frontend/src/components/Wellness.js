@@ -170,9 +170,11 @@ function Wellness({ meditation, setMeditation }) {
     setWellness({ ...wellness, water: newAmount });
 
     try {
-      await fetch("http://localhost:8080/api/wellness/water/" + hydrationHistory.id + "/add", {
-        method: "POST",
-      });
+      const endpoint =
+        amount > 0
+        ? `http://localhost:8080/api/wellness/water/${hydrationHistory.id}/add`
+        : `http://localhost:8080/api/wellness/water/${hydrationHistory.id}/remove`;
+      await fetch(endpoint, { method: "POST" });
     } catch (err) {
       console.error("Hydration update failed:", err);
     }
