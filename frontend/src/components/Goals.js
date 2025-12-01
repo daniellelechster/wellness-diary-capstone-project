@@ -68,7 +68,7 @@ export default function Goals({ goals = [], setGoals }) {
 
       {/* Add Goal Form */}
       <div className="goal-entry">
-        <input
+        <textarea
           type="text"
           value={newGoal}
           onChange={(e) => setNewGoal(e.target.value)}
