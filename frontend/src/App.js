@@ -36,6 +36,8 @@ function App() {
   // Meditation state 
   const [meditation, setMeditation] = useState(null);
 
+  // --- NEW: Exercise state ---
+  const [exercise, setExercise] = useState(null);
 
 // Fetch goals once on load ---
 useEffect(() => {
@@ -72,6 +74,15 @@ useEffect(() => {
       .catch(err => console.error("Error fetching meditation:", err));
   }, []);
 
+  // --- NEW: Fetch today's exercise once on load ---
+  useEffect(() => {
+    const today = new Date().toISOString().split("T")[0];
+    fetch(`http://localhost:8080/api/wellness/exercise/date/${today}`)
+      .then(res => res.json())
+      .then(data => setExercise(data))
+      .catch(err => console.error("Error fetching exercise:", err));
+  }, []);
+
   // Fetch journals
   useEffect(() => {
   fetch("http://localhost:8080/api/wellness/journal/all")
@@ -94,8 +105,6 @@ useEffect(() => {
     })
     .catch((err) => console.error("Error fetching journals:", err));
 }, []);
-
-
 
   // --- Audio effect ---
   useEffect(() => {
@@ -137,10 +146,10 @@ useEffect(() => {
 
         <main className="main-content">
           <Routes>
-            <Route path="/" element={<Home entries={entries} goals={goals} journals={journals} meditation={meditation} />} />
+            <Route path="/" element={<Home entries={entries} goals={goals} journals={journals} meditation={meditation} exercise={exercise} />} />
             <Route path="/about" element={<About />} />
             <Route path="/journals" element={<Journals journals={journals} setJournals={setJournals} entries={entries} />} />
-            <Route path="/wellness" element={<Wellness meditation={meditation} setMeditation={setMeditation} />} />
+            <Route path="/wellness" element={<Wellness meditation={meditation} setMeditation={setMeditation} exercise={exercise} setExercise={setExercise} />} />
             <Route path="/goals" element={<Goals goals={goals} setGoals={setGoals} />} />
             <Route path="/calendar" element={<Calendar entries={entries} selectedDate={selectedDate} onDateSelect={setSelectedDate} />} />
             <Route path="/weatherDisplay" element={<WeatherDisplay />} />
