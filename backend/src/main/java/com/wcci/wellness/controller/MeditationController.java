@@ -21,7 +21,7 @@ public class MeditationController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Meditation> getMeditationById(@PathVariable Long id) {
+    public ResponseEntity<Meditation> getMeditationById(@PathVariable("id") Long id) {
         Meditation meditation = meditationService.getMeditationById(id);
         if (meditation != null) {
             return ResponseEntity.ok(meditation);
@@ -31,7 +31,7 @@ public class MeditationController {
     }
 
     @GetMapping("/date/{date}")
-    public ResponseEntity<Meditation> getMeditationByDate(@PathVariable String date) {
+    public ResponseEntity<Meditation> getMeditationByDate(@PathVariable("date") String date) {
         LocalDate meditationDate = LocalDate.parse(date);
         Meditation meditation = meditationService.getMeditationByDate(meditationDate);
         return ResponseEntity.ok(meditation);

@@ -31,7 +31,7 @@ public class MoodController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Mood> getMoodById(@PathVariable Long id) {
+    public ResponseEntity<Mood> getMoodById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(moodService.getMoodById(id));
     }
 }

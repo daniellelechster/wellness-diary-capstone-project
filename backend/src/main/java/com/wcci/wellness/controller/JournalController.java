@@ -26,7 +26,7 @@ public class JournalController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Journal> getJournalById(@PathVariable Long id) {
+    public ResponseEntity<Journal> getJournalById(@PathVariable("id") Long id) {
         Journal journal = journalService.getJournalById(id);
         if (journal != null) {
             return ResponseEntity.ok(journal);
@@ -42,14 +42,14 @@ public class JournalController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteJournal(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteJournal(@PathVariable("id") Long id) {
         journalService.deleteJournal(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Journal> updateJournal(
-            @PathVariable Long id,
+            @PathVariable("id") Long id,
             @RequestBody Journal updatedJournal) {
         return ResponseEntity.ok(journalService.updateJournal(id, updatedJournal));
     }

@@ -1,5 +1,6 @@
 package com.wcci.wellness.controller;
 
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class MealsController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Meals> getMealsById(@PathVariable Long id) {
+    public ResponseEntity<Meals> getMealsById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(mealsService.getMealsById(id));
     }
 
@@ -36,27 +37,27 @@ public class MealsController {
     }
 
     @PutMapping("/{id}/breakfast")
-    public ResponseEntity<Meals> toggleBreakfast(@PathVariable Long id) {
+    public ResponseEntity<Meals> toggleBreakfast(@PathVariable("id") Long id) {
         return ResponseEntity.ok(mealsService.toggleBreakfast(id));
     }
 
     @PutMapping("/{id}/lunch")
-    public ResponseEntity<Meals> toggleLunch(@PathVariable Long id) {
+    public ResponseEntity<Meals> toggleLunch(@PathVariable("id") Long id) {
         return ResponseEntity.ok(mealsService.toggleLunch(id));
     }
 
     @PutMapping("/{id}/dinner")
-    public ResponseEntity<Meals> toggleDinner(@PathVariable Long id) {
+    public ResponseEntity<Meals> toggleDinner(@PathVariable("id") Long id) {
         return ResponseEntity.ok(mealsService.toggleDinner(id));
     }
 
     @PutMapping("/{id}/snack/add")
-    public ResponseEntity<Meals> addSnack(@PathVariable Long id) {
+    public ResponseEntity<Meals> addSnack(@PathVariable("id") Long id) {
         return ResponseEntity.ok(mealsService.addSnack(id));
     }
 
     @PutMapping("/{id}/snack/remove")
-    public ResponseEntity<Meals> removeSnack(@PathVariable Long id) {
+    public ResponseEntity<Meals> removeSnack(@PathVariable("id") Long id) {
         return ResponseEntity.ok(mealsService.removeSnack(id));
     }
 }
