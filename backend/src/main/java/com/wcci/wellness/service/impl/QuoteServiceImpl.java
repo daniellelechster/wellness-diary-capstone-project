@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.wcci.wellness.entity.Quote;
 import com.wcci.wellness.service.QuoteService;
 
@@ -34,7 +35,7 @@ public class QuoteServiceImpl implements QuoteService {
             Quote today = new Quote();
             today.setText(obj.get("q").asText());
             today.setAuthor(obj.get("a").asText());
-            
+
             return today;
 
         } catch (Exception e) {

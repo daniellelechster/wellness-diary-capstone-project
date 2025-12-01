@@ -1,11 +1,13 @@
 package com.wcci.wellness.service.impl;
 
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.wcci.wellness.entity.Exercise;
 import com.wcci.wellness.repository.ExerciseRepository;
 import com.wcci.wellness.service.ExerciseService;
-import org.springframework.stereotype.Service;
-import java.time.LocalDate;
-import java.util.List;
 
 @Service
 public class ExerciseServiceImpl implements ExerciseService {
@@ -16,6 +18,7 @@ public class ExerciseServiceImpl implements ExerciseService {
         this.exerciseRepository = exerciseRepository;
     }
 
+    @SuppressWarnings("null")
     @Override
     public Exercise getExerciseById(Long id) {
         return exerciseRepository.findById(id)

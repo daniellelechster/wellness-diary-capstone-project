@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.wcci.wellness.entity.Article;
 import com.wcci.wellness.service.ArticleService;
 
@@ -86,8 +87,6 @@ public class ArticleServiceImpl implements ArticleService {
             } else if (accessNode.isObject()) {
                 accessibleVersion = accessNode.path("Url").asText("");
             }
-
-
 
             conn.disconnect(); // Close connection
 

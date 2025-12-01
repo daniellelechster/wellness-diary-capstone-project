@@ -1,8 +1,9 @@
 package com.wcci.wellness.service;
 
-import com.wcci.wellness.entity.Exercise;
 import java.time.LocalDate;
 import java.util.List;
+
+import com.wcci.wellness.entity.Exercise;
 
 public interface ExerciseService {
 

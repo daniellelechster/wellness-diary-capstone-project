@@ -1,13 +1,13 @@
 package com.wcci.wellness.service.impl;
 
-import com.wcci.wellness.entity.Journal;
-import com.wcci.wellness.repository.JournalRepository;
-import com.wcci.wellness.service.JournalService;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import com.wcci.wellness.entity.Journal;
+import com.wcci.wellness.repository.JournalRepository;
+import com.wcci.wellness.service.JournalService;
 
 @Service
 public class JournalServiceImpl implements JournalService {
@@ -20,10 +20,10 @@ public class JournalServiceImpl implements JournalService {
 
     @Override
     public Journal createJournal(Journal journal) {
-        // ensure createdAt is set when creating
         if (journal.getCreatedAt() == null) {
             journal.setCreatedAt(LocalDateTime.now());
         }
+
         return journalRepository.save(journal);
     }
 
@@ -32,12 +32,14 @@ public class JournalServiceImpl implements JournalService {
         return journalRepository.findAll();
     }
 
+    @SuppressWarnings("null")
     @Override
     public Journal getJournalById(Long id) {
         return journalRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Journal not found with id: " + id));
-}
+                .orElseThrow(() -> new RuntimeException("Journal not found with id: " + id));
+    }
 
+    @SuppressWarnings("null")
     @Override
     public void deleteJournal(Long id) {
         journalRepository.deleteById(id);
@@ -45,13 +47,13 @@ public class JournalServiceImpl implements JournalService {
 
     @Override
     public Journal updateJournal(Long id, Journal updated) {
+        @SuppressWarnings("null")
         Journal existing = journalRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Journal not found with id: " + id));
+                .orElseThrow(() -> new RuntimeException("Journal not found with id: " + id));
 
-        // update fields we allow to change
         existing.setText(updated.getText());
         existing.setPrompt(updated.getPrompt() == null ? existing.getPrompt() : updated.getPrompt());
-        // keep createdAt unchanged (creation time)
+
         return journalRepository.save(existing);
     }
 }

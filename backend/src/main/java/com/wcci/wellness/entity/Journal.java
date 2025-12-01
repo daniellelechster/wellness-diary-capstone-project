@@ -1,10 +1,11 @@
 package com.wcci.wellness.entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import java.time.LocalDateTime;
 
 @Entity
 public class Journal {
@@ -13,7 +14,7 @@ public class Journal {
     @GeneratedValue
     private Long id;
     private String prompt;
-    @Column(length=2147483647)
+    @Column(length = 2147483647)
     private String text;
     private LocalDateTime createdAt;
 
@@ -57,5 +58,5 @@ public class Journal {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
-    
+
 }

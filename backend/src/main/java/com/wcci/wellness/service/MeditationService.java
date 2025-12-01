@@ -1,8 +1,9 @@
 package com.wcci.wellness.service;
 
-import com.wcci.wellness.entity.Meditation;
 import java.time.LocalDate;
 import java.util.List;
+
+import com.wcci.wellness.entity.Meditation;
 
 public interface MeditationService {
 

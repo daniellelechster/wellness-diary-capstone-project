@@ -1,6 +1,7 @@
 package com.wcci.wellness.entity;
 
 import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -11,6 +12,7 @@ public class Water {
     @Id
     @GeneratedValue
     private Long id;
+
     private int glasses;
     private LocalDate createdAt;
 
@@ -44,5 +46,5 @@ public class Water {
 
     public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
-    }    
+    }
 }

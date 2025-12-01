@@ -1,8 +1,10 @@
 package com.wcci.wellness.service.impl;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.wcci.wellness.entity.Mood;
 import com.wcci.wellness.repository.MoodRepository;
 import com.wcci.wellness.service.MoodService;
@@ -12,6 +14,7 @@ public class MoodServiceImpl implements MoodService {
     @Autowired
     private MoodRepository moodRepository;
 
+    @SuppressWarnings("null")
     @Override
     public Mood saveMood(Mood mood) {
         return moodRepository.save(mood);
@@ -22,6 +25,7 @@ public class MoodServiceImpl implements MoodService {
         return moodRepository.findAll();
     }
 
+    @SuppressWarnings("null")
     @Override
     public Mood getMoodById(Long id) {
         return moodRepository.findById(id)
