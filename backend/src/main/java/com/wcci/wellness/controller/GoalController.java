@@ -1,17 +1,18 @@
 package com.wcci.wellness.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import com.wcci.wellness.entity.Goal;
 import com.wcci.wellness.service.GoalService;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/wellness/goal")
 public class GoalController {
-    
+
     private GoalService goalService;
 
     public GoalController(GoalService goalService) {
@@ -30,7 +31,7 @@ public class GoalController {
 
     @PostMapping
     public ResponseEntity<Goal> saveGoal(@RequestBody Goal goal) {
-    Goal savedGoal = goalService.createGoal(goal);
+        Goal savedGoal = goalService.createGoal(goal);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedGoal);
     }
 
@@ -42,9 +43,8 @@ public class GoalController {
 
     @PutMapping("/{id}/status")
     public ResponseEntity<Goal> updateGoalStatus(
-            @PathVariable Long id,
-            @RequestBody String status
-    ) {
-        return ResponseEntity.ok(goalService.updateGoalStatus(id, status));
+        @PathVariable Long id,
+        @RequestBody String status) {
+    return ResponseEntity.ok(goalService.updateGoalStatus(id, status));
     }
 }

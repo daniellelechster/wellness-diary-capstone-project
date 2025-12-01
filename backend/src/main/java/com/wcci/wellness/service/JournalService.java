@@ -11,8 +11,7 @@ public interface JournalService {
 
     Journal getJournalById(Long id);
 
-    void deleteJournal(Long id); 
+    void deleteJournal(Long id);
 
-    // NEW
     Journal updateJournal(Long id, Journal updated);
 }

@@ -1,12 +1,13 @@
 package com.wcci.wellness.service.impl;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.wcci.wellness.entity.Meals;
 import com.wcci.wellness.repository.MealsRepository;
 import com.wcci.wellness.service.MealsService;
-import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 public class MealsServiceImpl implements MealsService {
@@ -22,12 +23,14 @@ public class MealsServiceImpl implements MealsService {
         return mealsRepository.findAll();
     }
 
+    @SuppressWarnings("null")
     @Override
     public Meals getMealsById(Long id) {
         return mealsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Meals not found with id: " + id));
     }
 
+    @SuppressWarnings("null")
     @Override
     public Meals createMeals(Meals meals) {
         return mealsRepository.save(meals);

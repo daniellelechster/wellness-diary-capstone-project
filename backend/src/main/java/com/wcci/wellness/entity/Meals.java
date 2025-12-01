@@ -1,9 +1,10 @@
 package com.wcci.wellness.entity;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import jakarta.persistence.*;
 
 @Entity
 public class Meals {
@@ -26,8 +27,8 @@ public class Meals {
     @ElementCollection
     private List<LocalDateTime> snacksTimestamps = new ArrayList<>();
 
-
-    public Meals() { }
+    public Meals() {
+    }
 
     public Meals(boolean breakfast, boolean lunch, boolean dinner, int snacks) {
         this.breakfast = breakfast;

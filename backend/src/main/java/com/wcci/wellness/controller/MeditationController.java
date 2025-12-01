@@ -1,12 +1,14 @@
 package com.wcci.wellness.controller;
 
-import com.wcci.wellness.entity.Meditation;
-import com.wcci.wellness.service.MeditationService;
 import java.time.LocalDate;
 import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.wcci.wellness.entity.Meditation;
+import com.wcci.wellness.service.MeditationService;
 
 @RestController
 @RequestMapping("/api/wellness/meditation")
@@ -41,7 +43,7 @@ public class MeditationController {
     }
 
     @PostMapping
-        public ResponseEntity<Meditation> saveMeditation(@RequestBody Meditation meditation) {
+    public ResponseEntity<Meditation> saveMeditation(@RequestBody Meditation meditation) {
         Meditation savedMeditation = meditationService.saveMeditation(meditation);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedMeditation);
     }
@@ -52,4 +54,3 @@ public class MeditationController {
         return ResponseEntity.status(HttpStatus.OK).body(savedMeditation);
     }
 }
-

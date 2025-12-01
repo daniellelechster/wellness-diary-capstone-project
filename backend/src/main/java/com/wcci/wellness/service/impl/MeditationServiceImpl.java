@@ -1,11 +1,13 @@
 package com.wcci.wellness.service.impl;
 
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.wcci.wellness.entity.Meditation;
 import com.wcci.wellness.repository.MeditationRepository;
 import com.wcci.wellness.service.MeditationService;
-import org.springframework.stereotype.Service;
-import java.time.LocalDate;
-import java.util.List;
 
 @Service
 public class MeditationServiceImpl implements MeditationService {
@@ -16,6 +18,7 @@ public class MeditationServiceImpl implements MeditationService {
         this.meditationRepository = meditationRepository;
     }
 
+    @SuppressWarnings("null")
     @Override
     public Meditation getMeditationById(Long id) {
         return meditationRepository.findById(id)

@@ -1,6 +1,7 @@
 package com.wcci.wellness.entity;
 
 import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -15,9 +16,8 @@ public class Goal {
     private String status;
     private LocalDate createdAt;
 
-
     public Goal() {
-        
+
     }
 
     public Goal(String text, String status) {
@@ -32,7 +32,7 @@ public class Goal {
     public void setId(Long id) {
         this.id = id;
     }
-        
+
     public String getText() {
         return text;
     }
@@ -57,5 +57,4 @@ public class Goal {
         this.createdAt = createdAt;
     }
 
-    
 }

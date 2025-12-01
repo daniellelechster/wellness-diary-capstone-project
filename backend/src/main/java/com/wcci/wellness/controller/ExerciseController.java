@@ -1,12 +1,14 @@
 package com.wcci.wellness.controller;
 
-import com.wcci.wellness.entity.Exercise;
-import com.wcci.wellness.service.ExerciseService;
 import java.time.LocalDate;
 import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.wcci.wellness.entity.Exercise;
+import com.wcci.wellness.service.ExerciseService;
 
 @RestController
 @RequestMapping("/api/wellness/exercise")
