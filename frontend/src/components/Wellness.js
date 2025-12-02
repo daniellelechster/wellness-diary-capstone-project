@@ -209,7 +209,8 @@ function Wellness({ meditation, setMeditation, exercise, setExercise, hydration,
 
   // --- Completion % ---
   const calculateCompletionRate = () => {
-    let total = 4;
+    if (!meditation || !exercise) return 0;
+    let total = 0;
     let completed = 0;
 
     total += 1;

@@ -115,7 +115,7 @@ useEffect(() => {
   // --- NEW: Fetch water
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
-    fetch(`http://localhost:8080/api/wellness/water/date/&{today}`)
+    fetch(`http://localhost:8080/api/wellness/water/date/${today}`)
       .then(res => res.json())
       .then(data => setHydration(data))
       .catch(err => console.error("Error fetching hydration:", err));
