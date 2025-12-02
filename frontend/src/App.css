@@ -2544,3 +2544,18 @@ transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s e
   from { opacity: 1; transform: translate(-50%, 0); }
   to { opacity: 0; transform: translate(-50%, -5px); }
 }
+
+/*Home Hydration*/
+.home-hydration-bar {
+  background-color: #e0f7fa;
+  border-radius: 8px;
+  height: 8px;
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+.home-hydration-fill {
+  background-color: #00bcd4;
+  height: 100%;
+  transition: width 0.3s ease;
+}

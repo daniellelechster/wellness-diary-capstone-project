@@ -19,7 +19,7 @@ const defaultWellness = {
   water: 0,
 };
 
-function Wellness({ meditation, setMeditation, exercise, setExercise }) {
+function Wellness({ meditation, setMeditation, exercise, setExercise, hydration, setHydration }) {
   // ✅ Local state for meals, hydration
   const [wellness, setWellness] = useState(defaultWellness);
 
@@ -160,15 +160,21 @@ function Wellness({ meditation, setMeditation, exercise, setExercise }) {
 
   // --- Water update hooked to backend ---
   const updateWater = async (amount) => {
-    const newAmount = Math.max(0, wellness.water + amount);
-    setWellness({ ...wellness, water: newAmount });
+    if (!hydration) return;
+    const newAmount = Math.max(0, hydration.glasses + amount);
+
+    // Optimistic UI update
+    setHydration({ ... hydration, glasses: newAmount });    
 
     try {
       const endpoint =
         amount > 0
         ? `http://localhost:8080/api/wellness/water/${hydrationHistory.id}/add`
         : `http://localhost:8080/api/wellness/water/${hydrationHistory.id}/remove`;
-      await fetch(endpoint, { method: "POST" });
+        
+      const res = await fetch(endpoint, { method: "POST" });
+      const data = await res.json();
+      setHydration(data); //sync with backend
     } catch (err) {
       console.error("Hydration update failed:", err);
     }
@@ -419,19 +425,19 @@ function Wellness({ meditation, setMeditation, exercise, setExercise }) {
           {!hydrationLoading && !hydrationHistory && <p>No hydration data yet.</p>}
 
           <div className="water-display">
-            <div className="water-count">{wellness.water} 💧</div>
+            <div className="water-count">{hydration?.glasses || 0} 💧</div>
 
             <div className="water-bar-bg">
               <div
                 className="water-bar-fill"
-                style={{ width: `${(wellness.water / 8) * 100}%` }}
+                style={{ width: `${((hydration?.glasses || 0) / 8) * 100}%` }}
               ></div>
             </div>
           </div>
 
           <div className="water-buttons">
             <button onClick={() => updateWater(1)}>+ Add Glass</button>
-            {wellness.water > 0 && <button onClick={() => updateWater(-1)}>- Remove</button>}
+            { hydration?.glasses> 0 && (<button onClick={() => updateWater(-1)}>- Remove</button>)}
           </div>
         </div>
       </div>
