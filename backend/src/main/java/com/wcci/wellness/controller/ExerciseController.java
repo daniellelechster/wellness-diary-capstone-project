@@ -21,7 +21,7 @@ public class ExerciseController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Exercise> getExerciseById(@PathVariable Long id) {
+    public ResponseEntity<Exercise> getExerciseById(@PathVariable("id") Long id) {
         Exercise exercise = exerciseService.getExerciseById(id);
         if (exercise != null) {
             return ResponseEntity.ok(exercise);
@@ -31,7 +31,7 @@ public class ExerciseController {
     }
 
     @GetMapping("/date/{date}")
-    public ResponseEntity<Exercise> getExerciseByDate(@PathVariable String date) {
+    public ResponseEntity<Exercise> getExerciseByDate(@PathVariable("date") String date) {
         LocalDate exerciseDate = LocalDate.parse(date);
         Exercise exercise = exerciseService.getExerciseByDate(exerciseDate);
         return ResponseEntity.ok(exercise);
