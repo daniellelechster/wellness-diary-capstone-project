@@ -5,27 +5,24 @@ export default function DailyQuote() {
   const [error, setError] = useState(null);
 
 useEffect(() => {
+  let ignore = false;
   console.log("DailyQuote mounted");
 
   fetch("http://localhost:8080/api/quote")
     .then(response => {
-      console.log("Fetch response:", response);
-      if (!response.ok) {
-        throw new Error("Failed to fetch quote");
-      }
+      // console.log("Fetch response:", response);
+      if (!response.ok) throw new Error("Failed to fetch quote");
       return response.json();
     })
     .then(data => {
-      console.log("Fetched JSON:", data);
-      if (data && data.text && data.author) {
-        console.log("Setting quote to:", data.text);
+      // console.log("Fetched JSON:", data);
+      if (!ignore && data?.text && data?.author) {
+        // console.log("Setting quote to:", data.text);
         setQuote(data);
       }
     })
-    .catch(err => {
-      console.log("Fetch error:", err);
-      setError(err.message);
-    });
+    .catch(err => setError(err.message));
+      // console.log("Fetch error:", err);
 }, []);
 
 

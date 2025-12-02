@@ -19,7 +19,7 @@ const defaultWellness = {
   water: 0,
 };
 
-function Wellness({ meditation, setMeditation, exercise, setExercise }) {
+function Wellness({ meditation, setMeditation, exercise, setExercise, hydration, setHydration, meals, setMeals }) {
   // ✅ Local state for meals, hydration
   const [wellness, setWellness] = useState(defaultWellness);
 
@@ -146,29 +146,62 @@ function Wellness({ meditation, setMeditation, exercise, setExercise }) {
   };
 
   // --- Meal toggle ---
-  const toggleMeal = (meal) => {
-    const updated = {
-      ...wellness,
-      meals: {
-        ...wellness.meals,
-        [meal]: !wellness.meals[meal],
-        [`${meal}Timestamp`]: !wellness.meals[meal] ? new Date().toISOString() : null,
-      },
-    };
-    setWellness(updated);
+  const toggleMeal = async (mealType) => {
+    if (!meals) return;
+    try {
+      const res = await fetch(`http://localhost:8080/api/wellness/meals/${meals.id}/${mealType}`, {
+        method: "PUT",
+      })
+      const data = await res.json();
+      setMeals(data);
+    } catch (err) {
+      console.error(`Failed to goggle ${mealType}:`, err);
+    }    
+  };
+
+  const addSnack = async () => {
+    if (!meals) return;
+    try {
+      const res = await fetch(`http://localhost:8080/api/wellness/meals/${meals.id}/snack/add`, {
+        method: "PUT",
+      });
+      const data = await res.json();
+      setMeals(data);
+    } catch (err) {
+      console.error("Failed to add snack:", err);
+    }
+  };
+
+  const removeSnack = async () => {
+    if (!meals) return;
+    try {
+      const res = await fetch(`http://localhost:8080/api/wellness/meals/${meals.id}/snack/remove`, {
+        method: "PUT",
+      });
+      const data = await res.json();
+      setMeals(data);
+    } catch (err) {
+      console.error("Failed to remove snack:", err);
+    }
   };
 
   // --- Water update hooked to backend ---
   const updateWater = async (amount) => {
-    const newAmount = Math.max(0, wellness.water + amount);
-    setWellness({ ...wellness, water: newAmount });
+    if (!hydration) return;
+    const newAmount = Math.max(0, hydration.glasses + amount);
+
+    // Optimistic UI update
+    setHydration({ ...hydration, glasses: newAmount });    
 
     try {
       const endpoint =
         amount > 0
         ? `http://localhost:8080/api/wellness/water/${hydrationHistory.id}/add`
         : `http://localhost:8080/api/wellness/water/${hydrationHistory.id}/remove`;
-      await fetch(endpoint, { method: "POST" });
+        
+      const res = await fetch(endpoint, { method: "POST" });
+      const data = await res.json();
+      setHydration(data); //sync with backend
     } catch (err) {
       console.error("Hydration update failed:", err);
     }
@@ -176,6 +209,7 @@ function Wellness({ meditation, setMeditation, exercise, setExercise }) {
 
   // --- Completion % ---
   const calculateCompletionRate = () => {
+    if (!meditation || !exercise) return 0;
     let total = 0;
     let completed = 0;
 
@@ -333,77 +367,33 @@ function Wellness({ meditation, setMeditation, exercise, setExercise }) {
               <label>
                 <input
                   type="checkbox"
-                  checked={wellness.meals[meal]}
+                  checked={meals?.[meal] || false}
                   onChange={() => toggleMeal(meal)}
                 />{" "}
                 {meal.charAt(0).toUpperCase() + meal.slice(1)}
               </label>
 
-              {wellness.meals[`${meal}Timestamp`] && (
+              {meals?.[`${meal}Timestamp`] && (
                 <p className="timestamp">
-                  {formatDate(wellness.meals[`${meal}Timestamp`])} —{" "}
-                  {formatTime(wellness.meals[`${meal}Timestamp`])}
+                  {formatDate(meals[`${meal}Timestamp`])} — {formatTime(meals[`${meal}Timestamp`])}
                 </p>
               )}
             </div>
           ))}
 
-          {/* Snacks */}
+          {/* Snacks */}          
           <div className="snacks-row">
-            <p>Snacks: {wellness.meals.snacks}</p>
-
-            <button
-              onClick={() =>
-                setWellness({
-                  ...wellness,
-                  meals: {
-                    ...wellness.meals,
-                    snacks: wellness.meals.snacks + 1,
-                    snacksTimestamps: [
-                      ...wellness.meals.snacksTimestamps,
-                      new Date().toISOString(),
-                    ],
-                  },
-                })
-              }
-            >
-              + Add Snack
-            </button>
-
-            {wellness.meals.snacks > 0 && (
-              <button
-                onClick={() =>
-                  setWellness({
-                    ...wellness,
-                    meals: {
-                      ...wellness.meals,
-                      snacks: Math.max(0, wellness.meals.snacks - 1),
-                      snacksTimestamps: wellness.meals.snacksTimestamps.slice(0, -1),
-                    },
-                  })
-                }
-              >
-                - Remove
-              </button>
-            )}
-
-            {wellness.meals.snacksTimestamps.length > 0 && (
+            <p>Snacks: {meals?.snacks || 0}</p>
+            <button onClick={addSnack}>+ Add Snack</button>
+            {meals?.snacks > 0 && <button onClick={removeSnack}>- Remove</button>}
+            {meals?.snacksTimestamps?.length > 0 && (
               <p className="timestamp">
-                Date:{" "}
-                {formatDate(
-                  wellness.meals.snacksTimestamps[
-                    wellness.meals.snacksTimestamps.length - 1
-                  ]
-                )}{" "}
-                / Time:{" "}
-                {formatTime(
-                  wellness.meals.snacksTimestamps[
-                    wellness.meals.snacksTimestamps.length - 1
-                  ]
-                )}
+                Date: {formatDate(meals.snacksTimestamps[meals.snacksTimestamps.length - 1])} /
+                Time: {formatTime(meals.snacksTimestamps[meals.snacksTimestamps.length - 1])}
               </p>
             )}
           </div>
+
         </div>
       </div>
 
@@ -419,19 +409,19 @@ function Wellness({ meditation, setMeditation, exercise, setExercise }) {
           {!hydrationLoading && !hydrationHistory && <p>No hydration data yet.</p>}
 
           <div className="water-display">
-            <div className="water-count">{wellness.water} 💧</div>
+            <div className="water-count">{hydration?.glasses || 0} 💧</div>
 
             <div className="water-bar-bg">
               <div
                 className="water-bar-fill"
-                style={{ width: `${(wellness.water / 8) * 100}%` }}
+                style={{ width: `${((hydration?.glasses || 0) / 8) * 100}%` }}
               ></div>
             </div>
           </div>
 
           <div className="water-buttons">
             <button onClick={() => updateWater(1)}>+ Add Glass</button>
-            {wellness.water > 0 && <button onClick={() => updateWater(-1)}>- Remove</button>}
+            { hydration?.glasses> 0 && (<button onClick={() => updateWater(-1)}>- Remove</button>)}
           </div>
         </div>
       </div>

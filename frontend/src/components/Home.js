@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import WeatherDisplay from "./WeatherDisplay";   // <-- ADDED
 import "../App.css";
 
-export default function Home({ entries, goals = [], journals = [], meditation, exercise }) {
+export default function Home({ entries, goals = [], journals = [], meditation, exercise, hydration, meals }) {
   const [todaysMood, setTodaysMood] = useState(null);  
   const [journalEntry, setJournalEntry] = useState("");
 
@@ -17,7 +17,13 @@ const wellnessSummary = {
     ? `${exercise.minutes} min ${exercise.text || "exercise"}`
     : "Not completed",
 
-  healthyEating: "None logged",
+  meals: meals && (meals.breakfast || meals.lunch || meals.dinner || meals.snacks > 0)
+    ? "Meals logged"
+    : "None logged",
+
+  hydration: hydration?.glasses > 0
+    ? `${hydration.glasses} glasses of water`
+    : "Not completed",
 };
   
   // --- Update mood whenever entries changes ---
@@ -72,11 +78,12 @@ const wellnessSummary = {
     ? [
         wellnessSummary.meditation !== "Not completed",
         wellnessSummary.workout !== "Not completed",
-        wellnessSummary.healthyEating !== "None logged",
+        wellnessSummary.meals !== "None logged",
+        wellnessSummary.hydration !== "Not completed",
       ].filter(Boolean).length
     : 0;
 
-  const wellnessProgress = (wellnessActivities / 3) * 100;
+  const wellnessProgress = (wellnessActivities / 4) * 100;
 
   return (
     <div className="home-background">
@@ -118,7 +125,7 @@ const wellnessSummary = {
               <div className="home-card-header">
                 <div className="home-icon-row">
                   <span className="home-icon purple">✨</span>
-                  <span className="home-small-text">{wellnessActivities}/3</span>
+                  <span className="home-small-text">{wellnessActivities}/4</span>
                 </div>
                 <h3>Wellness</h3>
               </div>
@@ -130,7 +137,7 @@ const wellnessSummary = {
                   ></div>
                 </div>
                 <p className="home-subtext">
-                  {wellnessActivities === 3
+                  {wellnessActivities === 4
                     ? "All activities complete!"
                     : wellnessActivities > 0
                     ? "Keep going!"
@@ -223,7 +230,8 @@ const wellnessSummary = {
           {[
             { key: "meditation", label: "Meditation", value: wellnessSummary?.meditation },
             { key: "workout", label: "Workout", value: wellnessSummary?.workout },
-            { key: "healthyEating", label: "Healthy Eating", value: wellnessSummary?.healthyEating }
+            { key: "meals", label: "Healthy Eating", value: wellnessSummary?.meals },
+            { key: "hydration", label: "Hydration", value: wellnessSummary?.hydration }
           ].map((item) => (
             <div
               key={item.key}
