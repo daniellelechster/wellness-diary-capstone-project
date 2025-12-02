@@ -42,6 +42,9 @@ function App() {
   // --- NEW: Water state ---
   const [hydration, setHydration] = useState(null);
 
+  // --- NEW: Meals state ---
+  const [meals, setMeals] = useState(null);
+
   // Fetch goals once on load ---
 useEffect(() => {
   fetch("http://localhost:8080/api/wellness/goal/all")
@@ -118,6 +121,16 @@ useEffect(() => {
       .catch(err => console.error("Error fetching hydration:", err));
   }, []);
 
+  // --- NEW: Fetch meals
+  useEffect(() => {
+    fetch("http://localhost:8080/api/wellness/meals/all")
+      .then(res => res.json())
+      .then(data => {
+        setMeals(data[data.length -1]);
+      })
+      .catch(err => console.error("Error fetching meals:", err));
+  }, []);
+
   // --- Audio effect ---
   useEffect(() => {
     const audio = audioRef.current;
@@ -158,10 +171,10 @@ useEffect(() => {
 
         <main className="main-content">
           <Routes>
-            <Route path="/" element={<Home entries={entries} goals={goals} journals={journals} meditation={meditation} exercise={exercise} hydration={hydration} />} />
+            <Route path="/" element={<Home entries={entries} goals={goals} journals={journals} meditation={meditation} exercise={exercise} hydration={hydration} meals={meals} />} />
             <Route path="/about" element={<About />} />
             <Route path="/journals" element={<Journals journals={journals} setJournals={setJournals} entries={entries} />} />
-            <Route path="/wellness" element={<Wellness meditation={meditation} setMeditation={setMeditation} exercise={exercise} setExercise={setExercise} hydration={hydration} setHydration={setHydration} />} />
+            <Route path="/wellness" element={<Wellness meditation={meditation} setMeditation={setMeditation} exercise={exercise} setExercise={setExercise} hydration={hydration} setHydration={setHydration} meals={meals} setMeals={setMeals} />} />
             <Route path="/goals" element={<Goals goals={goals} setGoals={setGoals} />} />
             <Route path="/calendar" element={<Calendar entries={entries} selectedDate={selectedDate} onDateSelect={setSelectedDate} />} />
             <Route path="/weatherDisplay" element={<WeatherDisplay />} />

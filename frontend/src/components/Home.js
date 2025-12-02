@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import WeatherDisplay from "./WeatherDisplay";   // <-- ADDED
 import "../App.css";
 
-export default function Home({ entries, goals = [], journals = [], meditation, exercise, hydration }) {
+export default function Home({ entries, goals = [], journals = [], meditation, exercise, hydration, meals }) {
   const [todaysMood, setTodaysMood] = useState(null);  
   const [journalEntry, setJournalEntry] = useState("");
 
@@ -17,7 +17,9 @@ const wellnessSummary = {
     ? `${exercise.minutes} min ${exercise.text || "exercise"}`
     : "Not completed",
 
-  healthyEating: "None logged",
+  meals: meals && (meals.breakfast || meals.lunch || meals.dinner || meals.snacks > 0)
+    ? "Meals logged"
+    : "None logged",
 
   hydration: hydration?.glasses > 0
     ? `${hydration.glasses} glasses of water`
@@ -76,7 +78,7 @@ const wellnessSummary = {
     ? [
         wellnessSummary.meditation !== "Not completed",
         wellnessSummary.workout !== "Not completed",
-        wellnessSummary.healthyEating !== "None logged",
+        wellnessSummary.meals !== "None logged",
         wellnessSummary.hydration !== "Not completed",
       ].filter(Boolean).length
     : 0;
@@ -228,7 +230,7 @@ const wellnessSummary = {
           {[
             { key: "meditation", label: "Meditation", value: wellnessSummary?.meditation },
             { key: "workout", label: "Workout", value: wellnessSummary?.workout },
-            { key: "healthyEating", label: "Healthy Eating", value: wellnessSummary?.healthyEating },
+            { key: "meals", label: "Healthy Eating", value: wellnessSummary?.meals },
             { key: "hydration", label: "Hydration", value: wellnessSummary?.hydration }
           ].map((item) => (
             <div
