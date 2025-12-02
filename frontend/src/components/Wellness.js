@@ -164,7 +164,7 @@ function Wellness({ meditation, setMeditation, exercise, setExercise, hydration,
     const newAmount = Math.max(0, hydration.glasses + amount);
 
     // Optimistic UI update
-    setHydration({ ... hydration, glasses: newAmount });    
+    setHydration({ ...hydration, glasses: newAmount });    
 
     try {
       const endpoint =
