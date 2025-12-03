@@ -126,7 +126,7 @@ const getMoodColor = (mood) => {
       {selectedEntry && (
         <div className="calendar-entry-details">
           <h3>{selectedDate}</h3>
-          <p>Mood: {selectedEntry.mood}/10</p>
+          <p>Mood: {selectedEntry.mood}/9</p>
           {selectedEntry.reflection && <p>Reflection: {selectedEntry.reflection}</p>}
           {selectedEntry.weather && <p>Weather: {selectedEntry.weather}</p>}
           {selectedEntry.waterIntake && <p>Water: {selectedEntry.waterIntake} glasses</p>}
