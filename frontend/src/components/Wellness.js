@@ -4,25 +4,7 @@ import RunningImg from "./images/Running.png";
 import nutritionImg from "./images/nutrition.png";
 import WaterImg from "./images/Water.png";
 
-// --- Default wellness structure ---
-const defaultWellness = {
-  meals: {
-    breakfast: false,
-    lunch: false,
-    dinner: false,
-    breakfastTimestamp: null,
-    lunchTimestamp: null,
-    dinnerTimestamp: null,
-    snacks: 0,
-    snacksTimestamps: [],
-  },
-  water: 0,
-};
-
 function Wellness({ meditation, setMeditation, exercise, setExercise, hydration, setHydration, meals, setMeals }) {
-  // ✅ Local state for meals, hydration
-  const [wellness, setWellness] = useState(defaultWellness);
-
   // --- Exercise API state ---
   const [exerciseLoading, setExerciseLoading] = useState(true);
   const [exerciseError, setExerciseError] = useState(null);
@@ -59,22 +41,21 @@ function Wellness({ meditation, setMeditation, exercise, setExercise, hydration,
         if (!res.ok) throw new Error("Failed to fetch hydration history");
         const data = await res.json();
         if (data && typeof data === "object" && data.glasses !== undefined) {
-          setHydrationHistory(data);
-          setWellness((prev) => ({ ...prev, water: data.glasses ?? 0 }));
+          setHydrationHistory(data);          
           setHydrationError(null);
         } else {
+          setHydration({ glasses: 0 });
           setHydrationHistory(null);
-          setWellness((prev) => ({ ...prev, water: 0 }));
         }
       } catch (err) {
         setHydrationError(err.message);
-        setHydrationHistory(null);
+        setHydration(null);
       } finally {
         setHydrationLoading(false);
       }
     }
     fetchHydration();
-  }, []);
+  }, [setHydration]);
 
   // --- Load meditation for today ---
   useEffect(() => {
@@ -209,23 +190,26 @@ function Wellness({ meditation, setMeditation, exercise, setExercise, hydration,
 
   // --- Completion % ---
   const calculateCompletionRate = () => {
-    if (!meditation || !exercise) return 0;
     let total = 0;
     let completed = 0;
 
+    // Meditation
     total += 1;
     if (meditation?.completed) completed++;
 
+    // Exercise
     total += 1;
-    if (exercise.completed) completed++;
+    if (exercise?.completed) completed++;
 
+    // Meals (breakfast, lunch, dinner)
     total += 3;
-    ["breakfast", "lunch", "dinner"].forEach((m) => {
-      if (wellness.meals[m]) completed++;
+    ["breakfast", "lunch", "dinner"].forEach((meal) => {
+      if (meals?.[meal]) completed++;
     });
 
+    // Hydration (at least 1 glass)
     total += 1;
-    if (wellness.water > 0) completed++;
+    if (hydration?.glasses > 0) completed++;
 
     return (completed / total) * 100;
   };
@@ -393,7 +377,6 @@ function Wellness({ meditation, setMeditation, exercise, setExercise, hydration,
               </p>
             )}
           </div>
-
         </div>
       </div>
 
@@ -410,7 +393,6 @@ function Wellness({ meditation, setMeditation, exercise, setExercise, hydration,
 
           <div className="water-display">
             <div className="water-count">{hydration?.glasses || 0} 💧</div>
-
             <div className="water-bar-bg">
               <div
                 className="water-bar-fill"
