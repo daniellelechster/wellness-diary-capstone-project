@@ -89,7 +89,7 @@ const getMoodColor = (mood) => {
         </div>
         <div>
           <h4>Days Logged</h4>
-          <p>{daysLogged}</p>
+          <p>{daysLogged + 1}</p>
         </div>
         <div>
           <h4>Current Month</h4>
