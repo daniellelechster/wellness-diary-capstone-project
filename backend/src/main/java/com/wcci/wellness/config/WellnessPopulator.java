@@ -131,7 +131,6 @@ public class WellnessPopulator implements CommandLineRunner {
                 meals9.setBreakfastTimestamp(LocalDateTime.of(2025, 11, 18, 7, 30));
 
                 Meals meals10 = new Meals(false, false, false, 0);
-                meals10.setLunchTimestamp(LocalDateTime.now());
 
                 mealsRepository.saveAll(List.of(
                                 meals1, meals2, meals3, meals4, meals5,
