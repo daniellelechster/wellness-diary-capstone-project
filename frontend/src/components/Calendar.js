@@ -89,7 +89,7 @@ const getMoodColor = (mood) => {
         </div>
         <div>
           <h4>Days Logged</h4>
-          <p>{daysLogged}</p>
+          <p>{daysLogged + 1}</p>
         </div>
         <div>
           <h4>Current Month</h4>
@@ -126,7 +126,7 @@ const getMoodColor = (mood) => {
       {selectedEntry && (
         <div className="calendar-entry-details">
           <h3>{selectedDate}</h3>
-          <p>Mood: {selectedEntry.mood}/10</p>
+          <p>Mood: {selectedEntry.mood}/9</p>
           {selectedEntry.reflection && <p>Reflection: {selectedEntry.reflection}</p>}
           {selectedEntry.weather && <p>Weather: {selectedEntry.weather}</p>}
           {selectedEntry.waterIntake && <p>Water: {selectedEntry.waterIntake} glasses</p>}
