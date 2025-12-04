@@ -19,7 +19,7 @@ const wellnessSummary = {
 
   meals: meals && (meals.breakfast || meals.lunch || meals.dinner || meals.snacks > 0)
     ? "Meals logged"
-    : "None logged",
+    : "Not logged",
 
   hydration: hydration?.glasses > 0
     ? `${hydration.glasses} glasses of water`
@@ -78,7 +78,7 @@ const wellnessSummary = {
     ? [
         wellnessSummary.meditation !== "Not completed",
         wellnessSummary.workout !== "Not completed",
-        wellnessSummary.meals !== "None logged",
+        wellnessSummary.meals !== "Not logged",
         wellnessSummary.hydration !== "Not completed",
       ].filter(Boolean).length
     : 0;
