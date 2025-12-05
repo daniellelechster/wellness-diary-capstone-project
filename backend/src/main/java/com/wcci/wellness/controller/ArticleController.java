@@ -1,40 +1,39 @@
 package com.wcci.wellness.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.wcci.wellness.entity.Article;
 import com.wcci.wellness.service.ArticleService;
 
 @RestController
 @RequestMapping("/api/article")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ArticleController {
 
     @Autowired
     private ArticleService articleService;
 
     @GetMapping("/{keyword}")
-    public Article getArticle(@PathVariable("keyword") String keyword) throws IOException {
+    public List<Article> getArticles(@PathVariable("keyword") String keyword) throws IOException {
         return articleService.getArticleByKeyword(keyword);
     }
 
     @GetMapping("/depression")
-    public Article getDepressionArticle() throws IOException {
+    public List<Article> getDepressionArticles() throws IOException {
         return articleService.getArticleByKeyword("Depression");
     }
 
     @GetMapping("/anxiety")
-    public Article getAnxietyArticle() throws IOException {
+    public List<Article> getAnxietyArticles() throws IOException {
         return articleService.getArticleByKeyword("Anxiety");
     }
 
     @GetMapping("/stress")
-    public Article getStressArticle() throws IOException {
+    public List<Article> getStressArticles() throws IOException {
         return articleService.getArticleByKeyword("Stress");
     }
 }
