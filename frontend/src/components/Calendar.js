@@ -4,7 +4,7 @@ import '../App.css';
 
 function Calendar({ entries = {}, selectedDate, onDateSelect }) {
   const [currentMonth, setCurrentMonth] = useState(
-    selectedDate ? new Date(selectedDate) : new Date(2025, 10, 1)
+    selectedDate ? new Date(selectedDate) : new Date()
   );
 
 const getMoodColor = (mood) => {

@@ -252,7 +252,7 @@ function Wellness({ meditation, setMeditation, exercise, setExercise, hydration,
       <div className="card progress-card">
         <p className="great-work">Keep up the great work!</p>
         <progress value={calculateCompletionRate()} max="100" className="wellness-progress-bar" />
-        <p>{Math.round(calculateCompletionRate())}% Complete</p>
+        <p className="percent-complete">{Math.round(calculateCompletionRate())}% Complete</p>
       </div>
 
       {/* 🧘 Meditation */}
