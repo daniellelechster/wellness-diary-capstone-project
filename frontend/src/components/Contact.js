@@ -20,14 +20,11 @@ function Contact() {
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        
+        e.preventDefault();        
        
-        console.log('Form submitted:', formData);
+        console.log('Form submitted:', formData);        
         
-        
-        setSubmitted(true);
-        
+        setSubmitted(true);        
        
         setTimeout(() => {
             setFormData({
