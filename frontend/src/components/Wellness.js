@@ -34,7 +34,6 @@ function Wellness({ meditation, setMeditation, exercise, setExercise, hydration,
     return progressFraction * hydrationWeight;
   };
 
-
   // --- Load hydration history from API ---
   useEffect(() => {
     async function fetchHydration() {
@@ -224,7 +223,6 @@ function Wellness({ meditation, setMeditation, exercise, setExercise, hydration,
     const nonHydrationPercent = (completed / total) * (100 - hydrationWeight);
 
     return nonHydrationPercent + hydrationContribution;
-
   };
 
   // --- Load today's exercise from backend ---
