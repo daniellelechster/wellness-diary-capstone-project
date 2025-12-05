@@ -4,6 +4,8 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -11,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.wcci.wellness.entity.Article;
 import com.wcci.wellness.service.ArticleService;
 
@@ -19,9 +20,10 @@ import com.wcci.wellness.service.ArticleService;
 public class ArticleServiceImpl implements ArticleService {
 
     @Override
-    public Article getArticleByKeyword(String keyword) {
+    public List<Article> getArticleByKeyword(String keyword) {
+        List<Article> articles = new ArrayList<>();
+
         try {
-            // Encode keyword for URL
             String encodedKeyword = URLEncoder.encode(keyword, StandardCharsets.UTF_8);
             String apiUrl = "https://odphp.health.gov/myhealthfinder/api/v4/topicsearch.json?keyword=" + encodedKeyword;
 
@@ -33,72 +35,67 @@ public class ArticleServiceImpl implements ArticleService {
 
             if (conn.getResponseCode() != HttpsURLConnection.HTTP_OK) {
                 System.err.println("Error fetching article: " + conn.getResponseCode());
-                return new Article("0", "No article available",
-                        "No description available",
-                        "",
-                        "Unable to retrieve content.",
-                        "");
+                return articles;
             }
 
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(conn.getInputStream());
 
-            JsonNode result = root.path("Result").path("Resources").path("Resource");
+            JsonNode array = root.path("Result")
+                                .path("Resources")
+                                .path("Resource");
 
-            if (!result.isArray() || result.size() == 0) {
-                return new Article("0", "No article found",
-                        "No description available",
-                        "",
-                        "No matching content.",
-                        "");
+            if (!array.isArray() || array.size() == 0) {
+                return articles;
             }
 
-            JsonNode articleNode = result.get(0);
+            for (JsonNode articleNode : array) {
 
-            // Extract fields
-            String id = articleNode.path("Id").asText();
-            String title = articleNode.path("Title").asText();
-            String description = articleNode.path("Teaser").asText();
-            String imageUrl = articleNode.path("ImageUrl").asText();
+                String id = articleNode.path("Id").asText();
+                String title = articleNode.path("Title").asText();
+                String description = articleNode.path("Teaser").asText();
+                String imageUrl = articleNode.path("ImageUrl").asText();
 
-            // Extract sections and build content
-            JsonNode sections = articleNode.path("Sections").path("Section");
-            StringBuilder contentBuilder = new StringBuilder();
-            if (sections.isArray()) {
-                for (JsonNode section : sections) {
-                    String sectionTitle = section.path("Title").asText();
-                    String sectionContent = section.path("Content").asText();
+                String accessibleVersion = articleNode.path("AccessibleVersion").asText();
 
-                    if (!sectionTitle.isEmpty()) {
-                        contentBuilder.append(sectionTitle).append("\n\n");
-                    }
-                    if (!sectionContent.isEmpty()) {
-                        contentBuilder.append(sectionContent).append("\n\n");
+                // Build content from Sections
+                JsonNode sections = articleNode.path("Sections").path("Section");
+                StringBuilder contentBuilder = new StringBuilder();
+
+                if (sections.isArray()) {
+                    for (JsonNode section : sections) {
+                        String sectionTitle = section.path("Title").asText();
+                        String sectionContent = section.path("Content").asText();
+
+                        if (!sectionTitle.isEmpty()) {
+                            contentBuilder.append(sectionTitle).append("\n\n");
+                        }
+                        if (!sectionContent.isEmpty()) {
+                            contentBuilder.append(sectionContent).append("\n\n");
+                        }
                     }
                 }
+
+                String content = contentBuilder.toString().trim();
+
+                Article article = new Article(
+                        id,
+                        title,
+                        description,
+                        imageUrl,
+                        content,
+                        accessibleVersion
+                );
+
+                articles.add(article);
             }
-            String content = contentBuilder.toString().trim();
 
-            String accessibleVersion = "";
-            JsonNode accessNode = articleNode.path("AccessibleVersion");
-
-            if (accessNode.isTextual()) {
-                accessibleVersion = accessNode.asText();
-            } else if (accessNode.isObject()) {
-                accessibleVersion = accessNode.path("Url").asText("");
-            }
-
-            conn.disconnect(); // Close connection
-
-            return new Article(id, title, description, imageUrl, content, accessibleVersion);
+            conn.disconnect();
+            return articles;
 
         } catch (Exception e) {
             e.printStackTrace();
-            return new Article("0", "No article available",
-                    "No description available",
-                    "",
-                    "Unable to retrieve content.",
-                    "");
+            return articles;
         }
     }
 }
