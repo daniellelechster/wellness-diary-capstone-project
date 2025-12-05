@@ -24,6 +24,16 @@ function Wellness({ meditation, setMeditation, exercise, setExercise, hydration,
   const formatDate = (ts) =>
     ts ? new Date(ts).toLocaleDateString([], { month: "short", day: "numeric", year: "numeric" }) : "";
 
+  //Water percentages
+  const dailyWaterGoal = 8; // glasses per day
+  const hydrationWeight = 17; // hydration contributes 17% of total wellness
+
+  const calculateHydrationContribution = (glasses) => {
+    if (!glasses || glasses <= 0) return 0;
+    const progressFraction = Math.min(glasses / dailyWaterGoal, 1);
+    return progressFraction * hydrationWeight;
+  };
+
   // --- Load hydration history from API ---
   useEffect(() => {
     async function fetchHydration() {
@@ -207,11 +217,12 @@ function Wellness({ meditation, setMeditation, exercise, setExercise, hydration,
       if (meals?.[meal]) completed++;
     });
 
-    // Hydration (at least 1 glass)
-    total += 1;
-    if (hydration?.glasses > 0) completed++;
+    const hydrationContribution = calculateHydrationContribution(hydration?.glasses);
 
-    return (completed / total) * 100;
+    // New: scale completed/total into 83%, then add hydration’s weighted % (17%)
+    const nonHydrationPercent = (completed / total) * (100 - hydrationWeight);
+
+    return nonHydrationPercent + hydrationContribution;
   };
 
   // --- Load today's exercise from backend ---

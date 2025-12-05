@@ -132,11 +132,11 @@ h3 {
 }
 
 .goal-celebration {
-  text-align: center;
-  font-size: 1.2rem;
-  color: #4caf50;
-  margin-top: 1rem;
-  animation: fadeInOut 3s ease-in-out;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #4caf50;
+    margin-top: 1rem;
+    animation: fadeInOut 3s ease-in-out;
 }
 
 .goals-container button {

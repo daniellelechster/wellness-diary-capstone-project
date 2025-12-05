@@ -182,9 +182,7 @@ function Journals({ journals, setJournals, entries }) {
               setResponse("");
             }}
             style={{ marginLeft: "12px" }}
-          >
-            New Prompt
-          </button>
+          >New Prompt</button>
         </p>
 
         <textarea

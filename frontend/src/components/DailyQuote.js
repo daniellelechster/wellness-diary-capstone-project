@@ -25,7 +25,6 @@ useEffect(() => {
       // console.log("Fetch error:", err);
 }, []);
 
-
   if (error) {
     return (
       <div className="quote-card">
