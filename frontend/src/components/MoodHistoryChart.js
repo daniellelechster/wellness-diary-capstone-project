@@ -13,7 +13,7 @@ import { moodMap } from "./MoodUtils";
 export default function MoodHistoryChart({ entries = [] }) {
   const data = [...entries]
     .sort((a, b) => a.date.localeCompare(b.date))
-    .filter(entry => entry.mood) // ✅ only keep valid moods
+    .filter(entry => entry.mood) // only keep valid moods
     .map(entry => ({
       ...entry,
       color: moodMap[entry.mood]?.color,

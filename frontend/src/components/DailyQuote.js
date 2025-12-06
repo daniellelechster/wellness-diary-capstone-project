@@ -10,19 +10,15 @@ useEffect(() => {
 
   fetch("http://localhost:8080/api/quote")
     .then(response => {
-      // console.log("Fetch response:", response);
       if (!response.ok) throw new Error("Failed to fetch quote");
       return response.json();
     })
     .then(data => {
-      // console.log("Fetched JSON:", data);
       if (!ignore && data?.text && data?.author) {
-        // console.log("Setting quote to:", data.text);
         setQuote(data);
       }
     })
     .catch(err => setError(err.message));
-      // console.log("Fetch error:", err);
 }, []);
 
   if (error) {

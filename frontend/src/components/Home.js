@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import WeatherDisplay from "./WeatherDisplay";   // <-- ADDED
+import WeatherDisplay from "./WeatherDisplay";   
 import "../App.css";
 
 export default function Home({ entries, goals = [], journals = [], meditation, exercise, hydration, meals }) {
@@ -32,7 +32,7 @@ const wellnessSummary = {
     if (entries[today]) {
       setTodaysMood(entries[today].mood);
     } else {
-      setTodaysMood(null); // explicitly “no mood”
+      setTodaysMood(null); 
     }
   }, [entries]);
 
@@ -44,7 +44,7 @@ const wellnessSummary = {
     if (Array.isArray(journals)) {
       const todaysEntries = journals.filter((j) => j.date === today);
       if (todaysEntries.length > 0) {
-        const latest = todaysEntries[0]; // newest first
+        const latest = todaysEntries[0]; 
         const snippet =
           latest.text.length > 60 ? latest.text.substring(0, 60) + "..." : latest.text;
         setJournalEntry(snippet);
@@ -92,7 +92,6 @@ const wellnessSummary = {
 
         <div className="home-card-header-card">
           <h2 className="home-header-title">Welcome to Your Wellness Dashboard</h2>
-          {/* <h2 className="home-header-subtitle">Here's a quick overview of your day</h2> */}
         </div>
 
         <div className="home-grid">
