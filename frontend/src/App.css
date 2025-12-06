@@ -2171,7 +2171,9 @@ transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s e
 }
 
 .submit-button {
-  color: #3a2b1e;
+  background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
+  border: 1px solid #b9b8b8;
+  color: rgba(94, 94, 94);
   padding: 15px 30px;
   border: none;
   border-radius: 5px;
@@ -2274,20 +2276,24 @@ transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s e
 }
 
 .mental-button {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  color: black;
-  background: radial-gradient(circle, #d1c4aa 0%, #a8c3a0 99%);
-  transition: 0.2s;
+    background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
+    border: 1px solid #b9b8b8;
+    color: rgba(94, 94, 94);
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: 2%;
+    margin-top: 10px;
+    transform: scale(1); /* default scale */
+    transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .mental-button:hover {
-  transform: translateY(-2px);
-  background: #e0eae8;
+    background-color: #a8c3a0;
+    transform: scale(1.05);
+    border-color: #888;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 /* Article container */
@@ -2296,11 +2302,16 @@ transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s e
   padding: 25px;
   width: 80%;
   max-width: 800px;
-  background: radial-gradient(circle, #d1c4aa 0%, #a8c3a0 99%);
+  background: #8d9491;
   border-radius: 20px;
   backdrop-filter: blur(6px);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
   position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 14px;
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
+    inset 4px 4px 8px rgba(0, 0, 0, 0.35), 4px 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Placeholder logo (shows before clicking) */
@@ -2347,31 +2358,45 @@ transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s e
 
 /* Link */
 .article-link-button {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 10px 18px;
-  background: #4b79a1;
-  color: white;
-  text-decoration: none;
-  border-radius: 10px;
-  font-weight: bold;
-  transition: 0.2s;
+    background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
+    border: 1px solid #b9b8b8;
+    color: rgba(94, 94, 94);
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: 2%;
+    margin-top: 10px;
+    transform: scale(1); /* default scale */
+    transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .next-article-button {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 10px 18px;
-  background: #4b79a1;
-  color: white;
-  text-decoration: none;
-  border-radius: 10px;
-  font-weight: bold;
-  transition: 0.2s;
+    background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
+    border: 1px solid #b9b8b8;
+    color: rgba(94, 94, 94);
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: 2%;
+    margin-top: 10px;    
+    transform: scale(1); /* default scale */
+    transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .article-link-button:hover {
-  background: #3a5d78;
+    background-color: #a8c3a0;
+    transform: scale(1.05);
+    border-color: #888;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.next-article-button:hover {
+    background-color: #a8c3a0;
+    transform: scale(1.05);
+    border-color: #888;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 /* ============================================
@@ -2629,6 +2654,10 @@ transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s e
 .moodNotification.fadeOut {
   animation: fadeOut 0.3s ease-in-out forwards;
 }
+
+.articles-page {
+    padding-top: 50px; /* header fully stacked in mobile mode */
+  }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translate(-50%, -5px); }
