@@ -12,6 +12,7 @@ body {
   font-family: "Inter", sans-serif;
   color: #ffffff;
   padding-top: 80px;
+  padding-bottom: 80px;
 }
 
 .home-background {
@@ -1134,8 +1135,6 @@ h3 {
   text-align: center;
   margin-bottom: 120px;
   margin-top: 0;
-  max-height: 100vh;
-  overflow-y: auto;
 }
 
 .calendar-page h2 {
@@ -1783,7 +1782,7 @@ transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s e
   padding: 20px;
   font-family: "Segoe UI", sans-serif;
   margin-bottom: 120px;
-  margin-top: 35px;
+  margin-top: 70px;
 }
 
 .wellness-container h2 {
@@ -2008,6 +2007,63 @@ transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s e
   margin-bottom: 10%;
 }
 
+@media (max-width: 1024px) {
+  .wellness-container {
+    max-width: 100%;
+    padding: 16px;
+    margin-top: 40px;
+  }
+
+  .exercise-card,
+  .meditation-card,
+  .waterdrop-card,
+  .food-card {
+    height: auto;          /* let them grow with content */
+    min-height: 240px;     /* still feels like a card */
+    padding: 16px;
+  }
+
+  .input-row {
+    flex-wrap: wrap;
+  }
+}
+
+/* ✅ Wellness – phones */
+@media (max-width: 600px) {
+  .wellness-container {
+    padding: 12px 10px 80px;
+    margin-top: 30px;
+  }
+
+  .exercise-card,
+  .meditation-card,
+  .waterdrop-card,
+  .food-card {
+    height: auto;
+    min-height: 200px;
+    padding: 14px;
+  }
+
+  /* Inputs stack nicely on narrow screens */
+  .input-row {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .input-row input[type="number"],
+  .input-row input[type="text"] {
+    width: 100%;
+  }
+
+  .water-display {
+    margin-top: 40px;
+  }
+
+  .wellness-progress-bar {
+    width: 100%;
+  }
+}
+
 @media (max-width: 768px) {
   .contact-body {
     grid-template-columns: 1fr;
@@ -2204,7 +2260,7 @@ transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s e
 }
 
 .articles-page h1 {
-  margin-top: 50px;
+  margin-top: 6%;
 }
 
 .mental-buttons-container {
@@ -2302,10 +2358,6 @@ transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s e
   transition: 0.2s;
 }
 
-.article-link-button:hover {
-  background: #3a5d78;
-}
-
 .next-article-button {
   display: inline-block;
   margin-top: 15px;
@@ -2318,10 +2370,9 @@ transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s e
   transition: 0.2s;
 }
 
-.next-article-button:hover {
+.article-link-button:hover {
   background: #3a5d78;
 }
-
 
 /* ============================================
    📌 LARGE TABLETS / SMALL LAPTOPS
@@ -2465,6 +2516,7 @@ transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s e
     align-items: stretch;
     padding: 8px 12px;
     gap: 8px;
+    z-index: 1000;
   }
 
   /* Title stays centered and on its own row */
