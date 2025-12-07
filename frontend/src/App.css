@@ -621,2029 +621,2029 @@ body {
   width: 100%;
   gap: 1rem;
   flex-wrap: wrap;
-  }
+}
 
-  .weather-block {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 100%;
-    gap: 0.1rem 0.1rem;
-  }
+.weather-block {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 0.1rem 0.1rem;
+}
 
-  /* ============================
+/* ============================
    CURRENT CONDITIONS
 ============================ */
-  .weather-current {
-    flex: 1 1 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    margin-top: -10px;
-    gap: 0.2rem;
-    padding-right: 1rem;
-  }
+.weather-current {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: -10px;
+  gap: 0.2rem;
+  padding-right: 1rem;
+}
 
-  .weather-icon-large {
-    width: 50px;
-    height: 50px;
-    margin-bottom: none;
-  }
+.weather-icon-large {
+  width: 50px;
+  height: 50px;
+  margin-bottom: none;
+}
 
-  .weather-current-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-  }
+.weather-current-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
 
-  .weather-temp {
-    font-size: 2rem;
-    font-weight: bold;
-    margin: 0;
-  }
+.weather-temp {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
 
-  .weather-description {
-    font-size: 0.5rem;
-    text-transform: capitalize;
-    margin: 0;
-  }
+.weather-description {
+  font-size: 0.5rem;
+  text-transform: capitalize;
+  margin: 0;
+}
 
-  .weather-details {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    margin: 0;
-  }
+.weather-details {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin: 0;
+}
 
-  .weather-lunar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 0 1rem;
-    margin-left: -15px;
-  }
+.weather-lunar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 1rem;
+  margin-left: -15px;
+}
 
-  /* ============================
+/* ============================
    DIVIDERS (VERTICAL ON DESKTOP)
 ============================ */
-  .weather-divider {
-    height: 200px;
-    width: 3px;
-    border: none;
-    border-right: 2px solid rgba(0, 0, 0, 0.25);
-    margin: 0 1rem;
-  }
+.weather-divider {
+  height: 200px;
+  width: 3px;
+  border: none;
+  border-right: 2px solid rgba(0, 0, 0, 0.25);
+  margin: 0 1rem;
+}
 
-  .weather-current,
-  .weather-lunar,
-  .weather-forecast-wrapper {
-    flex: 0.4 0.4 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-  }
+.weather-current,
+.weather-lunar,
+.weather-forecast-wrapper {
+  flex: 0.4 0.4 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
 
-  /* ============================
+/* ============================
    HEADERS
 ============================ */
-  .weather-section-title {
-    display: flex;
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin: 0.1 0.1 0.3rem 0.1;
-    align-items: center;
-    justify-items: center;
-    justify-content: flex-start;
-    padding: 3.2rem;
-    margin-left: -25px;
-  }
+.weather-section-title {
+  display: flex;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0.1 0.1 0.3rem 0.1;
+  align-items: center;
+  justify-items: center;
+  justify-content: flex-start;
+  padding: 3.2rem;
+  margin-left: -25px;
+}
 
-  /* ============================
+/* ============================
    MOON PHASE
 ============================ */
-  .weather-text {
-    opacity: 0.8;
-    font-size: 0.95rem;
+.weather-text {
+  opacity: 0.8;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* ============================
+   7-DAY FORECAST
+============================ */
+.weather-forecast-grid {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.weather-forecast-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.weather-forecast-day {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.weather-forecast-icon {
+  width: 50px;
+  height: 50px;
+}
+
+.weather-forecast-text {
+  margin: 0.2rem 0;
+  font-size: 0.9rem;
+}
+
+/* ============================
+   LOADING / ERROR
+============================ */
+.weather-error-text {
+  color: #ff8080;
+  font-size: 0.95rem;
+}
+
+/* ============================
+   RESPONSIVE (MOBILE STACK)
+============================ */
+@media (max-width: 900px) {
+  .weather-container,
+  .weather-block {
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .weather-divider {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 5px solid rgba(14, 14, 14, 0.25);
     margin: 0;
   }
 
-  /* ============================
-   7-DAY FORECAST
-============================ */
   .weather-forecast-grid {
-    display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
-    gap: 0.5rem;
+    justify-content: center;
   }
 
   .weather-forecast-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-    text-align: center;
+    width: 100px;
   }
+}
 
-  .weather-forecast-day {
-    font-weight: 600;
-    margin-bottom: 0.3rem;
-  }
+/* ABOUT */
 
-  .weather-forecast-icon {
-    width: 50px;
-    height: 50px;
-  }
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
+  margin-bottom: 120px;
+  margin-top: 75px;
+}
 
-  .weather-forecast-text {
-    margin: 0.2rem 0;
-    font-size: 0.9rem;
-  }
+.about-container h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: rgb(143, 78, 43);
+  margin: 0;
+  color: #3a2b1e;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6),
+    -1px -1px 1px rgba(143, 78, 43, 0.4);
+}
 
-  /* ============================
-   LOADING / ERROR
-============================ */
-  .weather-error-text {
-    color: #ff8080;
-    font-size: 0.95rem;
-  }
+#codeEmail {
+  margin-bottom: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
 
-  /* ============================
-   RESPONSIVE (MOBILE STACK)
-============================ */
-  @media (max-width: 900px) {
-    .weather-container,
-    .weather-block {
-      flex-direction: column;
-      gap: 1rem;
-      justify-content: center;
-      align-items: center;
-    }
+.about-body {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 40px;
+}
 
-    .weather-divider {
-      width: 100%;
-      height: auto;
-      border-right: none;
-      border-bottom: 5px solid rgba(14, 14, 14, 0.25);
-      margin: 0;
-    }
+.member-block {
+  background: #8d9491;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+  border-radius: 14px;
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
+    inset 4px 4px 8px rgba(0, 0, 0, 0.35), 4px 6px 12px rgba(0, 0, 0, 0.2);
+}
 
-    .weather-forecast-grid {
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+.member-block:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}
 
-    .weather-forecast-item {
-      width: 100px;
-    }
-  }
+.member-block .name {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: rgb(143, 78, 43);
 
-  /* ABOUT */
+  font-weight: bold;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6),
+    -1px -1px 1px rgba(143, 78, 43, 0.4);
+  margin-bottom: 20px;
+  text-align: center;
+}
 
+.member-block img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 45%;
+  margin: 0 auto 20px;
+  display: block;
+  border: 4px solid #d1ba94;
+  box-shadow: inset -10px -10px 15px rgba(255, 255, 255, 0.5),
+    inset 10px 10px 15px rgba(0, 0, 0, 0.2), 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+.member-block p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #ebe3cf;
+  text-align: justify;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .about-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    text-align: center;
-    margin-bottom: 120px;
-    margin-top: 75px;
+    padding: 20px 15px;
   }
 
   .about-container h2 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: rgb(143, 78, 43);
-    margin: 0;
-    color: #3a2b1e;
-    font-weight: bold;
-    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6),
-      -1px -1px 1px rgba(143, 78, 43, 0.4);
+    font-size: 2rem;
   }
 
   #codeEmail {
-    margin-bottom: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  }
-
-  .about-body {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    margin-top: 40px;
+    width: 200px;
+    height: 250px;
   }
 
   .member-block {
-    background: #8d9491;
-    padding: 30px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: left;
-    border-radius: 14px;
-    box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
-      inset 4px 4px 8px rgba(0, 0, 0, 0.35), 4px 6px 12px rgba(0, 0, 0, 0.2);
-  }
-
-  .member-block:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+    padding: 20px;
   }
 
   .member-block .name {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: rgb(143, 78, 43);
-
-    font-weight: bold;
-    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6),
-      -1px -1px 1px rgba(143, 78, 43, 0.4);
-    margin-bottom: 20px;
-    text-align: center;
+    font-size: 1.5rem;
   }
 
   .member-block img {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 45%;
-    margin: 0 auto 20px;
-    display: block;
-    border: 4px solid #d1ba94;
-    box-shadow: inset -10px -10px 15px rgba(255, 255, 255, 0.5),
-      inset 10px 10px 15px rgba(0, 0, 0, 0.2), 0 6px 12px rgba(0, 0, 0, 0.25);
+    width: 150px;
+    height: 150px;
   }
 
   .member-block p {
-    font-size: 1rem;
-    line-height: 1.8;
-    color: #ebe3cf;
-    text-align: justify;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-container h2 {
+    font-size: 1.75rem;
   }
 
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .about-container {
-      padding: 20px 15px;
-    }
-
-    .about-container h2 {
-      font-size: 2rem;
-    }
-
-    #codeEmail {
-      width: 200px;
-      height: 250px;
-    }
-
-    .member-block {
-      padding: 20px;
-    }
-
-    .member-block .name {
-      font-size: 1.5rem;
-    }
-
-    .member-block img {
-      width: 150px;
-      height: 150px;
-    }
-
-    .member-block p {
-      font-size: 0.95rem;
-    }
+  #codeEmail {
+    width: 150px;
+    height: 187px;
   }
 
-  @media (max-width: 480px) {
-    .about-container h2 {
-      font-size: 1.75rem;
-    }
-
-    #codeEmail {
-      width: 150px;
-      height: 187px;
-    }
-
-    .member-block img {
-      width: 120px;
-      height: 120px;
-    }
-  }
-
-  /* JOURNAL SECTION */
-
-  .journals-container {
-    max-width: 1000px;
-    margin: 50px auto;
-    padding: 50px;
-    border-radius: 12px;
-    font-family: "Segoe UI", sans-serif;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 100vh;
-    background-color: rgba(216, 213, 213, 0.7);
-    background-blend-mode: lighten;
-    border-radius: 18px;
-    margin-bottom: 100px;
-    box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
-      inset 0 -2px 2px rgba(255, 255, 255, 0.4);
-    transition: transform 0.2s ease;
-    margin-top: 75px;
-  }
-
-  .journals-container h1,
-  h2,
-  h3 {
-    text-align: center;
-    color: #181818;
-    margin-top: 10px;
-  }
-
-  .daily-quote {
-    text-align: center;
-    font-style: italic;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-    background: #a8c3a0;
-    color: rgb(31, 31, 31);
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
-      inset 0 -2px 2px rgba(255, 255, 255, 0.4);
-    background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
-  }
-
-  .journal-entry h3 {
-    font-size: 25px;
-    margin-top: 75px;
-    margin-bottom: 20px;
-    color: #181818;
-  }
-
-  .journal-entry p {
-    font-size: 18px;
-    margin-bottom: 20px;
-    color: #181818;
-  }
-
-  .journal-entry textarea {
-    width: 100%;
+  .member-block img {
+    width: 120px;
     height: 120px;
-    margin: 1rem 0;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border-radius: 8px;
-    background: linear-gradient(180deg, #fafafa, rgb(163, 180, 236));
-    border: 1px solid #ccc;
-    resize: vertical;
-    box-sizing: border-box;
-    overflow: auto;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
-      inset 0 -2px 2px rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* JOURNAL SECTION */
+
+.journals-container {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 50px;
+  border-radius: 12px;
+  font-family: "Segoe UI", sans-serif;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  background-color: rgba(216, 213, 213, 0.7);
+  background-blend-mode: lighten;
+  border-radius: 18px;
+  margin-bottom: 100px;
+  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
+    inset 0 -2px 2px rgba(255, 255, 255, 0.4);
+  transition: transform 0.2s ease;
+  margin-top: 75px;
+}
+
+.journals-container h1,
+h2,
+h3 {
+  text-align: center;
+  color: #181818;
+  margin-top: 10px;
+}
+
+.daily-quote {
+  text-align: center;
+  font-style: italic;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  background: #a8c3a0;
+  color: rgb(31, 31, 31);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
+    inset 0 -2px 2px rgba(255, 255, 255, 0.4);
+  background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
+}
+
+.journal-entry h3 {
+  font-size: 25px;
+  margin-top: 75px;
+  margin-bottom: 20px;
+  color: #181818;
+}
+
+.journal-entry p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #181818;
+}
+
+.journal-entry textarea {
+  width: 100%;
+  height: 120px;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #fafafa, rgb(163, 180, 236));
+  border: 1px solid #ccc;
+  resize: vertical;
+  box-sizing: border-box;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
+    inset 0 -2px 2px rgba(255, 255, 255, 0.4);
+}
+
+.placeholder {
+  color: rgb(39, 39, 39);
+}
+
+.journals-container button {
+  background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
+  border: 1px solid #b9b8b8;
+  color: rgba(94, 94, 94);
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 2%;
+  margin-top: 10px;
+  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
+    inset 0 -2px 2px rgba(255, 255, 255, 0.4);
+  transform: scale(1);
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for all journal buttons */
+.journals-container button:hover {
+  background-color: #a8c3a0;
+  transform: scale(1.05);
+  border-color: #888;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Optional: specific styling for save/cancel buttons while keeping hover effect */
+.journal-history li button.save-btn,
+.journal-history li button.cancel-btn {
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.journal-history li button.save-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.journal-history li button.cancel-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.journal-history {
+  font-size: 20px;
+  margin-top: 2rem;
+  color: #060606;
+}
+
+.journal-history h3 {
+  margin-bottom: 15px;
+  color: #050505;
+}
+
+.journal-history ul {
+  font-size: 1rem;
+  list-style-type: none;
+  padding: 0;
+}
+
+.journal-history li {
+  background: linear-gradient(180deg, #fafafa, rgb(163, 180, 236));
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
+    inset 0 -2px 2px rgba(255, 255, 255, 0.4);
+}
+
+.journal-history li.editing {
+  border: 2px solid #a8c3a0;
+}
+
+.journal-history li textarea {
+  min-height: 80px;
+  margin-top: 0.5rem;
+  padding: 0.1rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: linear-gradient(180deg, #fafafa, #e6f0ff);
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.journal-history li button.save-btn {
+  background: #a8c3a0;
+  color: #181818;
+  margin-right: 8px;
+}
+
+.journal-history li button.cancel-btn {
+  background: #f2dede;
+  color: #181818;
+}
+
+/* Calendar */
+.calendar-page {
+  padding: 0.5rem;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin-bottom: 120px;
+  margin-top: 0;
+}
+
+.calendar-page h2 {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  font-size: 35px;
+  text-align: center;
+  margin-top: -35px;
+}
+
+.calendar-page p {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  text-align: center;
+  margin-top: -15px;
+}
+
+.calendar-stats {
+  display: flex;
+  max-width: 500px;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 8px 0;
+  margin: 0 auto;
+  margin-top: -15px;
+  margin-bottom: 30px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.calendar-image {
+  max-width: 600px;
+  max-height: 100px;
+  border-radius: 25px;
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
+    inset 4px 4px 8px rgba(0, 0, 0, 0.25), 0 8px 18px rgba(0, 0, 0, 0.2);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-top: auto;
+}
+
+.calendar-stats div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 70px;
+  padding: 16px;
+  padding-top: 10px;
+  border-radius: 18px;
+  text-align: center;
+  background: linear-gradient(to bottom, #ffffff, rgb(163, 180, 236));
+  border-radius: 16px;
+  padding: 2px 10px;
+  margin: 0 5px;
+  color: #181818;
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
+    inset 4px 4px 8px rgba(0, 0, 0, 0.25), 0 8px 18px rgba(0, 0, 0, 0.2);
+}
+
+.calendar-stats p {
+  font-size: 15px;
+  margin-top: -50px;
+}
+
+.calendar-stats h4 {
+  font-size: 15px;
+  margin-top: 15px;
+}
+
+.calendar-controls {
+  margin: 1rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  gap: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.calendar-controls button {
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  border: 1px solid #b9b8b8;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    border-color 0.3s ease;
+  align-items: center;
+  cursor: pointer;
+}
+
+.calendar-controls button:hover {
+  background-color: #e0e0e0;
+  border-color: #888;
+  transform: scale(1.05);
+}
+
+.calendar-grid {
+  max-width: 850px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(7, 10fr);
+  gap: 8px;
+  color: #060606;
+}
+
+.calendar-day {
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  text-align: center;
+  border-radius: 12px;
+  border: 6px solid #a8c3a0;
+  border-style: double;
+  cursor: pointer;
+  background: #dad9d9;
+}
+
+.calendar-day.logged {
+  background: #a2d2ff;
+}
+
+.calendar-entry-details {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #fff;
+  color: #181818;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-mood-legend {
+  margin-top: 20px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.calendar-mood-legend h4 {
+  margin-top: 25px;
+  font-size: 25px;
+  text-decoration: underline;
+}
+
+.calendar-legend-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
+    inset 0 -2px 2px rgba(255, 255, 255, 0.4);
+  background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a2d2ff 60%);
+  color: rgb(61, 61, 61);
+  padding: 15px;
+  border-radius: 50px;
+}
+
+.calendar-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 100px;
+  flex: 0 0 auto;
+}
+
+.calendar-legend-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  margin-bottom: 4px;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   CALENDAR PAGE RESPONSIVE STYLES
+   ============================================ */
+
+/* Medium screens */
+@media (max-width: 992px) {
+  .calendar-image {
+    max-width: 100%;
+    max-height: 220px;
   }
 
-  .placeholder {
-    color: rgb(39, 39, 39);
+  .calendar-stats {
+    max-width: 90%;
+    height: auto;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 12px;
   }
 
-  .journals-container button {
-    background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
-    border: 1px solid #b9b8b8;
-    color: rgba(94, 94, 94);
-    padding: 0.5rem 1.5rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    margin-left: 2%;
-    margin-top: 10px;
-    box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
-      inset 0 -2px 2px rgba(255, 255, 255, 0.4);
-    transform: scale(1);
-    transition: background-color 0.3s ease, transform 0.3s ease,
-      border-color 0.3s ease, box-shadow 0.3s ease;
+  .calendar-stats div {
+    width: 45%;
+    height: auto;
+    margin: 0;
   }
 
-  /* Hover effect for all journal buttons */
-  .journals-container button:hover {
-    background-color: #a8c3a0;
-    transform: scale(1.05);
-    border-color: #888;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  .calendar-grid {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
   }
 
-  /* Optional: specific styling for save/cancel buttons while keeping hover effect */
-  .journal-history li button.save-btn,
-  .journal-history li button.cancel-btn {
-    transition: background-color 0.3s ease, transform 0.3s ease,
-      border-color 0.3s ease, box-shadow 0.3s ease;
+  .calendar-day {
+    padding: 3rem 0;
   }
+}
 
-  .journal-history li button.save-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
-
-  .journal-history li button.cancel-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
-
-  .journal-history {
-    font-size: 20px;
-    margin-top: 2rem;
-    color: #060606;
-  }
-
-  .journal-history h3 {
-    margin-bottom: 15px;
-    color: #050505;
-  }
-
-  .journal-history ul {
-    font-size: 1rem;
-    list-style-type: none;
-    padding: 0;
-  }
-
-  .journal-history li {
-    background: linear-gradient(180deg, #fafafa, rgb(163, 180, 236));
-    border-radius: 8px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
-      inset 0 -2px 2px rgba(255, 255, 255, 0.4);
-  }
-
-  .journal-history li.editing {
-    border: 2px solid #a8c3a0;
-  }
-
-  .journal-history li textarea {
-    min-height: 80px;
-    margin-top: 0.5rem;
-    padding: 0.1rem;
-    font-size: 1rem;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    background: linear-gradient(180deg, #fafafa, #e6f0ff);
-    box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.2);
-  }
-
-  .journal-history li button.save-btn {
-    background: #a8c3a0;
-    color: #181818;
-    margin-right: 8px;
-  }
-
-  .journal-history li button.cancel-btn {
-    background: #f2dede;
-    color: #181818;
-  }
-
-  /* Calendar */
+/* Small tablets & large phones */
+@media (max-width: 768px) {
   .calendar-page {
-    padding: 0.5rem;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin-bottom: 120px;
-    margin-top: 0;
+    padding: 1.5rem 1rem;
   }
 
-  .calendar-page h2 {
-    padding: 2rem;
-    font-family: Arial, sans-serif;
-    font-size: 35px;
-    text-align: center;
-    margin-top: -35px;
-  }
-
-  .calendar-page p {
-    padding: 2rem;
-    font-family: Arial, sans-serif;
-    font-size: 20px;
-    text-align: center;
+  .calendar-image {
+    max-height: 180px;
     margin-top: -15px;
   }
 
   .calendar-stats {
-    display: flex;
-    max-width: 500px;
-    height: auto;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    padding: 8px 0;
-    margin: 0 auto;
-    margin-top: -15px;
-    margin-bottom: 30px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-
-  .calendar-image {
-    max-width: 600px;
-    max-height: 100px;
-    border-radius: 25px;
-    box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
-      inset 4px 4px 8px rgba(0, 0, 0, 0.25), 0 8px 18px rgba(0, 0, 0, 0.2);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    margin-top: auto;
+    max-width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
   }
 
   .calendar-stats div {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    height: 70px;
-    padding: 16px;
-    padding-top: 10px;
-    border-radius: 18px;
-    text-align: center;
-    background: linear-gradient(to bottom, #ffffff, rgb(163, 180, 236));
-    border-radius: 16px;
-    padding: 2px 10px;
-    margin: 0 5px;
-    color: #181818;
-    box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
-      inset 4px 4px 8px rgba(0, 0, 0, 0.25), 0 8px 18px rgba(0, 0, 0, 0.2);
-  }
-
-  .calendar-stats p {
-    font-size: 15px;
-    margin-top: -50px;
-  }
-
-  .calendar-stats h4 {
-    font-size: 15px;
-    margin-top: 15px;
-  }
-
-  .calendar-controls {
-    margin: 1rem auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: fit-content;
-    gap: 1.5rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease,
-      border-color 0.3s ease;
-  }
-
-  .calendar-controls button {
-    padding: 0.5rem 1rem;
-    margin-right: 0.5rem;
-    border: 1px solid #b9b8b8;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease,
-      border-color 0.3s ease;
-    align-items: center;
-    cursor: pointer;
-  }
-
-  .calendar-controls button:hover {
-    background-color: #e0e0e0;
-    border-color: #888;
-    transform: scale(1.05);
+    width: 48%;
+    padding: 12px;
   }
 
   .calendar-grid {
-    max-width: 850px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(7, 10fr);
-    gap: 8px;
-    color: #060606;
+    grid-template-columns: repeat(7, minmax(35px, 1fr));
+    gap: 4px;
   }
 
   .calendar-day {
-    aspect-ratio: 1 / 1;
-    padding: 0;
-    text-align: center;
-    border-radius: 12px;
-    border: 6px solid #a8c3a0;
-    border-style: double;
-    cursor: pointer;
-    background: #dad9d9;
+    padding: 2.5rem 0;
+    font-size: 0.8rem;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 500px) {
+  .calendar-image {
+    max-height: 150px;
   }
 
-  .calendar-day.logged {
-    background: #a2d2ff;
+  .calendar-stats {
+    flex-direction: column;
+    align-items: center;
   }
 
-  .calendar-entry-details {
-    margin-top: 1rem;
-    padding: 1rem;
-    background: #fff;
-    color: #181818;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  .calendar-stats div {
+    width: 90%;
   }
 
+  /* Still 7 columns, just tiny but readable */
+  .calendar-grid {
+    grid-template-columns: repeat(7, minmax(25px, 1fr));
+    gap: 3px;
+  }
+
+  .calendar-day {
+    padding: 1.2rem 0;
+    font-size: 0.75rem;
+  }
+}
+
+/* ============================================
+   CALENDAR LEGEND RESPONSIVE STYLES
+   ============================================ */
+
+/* Medium screens */
+@media (max-width: 992px) {
   .calendar-mood-legend {
-    margin-top: 20px;
-    overflow-x: auto;
-    padding-bottom: 8px;
+    padding: 0.5rem;
+  }
+
+  .calendar-legend-grid {
+    gap: 20px;
+    padding: 12px;
+    border-radius: 40px;
+  }
+
+  .calendar-legend-item {
+    min-width: 80px;
+  }
+
+  .calendar-legend-color {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Tablets & small laptops */
+@media (max-width: 768px) {
+  .calendar-legend-grid {
+    gap: 16px;
+    padding: 10px;
+    flex-wrap: wrap;
+  }
+
+  .calendar-legend-item {
+    min-width: 70px;
   }
 
   .calendar-mood-legend h4 {
-    margin-top: 25px;
-    font-size: 25px;
-    text-decoration: underline;
+    font-size: 22px;
+  }
+
+  .calendar-legend-color {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 500px) {
+  .calendar-mood-legend {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 10px;
   }
 
   .calendar-legend-grid {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
     flex-wrap: wrap;
-    margin-top: 25px;
-    box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
-      inset 0 -2px 2px rgba(255, 255, 255, 0.4);
-    background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a2d2ff 60%);
-    color: rgb(61, 61, 61);
-    padding: 15px;
-    border-radius: 50px;
+    justify-content: center;
+    gap: 12px;
+    padding: 10px;
+    border-radius: 30px;
   }
 
   .calendar-legend-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    min-width: 100px;
-    flex: 0 0 auto;
+    min-width: 60px;
+    font-size: 0.85rem;
   }
 
   .calendar-legend-color {
-    width: 20px;
-    height: 20px;
-    border-radius: 4px;
-    margin-bottom: 4px;
-    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
   }
 
-  /* ============================================
-   CALENDAR PAGE RESPONSIVE STYLES
-   ============================================ */
-
-  /* Medium screens */
-  @media (max-width: 992px) {
-    .calendar-image {
-      max-width: 100%;
-      max-height: 220px;
-    }
-
-    .calendar-stats {
-      max-width: 90%;
-      height: auto;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      padding: 12px;
-    }
-
-    .calendar-stats div {
-      width: 45%;
-      height: auto;
-      margin: 0;
-    }
-
-    .calendar-grid {
-      grid-template-columns: repeat(7, 1fr);
-      gap: 5px;
-    }
-
-    .calendar-day {
-      padding: 3rem 0;
-    }
-  }
-
-  /* Small tablets & large phones */
-  @media (max-width: 768px) {
-    .calendar-page {
-      padding: 1.5rem 1rem;
-    }
-
-    .calendar-image {
-      max-height: 180px;
-      margin-top: -15px;
-    }
-
-    .calendar-stats {
-      max-width: 100%;
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .calendar-stats div {
-      width: 48%;
-      padding: 12px;
-    }
-
-    .calendar-grid {
-      grid-template-columns: repeat(7, minmax(35px, 1fr));
-      gap: 4px;
-    }
-
-    .calendar-day {
-      padding: 2.5rem 0;
-      font-size: 0.8rem;
-    }
-  }
-
-  /* Mobile phones */
-  @media (max-width: 500px) {
-    .calendar-image {
-      max-height: 150px;
-    }
-
-    .calendar-stats {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .calendar-stats div {
-      width: 90%;
-    }
-
-    /* Still 7 columns, just tiny but readable */
-    .calendar-grid {
-      grid-template-columns: repeat(7, minmax(25px, 1fr));
-      gap: 3px;
-    }
-
-    .calendar-day {
-      padding: 1.2rem 0;
-      font-size: 0.75rem;
-    }
-  }
-
-  /* ============================================
-   CALENDAR LEGEND RESPONSIVE STYLES
-   ============================================ */
-
-  /* Medium screens */
-  @media (max-width: 992px) {
-    .calendar-mood-legend {
-      padding: 0.5rem;
-    }
-
-    .calendar-legend-grid {
-      gap: 20px;
-      padding: 12px;
-      border-radius: 40px;
-    }
-
-    .calendar-legend-item {
-      min-width: 80px;
-    }
-
-    .calendar-legend-color {
-      width: 18px;
-      height: 18px;
-    }
-  }
-
-  /* Tablets & small laptops */
-  @media (max-width: 768px) {
-    .calendar-legend-grid {
-      gap: 16px;
-      padding: 10px;
-      flex-wrap: wrap;
-    }
-
-    .calendar-legend-item {
-      min-width: 70px;
-    }
-
-    .calendar-mood-legend h4 {
-      font-size: 22px;
-    }
-
-    .calendar-legend-color {
-      width: 16px;
-      height: 16px;
-    }
-  }
-
-  /* Mobile phones */
-  @media (max-width: 500px) {
-    .calendar-mood-legend {
-      width: 100%;
-      overflow-x: auto;
-      padding-bottom: 10px;
-    }
-
-    .calendar-legend-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      padding: 10px;
-      border-radius: 30px;
-    }
-
-    .calendar-legend-item {
-      min-width: 60px;
-      font-size: 0.85rem;
-    }
-
-    .calendar-legend-color {
-      width: 14px;
-      height: 14px;
-    }
-
-    .calendar-mood-legend h4 {
-      font-size: 20px;
-    }
-  }
-
-  /* Mood */
-  .moodBox {
-    background-image: url("./components/images/mood2.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-blend-mode: lighten;
-
-    min-height: 500px;
-    height: auto;
-    width: 100%;
-    max-width: 1000px;
-
-    padding: 20px 20px 100px;
-    border-radius: 20px;
-    margin: 80px auto 0;
-    color: #fff;
-
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    position: relative;
-    z-index: 1;
-    margin-bottom: 120px;
-  }
-
-  .moodBox h2,
-  .moodBox h1 {
-    background: none;
-    border-radius: 10px;
-    display: inline-block;
-    width: 100%;
-    margin-top: 5%;
-    text-align: center;
-  }
-
-  .moodFeedback {
-    color: rgb(24, 23, 23);
+  .calendar-mood-legend h4 {
     font-size: 20px;
-    position: relative;
-    margin-top: 1rem;
-    text-align: center;
-    z-index: 3;
+  }
+}
+
+/* Mood */
+.moodBox {
+  background-image: url("./components/images/mood2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: lighten;
+
+  min-height: 500px;
+  height: auto;
+  width: 100%;
+  max-width: 1000px;
+
+  padding: 20px 20px 100px;
+  border-radius: 20px;
+  margin: 80px auto 0;
+  color: #fff;
+
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  position: relative;
+  z-index: 1;
+  margin-bottom: 120px;
+}
+
+.moodBox h2,
+.moodBox h1 {
+  background: none;
+  border-radius: 10px;
+  display: inline-block;
+  width: 100%;
+  margin-top: 5%;
+  text-align: center;
+}
+
+.moodFeedback {
+  color: rgb(24, 23, 23);
+  font-size: 20px;
+  position: relative;
+  margin-top: 1rem;
+  text-align: center;
+  z-index: 3;
+}
+
+.moodHeader {
+  font-size: 1.6rem;
+  color: #0b0b0b;
+  margin-bottom: 1.5rem;
+}
+
+.emojiRow {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 1rem;
+  height: 3rem;
+  padding: 0;
+}
+
+.emojiItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.9rem;
+  color: #6d6875;
+}
+
+.moodSlider {
+  width: 98%;
+  margin: auto;
+  padding: 0;
+  accent-color: #ff4d6d;
+  appearance: none;
+  margin-bottom: 2rem;
+  background: none;
+}
+
+.moodSlider::-webkit-slider-runnable-track {
+  background: #a8c3a0;
+  border-radius: 10px;
+  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.2),
+    inset 0 -2px 2px rgba(255, 255, 255, 0.4);
+}
+
+.moodSlider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #ffb4a2;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.moodSlider::-moz-range-track {
+  height: 4px;
+  background: #ddd;
+  border-radius: 2px;
+}
+
+.numberRow {
+  display: flex;
+  justify-content: space-between;
+  width: 98%;
+  margin: 0 auto;
+  padding: 4px 4px;
+}
+
+.numberRow span {
+  font-size: 1.3rem;
+  color: #000000;
+}
+
+.moodSubmitButton {
+  display: block;
+  color: #fff;
+  border: 1px solid #b9b8b8;
+  background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 0.2rem auto;
+  transform: scale(1);
+  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
+    inset 0 -2px 2px rgba(255, 255, 255, 0.4);
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.moodSubmitButton:hover {
+  background-color: #a8c3a0;
+  transform: scale(1.05);
+  border-color: #888;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.moodHistoryBox h3 {
+  font-size: 1.6rem;
+  color: black;
+  margin-top: 4rem;
+  padding: 0.1rem;
+}
+
+.recharts-default-tooltip {
+  background: #ffffff !important;
+  border: 1px solid #ddd !important;
+  border-radius: 6px !important;
+  padding: 6px !important;
+  color: #6d6875 !important;
+}
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: #f1e9e9;
+}
+
+.recharts-line {
+  stroke-linecap: round;
+}
+
+.recharts-responsive-container {
+  margin-top: 25px;
+}
+
+/* ------------------------------------------------------ */
+/* RESPONSIVE BEHAVIOR                                    */
+/* ------------------------------------------------------ */
+
+/* Tablets — max-width 900px */
+@media (max-width: 900px) {
+  .moodBox {
+    padding: 20px 15px 80px;
+    margin-top: 40px;
+    max-width: 95%;
   }
 
   .moodHeader {
-    font-size: 1.6rem;
-    color: #0b0b0b;
-    margin-bottom: 1.5rem;
-  }
-
-  .emojiRow {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 1rem;
-    height: 3rem;
-    padding: 0;
+    font-size: 1.4rem;
   }
 
   .emojiItem {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 1.9rem;
-    color: #6d6875;
-  }
-
-  .moodSlider {
-    width: 98%;
-    margin: auto;
-    padding: 0;
-    accent-color: #ff4d6d;
-    appearance: none;
-    margin-bottom: 2rem;
-    background: none;
-  }
-
-  .moodSlider::-webkit-slider-runnable-track {
-    background: #a8c3a0;
-    border-radius: 10px;
-    box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.2),
-      inset 0 -2px 2px rgba(255, 255, 255, 0.4);
-  }
-
-  .moodSlider::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    background: #ffb4a2;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-
-  .moodSlider::-moz-range-track {
-    height: 4px;
-    background: #ddd;
-    border-radius: 2px;
-  }
-
-  .numberRow {
-    display: flex;
-    justify-content: space-between;
-    width: 98%;
-    margin: 0 auto;
-    padding: 4px 4px;
+    font-size: 1.6rem;
   }
 
   .numberRow span {
-    font-size: 1.3rem;
-    color: #000000;
+    font-size: 1.1rem;
+  }
+
+  .moodSlider {
+    width: 100%;
+  }
+}
+
+/* Small Tablets & Large Phones — max-width 600px */
+@media (max-width: 600px) {
+  .moodBox {
+    padding: 15px 10px 70px;
+  }
+
+  .emojiRow {
+    gap: 4px;
+  }
+
+  .emojiItem {
+    font-size: 1.4rem;
+  }
+
+  .numberRow span {
+    font-size: 1rem;
+  }
+
+  .moodFeedback {
+    font-size: 18px;
   }
 
   .moodSubmitButton {
-    display: block;
-    color: #fff;
-    border: 1px solid #b9b8b8;
-    background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* Mobile Phones — max-width 430px */
+@media (max-width: 430px) {
+  .moodBox {
+    padding: 12px 8px 60px;
+    margin-top: 20px;
+  }
+
+  .moodHeader {
+    font-size: 1.2rem;
+  }
+
+  .emojiRow {
+    gap: 2px;
+  }
+
+  .emojiItem {
+    font-size: 1.2rem;
+  }
+
+  .numberRow span {
+    font-size: 0.9rem;
+  }
+
+  .moodSlider {
+    margin-bottom: 1.5rem;
+  }
+
+  .moodSubmitButton {
+    width: 90%;
+  }
+}
+
+/* Very Small Phones — max-width 360px */
+@media (max-width: 360px) {
+  .emojiRow {
+    height: 2rem;
+  }
+
+  .emojiItem {
     font-size: 1rem;
-    cursor: pointer;
-    margin: 0.2rem auto;
-    transform: scale(1);
-    box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
-      inset 0 -2px 2px rgba(255, 255, 255, 0.4);
-    transition: background-color 0.3s ease, transform 0.3s ease,
-      border-color 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .moodSubmitButton:hover {
-    background-color: #a8c3a0;
-    transform: scale(1.05);
-    border-color: #888;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  .numberRow span {
+    font-size: 0.8rem;
   }
 
-  .moodHistoryBox h3 {
-    font-size: 1.6rem;
-    color: black;
-    margin-top: 4rem;
-    padding: 0.1rem;
+  .moodFeedback {
+    font-size: 16px;
   }
+}
 
-  .recharts-default-tooltip {
-    background: #ffffff !important;
-    border: 1px solid #ddd !important;
-    border-radius: 6px !important;
-    padding: 6px !important;
-    color: #6d6875 !important;
-  }
+/* Wellness */
+.wellness-container {
+  margin: 0 auto;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "Segoe UI", sans-serif;
+  margin-bottom: 120px;
+  margin-top: 70px;
+}
 
-  .recharts-cartesian-grid-horizontal line,
-  .recharts-cartesian-grid-vertical line {
-    stroke: #f1e9e9;
-  }
+.wellness-container h2 {
+  margin-top: none;
+  color: #333;
+}
 
-  .recharts-line {
-    stroke-linecap: round;
-  }
+.wellness-container h3 {
+  padding: 1rem;
+  margin-top: 5%;
+}
 
-  .recharts-responsive-container {
-    margin-top: 25px;
-  }
+.exercise-card {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 350px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  color: white;
+  overflow: hidden;
+  backdrop-filter: blur(1px);
+  box-shadow: inset -3px -3px 6px rgba(255, 255, 255, 1),
+    inset 3px 3px 6px rgba(0, 0, 0, 0.35), 0 5px 2px rgba(0, 0, 0, 0.15),
+    -3px -3px 7px rgba(255, 255, 255, 0.8), 3px 3px 7px rgba(0, 0, 0, 0.4);
+}
 
-  /* ------------------------------------------------------ */
-  /* RESPONSIVE BEHAVIOR                                    */
-  /* ------------------------------------------------------ */
+.meditation-card {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 500px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  color: white;
+  overflow: hidden;
+  backdrop-filter: blur(1px);
+  box-shadow: inset -3px -3px 6px rgba(255, 255, 255, 1),
+    inset 3px 3px 6px rgba(0, 0, 0, 0.35), 0 5px 2px rgba(0, 0, 0, 0.15),
+    -3px -3px 7px rgba(255, 255, 255, 0.8), 3px 3px 7px rgba(0, 0, 0, 0.4);
+}
 
-  /* Tablets — max-width 900px */
-  @media (max-width: 900px) {
-    .moodBox {
-      padding: 20px 15px 80px;
-      margin-top: 40px;
-      max-width: 95%;
-    }
+.waterdrop-card {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 350px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  color: rgb(57, 56, 56);
+  overflow: hidden;
+  backdrop-filter: blur(1px);
+  box-shadow: inset -3px -3px 6px rgba(255, 255, 255, 1),
+    inset 3px 3px 6px rgba(0, 0, 0, 0.35), 0 5px 2px rgba(0, 0, 0, 0.15),
+    -3px -3px 7px rgba(255, 255, 255, 0.8), 3px 3px 7px rgba(0, 0, 0, 0.4);
+}
 
-    .moodHeader {
-      font-size: 1.4rem;
-    }
+.food-card {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 350px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  color: white;
+  overflow: hidden;
+  backdrop-filter: blur(1px);
+  box-shadow: inset -3px -3px 6px rgba(255, 255, 255, 1),
+    inset 3px 3px 6px rgba(0, 0, 0, 0.35), 0 5px 2px rgba(0, 0, 0, 0.15),
+    -3px -3px 7px rgba(255, 255, 255, 0.8), 3px 3px 7px rgba(0, 0, 0, 0.4);
+}
 
-    .emojiItem {
-      font-size: 1.6rem;
-    }
+.progress-card {
+  background: linear-gradient(to bottom, #d6d6d7 0%, #5c7e92 99%);
+  color: rgb(32, 31, 31);
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.2),
+    inset 0 -2px 2px rgba(255, 255, 255, 0.4);
+}
 
-    .numberRow span {
-      font-size: 1.1rem;
-    }
+.wellness-progress-bar {
+  width: 95%;
+  height: 20px;
+  color: #3a2b1e;
+}
 
-    .moodSlider {
-      width: 100%;
-    }
-  }
+.great-work {
+  padding-top: 10px;
+  margin-bottom: 3px;
+}
 
-  /* Small Tablets & Large Phones — max-width 600px */
-  @media (max-width: 600px) {
-    .moodBox {
-      padding: 15px 10px 70px;
-    }
+.percent-complete {
+  margin-top: -0.05px;
+  padding-bottom: 10px;
+}
 
-    .emojiRow {
-      gap: 4px;
-    }
+.input-row {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+}
 
-    .emojiItem {
-      font-size: 1.4rem;
-    }
+.input-row input[type="number"],
+.input-row input[type="text"] {
+  padding: 4px;
+}
 
-    .numberRow span {
-      font-size: 1rem;
-    }
+.success-text {
+  color: rgb(253, 253, 253);
+  margin-top: 4px;
+}
 
-    .moodFeedback {
-      font-size: 18px;
-    }
+.snacks-row {
+  margin-top: 8px;
+}
 
-    .moodSubmitButton {
-      font-size: 0.9rem;
-      padding: 0.5rem 1rem;
-    }
-  }
+.snacks-row button {
+  margin-left: 4px;
+}
 
-  /* Mobile Phones — max-width 430px */
-  @media (max-width: 430px) {
-    .moodBox {
-      padding: 12px 8px 60px;
-      margin-top: 20px;
-    }
+.water-display {
+  text-align: center;
+  margin-top: 100px;
+}
 
-    .moodHeader {
-      font-size: 1.2rem;
-    }
+.water-card p {
+  font-size: 18px;
+  margin-top: 10px;
+}
 
-    .emojiRow {
-      gap: 2px;
-    }
+.water-count {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
 
-    .emojiItem {
-      font-size: 1.2rem;
-    }
+.water-bar-bg {
+  width: 100%;
+  height: 20px;
+  background: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+}
 
-    .numberRow span {
-      font-size: 0.9rem;
-    }
+.water-bar-fill {
+  height: 100%;
+  background: rgb(102, 216, 216);
+}
 
-    .moodSlider {
-      margin-bottom: 1.5rem;
-    }
+.water-buttons {
+  margin-top: 8px;
+  text-align: center;
+}
 
-    .moodSubmitButton {
-      width: 90%;
-    }
-  }
+.water-buttons button {
+  margin: 0 4px;
+}
 
-  /* Very Small Phones — max-width 360px */
-  @media (max-width: 360px) {
-    .emojiRow {
-      height: 2rem;
-    }
+.success-text {
+  color: #c8c5c5;
+}
 
-    .emojiItem {
-      font-size: 1rem;
-    }
+.timestamp {
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
 
-    .numberRow span {
-      font-size: 0.8rem;
-    }
+.wellness-container button {
+  background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
+  border: 1px solid #b9b8b8;
+  color: rgba(94, 94, 94);
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 10px;
+  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
+    inset 0 -2px 2px rgba(255, 255, 255, 0.4);
+  transform: scale(1);
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    border-color 0.3s ease, box-shadow 0.3s ease;
+}
 
-    .moodFeedback {
-      font-size: 16px;
-    }
-  }
+/* Hover effect for all wellness buttons */
+.wellness-container button:hover {
+  background-color: #a8c3a0;
+  transform: scale(1.05);
+  border-color: #888;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
 
-  /* Wellness */
+/* CONTACT */
+
+.contact-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  margin-top: 35px;
+}
+
+.contact-container h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: rgb(143, 78, 43);
+  margin: 0;
+  margin-top: 25px;
+  margin-bottom: 60px;
+  color: #3a2b1e;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6),
+    -1px -1px 1px rgba(143, 78, 43, 0.4);
+}
+
+.contact-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+  margin-bottom: 10%;
+}
+
+@media (max-width: 1024px) {
   .wellness-container {
-    margin: 0 auto;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: "Segoe UI", sans-serif;
-    margin-bottom: 120px;
-    margin-top: 70px;
+    max-width: 100%;
+    padding: 16px;
+    margin-top: 40px;
   }
 
-  .wellness-container h2 {
-    margin-top: none;
-    color: #333;
-  }
-
-  .wellness-container h3 {
-    padding: 1rem;
-    margin-top: 5%;
-  }
-
-  .exercise-card {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 350px;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 15px;
-    color: white;
-    overflow: hidden;
-    backdrop-filter: blur(1px);
-    box-shadow: inset -3px -3px 6px rgba(255, 255, 255, 1),
-      inset 3px 3px 6px rgba(0, 0, 0, 0.35), 0 5px 2px rgba(0, 0, 0, 0.15),
-      -3px -3px 7px rgba(255, 255, 255, 0.8), 3px 3px 7px rgba(0, 0, 0, 0.4);
-  }
-
-  .meditation-card {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 500px;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 15px;
-    color: white;
-    overflow: hidden;
-    backdrop-filter: blur(1px);
-    box-shadow: inset -3px -3px 6px rgba(255, 255, 255, 1),
-      inset 3px 3px 6px rgba(0, 0, 0, 0.35), 0 5px 2px rgba(0, 0, 0, 0.15),
-      -3px -3px 7px rgba(255, 255, 255, 0.8), 3px 3px 7px rgba(0, 0, 0, 0.4);
-  }
-
-  .waterdrop-card {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 350px;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 15px;
-    color: rgb(57, 56, 56);
-    overflow: hidden;
-    backdrop-filter: blur(1px);
-    box-shadow: inset -3px -3px 6px rgba(255, 255, 255, 1),
-      inset 3px 3px 6px rgba(0, 0, 0, 0.35), 0 5px 2px rgba(0, 0, 0, 0.15),
-      -3px -3px 7px rgba(255, 255, 255, 0.8), 3px 3px 7px rgba(0, 0, 0, 0.4);
-  }
-
+  .exercise-card,
+  .meditation-card,
+  .waterdrop-card,
   .food-card {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 350px;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 15px;
-    color: white;
-    overflow: hidden;
-    backdrop-filter: blur(1px);
-    box-shadow: inset -3px -3px 6px rgba(255, 255, 255, 1),
-      inset 3px 3px 6px rgba(0, 0, 0, 0.35), 0 5px 2px rgba(0, 0, 0, 0.15),
-      -3px -3px 7px rgba(255, 255, 255, 0.8), 3px 3px 7px rgba(0, 0, 0, 0.4);
-  }
-
-  .progress-card {
-    background: linear-gradient(to bottom, #d6d6d7 0%, #5c7e92 99%);
-    color: rgb(32, 31, 31);
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.2),
-      inset 0 -2px 2px rgba(255, 255, 255, 0.4);
-  }
-
-  .wellness-progress-bar {
-    width: 95%;
-    height: 20px;
-    color: #3a2b1e;
-  }
-
-  .great-work {
-    padding-top: 10px;
-    margin-bottom: 3px;
-  }
-
-  .percent-complete {
-    margin-top: -0.05px;
-    padding-bottom: 10px;
+    height: auto;
+    min-height: 240px;
+    padding: 16px;
   }
 
   .input-row {
-    margin-top: 8px;
-    display: flex;
-    gap: 8px;
+    flex-wrap: wrap;
+  }
+}
+
+/*  Wellness – phones */
+@media (max-width: 600px) {
+  .wellness-container {
+    padding: 12px 10px 80px;
+    margin-top: 30px;
+  }
+
+  .exercise-card,
+  .meditation-card,
+  .waterdrop-card,
+  .food-card {
+    height: auto;
+    min-height: 200px;
+    padding: 14px;
+  }
+
+  /* Inputs stack nicely on narrow screens */
+  .input-row {
+    flex-direction: column;
+    gap: 6px;
   }
 
   .input-row input[type="number"],
   .input-row input[type="text"] {
-    padding: 4px;
-  }
-
-  .success-text {
-    color: rgb(253, 253, 253);
-    margin-top: 4px;
-  }
-
-  .snacks-row {
-    margin-top: 8px;
-  }
-
-  .snacks-row button {
-    margin-left: 4px;
+    width: 100%;
   }
 
   .water-display {
-    text-align: center;
-    margin-top: 100px;
+    margin-top: 40px;
   }
 
-  .water-card p {
-    font-size: 18px;
-    margin-top: 10px;
-  }
-
-  .water-count {
-    font-size: 32px;
-    margin-bottom: 8px;
-  }
-
-  .water-bar-bg {
+  .wellness-progress-bar {
     width: 100%;
-    height: 20px;
-    background: #eee;
-    border-radius: 10px;
-    overflow: hidden;
   }
+}
 
-  .water-bar-fill {
-    height: 100%;
-    background: rgb(102, 216, 216);
-  }
-
-  .water-buttons {
-    margin-top: 8px;
-    text-align: center;
-  }
-
-  .water-buttons button {
-    margin: 0 4px;
-  }
-
-  .success-text {
-    color: #c8c5c5;
-  }
-
-  .timestamp {
-    margin-bottom: 10px;
-    margin-top: 5px;
-  }
-
-  .wellness-container button {
-    background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
-    border: 1px solid #b9b8b8;
-    color: rgba(94, 94, 94);
-    padding: 0.5rem 1.5rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    margin-top: 10px;
-    box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
-      inset 0 -2px 2px rgba(255, 255, 255, 0.4);
-    transform: scale(1);
-    transition: background-color 0.3s ease, transform 0.3s ease,
-      border-color 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  /* Hover effect for all wellness buttons */
-  .wellness-container button:hover {
-    background-color: #a8c3a0;
-    transform: scale(1.05);
-    border-color: #888;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
-
-  /* CONTACT */
-
-  .contact-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    margin-top: 35px;
-  }
-
-  .contact-container h2 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: rgb(143, 78, 43);
-    margin: 0;
-    margin-top: 25px;
-    margin-bottom: 60px;
-    color: #3a2b1e;
-    font-weight: bold;
-    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6),
-      -1px -1px 1px rgba(143, 78, 43, 0.4);
-  }
-
+@media (max-width: 768px) {
   .contact-body {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: start;
-    margin-bottom: 10%;
+    grid-template-columns: 1fr;
   }
+}
 
-  @media (max-width: 1024px) {
-    .wellness-container {
-      max-width: 100%;
-      padding: 16px;
-      margin-top: 40px;
-    }
+.contact-info {
+  background: #8d9491;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+  border-radius: 14px;
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
+    inset 4px 4px 8px rgba(0, 0, 0, 0.35), 4px 6px 12px rgba(0, 0, 0, 0.2);
+}
 
-    .exercise-card,
-    .meditation-card,
-    .waterdrop-card,
-    .food-card {
-      height: auto;
-      min-height: 240px;
-      padding: 16px;
-    }
+.contact-info h3 {
+  font-size: 1.8rem;
+  color: #ebe3cf;
+  margin-bottom: 20px;
+}
 
-    .input-row {
-      flex-wrap: wrap;
-    }
+.contact-info p {
+  line-height: 1.8;
+  color: #ebe3cf;
+  margin-bottom: 30px;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-item {
+  padding: 10px;
+  background: white;
+  border-radius: 5px;
+  color: #333;
+}
+
+.contact-item strong {
+  color: #3a2b1e;
+  margin-right: 10px;
+}
+
+.contact-form-wrapper {
+  background: #8d9491;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+  border-radius: 14px;
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
+    inset 4px 4px 8px rgba(0, 0, 0, 0.35), 4px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.success-message {
+  color: #3a2b1e;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 12px 15px;
+  border: 2px solid #e5e7eb;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  color: #3a2b1e;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.submit-button {
+  background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
+  border: 1px solid #b9b8b8;
+  color: rgba(94, 94, 94);
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-top: 10px;
+}
+
+.submit-button:hover {
+  color: #f6f2e8;
+  border-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
+    inset 4px 4px 8px rgba(0, 0, 0, 0.35), 4px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.submit-button:active {
+  transform: scale(0.98);
+}
+
+.now-playing-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.pulse {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #5ac8fa;
+  opacity: 0.4;
+  animation: pulseAnim 1.5s infinite ease-in-out;
+}
+
+.pulse.active {
+  opacity: 1;
+}
+
+@keyframes pulseAnim {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
   }
-
-  /*  Wellness – phones */
-  @media (max-width: 600px) {
-    .wellness-container {
-      padding: 12px 10px 80px;
-      margin-top: 30px;
-    }
-
-    .exercise-card,
-    .meditation-card,
-    .waterdrop-card,
-    .food-card {
-      height: auto;
-      min-height: 200px;
-      padding: 14px;
-    }
-
-    /* Inputs stack nicely on narrow screens */
-    .input-row {
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .input-row input[type="number"],
-    .input-row input[type="text"] {
-      width: 100%;
-    }
-
-    .water-display {
-      margin-top: 40px;
-    }
-
-    .wellness-progress-bar {
-      width: 100%;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .contact-body {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .contact-info {
-    background: #8d9491;
-    padding: 30px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: left;
-    border-radius: 14px;
-    box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
-      inset 4px 4px 8px rgba(0, 0, 0, 0.35), 4px 6px 12px rgba(0, 0, 0, 0.2);
-  }
-
-  .contact-info h3 {
-    font-size: 1.8rem;
-    color: #ebe3cf;
-    margin-bottom: 20px;
-  }
-
-  .contact-info p {
-    line-height: 1.8;
-    color: #ebe3cf;
-    margin-bottom: 30px;
-  }
-
-  .contact-details {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .contact-item {
-    padding: 10px;
-    background: white;
-    border-radius: 5px;
-    color: #333;
-  }
-
-  .contact-item strong {
-    color: #3a2b1e;
-    margin-right: 10px;
-  }
-
-  .contact-form-wrapper {
-    background: #8d9491;
-    padding: 30px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: left;
-    border-radius: 14px;
-    box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
-      inset 4px 4px 8px rgba(0, 0, 0, 0.35), 4px 6px 12px rgba(0, 0, 0, 0.2);
-  }
-
-  .success-message {
-    color: #3a2b1e;
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    text-align: center;
-    font-weight: 500;
-  }
-
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .form-group label {
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 8px;
-    font-size: 0.95rem;
-  }
-
-  .form-group input,
-  .form-group textarea {
-    padding: 12px 15px;
-    border: 2px solid #e5e7eb;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-family: inherit;
-    transition: border-color 0.3s ease;
-  }
-
-  .form-group input:focus,
-  .form-group textarea:focus {
-    outline: none;
-    color: #3a2b1e;
-  }
-
-  .form-group textarea {
-    resize: vertical;
-    min-height: 120px;
-  }
-
-  .submit-button {
-    background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
-    border: 1px solid #b9b8b8;
-    color: rgba(94, 94, 94);
-    padding: 15px 30px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s ease;
-    margin-top: 10px;
-  }
-
-  .submit-button:hover {
-    color: #f6f2e8;
-    border-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
-      inset 4px 4px 8px rgba(0, 0, 0, 0.35), 4px 6px 12px rgba(0, 0, 0, 0.2);
-  }
-
-  .submit-button:active {
-    transform: scale(0.98);
-  }
-
-  .now-playing-bar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 8px 0;
-    font-size: 0.9rem;
-    opacity: 0.85;
-  }
-
-  .pulse {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #5ac8fa;
-    opacity: 0.4;
-    animation: pulseAnim 1.5s infinite ease-in-out;
-  }
-
-  .pulse.active {
+  50% {
+    transform: scale(1.4);
     opacity: 1;
   }
-
-  @keyframes pulseAnim {
-    0% {
-      transform: scale(1);
-      opacity: 0.6;
-    }
-    50% {
-      transform: scale(1.4);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 0.6;
-    }
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
   }
+}
 
-  .footer-container {
-    width: 100%;
-    height: 55px;
-    position: fixed;
-    bottom: 0;
-    margin-bottom: none;
-    justify-content: center;
-    padding: none;
-    z-index: 9999;
-    text-align: center;
-    color: #333;
-    align-items: center;
-    font-size: 20px;
-    background: radial-gradient(circle, #d1c4aa 0%, #a8c3a0 99%);
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+.footer-container {
+  width: 100%;
+  height: 55px;
+  position: fixed;
+  bottom: 0;
+  margin-bottom: none;
+  justify-content: center;
+  padding: none;
+  z-index: 9999;
+  text-align: center;
+  color: #333;
+  align-items: center;
+  font-size: 20px;
+  background: radial-gradient(circle, #d1c4aa 0%, #a8c3a0 99%);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 
-    box-shadow: inset 0 3px 3px rgba(255, 255, 255, 0.5),
-      inset 0 8px 10px rgba(0, 0, 0, 0.35);
-  }
+  box-shadow: inset 0 3px 3px rgba(255, 255, 255, 0.5),
+    inset 0 8px 10px rgba(0, 0, 0, 0.35);
+}
 
-  /* Articles Page */
-  .articles-page {
-    padding: 20px;
-    text-align: center;
-  }
+/* Articles Page */
+.articles-page {
+  padding: 20px;
+  text-align: center;
+}
 
-  .articles-page h1 {
-    margin-top: 6%;
-  }
+.articles-page h1 {
+  margin-top: 6%;
+}
 
-  .mental-buttons-container {
-    margin-bottom: 25px;
-  }
+.mental-buttons-container {
+  margin-bottom: 25px;
+}
 
-  .article-buttons-row {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-  }
+.article-buttons-row {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
 
-  .mental-button {
-    background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
-    border: 1px solid #b9b8b8;
-    color: rgba(94, 94, 94);
-    padding: 0.5rem 1.5rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    margin-left: 2%;
-    margin-top: 10px;
-    transform: scale(1); /* default scale */
-    transition: background-color 0.3s ease, transform 0.3s ease,
-      border-color 0.3s ease, box-shadow 0.3s ease;
-  }
+.mental-button {
+  background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
+  border: 1px solid #b9b8b8;
+  color: rgba(94, 94, 94);
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 2%;
+  margin-top: 10px;
+  transform: scale(1); /* default scale */
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    border-color 0.3s ease, box-shadow 0.3s ease;
+}
 
-  .mental-button:hover {
-    background-color: #a8c3a0;
-    transform: scale(1.05);
-    border-color: #888;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
+.mental-button:hover {
+  background-color: #a8c3a0;
+  transform: scale(1.05);
+  border-color: #888;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
 
-  /* Article container */
-  .article-container {
-    margin: 40px auto;
-    padding: 25px;
-    width: 80%;
-    max-width: 800px;
-    background: #8d9491;
-    border-radius: 20px;
-    backdrop-filter: blur(6px);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-    position: relative;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 14px;
-    box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
-      inset 4px 4px 8px rgba(0, 0, 0, 0.35), 4px 6px 12px rgba(0, 0, 0, 0.2);
-  }
+/* Article container */
+.article-container {
+  margin: 40px auto;
+  padding: 25px;
+  width: 80%;
+  max-width: 800px;
+  background: #8d9491;
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 14px;
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
+    inset 4px 4px 8px rgba(0, 0, 0, 0.35), 4px 6px 12px rgba(0, 0, 0, 0.2);
+}
 
-  /* Placeholder logo (shows before clicking) */
-  .article-placeholder {
-    width: 100%;
-    height: 300px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 140px;
-    opacity: 1;
-    filter: none;
-  }
+/* Placeholder logo (shows before clicking) */
+.article-placeholder {
+  width: 100%;
+  height: 300px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 140px;
+  opacity: 1;
+  filter: none;
+}
 
-  /* Article content styling */
-  .article-title {
-    margin-top: 10px;
-    font-size: 24px;
-    font-weight: bold;
-  }
+/* Article content styling */
+.article-title {
+  margin-top: 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
 
-  .article-desc {
-    margin: 10px 0;
-    font-size: 18px;
-    opacity: 0.85;
-  }
+.article-desc {
+  margin: 10px 0;
+  font-size: 18px;
+  opacity: 0.85;
+}
 
-  .no-content-msg {
-    margin-top: 10px;
-    font-style: italic;
-    opacity: 0.7;
-    color: black;
-  }
+.no-content-msg {
+  margin-top: 10px;
+  font-style: italic;
+  opacity: 0.7;
+  color: black;
+}
 
-  /* Article image — FIXED */
-  .article-image {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
-    margin: 20px auto;
-    border-radius: 10px;
-  }
+/* Article image — FIXED */
+.article-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  margin: 20px auto;
+  border-radius: 10px;
+}
 
-  /* Link */
-  .article-link-button {
-    background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
-    border: 1px solid #b9b8b8;
-    color: rgba(94, 94, 94);
-    padding: 0.5rem 1.5rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    margin-left: 2%;
-    margin-top: 10px;
-    transform: scale(1); /* default scale */
-    transition: background-color 0.3s ease, transform 0.3s ease,
-      border-color 0.3s ease, box-shadow 0.3s ease;
-  }
+/* Link */
+.article-link-button {
+  background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
+  border: 1px solid #b9b8b8;
+  color: rgba(94, 94, 94);
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 2%;
+  margin-top: 10px;
+  transform: scale(1); /* default scale */
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    border-color 0.3s ease, box-shadow 0.3s ease;
+}
 
-  .next-article-button {
-    background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
-    border: 1px solid #b9b8b8;
-    color: rgba(94, 94, 94);
-    padding: 0.5rem 1.5rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    margin-left: 2%;
-    margin-top: 10px;
-    transform: scale(1); /* default scale */
-    transition: background-color 0.3s ease, transform 0.3s ease,
-      border-color 0.3s ease, box-shadow 0.3s ease;
-  }
+.next-article-button {
+  background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
+  border: 1px solid #b9b8b8;
+  color: rgba(94, 94, 94);
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 2%;
+  margin-top: 10px;
+  transform: scale(1); /* default scale */
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    border-color 0.3s ease, box-shadow 0.3s ease;
+}
 
-  .article-link-button:hover {
-    background-color: #a8c3a0;
-    transform: scale(1.05);
-    border-color: #888;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
+.article-link-button:hover {
+  background-color: #a8c3a0;
+  transform: scale(1.05);
+  border-color: #888;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
 
-  .next-article-button:hover {
-    background-color: #a8c3a0;
-    transform: scale(1.05);
-    border-color: #888;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
+.next-article-button:hover {
+  background-color: #a8c3a0;
+  transform: scale(1.05);
+  border-color: #888;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
 
-  /* ============================================
+/* ============================================
    📌 LARGE TABLETS / SMALL LAPTOPS
    max-width: 1200px
 ============================================ */
-  @media (max-width: 1200px) {
-    .home-grid {
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-
-    .home-activities {
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
-
-    .home-card {
-      padding: 14px;
-    }
+@media (max-width: 1200px) {
+  .home-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 
-  /* ============================================
+  .home-activities {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .home-card {
+    padding: 14px;
+  }
+}
+
+/* ============================================
    📌 TABLETS
    max-width: 900px
 ============================================ */
-  @media (max-width: 900px) {
-    .home-container {
-      padding: 16px;
-      gap: 20px;
-      margin-top: -50px;
-    }
-
-    .home-header-title {
-      font-size: 1.3rem;
-      padding: 6px 14px;
-    }
-
-    .home-grid {
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 14px;
-    }
-
-    .home-card,
-    .wellness-home-card {
-      height: auto;
-      min-height: 140px;
-      padding: 14px;
-    }
-
-    .home-activities {
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 10px;
-    }
-
-    .header h1 {
-      font-size: 1.6rem;
-    }
-
-    .nav-links {
-      gap: 0.5rem;
-    }
+@media (max-width: 900px) {
+  .home-container {
+    padding: 16px;
+    gap: 20px;
+    margin-top: -50px;
   }
 
-  /* ============================================
+  .home-header-title {
+    font-size: 1.3rem;
+    padding: 6px 14px;
+  }
+
+  .home-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+  }
+
+  .home-card,
+  .wellness-home-card {
+    height: auto;
+    min-height: 140px;
+    padding: 14px;
+  }
+
+  .home-activities {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+  }
+
+  .header h1 {
+    font-size: 1.6rem;
+  }
+
+  .nav-links {
+    gap: 0.5rem;
+  }
+}
+
+/* ============================================
    📌 MOBILE PHONES
    max-width: 600px
 ============================================ */
-  @media (max-width: 600px) {
-    .home-container {
-      padding: 12px;
-      gap: 16px;
-    }
-
-    .home-header-title {
-      font-size: 1.1rem;
-      padding: 6px 12px;
-    }
-
-    .home-card,
-    .wellness-home-card {
-      padding: 12px;
-      border-radius: 14px;
-    }
-
-    .home-grid {
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-
-    .home-activities {
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 10px;
-    }
-
-    .home-activity {
-      padding: 10px;
-    }
-
-    .home-card-header h3 {
-      font-size: 1rem;
-    }
-
-    .home-icon {
-      font-size: 18px;
-    }
-
-    .home-value {
-      font-size: 1rem;
-    }
-
-    .header {
-      padding: 8px 0;
-    }
-
-    .header h1 {
-      font-size: 1.3rem;
-    }
-
-    .nav-links a {
-      padding: 0.4rem 0.7rem;
-      font-size: 0.85rem;
-    }
-
-    .nav-right {
-      gap: 0.5rem;
-    }
-
-    .navbar-logo {
-      height: 40px;
-    }
+@media (max-width: 600px) {
+  .home-container {
+    padding: 12px;
+    gap: 16px;
   }
 
-  @media (max-width: 750px) {
-    /* Make header flow top-to-bottom (title first, nav below) */
-    .header {
-      position: relative; /* allow normal flow so nav pushes under title */
-      display: flex;
-      flex-direction: column; /* stack title then nav */
-      align-items: stretch;
-      padding: 8px 12px;
-      gap: 8px;
-      z-index: 1000;
-    }
-
-    /* Title stays centered and on its own row */
-    .header h1 {
-      order: 0;
-      text-align: center;
-      margin: 0;
-      font-size: 1.3rem;
-      flex: none; /* don't stretch */
-    }
-
-    /* Main nav becomes a block under the title */
-    .main-nav {
-      display: flex;
-      flex-direction: column; /* stack children vertically */
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      padding: 0;
-      gap: 8px;
-      order: 1;
-      box-sizing: border-box;
-    }
-
-    /* Right side (logo + links) stacks vertically and takes full width */
-    .nav-right {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      width: 100%;
-    }
-
-    /* Make nav-links a vertical full-width list */
-    .nav-links {
-      display: flex !important;
-      flex-direction: column !important;
-      gap: 8px;
-      width: 100%;
-      padding: 0;
-      margin: 0;
-      list-style: none;
-      align-items: stretch;
-    }
-
-    /* Each link becomes a full-width button so they don't overlap */
-    .nav-links a {
-      display: block;
-      width: 100%;
-      box-sizing: border-box;
-      padding: 10px 12px;
-      border-radius: 8px;
-      text-align: center;
-      background: transparent;
-      margin: 0;
-    }
-
-    /* If you want a visible background for links on mobile, enable this: */
-    /* Keep logo size sensible */
-    .navbar-logo {
-      height: 44px;
-      width: auto;
-    }
-
-    /* Prevent z-index / fixed header overlap with page content on small screens */
-    .header {
-      z-index: 1000;
-    }
-
-    body {
-      padding-top: 15px;
-    }
+  .home-header-title {
+    font-size: 1.1rem;
+    padding: 6px 12px;
   }
 
-  .moodPrompt {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 12px 16px;
-    border-radius: 6px;
-    border: 1px solid #f5c6cb;
-    font-weight: bold;
+  .home-card,
+  .wellness-home-card {
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .home-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .home-activities {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+  }
+
+  .home-activity {
+    padding: 10px;
+  }
+
+  .home-card-header h3 {
+    font-size: 1rem;
+  }
+
+  .home-icon {
+    font-size: 18px;
+  }
+
+  .home-value {
+    font-size: 1rem;
+  }
+
+  .header {
+    padding: 8px 0;
+  }
+
+  .header h1 {
+    font-size: 1.3rem;
+  }
+
+  .nav-links a {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.85rem;
+  }
+
+  .nav-right {
+    gap: 0.5rem;
+  }
+
+  .navbar-logo {
+    height: 40px;
+  }
+}
+
+@media (max-width: 750px) {
+  /* Make header flow top-to-bottom (title first, nav below) */
+  .header {
+    position: relative; /* allow normal flow so nav pushes under title */
+    display: flex;
+    flex-direction: column; /* stack title then nav */
+    align-items: stretch;
+    padding: 8px 12px;
+    gap: 8px;
+    z-index: 1000;
+  }
+
+  /* Title stays centered and on its own row */
+  .header h1 {
+    order: 0;
     text-align: center;
+    margin: 0;
+    font-size: 1.3rem;
+    flex: none; /* don't stretch */
   }
 
-  .moodNotification {
-    position: absolute;
-    bottom: 26.7rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #e6ffed;
-    color: #2d7a2d;
-    padding: 12px 16px;
+  /* Main nav becomes a block under the title */
+  .main-nav {
+    display: flex;
+    flex-direction: column; /* stack children vertically */
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    gap: 8px;
+    order: 1;
+    box-sizing: border-box;
+  }
+
+  /* Right side (logo + links) stacks vertically and takes full width */
+  .nav-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+  }
+
+  /* Make nav-links a vertical full-width list */
+  .nav-links {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    align-items: stretch;
+  }
+
+  /* Each link becomes a full-width button so they don't overlap */
+  .nav-links a {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
     border-radius: 8px;
-    font-weight: 600;
-    margin-bottom: 30px;
     text-align: center;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 0.3s ease-in-out forwards;
-    z-index: 10; /* ensures it overlays chart */
+    background: transparent;
+    margin: 0;
   }
 
-  .moodNotification.fadeOut {
-    animation: fadeOut 0.3s ease-in-out forwards;
+  /* If you want a visible background for links on mobile, enable this: */
+  /* Keep logo size sensible */
+  .navbar-logo {
+    height: 44px;
+    width: auto;
   }
 
-  .articles-page {
-    padding-top: 50px; /* header fully stacked in mobile mode */
+  /* Prevent z-index / fixed header overlap with page content on small screens */
+  .header {
+    z-index: 1000;
   }
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translate(-50%, -5px);
-    }
-    to {
-      opacity: 1;
-      transform: translate(-50%, 0);
-    }
+  body {
+    padding-top: 15px;
   }
+}
 
-  @keyframes fadeOut {
-    from {
-      opacity: 1;
-      transform: translate(-50%, 0);
-    }
-    to {
-      opacity: 0;
-      transform: translate(-50%, -5px);
-    }
+.moodPrompt {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 12px 16px;
+  border-radius: 6px;
+  border: 1px solid #f5c6cb;
+  font-weight: bold;
+  text-align: center;
+}
+
+.moodNotification {
+  position: absolute;
+  bottom: 26.7rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #e6ffed;
+  color: #2d7a2d;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.3s ease-in-out forwards;
+  z-index: 10; /* ensures it overlays chart */
+}
+
+.moodNotification.fadeOut {
+  animation: fadeOut 0.3s ease-in-out forwards;
+}
+
+.articles-page {
+  padding-top: 50px; /* header fully stacked in mobile mode */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -5px);
   }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -5px);
+  }
+}
 
 /* =======================================================
    WEATHER LOCATION PLUGIN
@@ -2663,10 +2663,8 @@ body {
   padding: 8px 16px;
   border-radius: 20px;
 
-  box-shadow:
-    inset 2px 2px 4px rgba(255, 255, 255, 0.6),
-    inset -2px -2px 4px rgba(0, 0, 0, 0.25),
-    2px 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.6),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.25), 2px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Mobile-friendly scaling */

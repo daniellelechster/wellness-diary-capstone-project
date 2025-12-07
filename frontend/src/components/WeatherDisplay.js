@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-
 export default function WeatherDisplay() {
   const [weather, setWeather] = useState(null);
   const [weatherError, setWeatherError] = useState(null);
@@ -71,9 +70,7 @@ export default function WeatherDisplay() {
       .then((data) => setWeather(data))
       .catch((err) => {
         if (err.message === "bad_api_key") {
-          setWeatherError(
-            "Unable to load weather, please check your API key."
-          );
+          setWeatherError("Unable to load weather, please check your API key.");
         } else {
           setWeatherError("Unable to load weather for your location.");
         }
@@ -125,9 +122,7 @@ export default function WeatherDisplay() {
         <div className="weather-block">
           {/* Location Display */}
           {locationName && (
-            <h3 className="weather-location-text">
-              📍 {locationName}
-            </h3>
+            <h3 className="weather-location-text">📍 {locationName}</h3>
           )}
 
           {/* Current Conditions */}
