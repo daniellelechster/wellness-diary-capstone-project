@@ -17,15 +17,15 @@ function About() {
           <div className="name">Neal Billig</div>
           <img src={nealsbiopic} alt="Neal Billig" />
           <p>
-            Neal is an emerging full-stack Java developer with a passion for 
-            building things, solving problems, and learning about new technology. 
-            After several years as a lead window installer, he developed strong 
-            leadership and teamwork skills that now translate into his 
-            collaborative coding style. He brings a high level of attention to 
-            detail to debugging and development, helping teams create clean, 
-            reliable solutions. Neal is driven by curiosity and a desire to 
-            constantly improve his craft. When he isn’t coding, he enjoys 
-            spending time with his wife and their two cats and unwinding 
+            Neal is an emerging full-stack Java developer with a passion for
+            building things, solving problems, and learning about new
+            technology. After several years as a lead window installer, he
+            developed strong leadership and teamwork skills that now translate
+            into his collaborative coding style. He brings a high level of
+            attention to detail to debugging and development, helping teams
+            create clean, reliable solutions. Neal is driven by curiosity and a
+            desire to constantly improve his craft. When he isn’t coding, he
+            enjoys spending time with his wife and their two cats and unwinding
             with a good movie.
           </p>
         </div>
