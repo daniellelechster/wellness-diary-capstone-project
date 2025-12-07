@@ -1,41 +1,51 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import WeatherDisplay from "./WeatherDisplay";   
+import WeatherDisplay from "./WeatherDisplay";
 import "../App.css";
 
-export default function Home({ entries, goals = [], journals = [], meditation, exercise, hydration, meals }) {
-  const [todaysMood, setTodaysMood] = useState(null);  
+export default function Home({
+  entries,
+  goals = [],
+  journals = [],
+  meditation,
+  exercise,
+  hydration,
+  meals,
+}) {
+  const [todaysMood, setTodaysMood] = useState(null);
   const [journalEntry, setJournalEntry] = useState("");
 
   // --- Build wellness summary directly from props ---
-const wellnessSummary = {
-  meditation: meditation?.completed
-    ? `${meditation.minutes} min meditated`
-    : "Not completed",
+  const wellnessSummary = {
+    meditation: meditation?.completed
+      ? `${meditation.minutes} min meditated`
+      : "Not completed",
 
-  workout: exercise?.completed
-    ? `${exercise.minutes} min ${exercise.text || "exercise"}`
-    : "Not completed",
+    workout: exercise?.completed
+      ? `${exercise.minutes} min ${exercise.text || "exercise"}`
+      : "Not completed",
 
-  meals: meals && (meals.breakfast || meals.lunch || meals.dinner || meals.snacks > 0)
-    ? "Meals logged"
-    : "Not logged",
+    meals:
+      meals &&
+      (meals.breakfast || meals.lunch || meals.dinner || meals.snacks > 0)
+        ? "Meals logged"
+        : "Not logged",
 
-  hydration: hydration?.glasses > 0
-    ? `${hydration.glasses} glasses of water`
-    : "Not completed",
-};
-  
+    hydration:
+      hydration?.glasses > 0
+        ? `${hydration.glasses} glasses of water`
+        : "Not completed",
+  };
+
   // --- Update mood whenever entries changes ---
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
     if (entries[today]) {
       setTodaysMood(entries[today].mood);
     } else {
-      setTodaysMood(null); 
+      setTodaysMood(null);
     }
   }, [entries]);
-
 
   // --- Update journal snippet for today ---
   useEffect(() => {
@@ -44,9 +54,11 @@ const wellnessSummary = {
     if (Array.isArray(journals)) {
       const todaysEntries = journals.filter((j) => j.date === today);
       if (todaysEntries.length > 0) {
-        const latest = todaysEntries[0]; 
+        const latest = todaysEntries[0];
         const snippet =
-          latest.text.length > 60 ? latest.text.substring(0, 60) + "..." : latest.text;
+          latest.text.length > 60
+            ? latest.text.substring(0, 60) + "..."
+            : latest.text;
         setJournalEntry(snippet);
       } else {
         setJournalEntry("");
@@ -71,8 +83,11 @@ const wellnessSummary = {
     ][mood - 1] || "Not tracked";
 
   const completedGoals = goals.filter((g) => g.status === "completed").length;
-  const inProgressGoals = goals.filter((g) => g.status === "in progress").length;
-  const goalProgress = goals.length > 0 ? (completedGoals / goals.length) * 100 : 0;
+  const inProgressGoals = goals.filter(
+    (g) => g.status === "in progress"
+  ).length;
+  const goalProgress =
+    goals.length > 0 ? (completedGoals / goals.length) * 100 : 0;
 
   const wellnessActivities = wellnessSummary
     ? [
@@ -88,10 +103,10 @@ const wellnessSummary = {
   return (
     <div className="home-background">
       <div className="home-container">
-
-
         <div className="home-card-header-card">
-          <h2 className="home-header-title">Welcome to Your Wellness Dashboard</h2>
+          <h2 className="home-header-title">
+            Welcome to Your Wellness Dashboard
+          </h2>
         </div>
 
         <div className="home-grid">
@@ -112,7 +127,9 @@ const wellnessSummary = {
                   {todaysMood ? getMoodLabel(todaysMood) : "Not tracked"}
                 </p>
                 <p className="home-subtext">
-                  {todaysMood ? `Level ${todaysMood}/9` : "Track your mood today"}
+                  {todaysMood
+                    ? `Level ${todaysMood}/9`
+                    : "Track your mood today"}
                 </p>
               </div>
             </div>
@@ -124,7 +141,9 @@ const wellnessSummary = {
               <div className="home-card-header">
                 <div className="home-icon-row">
                   <span className="home-icon purple">✨</span>
-                  <span className="home-small-text">{wellnessActivities}/4</span>
+                  <span className="home-small-text">
+                    {wellnessActivities}/4
+                  </span>
                 </div>
                 <h3>Wellness</h3>
               </div>
@@ -182,7 +201,9 @@ const wellnessSummary = {
               <div className="home-card-header">
                 <div className="home-icon-row">
                   <span className="home-icon indigo">📖</span>
-                  <span className="home-small-text">{journalEntry ? "✓" : "○"}</span>
+                  <span className="home-small-text">
+                    {journalEntry ? "✓" : "○"}
+                  </span>
                 </div>
                 <h3>Journal</h3>
               </div>
@@ -202,8 +223,7 @@ const wellnessSummary = {
         <div className="home-card">
           <div className="home-card-header">
             <div className="home-icon-row">
-              <span className="home-icon indigo">⛅
-</span>
+              <span className="home-icon indigo">⛅</span>
               <span className="home-small-text">Now</span>
             </div>
             <h3>Weather</h3>
@@ -214,7 +234,6 @@ const wellnessSummary = {
           </div>
         </div>
 
-
         {/* Wellness Activities */}
         <div className="wellness-home-card">
           <div className="home-card-header">
@@ -223,37 +242,50 @@ const wellnessSummary = {
           </div>
           <p className="home-subtext">Your self-care for today</p>
 
+          <div className="home-activities">
+            {[
+              {
+                key: "meditation",
+                label: "Meditation",
+                value: wellnessSummary?.meditation,
+              },
+              {
+                key: "workout",
+                label: "Workout",
+                value: wellnessSummary?.workout,
+              },
+              {
+                key: "meals",
+                label: "Healthy Eating",
+                value: wellnessSummary?.meals,
+              },
+              {
+                key: "hydration",
+                label: "Hydration",
+                value: wellnessSummary?.hydration,
+              },
+            ].map((item) => (
+              <div
+                key={item.key}
+                className={`home-activity ${
+                  item.value && !item.value.includes("Not")
+                    ? "activity-complete"
+                    : "activity-incomplete"
+                }`}
+              >
+                <div className="home-activity-header">
+                  <span>{item.label}</span>
+                  <span>
+                    {item.value && !item.value.includes("Not") ? "✓" : "○"}
+                  </span>
+                </div>
 
-        <div className="home-activities">
-
-          {[
-            { key: "meditation", label: "Meditation", value: wellnessSummary?.meditation },
-            { key: "workout", label: "Workout", value: wellnessSummary?.workout },
-            { key: "meals", label: "Healthy Eating", value: wellnessSummary?.meals },
-            { key: "hydration", label: "Hydration", value: wellnessSummary?.hydration }
-          ].map((item) => (
-            <div
-              key={item.key}
-              className={`home-activity ${
-                item.value && !item.value.includes("Not") 
-                  ? "activity-complete" 
-                  : "activity-incomplete"
-              }`}
-            >
-              <div className="home-activity-header">
-                <span>{item.label}</span>
-                <span>
-                  {item.value && !item.value.includes("Not") ? "✓" : "○"}
-                </span>
+                <p className="home-subtext">{item.value || "No data"}</p>
               </div>
-
-              <p className="home-subtext">{item.value || "No data"}</p>
-            </div>
-          ))}
-
+            ))}
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }

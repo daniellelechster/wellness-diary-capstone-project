@@ -4,22 +4,22 @@ export default function DailyQuote() {
   const [quote, setQuote] = useState(null);
   const [error, setError] = useState(null);
 
-useEffect(() => {
-  let ignore = false;
-  console.log("DailyQuote mounted");
+  useEffect(() => {
+    let ignore = false;
+    console.log("DailyQuote mounted");
 
-  fetch("http://localhost:8080/api/quote")
-    .then(response => {
-      if (!response.ok) throw new Error("Failed to fetch quote");
-      return response.json();
-    })
-    .then(data => {
-      if (!ignore && data?.text && data?.author) {
-        setQuote(data);
-      }
-    })
-    .catch(err => setError(err.message));
-}, []);
+    fetch("http://localhost:8080/api/quote")
+      .then((response) => {
+        if (!response.ok) throw new Error("Failed to fetch quote");
+        return response.json();
+      })
+      .then((data) => {
+        if (!ignore && data?.text && data?.author) {
+          setQuote(data);
+        }
+      })
+      .catch((err) => setError(err.message));
+  }, []);
 
   if (error) {
     return (

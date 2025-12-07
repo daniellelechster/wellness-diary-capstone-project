@@ -29,7 +29,7 @@ export default function WeatherDisplay() {
   };
 
   useEffect(() => {
-    const lat = 41.4993; 
+    const lat = 41.4993;
     const lon = -81.6944;
     const apiKey = process.env.REACT_APP_API_KEY;
 
@@ -44,80 +44,77 @@ export default function WeatherDisplay() {
       .catch((err) => setWeatherError(err.message));
   }, []);
 
-return (
-  <div className="weather-container">
+  return (
+    <div className="weather-container">
+      {!weather && !weatherError && (
+        <p className="weather-text">Loading weather...</p>
+      )}
 
-    {!weather && !weatherError && (
-      <p className="weather-text">Loading weather...</p>
-    )}
+      {weatherError && (
+        <p className="weather-error-text">
+          Unable to load weather, please check your API key.
+        </p>
+      )}
 
-    {weatherError && (
-      <p className="weather-error-text">
-        Unable to load weather, please check your API key.
-      </p>
-    )}
+      {weather && (
+        <div className="weather-block">
+          {/* Current Conditions */}
+          <div className="weather-current">
+            <img
+              className="weather-icon-large"
+              src={`https://openweathermap.org/img/wn/${weather.current.weather[0].icon}@2x.png`}
+              alt="weather icon"
+            />
 
-    {weather && (
-      <div className="weather-block">
+            <div className="weather-current-info">
+              <p className="weather-temp">{weather.current.temp}°F</p>
+              <p className="weather-description">
+                {weather.current.weather[0].description}
+              </p>
+              <p className="weather-details">
+                Feels like: {weather.current.feels_like}°F
+              </p>
+              <p className="weather-details">
+                Sunrise: {formatTime(weather.current.sunrise)}
+              </p>
+              <p className="weather-details">
+                Sunset: {formatTime(weather.current.sunset)}
+              </p>
+            </div>
+          </div>
 
-        {/* Current Conditions */}
-        <div className="weather-current">
-          <img
-            className="weather-icon-large"
-            src={`https://openweathermap.org/img/wn/${weather.current.weather[0].icon}@2x.png`}
-            alt="weather icon"
-          />
+          <hr className="weather-divider" />
 
-          <div className="weather-current-info">
-            <p className="weather-temp">{weather.current.temp}°F</p>
-            <p className="weather-description">
-              {weather.current.weather[0].description}
-            </p>
-            <p className="weather-details">
-              Feels like: {weather.current.feels_like}°F
-            </p>
-            <p className="weather-details">
-              Sunrise: {formatTime(weather.current.sunrise)}
-            </p>
-            <p className="weather-details">
-              Sunset: {formatTime(weather.current.sunset)}
+          {/* Moon Phase */}
+          <div className="weather-lunar">
+            <h4 className="weather-lunar-title">🌙 Lunar Cycle</h4>
+            <p className="weather-text">
+              {getMoonPhase(weather.daily[0].moon_phase)}
             </p>
           </div>
+
+          <hr className="weather-divider" />
+
+          {/* 7-Day Forecast */}
+          <h4 className="weather-section-title">7-Day Forecast</h4>
+          <div className="weather-forecast-grid">
+            {weather.daily.slice(1, 8).map((day, index) => (
+              <div key={index} className="weather-forecast-item">
+                <p className="weather-forecast-day">{formatDay(day.dt)}</p>
+
+                <img
+                  className="weather-forecast-icon"
+                  src={`https://openweathermap.org/img/wn/${day.weather[0].icon}.png`}
+                  alt="forecast icon"
+                />
+
+                <p className="weather-forecast-text">High: {day.temp.max}°F</p>
+                <p className="weather-forecast-text">Low: {day.temp.min}°F</p>
+              </div>
+            ))}
+          </div>
         </div>
-
-        <hr className="weather-divider" />
-
-        {/* Moon Phase */}
-        <div className="weather-lunar">
-        <h4 className="weather-lunar-title">🌙 Lunar Cycle</h4>
-        <p className="weather-text">
-          {getMoonPhase(weather.daily[0].moon_phase)}
-        </p>
-        </div>
-
-        <hr className="weather-divider" />
-
-        {/* 7-Day Forecast */}
-        <h4 className="weather-section-title">7-Day Forecast</h4>
-        <div className="weather-forecast-grid">
-          {weather.daily.slice(1, 8).map((day, index) => (
-            <div key={index} className="weather-forecast-item">
-              <p className="weather-forecast-day">{formatDay(day.dt)}</p>
-
-              <img
-                className="weather-forecast-icon"
-                src={`https://openweathermap.org/img/wn/${day.weather[0].icon}.png`}
-                alt="forecast icon"
-              />
-
-              <p className="weather-forecast-text">High: {day.temp.max}°F</p>
-              <p className="weather-forecast-text">Low: {day.temp.min}°F</p>
-            </div>
-          ))}
-        </div>
-
-      </div>
-    )}
-  </div>
-);
+      )}
+    </div>
+  );
 }

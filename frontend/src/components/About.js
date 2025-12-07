@@ -70,15 +70,17 @@ function About() {
           <div className="name">Marbue Norman</div>
           <img src={marbue1} alt="Marbue Norman" />
           <p>
-           Marbue is currently completing an intensive software development program at We Can Code IT, 
-           specializing in Java and the Spring Framework for full-stack development. 
-           She is building a technical foundation focused on creating efficient 
-           and scalable applications. Her background in healthcare
-           has instilled key competencies, including exceptional attention to detail, strong adaptability,
-           and a constant commitment to quality. Marbue successfully applies 
-           these disciplined qualities to her technical work. 
-           Her ongoing project portfolio demonstrates growing proficiency in developing robust,
-           object-oriented solutions. When not coding, she is spending time with her son.
+            Marbue is currently completing an intensive software development
+            program at We Can Code IT, specializing in Java and the Spring
+            Framework for full-stack development. She is building a technical
+            foundation focused on creating efficient and scalable applications.
+            Her background in healthcare has instilled key competencies,
+            including exceptional attention to detail, strong adaptability, and
+            a constant commitment to quality. Marbue successfully applies these
+            disciplined qualities to her technical work. Her ongoing project
+            portfolio demonstrates growing proficiency in developing robust,
+            object-oriented solutions. When not coding, she is spending time
+            with her son.
           </p>
         </div>
 

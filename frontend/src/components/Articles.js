@@ -14,7 +14,9 @@ export default function Articles() {
     setCurrentArticle(null);
 
     try {
-      const response = await fetch(`http://localhost:8080/api/article/${topic}`);
+      const response = await fetch(
+        `http://localhost:8080/api/article/${topic}`
+      );
       const data = await response.json();
 
       if (Array.isArray(data) && data.length > 0) {
@@ -46,13 +48,22 @@ export default function Articles() {
       <div className="mental-buttons-container">
         <h2 className="mental-buttons-title">Select an Article Topic</h2>
         <div className="article-buttons-row">
-          <button className="mental-button depression" onClick={() => fetchArticles("depression")}>
+          <button
+            className="mental-button depression"
+            onClick={() => fetchArticles("depression")}
+          >
             Depression
           </button>
-          <button className="mental-button anxiety" onClick={() => fetchArticles("anxiety")}>
+          <button
+            className="mental-button anxiety"
+            onClick={() => fetchArticles("anxiety")}
+          >
             Anxiety
           </button>
-          <button className="mental-button stress" onClick={() => fetchArticles("stress")}>
+          <button
+            className="mental-button stress"
+            onClick={() => fetchArticles("stress")}
+          >
             Stress
           </button>
         </div>
@@ -86,10 +97,7 @@ export default function Articles() {
 
             <div className="article-buttons-row" style={{ marginTop: "15px" }}>
               {articles.length > 1 && (
-                <button
-                  className="next-article-button"
-                  onClick={nextArticle}
-                >
+                <button className="next-article-button" onClick={nextArticle}>
                   Next Article
                 </button>
               )}
