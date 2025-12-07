@@ -2645,3 +2645,42 @@ body {
     }
   }
 
+/* =======================================================
+   WEATHER LOCATION PLUGIN
+   Drop-in add-on for existing weather widget
+======================================================= */
+
+.weather-location {
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.6rem;
+
+  color: rgb(31, 31, 31);
+  background: radial-gradient(circle, #d1c4aa 0%, #a8c3a0 85%);
+  padding: 8px 16px;
+  border-radius: 20px;
+
+  box-shadow:
+    inset 2px 2px 4px rgba(255, 255, 255, 0.6),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.25),
+    2px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Mobile-friendly scaling */
+@media (max-width: 900px) {
+  .weather-location {
+    font-size: 1rem;
+    padding: 6px 12px;
+  }
+}
+
+.weather-location-text {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  letter-spacing: 0.3px;
+}
