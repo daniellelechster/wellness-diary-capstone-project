@@ -33,8 +33,11 @@ function Header({ musicOn, toggleMusic }) {
         <nav className="main-nav">
           {/* LEFT SIDE: logo */}
           <div className="nav-logo">
+          <Link to="/">
             <img src={logo} alt="Logo" className="navbar-logo" />
+          </Link>
           </div>
+          
 
           {/* MIDDLE: Title */}
           <h1 className="site-title">WELLNESS DIARY</h1>
