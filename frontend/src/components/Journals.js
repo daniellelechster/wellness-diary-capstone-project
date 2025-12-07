@@ -13,18 +13,39 @@ function Journals({ journals, setJournals, entries }) {
 
   const today = new Date().toISOString().split("T")[0];
   const todaysMood = entries[today]?.mood;
-  
+
   /* -------------------------
      Prompts Based on Mood
   --------------------------*/
   const getPromptsForMood = useCallback((mood) => {
-    if (mood >= 8) return ["What made you feel grateful today?", "What's something that brought you joy?"];
-    if (mood >= 5) return ["What went well today?", "What's something you'd like to improve tomorrow?"];
-    return ["What’s been challenging today?", "What can you do to be kind to yourself?"];
+    if (mood >= 8)
+      return [
+        "What made you feel grateful today?",
+        "What's something that brought you joy?",
+      ];
+    if (mood >= 5)
+      return [
+        "What went well today?",
+        "What's something you'd like to improve tomorrow?",
+      ];
+    return [
+      "What’s been challenging today?",
+      "What can you do to be kind to yourself?",
+    ];
   }, []);
 
   const getMoodLabel = (mood) =>
-    ["Very Low 😒","Down 😢","Frustrated 😣","Meh 😕","In the Middle 😐","Okay 😏","Content 😊","Very Good 😄","Amazing 😍"][mood - 1] || "Not tracked";
+    [
+      "Very Low 😒",
+      "Down 😢",
+      "Frustrated 😣",
+      "Meh 😕",
+      "In the Middle 😐",
+      "Okay 😏",
+      "Content 😊",
+      "Very Good 😄",
+      "Amazing 😍",
+    ][mood - 1] || "Not tracked";
 
   /* -------------------------
      Update mood + prompt when entries change
@@ -36,7 +57,7 @@ function Journals({ journals, setJournals, entries }) {
       setCurrentPrompt(prompts[Math.floor(Math.random() * prompts.length)]);
     } else {
       setMoodLabel("Not tracked");
-      // ✅ Provide a fallback prompt
+      // Provide a fallback prompt
       setCurrentPrompt("Write anything that’s on your mind today.");
     }
   }, [todaysMood, getPromptsForMood]);
@@ -47,7 +68,9 @@ function Journals({ journals, setJournals, entries }) {
   useEffect(() => {
     async function fetchEntries() {
       try {
-        const res = await fetch("http://localhost:8080/api/wellness/journal/all");
+        const res = await fetch(
+          "http://localhost:8080/api/wellness/journal/all"
+        );
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
 
@@ -60,7 +83,10 @@ function Journals({ journals, setJournals, entries }) {
               text: j.text,
               createdAt: j.createdAt,
               date: created.toISOString().split("T")[0],
-              time: created.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }),
+              time: created.toLocaleTimeString([], {
+                hour: "numeric",
+                minute: "2-digit",
+              }),
             };
           })
           .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
@@ -101,7 +127,10 @@ function Journals({ journals, setJournals, entries }) {
         text: saved.text,
         createdAt: saved.createdAt,
         date: created.toISOString().split("T")[0],
-        time: created.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }),
+        time: created.toLocaleTimeString([], {
+          hour: "numeric",
+          minute: "2-digit",
+        }),
       };
 
       setJournals((prev) => [frontendEntry, ...prev]);
@@ -118,8 +147,12 @@ function Journals({ journals, setJournals, entries }) {
   const handleDeleteEntry = async (id) => {
     if (!window.confirm("Delete this entry?")) return;
     try {
-      const res = await fetch(`http://localhost:8080/api/wellness/journal/${id}`, { method: "DELETE" });
-      if (!res.ok && res.status !== 204) throw new Error(`Delete failed ${res.status}`);
+      const res = await fetch(
+        `http://localhost:8080/api/wellness/journal/${id}`,
+        { method: "DELETE" }
+      );
+      if (!res.ok && res.status !== 204)
+        throw new Error(`Delete failed ${res.status}`);
       setJournals((prev) => prev.filter((entry) => entry.id !== id));
     } catch (err) {
       console.error("Delete failed:", err);
@@ -134,23 +167,33 @@ function Journals({ journals, setJournals, entries }) {
     const entryToUpdate = journals.find((e) => e.id === id);
     if (!entryToUpdate) return;
     try {
-      const res = await fetch(`http://localhost:8080/api/wellness/journal/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...entryToUpdate, text: updatedText }),
-      });
+      const res = await fetch(
+        `http://localhost:8080/api/wellness/journal/${id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...entryToUpdate, text: updatedText }),
+        }
+      );
       if (!res.ok) throw new Error(`Update failed ${res.status}`);
       const updated = await res.json();
-      const created = updated.createdAt ? new Date(updated.createdAt) : new Date();
+      const created = updated.createdAt
+        ? new Date(updated.createdAt)
+        : new Date();
       const frontendUpdated = {
         id: updated.id,
         prompt: updated.prompt,
         text: updated.text,
         createdAt: updated.createdAt,
         date: created.toISOString().split("T")[0],
-        time: created.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }),
+        time: created.toLocaleTimeString([], {
+          hour: "numeric",
+          minute: "2-digit",
+        }),
       };
-      setJournals((prev) => prev.map((e) => (e.id === id ? frontendUpdated : e)));
+      setJournals((prev) =>
+        prev.map((e) => (e.id === id ? frontendUpdated : e))
+      );
     } catch (err) {
       console.error("Update error:", err);
       alert("Unable to update entry — try again.");
@@ -161,7 +204,10 @@ function Journals({ journals, setJournals, entries }) {
     UI
   --------------------------*/
   return (
-    <div className="journals-container" style={{ backgroundImage: `url(${serenity1})` }}>
+    <div
+      className="journals-container"
+      style={{ backgroundImage: `url(${serenity1})` }}
+    >
       <h1>Today's Journal</h1>
       <h2>Mood: {moodLabel}</h2>
 
@@ -177,12 +223,15 @@ function Journals({ journals, setJournals, entries }) {
           <button
             onClick={() => {
               const prompts = getPromptsForMood(todaysMood || "Not Tracked");
-              const randomPrompt = prompts[Math.floor(Math.random() * prompts.length)];
+              const randomPrompt =
+                prompts[Math.floor(Math.random() * prompts.length)];
               setCurrentPrompt(randomPrompt);
               setResponse("");
             }}
             style={{ marginLeft: "12px" }}
-          >New Prompt</button>
+          >
+            New Prompt
+          </button>
         </p>
 
         <textarea
@@ -203,50 +252,55 @@ function Journals({ journals, setJournals, entries }) {
         ) : (
           <ul>
             {journals.map((entry) => (
-            <li key={entry.id} className={editingEntryId === entry.id ? "editing" : ""}>
-              <strong>{entry.date}</strong> at <em>{entry.time}</em> — {entry.prompt}
-
-              {editingEntryId === entry.id ? (
-                <>
-                  <textarea
-                    value={editingText}
-                    onChange={(e) => setEditingText(e.target.value)}
-                    style={{ width: "100%", minHeight: "80px" }}
-                  />
-                  <button
-                    onClick={() => {
-                      handleEditEntry(entry.id, editingText);
-                      setEditingEntryId(null);
-                      setEditingText("");
-                    }}
-                  >
-                    Save
-                  </button>
-                  <button
-                    onClick={() => {
-                      setEditingEntryId(null);
-                      setEditingText("");
-                    }}
-                  >
-                    Cancel
-                  </button>
-                </>
-              ) : (
-                <>
-                  <p style={{ whiteSpace: "pre-wrap" }}>{entry.text}</p>
-                  <button onClick={() => handleDeleteEntry(entry.id)}>Delete</button>
-                  <button
-                    onClick={() => {
-                      setEditingEntryId(entry.id);
-                      setEditingText(entry.text);
-                    }}
-                  >
-                    Edit
-                  </button>
-                </>
-              )}
-            </li>
-          ))}
+              <li
+                key={entry.id}
+                className={editingEntryId === entry.id ? "editing" : ""}
+              >
+                <strong>{entry.date}</strong> at <em>{entry.time}</em> —{" "}
+                {entry.prompt}
+                {editingEntryId === entry.id ? (
+                  <>
+                    <textarea
+                      value={editingText}
+                      onChange={(e) => setEditingText(e.target.value)}
+                      style={{ width: "100%", minHeight: "80px" }}
+                    />
+                    <button
+                      onClick={() => {
+                        handleEditEntry(entry.id, editingText);
+                        setEditingEntryId(null);
+                        setEditingText("");
+                      }}
+                    >
+                      Save
+                    </button>
+                    <button
+                      onClick={() => {
+                        setEditingEntryId(null);
+                        setEditingText("");
+                      }}
+                    >
+                      Cancel
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <p style={{ whiteSpace: "pre-wrap" }}>{entry.text}</p>
+                    <button onClick={() => handleDeleteEntry(entry.id)}>
+                      Delete
+                    </button>
+                    <button
+                      onClick={() => {
+                        setEditingEntryId(entry.id);
+                        setEditingText(entry.text);
+                      }}
+                    >
+                      Edit
+                    </button>
+                  </>
+                )}
+              </li>
+            ))}
           </ul>
         )}
       </div>
@@ -255,4 +309,3 @@ function Journals({ journals, setJournals, entries }) {
 }
 
 export default Journals;
-

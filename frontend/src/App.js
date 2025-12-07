@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './App.css';
+import React, { useState, useEffect, useRef } from "react";
+import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import About from "./components/About";
@@ -13,10 +13,8 @@ import Mood from "./components/Mood";
 import Wellness from "./components/Wellness";
 import Journals from "./components/Journals";
 import WeatherDisplay from "./components/WeatherDisplay";
-import Charts from "./components/Charts";
 import musicFile from "./components/audio/music.mp3";
 import Articles from "./components/Articles";
-
 
 function App() {
   // 🎵 Audio state
@@ -33,7 +31,7 @@ function App() {
   // Journal entries state
   const [journals, setJournals] = useState([]);
 
-  // Meditation state 
+  // Meditation state
   const [meditation, setMeditation] = useState(null);
 
   // --- NEW: Exercise state ---
@@ -46,12 +44,12 @@ function App() {
   const [meals, setMeals] = useState(null);
 
   // Fetch goals once on load ---
-useEffect(() => {
-  fetch("http://localhost:8080/api/wellness/goal/all")
-    .then((res) => res.json())
-    .then((data) => setGoals(data))
-    .catch((err) => console.error("Error fetching goals:", err));
-}, []);
+  useEffect(() => {
+    fetch("http://localhost:8080/api/wellness/goal/all")
+      .then((res) => res.json())
+      .then((data) => setGoals(data))
+      .catch((err) => console.error("Error fetching goals:", err));
+  }, []);
 
   // --- Fetch moods once on load ---
   useEffect(() => {
@@ -75,60 +73,63 @@ useEffect(() => {
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
     fetch(`http://localhost:8080/api/wellness/meditation/date/${today}`)
-      .then(res => res.json())
-      .then(data => setMeditation(data))
-      .catch(err => console.error("Error fetching meditation:", err));
+      .then((res) => res.json())
+      .then((data) => setMeditation(data))
+      .catch((err) => console.error("Error fetching meditation:", err));
   }, []);
 
   // --- NEW: Fetch today's exercise once on load ---
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
     fetch(`http://localhost:8080/api/wellness/exercise/date/${today}`)
-      .then(res => res.json())
-      .then(data => setExercise(data))
-      .catch(err => console.error("Error fetching exercise:", err));
+      .then((res) => res.json())
+      .then((data) => setExercise(data))
+      .catch((err) => console.error("Error fetching exercise:", err));
   }, []);
 
   // Fetch journals
   useEffect(() => {
-  fetch("http://localhost:8080/api/wellness/journal/all")
-    .then((res) => res.json())
-    .then((data) => {
-      const mapped = data
-        .map((j) => {
-          const created = j.createdAt ? new Date(j.createdAt) : new Date();
-          return {
-            id: j.id,
-            prompt: j.prompt,
-            text: j.text,
-            createdAt: j.createdAt,
-            date: created.toISOString().split("T")[0],
-            time: created.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }),
-          };
-        })
-        .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
-      setJournals(mapped);
-    })
-    .catch((err) => console.error("Error fetching journals:", err));
-}, []);
+    fetch("http://localhost:8080/api/wellness/journal/all")
+      .then((res) => res.json())
+      .then((data) => {
+        const mapped = data
+          .map((j) => {
+            const created = j.createdAt ? new Date(j.createdAt) : new Date();
+            return {
+              id: j.id,
+              prompt: j.prompt,
+              text: j.text,
+              createdAt: j.createdAt,
+              date: created.toISOString().split("T")[0],
+              time: created.toLocaleTimeString([], {
+                hour: "numeric",
+                minute: "2-digit",
+              }),
+            };
+          })
+          .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
+        setJournals(mapped);
+      })
+      .catch((err) => console.error("Error fetching journals:", err));
+  }, []);
 
   // --- NEW: Fetch water
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
     fetch(`http://localhost:8080/api/wellness/water/date/${today}`)
-      .then(res => res.json())
-      .then(data => setHydration(data))
-      .catch(err => console.error("Error fetching hydration:", err));
+      .then((res) => res.json())
+      .then((data) => setHydration(data))
+      .catch((err) => console.error("Error fetching hydration:", err));
   }, []);
 
   // --- NEW: Fetch meals
   useEffect(() => {
     fetch("http://localhost:8080/api/wellness/meals/all")
-      .then(res => res.json())
-      .then(data => {
-        setMeals(data[data.length -1]);
+      .then((res) => res.json())
+      .then((data) => {
+        setMeals(data[data.length - 1]);
       })
-      .catch(err => console.error("Error fetching meals:", err));
+      .catch((err) => console.error("Error fetching meals:", err));
   }, []);
 
   // --- Audio effect ---
@@ -171,16 +172,66 @@ useEffect(() => {
 
         <main className="main-content">
           <Routes>
-            <Route path="/" element={<Home entries={entries} goals={goals} journals={journals} meditation={meditation} exercise={exercise} hydration={hydration} meals={meals} />} />
+            <Route
+              path="/"
+              element={
+                <Home
+                  entries={entries}
+                  goals={goals}
+                  journals={journals}
+                  meditation={meditation}
+                  exercise={exercise}
+                  hydration={hydration}
+                  meals={meals}
+                />
+              }
+            />
             <Route path="/about" element={<About />} />
-            <Route path="/journals" element={<Journals journals={journals} setJournals={setJournals} entries={entries} />} />
-            <Route path="/wellness" element={<Wellness meditation={meditation} setMeditation={setMeditation} exercise={exercise} setExercise={setExercise} hydration={hydration} setHydration={setHydration} meals={meals} setMeals={setMeals} />} />
-            <Route path="/goals" element={<Goals goals={goals} setGoals={setGoals} />} />
-            <Route path="/calendar" element={<Calendar entries={entries} selectedDate={selectedDate} onDateSelect={setSelectedDate} />} />
+            <Route
+              path="/journals"
+              element={
+                <Journals
+                  journals={journals}
+                  setJournals={setJournals}
+                  entries={entries}
+                />
+              }
+            />
+            <Route
+              path="/wellness"
+              element={
+                <Wellness
+                  meditation={meditation}
+                  setMeditation={setMeditation}
+                  exercise={exercise}
+                  setExercise={setExercise}
+                  hydration={hydration}
+                  setHydration={setHydration}
+                  meals={meals}
+                  setMeals={setMeals}
+                />
+              }
+            />
+            <Route
+              path="/goals"
+              element={<Goals goals={goals} setGoals={setGoals} />}
+            />
+            <Route
+              path="/calendar"
+              element={
+                <Calendar
+                  entries={entries}
+                  selectedDate={selectedDate}
+                  onDateSelect={setSelectedDate}
+                />
+              }
+            />
             <Route path="/weatherDisplay" element={<WeatherDisplay />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/charts" element={<Charts />} />
-            <Route path="/mood" element={<Mood entries={entries} setEntries={setEntries} />} />
+            <Route
+              path="/mood"
+              element={<Mood entries={entries} setEntries={setEntries} />}
+            />
             <Route path="/articles" element={<Articles />} />
           </Routes>
         </main>

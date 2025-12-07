@@ -1,14 +1,13 @@
-import React from 'react'
+import React from "react";
 
 function Footer() {
-    return (
-        <nav className="footer-container">
-        <footer>
-            <p>&copy; 2025 CodeBusters</p>
-            
-        </footer>
-        </nav>
-    );
+  return (
+    <nav className="footer-container">
+      <footer>
+        <p>&copy; 2025 CodeBusters</p>
+      </footer>
+    </nav>
+  );
 }
 
 export default Footer;

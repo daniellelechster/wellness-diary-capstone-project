@@ -11,7 +11,7 @@ const moodMap = {
   6: { label: "Okay", emoji: "😏", color: "#9acd32" },
   7: { label: "Content", emoji: "😊", color: "#32cd32" },
   8: { label: "Very Good", emoji: "😄", color: "#00fa9a" },
-  9: { label: "Amazing", emoji: "😍", color: "#00ced1" }
+  9: { label: "Amazing", emoji: "😍", color: "#00ced1" },
 };
 
 export default function Mood({ entries, setEntries }) {
@@ -44,13 +44,15 @@ export default function Mood({ entries, setEntries }) {
         const saved = await res.json();
         const dateStr = saved.date.split("T")[0];
 
-        setEntries(prev => ({
+        setEntries((prev) => ({
           ...prev,
-          [dateStr]: { date: dateStr, mood: saved.rating }
+          [dateStr]: { date: dateStr, mood: saved.rating },
         }));
 
         if (moodMap[mood]) {
-          setNotification(`Mood submitted: ${moodMap[mood].label} ${moodMap[mood].emoji}`);
+          setNotification(
+            `Mood submitted: ${moodMap[mood].label} ${moodMap[mood].emoji}`
+          );
         } else {
           setNotification(`Mood submitted: ${mood}`);
         }
@@ -82,11 +84,13 @@ export default function Mood({ entries, setEntries }) {
       <div className="emojiNumberContainer">
         <div className="emojiRow">
           {Object.values(moodMap).map((m, i) => (
-            <span key={i} className="emojiItem">{m.emoji}</span>
+            <span key={i} className="emojiItem">
+              {m.emoji}
+            </span>
           ))}
         </div>
         <div className="numberRow">
-          {Object.keys(moodMap).map(num => (
+          {Object.keys(moodMap).map((num) => (
             <span key={num}>{num}</span>
           ))}
         </div>

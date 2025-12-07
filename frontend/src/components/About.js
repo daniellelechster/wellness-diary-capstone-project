@@ -3,7 +3,6 @@ import kaylabiopic from "./images/kaylabiopic.png";
 import jaysensbiopic from "./images/jaysensbiopic.png";
 import marbue1 from "./images/marbuebiopic.jpeg";
 import nealsbiopic from "./images/nealsbiopic.png";
-// import CodeBustersLogo from "./images/CodeBustersLogo.png";
 
 import "../App.css";
 
@@ -12,31 +11,21 @@ function About() {
     <div className="about-container">
       <h2>ABOUT</h2>
 
-      {/* <div>
-        <img
-          src={CodeBustersLogo}
-          width={300}
-          height={375}
-          id="codeEmail"
-          alt="CodeBusters"
-        />
-      </div> */}
-
       <div className="about-body">
         {/* Neal */}
         <div className="member-block">
           <div className="name">Neal Billig</div>
           <img src={nealsbiopic} alt="Neal Billig" />
           <p>
-            Neal is an emerging full-stack Java developer with a passion for 
-            building things, solving problems, and learning about new technology. 
-            After several years as a lead window installer, he developed strong 
-            leadership and teamwork skills that now translate into his 
-            collaborative coding style. He brings a high level of attention to 
-            detail to debugging and development, helping teams create clean, 
-            reliable solutions. Neal is driven by curiosity and a desire to 
-            constantly improve his craft. When he isn’t coding, he enjoys 
-            spending time with his wife and their two cats and unwinding 
+            Neal is an emerging full-stack Java developer with a passion for
+            building things, solving problems, and learning about new
+            technology. After several years as a lead window installer, he
+            developed strong leadership and teamwork skills that now translate
+            into his collaborative coding style. He brings a high level of
+            attention to detail to debugging and development, helping teams
+            create clean, reliable solutions. Neal is driven by curiosity and a
+            desire to constantly improve his craft. When he isn’t coding, he
+            enjoys spending time with his wife and their two cats and unwinding
             with a good movie.
           </p>
         </div>
@@ -84,15 +73,17 @@ function About() {
           <div className="name">Marbue Norman</div>
           <img src={marbue1} alt="Marbue Norman" />
           <p>
-           Marbue is currently completing an intensive software development program at We Can Code IT, 
-           specializing in Java and the Spring Framework for full-stack development. 
-           She is building a technical foundation focused on creating efficient 
-           and scalable applications. Her background in healthcare
-           has instilled key competencies, including exceptional attention to detail, strong adaptability,
-           and a constant commitment to quality. Marbue successfully applies 
-           these disciplined qualities to her technical work. 
-           Her ongoing project portfolio demonstrates growing proficiency in developing robust,
-           object-oriented solutions. When not coding, she is spending time with her son.
+            Marbue is currently completing an intensive software development
+            program at We Can Code IT, specializing in Java and the Spring
+            Framework for full-stack development. She is building a technical
+            foundation focused on creating efficient and scalable applications.
+            Her background in healthcare has instilled key competencies,
+            including exceptional attention to detail, strong adaptability, and
+            a constant commitment to quality. Marbue successfully applies these
+            disciplined qualities to her technical work. Her ongoing project
+            portfolio demonstrates growing proficiency in developing robust,
+            object-oriented solutions. When not coding, she is spending time
+            with her son.
           </p>
         </div>
 

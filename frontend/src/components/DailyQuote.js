@@ -1,29 +1,24 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function DailyQuote() {
   const [quote, setQuote] = useState(null);
   const [error, setError] = useState(null);
 
-useEffect(() => {
-  let ignore = false;
-  console.log("DailyQuote mounted");
+  useEffect(() => {
+    let ignore = false;
 
-  fetch("http://localhost:8080/api/quote")
-    .then(response => {
-      // console.log("Fetch response:", response);
-      if (!response.ok) throw new Error("Failed to fetch quote");
-      return response.json();
-    })
-    .then(data => {
-      // console.log("Fetched JSON:", data);
-      if (!ignore && data?.text && data?.author) {
-        // console.log("Setting quote to:", data.text);
-        setQuote(data);
-      }
-    })
-    .catch(err => setError(err.message));
-      // console.log("Fetch error:", err);
-}, []);
+    fetch("http://localhost:8080/api/quote")
+      .then((response) => {
+        if (!response.ok) throw new Error("Failed to fetch quote");
+        return response.json();
+      })
+      .then((data) => {
+        if (!ignore && data?.text && data?.author) {
+          setQuote(data);
+        }
+      })
+      .catch((err) => setError(err.message));
+  }, []);
 
   if (error) {
     return (

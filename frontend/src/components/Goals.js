@@ -1,17 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import confetti from "canvas-confetti";
 import "./Goals.css";
-// import "../App.css";
 import SaveButton from "./SaveGoalsButton";
 
 export default function Goals({ goals = [], setGoals }) {
   const [newGoal, setNewGoal] = useState("");
   const [celebration, setCelebration] = useState(""); // 🎉 track celebration message
-
-  // Debug: log goals state whenever it changes
-  useEffect(() => {
-    console.log("Goals state:", goals);
-  }, [goals]);
 
   // --- Delete a goal ---
   const handleDeleteGoal = (id) => {
@@ -46,7 +40,6 @@ export default function Goals({ goals = [], setGoals }) {
             origin: { y: 0.6 },
           });
         }
-
       })
       .catch((err) => console.error("Error updating goal:", err));
   };
@@ -74,7 +67,11 @@ export default function Goals({ goals = [], setGoals }) {
           onChange={(e) => setNewGoal(e.target.value)}
           placeholder="Enter a new goal..."
         />
-        <SaveButton saveProp={newGoal} setGoals={setGoals} onSaved={() => setNewGoal("")} />
+        <SaveButton
+          saveProp={newGoal}
+          setGoals={setGoals}
+          onSaved={() => setNewGoal("")}
+        />
       </div>
 
       {/* Celebration message */}
@@ -90,10 +87,14 @@ export default function Goals({ goals = [], setGoals }) {
             {inProgressGoals.map((goal) => (
               <li key={goal.id}>
                 <span className="goal-text">{goal.text}</span>
-                <button onClick={() => handleUpdateStatus(goal.id, "completed")}>
+                <button
+                  onClick={() => handleUpdateStatus(goal.id, "completed")}
+                >
                   Complete
                 </button>
-                <button onClick={() => handleDeleteGoal(goal.id)}>Delete</button>
+                <button onClick={() => handleDeleteGoal(goal.id)}>
+                  Delete
+                </button>
               </li>
             ))}
           </ul>
@@ -110,10 +111,14 @@ export default function Goals({ goals = [], setGoals }) {
             {completedGoals.map((goal) => (
               <li key={goal.id}>
                 <span className="goal-text">{goal.text}</span>
-                <button onClick={() => handleUpdateStatus(goal.id, "in progress")}>
+                <button
+                  onClick={() => handleUpdateStatus(goal.id, "in progress")}
+                >
                   Undo
                 </button>
-                <button onClick={() => handleDeleteGoal(goal.id)}>Delete</button>
+                <button onClick={() => handleDeleteGoal(goal.id)}>
+                  Delete
+                </button>
               </li>
             ))}
           </ul>

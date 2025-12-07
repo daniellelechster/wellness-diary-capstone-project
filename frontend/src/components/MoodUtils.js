@@ -6,6 +6,6 @@ export const moodMap = {
   5: { label: "In the Middle 😐", color: "#FF4500", emoji: "😐" },
   6: { label: "Okay 😏", color: "#FFA500", emoji: "😏" },
   7: { label: "Content 😊", color: "#FFFF00", emoji: "😊" },
-  8: { label: "Very Good 😄", color: "#ADFF2F"/*, emoji: "😄"*/ },
+  8: { label: "Very Good 😄", color: "#ADFF2F", emoji: "😄" },
   9: { label: "Amazing 😍", color: "#228B22", emoji: "😍" },
 };
