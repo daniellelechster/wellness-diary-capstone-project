@@ -621,6 +621,7 @@ body {
   width: 100%;
   gap: 1rem;
   flex-wrap: wrap;
+  }
 
   .weather-block {
     display: flex;
@@ -2643,4 +2644,4 @@ body {
       transform: translate(-50%, -5px);
     }
   }
-}
+
