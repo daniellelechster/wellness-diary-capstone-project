@@ -1,17 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import confetti from "canvas-confetti";
 import "./Goals.css";
-// import "../App.css";
 import SaveButton from "./SaveGoalsButton";
 
 export default function Goals({ goals = [], setGoals }) {
   const [newGoal, setNewGoal] = useState("");
   const [celebration, setCelebration] = useState(""); // 🎉 track celebration message
-
-  // Debug: log goals state whenever it changes
-  useEffect(() => {
-    console.log("Goals state:", goals);
-  }, [goals]);
 
   // --- Delete a goal ---
   const handleDeleteGoal = (id) => {

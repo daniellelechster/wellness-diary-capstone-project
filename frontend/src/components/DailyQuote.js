@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState, useEffect } from "react";
 
 export default function DailyQuote() {
   const [quote, setQuote] = useState(null);
@@ -6,7 +6,6 @@ export default function DailyQuote() {
 
   useEffect(() => {
     let ignore = false;
-    console.log("DailyQuote mounted");
 
     fetch("http://localhost:8080/api/quote")
       .then((response) => {
