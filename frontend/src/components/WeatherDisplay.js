@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 export default function WeatherDisplay() {
   const [weather, setWeather] = useState(null);
   const [weatherError, setWeatherError] = useState(null);
+  const [locationName, setLocationName] = useState(null);
 
   const getMoonPhase = (phase) => {
     if (phase === 0) return "🌑 New Moon";
@@ -28,20 +29,78 @@ export default function WeatherDisplay() {
     });
   };
 
-  useEffect(() => {
-    const lat = 41.4993;
-    const lon = -81.6944;
+  const fetchLocationName = (lat, lon) => {
+    const apiKey = process.env.REACT_APP_API_KEY;
+
+    fetch(
+      `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${apiKey}`
+    )
+      .then((res) => {
+        if (!res.ok) throw new Error("location_fetch_failed");
+        return res.json();
+      })
+      .then((data) => {
+        if (data && data.length > 0) {
+          const place = data[0];
+          const city = place.name;
+          const state = place.state;
+          setLocationName(`${city}, ${state}`);
+        }
+      })
+      .catch(() => {
+        setLocationName(null);
+      });
+  };
+
+  const fetchWeather = (lat, lon) => {
     const apiKey = process.env.REACT_APP_API_KEY;
 
     fetch(
       `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&units=imperial&appid=${apiKey}`
     )
       .then((response) => {
-        if (!response.ok) throw new Error("Weather fetch failed");
+        if (response.status === 401) {
+          throw new Error("bad_api_key");
+        }
+        if (!response.ok) {
+          throw new Error("weather_fetch_failed");
+        }
         return response.json();
       })
       .then((data) => setWeather(data))
-      .catch((err) => setWeatherError(err.message));
+      .catch((err) => {
+        if (err.message === "bad_api_key") {
+          setWeatherError("Unable to load weather, please check your API key.");
+        } else {
+          setWeatherError("Unable to load weather for your location.");
+        }
+      });
+  };
+
+  const requestLocation = () => {
+    setWeatherError(null);
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        fetchWeather(latitude, longitude);
+        fetchLocationName(latitude, longitude);
+      },
+      () => {
+        setWeatherError(
+          "Location access denied. Please enable it in your browser settings."
+        );
+      }
+    );
+  };
+
+  useEffect(() => {
+    if (!navigator.geolocation) {
+      setWeatherError("Geolocation is not supported by this browser.");
+      return;
+    }
+
+    requestLocation();
   }, []);
 
   return (
@@ -51,13 +110,21 @@ export default function WeatherDisplay() {
       )}
 
       {weatherError && (
-        <p className="weather-error-text">
-          Unable to load weather, please check your API key.
-        </p>
+        <div>
+          <p className="weather-error-text">{weatherError}</p>
+          <button className="weather-retry-button" onClick={requestLocation}>
+            Retry Location
+          </button>
+        </div>
       )}
 
       {weather && (
         <div className="weather-block">
+          {/* Location Display */}
+          {locationName && (
+            <h3 className="weather-location-text">📍 {locationName}</h3>
+          )}
+
           {/* Current Conditions */}
           <div className="weather-current">
             <img
@@ -67,12 +134,14 @@ export default function WeatherDisplay() {
             />
 
             <div className="weather-current-info">
-              <p className="weather-temp">{weather.current.temp}°F</p>
+              <p className="weather-temp">
+                {Math.round(weather.current.temp)}°F
+              </p>
               <p className="weather-description">
                 {weather.current.weather[0].description}
               </p>
               <p className="weather-details">
-                Feels like: {weather.current.feels_like}°F
+                Feels like: {Math.round(weather.current.feels_like)}°F
               </p>
               <p className="weather-details">
                 Sunrise: {formatTime(weather.current.sunrise)}
@@ -95,7 +164,7 @@ export default function WeatherDisplay() {
 
           <hr className="weather-divider" />
 
-          {/* 7-Day Forecast */}
+          {/* Forecast */}
           <h4 className="weather-section-title">7-Day Forecast</h4>
           <div className="weather-forecast-grid">
             {weather.daily.slice(1, 8).map((day, index) => (
@@ -108,8 +177,12 @@ export default function WeatherDisplay() {
                   alt="forecast icon"
                 />
 
-                <p className="weather-forecast-text">High: {day.temp.max}°F</p>
-                <p className="weather-forecast-text">Low: {day.temp.min}°F</p>
+                <p className="weather-forecast-text">
+                  High: {Math.round(day.temp.max)}°F
+                </p>
+                <p className="weather-forecast-text">
+                  Low: {Math.round(day.temp.min)}°F
+                </p>
               </div>
             ))}
           </div>
