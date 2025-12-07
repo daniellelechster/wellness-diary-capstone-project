@@ -2248,7 +2248,7 @@ body {
     gap: 15px;
   }
 
-.mental-button {
+  .mental-button {
     background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
     border: 1px solid #b9b8b8;
     color: rgba(94, 94, 94);
@@ -2259,33 +2259,34 @@ body {
     margin-left: 2%;
     margin-top: 10px;
     transform: scale(1); /* default scale */
-    transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
+    transition: background-color 0.3s ease, transform 0.3s ease,
+      border-color 0.3s ease, box-shadow 0.3s ease;
+  }
 
-.mental-button:hover {
+  .mental-button:hover {
     background-color: #a8c3a0;
     transform: scale(1.05);
     border-color: #888;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
 
-/* Article container */
-.article-container {
-  margin: 40px auto;
-  padding: 25px;
-  width: 80%;
-  max-width: 800px;
-  background: #8d9491;
-  border-radius: 20px;
-  backdrop-filter: blur(6px);
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-  position: relative;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border-radius: 14px;
-  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
-    inset 4px 4px 8px rgba(0, 0, 0, 0.35), 4px 6px 12px rgba(0, 0, 0, 0.2);
-}
+  /* Article container */
+  .article-container {
+    margin: 40px auto;
+    padding: 25px;
+    width: 80%;
+    max-width: 800px;
+    background: #8d9491;
+    border-radius: 20px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 14px;
+    box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
+      inset 4px 4px 8px rgba(0, 0, 0, 0.35), 4px 6px 12px rgba(0, 0, 0, 0.2);
+  }
 
   /* Placeholder logo (shows before clicking) */
   .article-placeholder {
@@ -2318,19 +2319,18 @@ body {
     color: black;
   }
 
-/* Article image — FIXED */
-.article-image {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
-  margin: 20px auto;
-  border-radius: 10px;
-}
+  /* Article image — FIXED */
+  .article-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    margin: 20px auto;
+    border-radius: 10px;
+  }
 
-
-/* Link */
-.article-link-button {
+  /* Link */
+  .article-link-button {
     background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
     border: 1px solid #b9b8b8;
     color: rgba(94, 94, 94);
@@ -2341,10 +2341,11 @@ body {
     margin-left: 2%;
     margin-top: 10px;
     transform: scale(1); /* default scale */
-    transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
+    transition: background-color 0.3s ease, transform 0.3s ease,
+      border-color 0.3s ease, box-shadow 0.3s ease;
+  }
 
-.next-article-button {
+  .next-article-button {
     background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a8c3a0 60%);
     border: 1px solid #b9b8b8;
     color: rgba(94, 94, 94);
@@ -2353,24 +2354,25 @@ body {
     cursor: pointer;
     font-size: 1rem;
     margin-left: 2%;
-    margin-top: 10px;    
+    margin-top: 10px;
     transform: scale(1); /* default scale */
-    transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
+    transition: background-color 0.3s ease, transform 0.3s ease,
+      border-color 0.3s ease, box-shadow 0.3s ease;
+  }
 
-.article-link-button:hover {
+  .article-link-button:hover {
     background-color: #a8c3a0;
     transform: scale(1.05);
     border-color: #888;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
 
-.next-article-button:hover {
+  .next-article-button:hover {
     background-color: #a8c3a0;
     transform: scale(1.05);
     border-color: #888;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
 
   /* ============================================
    📌 LARGE TABLETS / SMALL LAPTOPS
@@ -2612,11 +2614,11 @@ body {
     z-index: 10; /* ensures it overlays chart */
   }
 
-.moodNotification.fadeOut {
-  animation: fadeOut 0.3s ease-in-out forwards;
-}
+  .moodNotification.fadeOut {
+    animation: fadeOut 0.3s ease-in-out forwards;
+  }
 
-.articles-page {
+  .articles-page {
     padding-top: 50px; /* header fully stacked in mobile mode */
   }
 
