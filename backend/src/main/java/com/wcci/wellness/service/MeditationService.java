@@ -15,9 +15,5 @@ public interface MeditationService {
 
     Meditation saveMeditation(Meditation meditation);
 
-    Meditation logMinutes(LocalDate date, int minutes);
-
-    Meditation toggleCompleted(LocalDate date);
-
     void deleteMeditation(long id);
 }

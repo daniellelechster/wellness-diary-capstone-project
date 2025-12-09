@@ -44,26 +44,17 @@ public class WellnessPopulator implements CommandLineRunner {
         public void run(String... args) {
 
                 // ---------- MEDITATION ----------
-                Meditation meditation1 = new Meditation(false, "", 5);
-                meditation1.setCreatedAt(LocalDateTime.now().minusDays(10));
-                Meditation meditation2 = new Meditation(true, "", 10);
-                meditation2.setCreatedAt(LocalDateTime.now().minusDays(9));
-                Meditation meditation3 = new Meditation(false, "", 7);
-                meditation3.setCreatedAt(LocalDateTime.now().minusDays(8));
-                Meditation meditation4 = new Meditation(true, "", 12);
-                meditation4.setCreatedAt(LocalDateTime.now().minusDays(7));
-                Meditation meditation5 = new Meditation(false, "", 8);
-                meditation5.setCreatedAt(LocalDateTime.now().minusDays(6));
-                Meditation meditation6 = new Meditation(true, "", 15);
-                meditation6.setCreatedAt(LocalDateTime.now().minusDays(5));
-                Meditation meditation7 = new Meditation(false, "", 6);
-                meditation7.setCreatedAt(LocalDateTime.now().minusDays(4));
-                Meditation meditation8 = new Meditation(true, "", 20);
-                meditation8.setCreatedAt(LocalDateTime.now().minusDays(3));
-                Meditation meditation9 = new Meditation(false, "", 10);
-                meditation9.setCreatedAt(LocalDateTime.now().minusDays(2));
-                Meditation meditation10 = new Meditation(true, "", 25);
-                meditation10.setCreatedAt(LocalDateTime.now().minusDays(1));
+                Meditation meditation1 = new Meditation(false, "", 5, OffsetDateTime.now().minusDays(10));                
+                Meditation meditation2 = new Meditation(true, "", 10, OffsetDateTime.now().minusDays(9));                
+                Meditation meditation3 = new Meditation(false, "", 7, OffsetDateTime.now().minusDays(8));                
+                Meditation meditation4 = new Meditation(true, "", 12, OffsetDateTime.now().minusDays(7));                
+                Meditation meditation5 = new Meditation(false, "", 8, OffsetDateTime.now().minusDays(6));                
+                Meditation meditation6 = new Meditation(true, "", 15, OffsetDateTime.now().minusDays(5));                
+                Meditation meditation7 = new Meditation(false, "", 6, OffsetDateTime.now().minusDays(4));                
+                Meditation meditation8 = new Meditation(true, "", 20, OffsetDateTime.now().minusDays(3));                
+                Meditation meditation9 = new Meditation(false, "", 10, OffsetDateTime.now().minusDays(2));                
+                Meditation meditation10 = new Meditation(true, "", 25, OffsetDateTime.now().minusDays(1));
+                
 
                 meditationRepository.saveAll(List.of(
                                 meditation1, meditation2, meditation3, meditation4, meditation5,

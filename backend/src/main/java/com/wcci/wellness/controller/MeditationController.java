@@ -48,18 +48,10 @@ public class MeditationController {
     public ResponseEntity<List<Meditation>> getAllMeditations() {
         return ResponseEntity.ok(meditationService.getAllMeditations());
     }
-
-    // @GetMapping
-    // public ResponseEntity<List<Meditation>> getAllMeditationsShortcut() {
-    //     return ResponseEntity.ok(meditationService.getAllMeditations());
-    // }
-
-
+    
     // ✅ Add a new meditation
     @PostMapping
-    public ResponseEntity<Meditation> addMeditation(@RequestBody Meditation meditation) {
-        meditation.setMinutes(Math.max(0, meditation.getMinutes()));
-        meditation.setCompleted(meditation.getMinutes() > 0);
+    public ResponseEntity<Meditation> addMeditation(@RequestBody Meditation meditation) {        
         Meditation savedMeditation = meditationService.saveMeditation(meditation);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedMeditation);
     }
