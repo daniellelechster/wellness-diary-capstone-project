@@ -20,16 +20,16 @@ public class Exercise {
     private boolean completed;
     private String text;
     private int minutes;
-    private LocalDateTime createdAt = LocalDateTime.now(ZoneId.of("America/New_York"));
+    private LocalDateTime createdAt;
 
     public Exercise() {
     }
 
-    public Exercise(boolean completed, String text, int minutes) {
+    public Exercise(boolean completed, String text, int minutes, LocalDateTime createdAt) {
         this.completed = completed;
         this.text = text;
         this.minutes = minutes;
-        this.createdAt = LocalDateTime.now();
+        this.createdAt = createdAt;
     }
 
     public void setId(Long id) {

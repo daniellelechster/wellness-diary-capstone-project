@@ -39,9 +39,7 @@ public class ExerciseController {
     }
 
     @PostMapping
-    public ResponseEntity<Exercise> addExercise(@RequestBody Exercise exercise) {
-        exercise.setMinutes(Math.max(0, exercise.getMinutes()));
-        exercise.setCompleted(exercise.getMinutes() > 0);
+    public ResponseEntity<Exercise> addExercise(@RequestBody Exercise exercise) {        
         Exercise savedExercise = exerciseService.saveExercise(exercise);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedExercise);
     }

@@ -39,42 +39,9 @@ public class ExerciseServiceImpl implements ExerciseService {
     }
 
     @Override
-    public Exercise saveExercise(Exercise exercise) {
-        // Clamp minutes and sync completed flag
+    public Exercise saveExercise(Exercise exercise) {        
         exercise.setMinutes(Math.max(0, exercise.getMinutes()));
         exercise.setCompleted(exercise.getMinutes() > 0);
-        return exerciseRepository.save(exercise);
-    }
-
-    @Override
-    public Exercise logMinutes(LocalDate date, int minutes) {
-        // If you still want a helper to add minutes to the first exercise of the day
-        List<Exercise> exercises = getExercisesByDate(date);
-        if (exercises.isEmpty()) {
-            Exercise newExercise = new Exercise(false, "", Math.max(0, minutes));
-            newExercise.setCreatedAt(LocalDateTime.now());
-            newExercise.setCompleted(newExercise.getMinutes() > 0);
-            return exerciseRepository.save(newExercise);
-        } else {
-            Exercise exercise = exercises.get(0); // pick first entry
-            exercise.setMinutes(Math.max(0, exercise.getMinutes() + minutes));
-            exercise.setCompleted(exercise.getMinutes() > 0);
-            return exerciseRepository.save(exercise);
-        }
-    }
-
-    @Override
-    public Exercise toggleCompleted(LocalDate date) {
-        List<Exercise> exercises = getExercisesByDate(date);
-        if (exercises.isEmpty()) {
-            throw new RuntimeException("No exercises found for date: " + date);
-        }
-        Exercise exercise = exercises.get(0); // toggle first entry
-        boolean newCompleted = !exercise.isCompleted();
-        exercise.setCompleted(newCompleted);
-        if (!newCompleted) {
-            exercise.setMinutes(0);
-        }
         return exerciseRepository.save(exercise);
     }
 

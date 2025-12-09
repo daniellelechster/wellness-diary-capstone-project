@@ -15,9 +15,5 @@ public interface ExerciseService {
 
     Exercise saveExercise(Exercise exercise);
 
-    Exercise logMinutes(LocalDate date, int minutes);
-
-    Exercise toggleCompleted(LocalDate date);
-
     void deleteExercise(Long id);
 }

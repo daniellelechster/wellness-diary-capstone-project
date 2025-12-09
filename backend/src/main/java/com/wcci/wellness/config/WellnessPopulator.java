@@ -69,26 +69,16 @@ public class WellnessPopulator implements CommandLineRunner {
                                 meditation6, meditation7, meditation8, meditation9, meditation10));
 
                 // ---------- EXERCISE ----------
-                Exercise exercise1 = new Exercise(true, "Morning jog", 20);
-                exercise1.setCreatedAt(LocalDateTime.now().minusDays(10));
-                Exercise exercise2 = new Exercise(false, "Light stretching", 5);
-                exercise2.setCreatedAt(LocalDateTime.now().minusDays(9));
-                Exercise exercise3 = new Exercise(true, "Gym session", 45);
-                exercise3.setCreatedAt(LocalDateTime.now().minusDays(8));
-                Exercise exercise4 = new Exercise(false, "Yoga session", 30);
-                exercise4.setCreatedAt(LocalDateTime.now().minusDays(7));
-                Exercise exercise5 = new Exercise(true, "Evening walk", 15);
-                exercise5.setCreatedAt(LocalDateTime.now().minusDays(6));
-                Exercise exercise6 = new Exercise(false, "Bike ride", 25);
-                exercise6.setCreatedAt(LocalDateTime.now().minusDays(5));
-                Exercise exercise7 = new Exercise(true, "HIIT workout", 35);
-                exercise7.setCreatedAt(LocalDateTime.now().minusDays(4));
-                Exercise exercise8 = new Exercise(false, "Swimming", 50);
-                exercise8.setCreatedAt(LocalDateTime.now().minusDays(3));
-                Exercise exercise9 = new Exercise(true, "Pilates", 40);
-                exercise9.setCreatedAt(LocalDateTime.now().minusDays(2));
-                Exercise exercise10 = new Exercise(true, "Weight lifting", 60);
-                exercise10.setCreatedAt(LocalDateTime.now().minusDays(1));
+                Exercise exercise1 = new Exercise(true, "Morning jog", 20, LocalDateTime.now().minusDays(10));                
+                Exercise exercise2 = new Exercise(false, "Light stretching", 5, LocalDateTime.now().minusDays(9));                
+                Exercise exercise3 = new Exercise(true, "Gym session", 45, LocalDateTime.now().minusDays(8));
+                Exercise exercise4 = new Exercise(false, "Yoga session", 30, LocalDateTime.now().minusDays(7));
+                Exercise exercise5 = new Exercise(true, "Evening walk", 15, LocalDateTime.now().minusDays(6));
+                Exercise exercise6 = new Exercise(false, "Bike ride", 25, LocalDateTime.now().minusDays(5));
+                Exercise exercise7 = new Exercise(true, "HIIT workout", 35, LocalDateTime.now().minusDays(4));
+                Exercise exercise8 = new Exercise(false, "Swimming", 50, LocalDateTime.now().minusDays(3));
+                Exercise exercise9 = new Exercise(true, "Pilates", 40, LocalDateTime.now().minusDays(2));
+                Exercise exercise10 = new Exercise(true, "Weight lifting", 60, LocalDateTime.now().minusDays(1));
 
                 exerciseRepository.saveAll(List.of(
                                 exercise1, exercise2, exercise3, exercise4, exercise5,

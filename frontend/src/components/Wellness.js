@@ -435,7 +435,9 @@ function Wellness({
               <ul className="exercise-list">
                 {exerciseList
                   .filter(ex => ex.minutes > 0)
-                  .map((ex) => (
+                  .map((ex) => {
+                    {/* console.log(ex); */}
+                    return (
                     <li key={ex.id} className="exercise-row">
                       <span>{ex.text} - {ex.minutes} minutes</span>
                       {ex.createdAt && (
@@ -447,7 +449,7 @@ function Wellness({
                       
                       <button onClick={() => deleteExercise(ex.id)}>Delete</button>
                     </li>
-                  ))}
+                  )})}
               </ul>
             ) : (
               <p>No exercises logged yet.</p>
@@ -464,7 +466,9 @@ function Wellness({
         style={{ backgroundImage: `url(${nutritionImg})` }}
       >
         <div className="meals-card">
-          {["breakfast", "lunch", "dinner"].map((meal) => (
+          {["breakfast", "lunch", "dinner"].map((meal) => {
+            console.log(meals?.[`${meal}Timestamp`]);
+            return(
             <div key={meal}>
               <label>
                 <input
@@ -482,7 +486,7 @@ function Wellness({
                 </p>
               )}
             </div>
-          ))}
+          )})}
 
           {/* Snacks */}
           <div className="snacks-row">
