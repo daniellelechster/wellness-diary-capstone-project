@@ -7,9 +7,9 @@ import com.wcci.wellness.entity.Exercise;
 
 public interface ExerciseService {
 
-    Exercise getExerciseById(Long id);
+    Exercise getExerciseById(Long id);    
 
-    Exercise getExerciseByDate(LocalDate date);
+    List<Exercise> getExercisesByDate(LocalDate date);
 
     List<Exercise> getAllExercises();
 
@@ -18,4 +18,6 @@ public interface ExerciseService {
     Exercise logMinutes(LocalDate date, int minutes);
 
     Exercise toggleCompleted(LocalDate date);
+
+    void deleteExercise(Long id);
 }

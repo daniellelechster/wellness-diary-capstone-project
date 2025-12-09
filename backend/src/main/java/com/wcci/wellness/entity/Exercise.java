@@ -1,6 +1,8 @@
 package com.wcci.wellness.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +20,7 @@ public class Exercise {
     private boolean completed;
     private String text;
     private int minutes;
-    private LocalDate createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now(ZoneId.of("America/New_York"));
 
     public Exercise() {
     }
@@ -27,7 +29,7 @@ public class Exercise {
         this.completed = completed;
         this.text = text;
         this.minutes = minutes;
-        this.createdAt = LocalDate.now();
+        this.createdAt = LocalDateTime.now();
     }
 
     public void setId(Long id) {
@@ -62,11 +64,11 @@ public class Exercise {
         this.minutes = minutes;
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 }

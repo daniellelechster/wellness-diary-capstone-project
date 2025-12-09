@@ -17,11 +17,16 @@ export default function Home({
 
   // --- Build wellness summary directly from props ---
   const wellnessSummary = {
-    meditation: meditation?.completed
+    meditation: Array.isArray(meditation) && meditation.length > 0
+      ? `${meditation[0].minutes} min meditated`
+      : meditation?.completed
       ? `${meditation.minutes} min meditated`
       : "Not completed",
 
-    workout: exercise?.completed
+
+    workout: Array.isArray(exercise) && exercise.length > 0
+      ? `${exercise[0].minutes} min ${exercise[0].text || "exercise"}`
+      : exercise?.completed
       ? `${exercise.minutes} min ${exercise.text || "exercise"}`
       : "Not completed",
 
@@ -33,7 +38,7 @@ export default function Home({
 
     hydration:
       hydration?.glasses > 0
-        ? `${hydration.glasses} glasses of water`
+        ? `${hydration.glasses} ${hydration.glasses === 1 ? "glass" :"glasses"} of water`
         : "Not completed",
   };
 
@@ -257,7 +262,10 @@ export default function Home({
               {
                 key: "meals",
                 label: "Healthy Eating",
-                value: wellnessSummary?.meals,
+                value: meals && (meals.breakfast || meals.lunch || meals.dinner || meals.snacks > 0)
+                  ? `Breakfast: ${meals.breakfast ? "✓" : "○"}, Lunch: ${meals.lunch ? "✓" : "○"}, Dinner: ${meals.dinner ? "✓" : "○"}, Snacks: ${meals.snacks || 0}`
+                  : "Not logged",
+
               },
               {
                 key: "hydration",

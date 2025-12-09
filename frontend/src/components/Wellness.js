@@ -15,8 +15,13 @@ function Wellness({
   setMeals,
 }) {
   // --- Exercise API state ---
+  const [exerciseList, setExerciseList] = useState([]);
   const [exerciseLoading, setExerciseLoading] = useState(true);
   const [exerciseError, setExerciseError] = useState(null);
+
+  // --- Local form state for new exercise ---
+  const [newExerciseText, setNewExerciseText] = useState("");
+  const [newExerciseMinutes, setNewExerciseMinutes] = useState("");
 
   // --- Hydration API states ---
   const [hydrationHistory, setHydrationHistory] = useState(null);
@@ -26,6 +31,8 @@ function Wellness({
   // --- Meditation API states ---
   const [meditationError, setMeditationError] = useState(null);
   const [meditationLoading, setMeditationLoading] = useState(true);
+  const [meditationList, setMeditationList] = useState([]);
+  const [newMeditationMinutes, setNewMeditationMinutes] = useState("");
 
   // --- Helpers ---
   const formatTime = (ts) =>
@@ -91,41 +98,35 @@ function Wellness({
 
   // --- Load meditation for today ---
   useEffect(() => {
-    async function fetchMeditation() {
+    async function fetchMeditations() {
       try {
         setMeditationLoading(true);
-        const today = new Date().toISOString().slice(0, 10);
-
-        const res = await fetch(
-          `http://localhost:8080/api/wellness/meditation/date/${today}`
-        );
-        if (!res.ok) throw new Error("Failed to fetch meditation data");
-
+        const today = new Date().toISOString().split("T")[0];
+        const res = await fetch(`http://localhost:8080/api/wellness/meditation/date/${today}`);
+        if (!res.ok) throw new Error("Failed to fetch meditations");
         const data = await res.json();
-        if (data && typeof data === "object") {
-          setMeditation({
-            completed: data.completed ?? false,
-            minutes: data.minutes ?? 0,
-            createdAt: data.createdAt ?? today,
-          });
-        }
+        setMeditationList(Array.isArray(data) ? data : [data]);
         setMeditationError(null);
       } catch (err) {
         setMeditationError(err.message);
+        setMeditationList([]);
       } finally {
         setMeditationLoading(false);
       }
     }
-    fetchMeditation();
-  }, [setMeditation]);
+    fetchMeditations();
+  }, []);
+
 
   // --- Meditation update hooked to backend ---
   const updateMeditation = async (minutes) => {
-    const today = new Date().toISOString().split("T")[0];
-    const payload = { completed: true, minutes, createdAt: today };
-
-    // Optimistic UI
-    setMeditation({ completed: true, minutes, createdAt: today });
+    const safeMinutes = Math.max(0, minutes);
+    const payload = {
+      text: "Meditation",
+      minutes: safeMinutes,
+      completed: safeMinutes > 0,
+      createdAt: new Date().toISOString(),
+    };
 
     try {
       const res = await fetch("http://localhost:8080/api/wellness/meditation", {
@@ -133,19 +134,29 @@ function Wellness({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
+
+      if (!res.ok) throw new Error("Failed to add meditation");
+
       const data = await res.json();
       setMeditation(data);
+      setMeditationList(prevList => [ ...prevList, data]);
+      setNewMeditationMinutes("");
     } catch (err) {
       console.error("Meditation update failed:", err);
     }
   };
 
   // --- Exercise update hooked to backend ---
-  const updateExercise = async (minutes, text) => {
+  const addExercise = async (text, minutes) => {
     const today = new Date().toISOString().split("T")[0];
-    const payload = { completed: true, minutes, text, createdAt: today };
+    const safeMinutes = Math.max(0, minutes);
 
-    setExercise(payload); // Optimistic UI
+    const payload = {
+      text,
+      minutes: safeMinutes,
+      completed: safeMinutes > 0,
+      createdAt: new Date().toISOString(),
+    };
 
     try {
       const res = await fetch("http://localhost:8080/api/wellness/exercise", {
@@ -153,12 +164,56 @@ function Wellness({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
+
+      if (!res.ok) throw new Error("Failed to add exercise");
+
       const data = await res.json();
       setExercise(data);
+      setExerciseList(prevList => [ ...prevList, data]);      
+      setNewExerciseText("");
+      setNewExerciseMinutes("");
     } catch (err) {
-      console.error("Exercise update failed:", err);
+      console.error("Error adding exercise:", err);
     }
   };
+
+  const deleteMeditation = async (id) => {
+    try {
+      setMeditationList(prevList => prevList.filter(med => med.id !== id));
+
+      const res = await fetch(`http://localhost:8080/api/wellness/meditation/${id}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) throw new Error("Failed to delete meditation");
+      setMeditation(prev => {
+        if (!prev) return null;
+      });
+    } catch (err) {
+      console.error("Error deleting meditation:", err);
+    }
+  };
+
+
+  const deleteExercise = async (id) => {
+    try {
+      setExerciseList(prevList => prevList.filter(ex => ex.id !== id));
+
+      const res = await fetch(`http://localhost:8080/api/wellness/exercise/${id}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) throw new Error("Failed to delete exercise");
+
+      // ✅ Update global state (App.js)
+      setExercise(prev => {
+        if (!prev) return null;
+        return prev.id === id ? null : prev;
+      });
+    } catch (err) {
+      console.error("Error deleting exercise:", err);
+    }
+  };
+
+
 
   // --- Meal toggle ---
   const toggleMeal = async (mealType) => {
@@ -238,11 +293,11 @@ function Wellness({
 
     // Meditation
     total += 1;
-    if (meditation?.completed) completed++;
+    if (meditationList?.some(med => med.minutes > 0)) completed++;
 
     // Exercise
     total += 1;
-    if (exercise?.completed) completed++;
+    if (exerciseList?.some(ex => ex.minutes > 0)) completed++;
 
     // Meals (breakfast, lunch, dinner)
     total += 3;
@@ -262,7 +317,7 @@ function Wellness({
 
   // --- Load today's exercise from backend ---
   useEffect(() => {
-    async function fetchExercise() {
+    async function fetchExercises() {
       try {
         setExerciseLoading(true);
         const today = new Date().toISOString().split("T")[0];
@@ -273,21 +328,17 @@ function Wellness({
         if (!res.ok) throw new Error("Failed to fetch exercise data");
 
         const data = await res.json();
-        setExercise({
-          completed: data.completed ?? false,
-          text: data.text ?? "",
-          minutes: data.minutes ?? 0,
-          createdAt: data.createdAt ?? today,
-        });
+        setExerciseList(Array.isArray(data) ? data : [data]);
         setExerciseError(null);
       } catch (err) {
         setExerciseError(err.message);
+        setExerciseList([]);
       } finally {
         setExerciseLoading(false);
       }
     }
-    fetchExercise();
-  }, [setExercise]);
+    fetchExercises();
+  }, []);
 
   return (
     <div className="wellness-container">
@@ -312,115 +363,94 @@ function Wellness({
       {/* 🧘 Meditation */}
       <h3>🧠 Meditation & Mindfulness</h3>
       <br />
-      <div
-        className="meditation-card"
-        style={{ backgroundImage: `url(${meditationImg})` }}
-      >
+      <div className="meditation-card" style={{ backgroundImage: `url(${meditationImg})` }}>
         {meditationLoading ? (
           <p>Loading meditation ... </p>
         ) : meditationError ? (
           <p className="error">{meditationError}</p>
         ) : (
           <>
-            <label>
-              <input
-                type="checkbox"
-                checked={meditation?.completed || false}
-                readOnly
-              />
-              Meditation session completed
-            </label>
-
             <div className="input-row">
               <input
                 type="number"
-                value={meditation?.minutes || 0}
-                onChange={(e) =>
-                  updateMeditation(parseInt(e.target.value) || 0)
-                }
+                value={newMeditationMinutes}
+                onChange={(e) => setNewMeditationMinutes(Math.max(0, parseInt(e.target.value) || 0))}
                 placeholder="Minutes"
               />
-              <button
-                onClick={() => updateMeditation(meditation?.minutes || 0)}
-              >
-                Log
-              </button>
+              <button onClick={() => updateMeditation(newMeditationMinutes)}>Log</button>
             </div>
 
-            {meditation?.completed && (
-              <>
-                <p className="success-text">
-                  ✓ {meditation.minutes} minutes meditated today
-                </p>
-                {meditation.createdAt && (
-                  <p className="timestamp">
-                    Date: {formatDate(meditation.createdAt)} / Time:{" "}
-                    {formatTime(meditation.createdAt)}
-                  </p>
-                )}
-              </>
+            {/* ✅ Show meditation list here */}
+            {meditationList.length > 0 ? (
+              <ul className="meditation-list">
+                {meditationList
+                  .filter(med => med.minutes > 0)
+                  .map(med => (
+                    <li key={med.id} className="meditation-row">
+                      <span>🧘 {med.text} — {med.minutes} min</span>
+                      {med.createdAt && (
+                        <p className="timestamp">
+                          {new Date(med.createdAt).toLocaleDateString()} —{" "}
+                          {new Date(med.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                        </p>
+                      )}
+                      <button className="delete-btn" onClick={() => deleteMeditation(med.id)}>Delete</button>
+                    </li>
+                  ))}
+              </ul>
+            ) : (
+              <p>No meditations logged yet.</p>
             )}
           </>
         )}
       </div>
 
+
       {/* 🏋️ Workout */}
       <h3>🏋️ Exercise & Movement</h3>
-      <br />
-      <div
-        className="exercise-card"
-        style={{ backgroundImage: `url(${RunningImg})` }}
-      >
+      <div className="exercise-card" style={{ backgroundImage: `url(${RunningImg})` }}>
         {exerciseLoading ? (
           <p>Loading exercise...</p>
         ) : exerciseError ? (
           <p className="error">{exerciseError}</p>
         ) : (
           <>
-            <label>
-              <input type="checkbox" checked={exercise.completed} readOnly />
-              Workout completed
-            </label>
-
             <div className="input-row">
               <input
                 type="text"
-                value={exercise.text}
-                onChange={(e) =>
-                  setExercise({ ...exercise, text: e.target.value })
-                }
+                value={newExerciseText}
+                onChange={(e) => setNewExerciseText(e.target.value)}
                 placeholder="Type (Running, Yoga)"
               />
               <input
                 type="number"
-                value={exercise.minutes}
-                onChange={(e) =>
-                  setExercise({
-                    ...exercise,
-                    minutes: parseInt(e.target.value) || 0,
-                  })
-                }
+                value={newExerciseMinutes}
+                onChange={(e) => setNewExerciseMinutes(Math.max(0, parseInt(e.target.value) || 0))}
                 placeholder="Minutes"
               />
-              <button
-                onClick={() => updateExercise(exercise.minutes, exercise.text)}
-              >
-                Log
-              </button>
+              <button onClick={() => addExercise(newExerciseText, newExerciseMinutes)}>+ Add Exercise</button>
             </div>
 
-            {exercise.completed && (
-              <>
-                <p className="success-text">
-                  ✓ {exercise.text} for {exercise.minutes} minutes
-                </p>
-                {exercise.createdAt && (
-                  <p className="timestamp">
-                    Date: {formatDate(exercise.createdAt)} / Time:{" "}
-                    {formatTime(exercise.createdAt)}
-                  </p>
-                )}
-              </>
+            {exerciseList.length > 0 ? (
+              <ul className="exercise-list">
+                {exerciseList
+                  .filter(ex => ex.minutes > 0)
+                  .map((ex) => (
+                    <li key={ex.id} className="exercise-row">
+                      <span>{ex.text} - {ex.minutes} minutes</span>
+                      {ex.createdAt && (
+                        <p className="timestamp">
+                          {formatDate(ex.createdAt)} —{" "}
+                          {formatTime(ex.createdAt)}
+                        </p>
+                      )}
+                      
+                      <button onClick={() => deleteExercise(ex.id)}>Delete</button>
+                    </li>
+                  ))}
+              </ul>
+            ) : (
+              <p>No exercises logged yet.</p>
             )}
           </>
         )}
@@ -505,11 +535,11 @@ function Wellness({
             </div>
           </div>
 
-          <div className="water-buttons">
-            <button onClick={() => updateWater(1)}>+ Add Glass</button>
+          <div className="water-buttons">            
             {hydration?.glasses > 0 && (
               <button onClick={() => updateWater(-1)}>- Remove</button>
             )}
+            <button onClick={() => updateWater(1)}>+ Add Glass</button>
           </div>
         </div>
       </div>

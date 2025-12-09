@@ -1,6 +1,6 @@
 package com.wcci.wellness.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,16 +15,20 @@ public class Meditation {
     private Long id;
 
     private boolean completed;
+    private String text;
     private int minutes;
-    private LocalDate createdAt;
+
+    private LocalDateTime createdAt;
 
     public Meditation() {
+        this.createdAt = LocalDateTime.now();
     }
 
-    public Meditation(boolean completed, int minutes) {
+    public Meditation(boolean completed, String text, int minutes) {
         this.completed = completed;
+        this.text = text;
         this.minutes = minutes;
-        this.createdAt = LocalDate.now();
+        this.createdAt = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -47,11 +51,19 @@ public class Meditation {
         this.minutes = minutes;
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

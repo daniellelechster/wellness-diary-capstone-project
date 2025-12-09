@@ -9,7 +9,7 @@ public interface MeditationService {
 
     Meditation getMeditationById(Long id);
 
-    Meditation getMeditationByDate(LocalDate date);
+    List<Meditation> getMeditationsByDate(LocalDate date);
 
     List<Meditation> getAllMeditations();
 
@@ -18,4 +18,6 @@ public interface MeditationService {
     Meditation logMinutes(LocalDate date, int minutes);
 
     Meditation toggleCompleted(LocalDate date);
+
+    void deleteMeditation(long id);
 }

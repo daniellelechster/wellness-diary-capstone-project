@@ -2682,3 +2682,26 @@ h3 {
   margin-bottom: 15px;
   letter-spacing: 0.3px;
 }
+
+.exercise-item {
+  list-style: none;
+  margin: 4px 0;
+}
+
+.exercise-row {
+  display: flex;
+  justify-content: left; 
+  align-items: center;
+  gap: 8px;
+}
+
+.exercise-list {
+  margin-top: 10px;
+  padding: 0;
+}
+
+.exercise-list li {
+  list-style: none;
+  margin: 6px 0;
+}
+
