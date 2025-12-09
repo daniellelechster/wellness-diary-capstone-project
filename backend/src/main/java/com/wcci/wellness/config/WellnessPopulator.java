@@ -2,6 +2,7 @@ package com.wcci.wellness.config;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import org.springframework.boot.CommandLineRunner;
@@ -69,16 +70,16 @@ public class WellnessPopulator implements CommandLineRunner {
                                 meditation6, meditation7, meditation8, meditation9, meditation10));
 
                 // ---------- EXERCISE ----------
-                Exercise exercise1 = new Exercise(true, "Morning jog", 20, LocalDateTime.now().minusDays(10));                
-                Exercise exercise2 = new Exercise(false, "Light stretching", 5, LocalDateTime.now().minusDays(9));                
-                Exercise exercise3 = new Exercise(true, "Gym session", 45, LocalDateTime.now().minusDays(8));
-                Exercise exercise4 = new Exercise(false, "Yoga session", 30, LocalDateTime.now().minusDays(7));
-                Exercise exercise5 = new Exercise(true, "Evening walk", 15, LocalDateTime.now().minusDays(6));
-                Exercise exercise6 = new Exercise(false, "Bike ride", 25, LocalDateTime.now().minusDays(5));
-                Exercise exercise7 = new Exercise(true, "HIIT workout", 35, LocalDateTime.now().minusDays(4));
-                Exercise exercise8 = new Exercise(false, "Swimming", 50, LocalDateTime.now().minusDays(3));
-                Exercise exercise9 = new Exercise(true, "Pilates", 40, LocalDateTime.now().minusDays(2));
-                Exercise exercise10 = new Exercise(true, "Weight lifting", 60, LocalDateTime.now().minusDays(1));
+                Exercise exercise1 = new Exercise(true, "Morning jog", 20, OffsetDateTime.now().minusMinutes(10));                
+                Exercise exercise2 = new Exercise(false, "Light stretching", 5, OffsetDateTime.now().minusMinutes(9));                
+                Exercise exercise3 = new Exercise(true, "Gym session", 45, OffsetDateTime.now().minusMinutes(8));
+                Exercise exercise4 = new Exercise(false, "Yoga session", 30, OffsetDateTime.now().minusDays(7));
+                Exercise exercise5 = new Exercise(true, "Evening walk", 15, OffsetDateTime.now().minusDays(6));
+                Exercise exercise6 = new Exercise(false, "Bike ride", 25, OffsetDateTime.now().minusDays(5));
+                Exercise exercise7 = new Exercise(true, "HIIT workout", 35, OffsetDateTime.now().minusDays(4));
+                Exercise exercise8 = new Exercise(false, "Swimming", 50, OffsetDateTime.now().minusDays(3));
+                Exercise exercise9 = new Exercise(true, "Pilates", 40, OffsetDateTime.now().minusDays(2));
+                Exercise exercise10 = new Exercise(true, "Weight lifting", 60, OffsetDateTime.now().minusDays(1));
 
                 exerciseRepository.saveAll(List.of(
                                 exercise1, exercise2, exercise3, exercise4, exercise5,

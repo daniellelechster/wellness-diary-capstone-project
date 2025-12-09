@@ -2,6 +2,8 @@ package com.wcci.wellness.service.impl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -28,8 +30,9 @@ public class ExerciseServiceImpl implements ExerciseService {
     // ✅ Return all exercises for a given date
     @Override
     public List<Exercise> getExercisesByDate(LocalDate date) {
-        LocalDateTime start = date.atStartOfDay();
-        LocalDateTime end = date.plusDays(1).atStartOfDay();
+        ZoneId zone = ZoneId.systemDefault();
+        OffsetDateTime start = date.atStartOfDay(zone).toOffsetDateTime();
+        OffsetDateTime end = date.plusDays(1).atStartOfDay(zone).toOffsetDateTime();
         return exerciseRepository.findAllByCreatedAtBetween(start, end);
     }
 

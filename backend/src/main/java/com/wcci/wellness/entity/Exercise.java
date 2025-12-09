@@ -1,14 +1,12 @@
 package com.wcci.wellness.entity;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
 
 @Entity
 public class Exercise {
@@ -20,12 +18,13 @@ public class Exercise {
     private boolean completed;
     private String text;
     private int minutes;
-    private LocalDateTime createdAt;
+    private OffsetDateTime createdAt;
 
     public Exercise() {
+        this.createdAt = OffsetDateTime.now(ZoneOffset.systemDefault().getRules().getOffset(java.time.Instant.now()));
     }
 
-    public Exercise(boolean completed, String text, int minutes, LocalDateTime createdAt) {
+    public Exercise(boolean completed, String text, int minutes, OffsetDateTime createdAt) {
         this.completed = completed;
         this.text = text;
         this.minutes = minutes;
@@ -64,11 +63,11 @@ public class Exercise {
         this.minutes = minutes;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public OffsetDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(OffsetDateTime createdAt) {
         this.createdAt = createdAt;
     }
 }
