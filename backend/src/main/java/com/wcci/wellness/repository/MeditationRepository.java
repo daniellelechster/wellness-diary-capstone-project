@@ -1,6 +1,6 @@
 package com.wcci.wellness.repository;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,5 +10,5 @@ import com.wcci.wellness.entity.Meditation;
 
 @Repository
 public interface MeditationRepository extends JpaRepository<Meditation, Long> {
-    List<Meditation> findAllByCreatedAtBetween(LocalDateTime start, LocalDateTime end);
+    List<Meditation> findAllByCreatedAtBetween(OffsetDateTime start, OffsetDateTime end);
 }

@@ -71,7 +71,14 @@ function App() {
 
   // --- Fetch today's meditation once on load ---
   useEffect(() => {
-    const today = new Date().toISOString().split("T")[0];
+    // const today = new Date().toISOString().split("T")[0];
+    const todayDate = new Date();
+        const today =
+          todayDate.getFullYear() +
+          "-" +
+          String(todayDate.getMonth() + 1).padStart(2, "0") +
+          "-" +
+          String(todayDate.getDate()).padStart(2, "0");
     fetch(`http://localhost:8080/api/wellness/meditation/date/${today}`)
       .then((res) => res.json())
       .then((data) => setMeditation(data))

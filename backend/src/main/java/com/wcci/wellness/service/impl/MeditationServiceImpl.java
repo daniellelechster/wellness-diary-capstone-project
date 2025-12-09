@@ -1,12 +1,12 @@
 package com.wcci.wellness.service.impl;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.wcci.wellness.entity.Exercise;
 import com.wcci.wellness.entity.Meditation;
 import com.wcci.wellness.repository.MeditationRepository;
 import com.wcci.wellness.service.MeditationService;
@@ -29,8 +29,9 @@ public class MeditationServiceImpl implements MeditationService {
 
     @Override
     public List<Meditation> getMeditationsByDate(LocalDate date) {
-        LocalDateTime start = date.atStartOfDay();
-        LocalDateTime end = date.plusDays(1).atStartOfDay();
+        ZoneId zone = ZoneId.systemDefault();
+        OffsetDateTime start = date.atStartOfDay(zone).toOffsetDateTime();
+        OffsetDateTime end = date.plusDays(1).atStartOfDay(zone).toOffsetDateTime();
         return meditationRepository.findAllByCreatedAtBetween(start, end);
     }
 
