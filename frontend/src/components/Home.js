@@ -15,23 +15,31 @@ export default function Home({
   const [todaysMood, setTodaysMood] = useState(null);
   const [journalEntry, setJournalEntry] = useState("");
   const [meditation, setMeditation] = useState(null);
-  const [todaysExercise, setExercise] = useState(null);
+  const [Exercise, setExercise] = useState(null);
    // const [exercise, setExercise] = useState(null);
+
+   // Helper: normalize prop to array and sum minutes
+const toArray = (val) => (val == null ? [] : Array.isArray(val) ? val : [val]);
+
+const sumMinutes = (items) =>
+  toArray(items).reduce((acc, it) => acc + (Number(it?.minutes) || 0), 0);
+
+// Compute totals
+const meditationTotal = sumMinutes(meditation);
+const exerciseTotal = sumMinutes(exercise);
 
   // --- Build wellness summary directly from props ---
   const wellnessSummary = {
-    meditation: Array.isArray(meditation) && meditation.length > 0
-      ? `${meditation[0].minutes} min meditated`
-      : meditation?.isCompleted
-      ? `${meditation.minutes} min meditated`
-      : "Not completed",
+    meditation:
+      meditationTotal > 0 ? `${meditationTotal} min meditated` : "Not completed",
 
 
-    workout: Array.isArray(exercise) && exercise.length > 0
-      ? `${exercise[0].minutes} min ${exercise[0].text || "exercise"}`
-      : exercise?.isCompleted
-      ? `${exercise.minutes} min ${exercise.text || "exercise"}`
-      : "Not completed",
+
+    workout: 
+      exerciseTotal > 0
+        ? `${exerciseTotal} min workout`
+        : "Not completed",
+
 
     meals:
       meals &&
@@ -104,6 +112,8 @@ export default function Home({
       }
     }
   }, [journals]);
+
+  
 
   const getMoodEmoji = (mood) =>
     ["😒", "😢", "😣", "😕", "😐", "😏", "😊", "😄", "😍"][mood - 1] || "—";

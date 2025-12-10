@@ -7,17 +7,19 @@ import WaterImg from "./images/Water.png";
 function Wellness({
   meditation,
   setMeditation,
-  exercise,
+  exercise = [],
   setExercise,
+  refreshExercise,
   hydration,
   setHydration,
   meals,
   setMeals,
 }) {
   // --- Exercise API state ---
-  const [exerciseList, setExerciseList] = useState([]);
-  const [exerciseLoading, setExerciseLoading] = useState(true);
+  const [exerciseLoading, setExerciseLoading] = useState(false);
   const [exerciseError, setExerciseError] = useState(null);
+
+  // const [exerciseError, setExerciseError] = useState(null);
 
   // --- Local form state for new exercise ---
   const [newExerciseText, setNewExerciseText] = useState("");
@@ -33,6 +35,9 @@ function Wellness({
   const [meditationLoading, setMeditationLoading] = useState(true);
   const [meditationList, setMeditationList] = useState([]);
   const [newMeditationMinutes, setNewMeditationMinutes] = useState("");
+
+  // normalize values to arrays: Array -> same, object -> [object], null/undefined -> []
+  const normalizeToArray = (v) => (Array.isArray(v) ? v : v ? [v] : []);
 
   // --- Helpers ---
   const formatTime = (ts) =>
@@ -117,8 +122,13 @@ function Wellness({
         if (!res.ok) throw new Error("Failed to fetch meditations");
         const data = await res.json();
         console.log(data);
+        const normalized = normalizeToArray(data);
+        setMeditationList(normalized);
+        // sync App-level state
+        setMeditation(normalized);
+
        // if (data && typeof data === "object" && data.glasses !== undefined) {
-        setMeditationList(Array.isArray(data) ? data : [data]);
+        // setMeditationList(Array.isArray(data) ? data : [data]);
         setMeditationError(null);
         //}
       } catch (err) {
@@ -129,7 +139,7 @@ function Wellness({
       }
     }
     fetchMeditations();
-  }, [setMeditation]);
+  }, []);
 
 
   // --- Meditation update hooked to backend ---
@@ -163,7 +173,7 @@ function Wellness({
   // --- Exercise update hooked to backend ---
   const addExercise = async (text, minutes) => {
     //const today = new Date().toISOString().split("T")[0];
-    const safeMinutes = Math.max(0, minutes);
+    const safeMinutes = Math.max(0, Number(minutes) || 0);
 
     const payload = {
       text,
@@ -179,11 +189,34 @@ function Wellness({
         body: JSON.stringify(payload),
       });
 
-      if (!res.ok) throw new Error("Failed to add exercise");
+      if (!res.ok) {
+        const errText = await res.text();
+        throw new Error(`Failed to add exercise: ${res.status} ${errText}`);
+      }
 
       const data = await res.json();
-      setExercise(data);
-      setExerciseList(prevList => [ ...prevList, data]);      
+      console.log("Wellness added exercise:", data);
+
+      // Preferred: ask App to re-fetch today's exercises
+      if (typeof refreshExercise === "function") {
+        refreshExercise();
+      } else if (typeof setExercise === "function") {
+        // fallback: merge returned item into App state
+        setExercise((prev) => {
+          const prevArr = normalizeToArray(prev);
+          return [data, ...prevArr];
+        });
+      }
+
+
+//       console.log('Wellness setExercise called with:', data);
+//       setExercise(data);
+//       setExerciseList(prevList => [ ...prevList, data]);
+//       setExercise(prev => {
+//   const prevArr = Array.isArray(prev) ? prev : prev ? [prev] : [];
+//   return [...prevArr, data];
+// });
+    
       setNewExerciseText("");
       setNewExerciseMinutes("");
     } catch (err) {
@@ -210,23 +243,29 @@ function Wellness({
 
   const deleteExercise = async (id) => {
     try {
-      setExerciseList(prevList => prevList.filter(ex => ex.id !== id));
+      // setExerciseList(prevList => prevList.filter(ex => ex.id !== id));
 
       const res = await fetch(`http://localhost:8080/api/wellness/exercise/${id}`, {
         method: "DELETE",
       });
-      if (!res.ok) throw new Error("Failed to delete exercise");
+      if (!res.ok) {
+        const errText = await res.text();
+        throw new Error(`Failed to delete exercise: ${res.status} ${errText}`);
+      }
 
-      // ✅ Update global state (App.js)
-      setExercise(prev => {
-        if (!prev) return null;
-        return prev.id === id ? null : prev;
-      });
+      // Preferred: re-fetch from server
+      if (typeof refreshExercise === "function") {
+        refreshExercise();
+      } else if (typeof setExercise === "function") {
+        setExercise((prev) => {
+          const prevArr = normalizeToArray(prev);
+          return prevArr.filter((e) => e.id !== id);
+        });
+      }
     } catch (err) {
       console.error("Error deleting exercise:", err);
     }
   };
-
 
 
   // --- Meal toggle ---
@@ -311,7 +350,8 @@ function Wellness({
 
     // Exercise
     total += 1;
-    if (exerciseList?.some(ex => ex.minutes > 0)) completed++;
+    if ((exercise ?? []).some((ex) => Number(ex?.minutes) > 0)) completed++;
+
 
     // Meals (breakfast, lunch, dinner)
     total += 3;
@@ -330,37 +370,42 @@ function Wellness({
   };
 
   // --- Load today's exercise from backend ---
-  useEffect(() => {
-    async function fetchExercises() {
-      try {
-        setExerciseLoading(true);
-        const todayDate = new Date();
-        const today =
-          todayDate.getFullYear() +
-          "-" +
-          String(todayDate.getMonth() + 1).padStart(2, "0") +
-          "-" +
-          String(todayDate.getDate()).padStart(2, "0");
+  // useEffect(() => {
+  //   async function fetchExercises() {
+  //     try {
+  //       setExerciseLoading(true);
+  //       const todayDate = new Date();
+  //       const today =
+  //         todayDate.getFullYear() +
+  //         "-" +
+  //         String(todayDate.getMonth() + 1).padStart(2, "0") +
+  //         "-" +
+  //         String(todayDate.getDate()).padStart(2, "0");
 
-        const res = await fetch(
-          `http://localhost:8080/api/wellness/exercise/date/${today}`
-        );
-        if (!res.ok) throw new Error("Failed to fetch exercise data");
+  //       const res = await fetch(
+  //         `http://localhost:8080/api/wellness/exercise/date/${today}`
+  //       );
+  //       if (!res.ok) throw new Error("Failed to fetch exercise data");
 
-        const data = await res.json();
-        setExerciseList(Array.isArray(data) ? data : [data]);
-        setExerciseError(null);
-  console.log("EXERCISETEST completed" + today);
-      } catch (err) {
-        setExerciseError(err.message);
-        setExerciseList([]);
-      } finally {
-        setExerciseLoading(false);
-  console.log("EXERCISETEST Finally");
-      }
-    }
-    fetchExercises();
-  }, [setExercise]);
+  //       const data = await res.json();
+  //       const normalized = normalizeToArray(data);
+  //     setExerciseList(normalized);
+  //     // sync App-level state (App expects an array)
+  //     setExercise(normalized);
+
+  //       // setExerciseList(Array.isArray(data) ? data : [data]);
+  //       setExerciseError(null);
+  // console.log("EXERCISETEST completed" + today);
+  //     } catch (err) {
+  //       setExerciseError(err.message);
+  //       setExerciseList([]);
+  //     } finally {
+  //       setExerciseLoading(false);
+  // console.log("EXERCISETEST Finally");
+  //     }
+  //   }
+  //   fetchExercises();
+  // }, []);
 
   return (
     <div className="wellness-container">
@@ -430,7 +475,7 @@ function Wellness({
 
       {/* 🏋️ Workout */}
       <h3>🏋️ Exercise & Movement</h3>
-      <div className="exercise-card" style={{ backgroundImage: `url(${RunningImg})` }}>
+      {/* <div className="exercise-card" style={{ backgroundImage: `url(${RunningImg})` }}>
         {exerciseLoading ? (
           <p>Loading exercise...</p>
         ) : exerciseError ? (
@@ -458,7 +503,7 @@ function Wellness({
                 {exerciseList
                   .filter(ex => ex.minutes > 0)
                   .map((ex) => {
-                    {/* console.log(ex); */}
+                    * console.log(ex); 
                     return (
                     <li key={ex.id} className="exercise-row">
                       <span>{ex.text} - {ex.minutes} minutes</span>
@@ -478,7 +523,68 @@ function Wellness({
             )}
           </>
         )}
+      </div> */}
+      <div
+        className="exercise-card"
+        style={{ backgroundImage: `url(${RunningImg})` }}
+      >
+        {exerciseLoading ? (
+          <p>Loading exercise...</p>
+        ) : exerciseError ? (
+          <p className="error">{exerciseError}</p>
+        ) : (
+          <>
+            <div className="input-row">
+              <input
+                type="text"
+                value={newExerciseText}
+                onChange={(e) => setNewExerciseText(e.target.value)}
+                placeholder="Type (Running, Yoga)"
+              />
+              <input
+                type="number"
+                value={newExerciseMinutes}
+                onChange={(e) =>
+                  setNewExerciseMinutes(
+                    Math.max(0, parseInt(e.target.value) || 0)
+                  )
+                }
+                placeholder="Minutes"
+              />
+              <button
+                onClick={() => addExercise(newExerciseText, newExerciseMinutes)}
+              >
+                + Add Exercise
+              </button>
+            </div>
+
+            {(normalizeToArray(exercise).length > 0) ? (
+              <ul className="exercise-list">
+                {normalizeToArray(exercise)
+                  .filter((ex) => ex.minutes > 0)
+                  .map((ex) => (
+                    <li key={ex.id} className="exercise-row">
+                      <span>
+                        {ex.text} - {ex.minutes} minutes
+                      </span>
+                      {ex.createdAt && (
+                        <p className="timestamp">
+                          {formatDate(ex.createdAt)} — {formatTime(ex.createdAt)}
+                        </p>
+                      )}
+
+                      <button onClick={() => deleteExercise(ex.id)}>Delete</button>
+                    </li>
+                  ))}
+              </ul>
+            ) : (
+              <p>No exercises logged yet.</p>
+            )}
+          </>
+        )}
       </div>
+
+
 
       {/* 🍽 Meals */}
       <h3>🍽 Meals & Nutrition</h3>
