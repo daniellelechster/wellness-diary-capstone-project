@@ -1,6 +1,8 @@
 package com.wcci.wellness.service.impl;
 
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -18,7 +20,7 @@ public class MeditationServiceImpl implements MeditationService {
         this.meditationRepository = meditationRepository;
     }
 
-    @SuppressWarnings("null")
+    // @SuppressWarnings("null")
     @Override
     public Meditation getMeditationById(Long id) {
         return meditationRepository.findById(id)
@@ -26,14 +28,11 @@ public class MeditationServiceImpl implements MeditationService {
     }
 
     @Override
-    public Meditation getMeditationByDate(LocalDate date) {
-        Meditation meditation = meditationRepository.findByCreatedAt(date);
-        if (meditation == null) {
-            meditation = new Meditation(false, 0);
-            meditation.setCreatedAt(date);
-            meditation = meditationRepository.save(meditation);
-        }
-        return meditation;
+    public List<Meditation> getMeditationsByDate(LocalDate date) {
+        ZoneId zone = ZoneId.systemDefault();
+        OffsetDateTime start = date.atStartOfDay(zone).toOffsetDateTime();
+        OffsetDateTime end = date.plusDays(1).atStartOfDay(zone).toOffsetDateTime();
+        return meditationRepository.findAllByCreatedAtBetween(start, end);
     }
 
     @Override
@@ -43,27 +42,14 @@ public class MeditationServiceImpl implements MeditationService {
 
     @Override
     public Meditation saveMeditation(Meditation meditation) {
-        Meditation existing = meditationRepository.findByCreatedAt(meditation.getCreatedAt());
-        if (existing != null) {
-            existing.setMinutes(meditation.getMinutes());
-            existing.setCompleted(meditation.isCompleted());
-            return meditationRepository.save(existing);
-        } else {
-            return meditationRepository.save(meditation);
-        }
-    }
-
-    @Override
-    public Meditation logMinutes(LocalDate date, int minutes) {
-        Meditation meditation = getMeditationByDate(date);
-        meditation.setMinutes(minutes);
+        meditation.setMinutes(Math.max(0, meditation.getMinutes()));
+        meditation.setCompleted(meditation.getMinutes() > 0);        
         return meditationRepository.save(meditation);
     }
 
     @Override
-    public Meditation toggleCompleted(LocalDate date) {
-        Meditation meditation = getMeditationByDate(date);
-        meditation.setCompleted(!meditation.isCompleted());
-        return meditationRepository.save(meditation);
+    public void deleteMeditation(long id) {
+        meditationRepository.deleteById(id);        
     }
 }
+

@@ -22,15 +22,27 @@ function Journals({ journals, setJournals, entries }) {
       return [
         "What made you feel grateful today?",
         "What's something that brought you joy?",
+        "Who made a positive impact on your day?",
+        "What’s a moment you’d like to remember from today?",
+        "What’s one thing you learned or realized today?",
+        "What’s one thing you’re proud of yourself for?"
       ];
     if (mood >= 5)
       return [
         "What went well today?",
         "What's something you'd like to improve tomorrow?",
+        "What’s something you’re curious to explore tomorrow?",
+        "What's something you'd like to improve tomorrow?",
+        "What gave you energy today?",
+        "What’s one thing you’re proud of yourself for?",
       ];
     return [
       "What’s been challenging today?",
       "What can you do to be kind to yourself?",
+      "What’s one skill or habit you’d like to strengthen?",
+      "How did you respond to stress, and what might you try differently next time?",
+      "What’s one boundary you want to honor for your own well‑being?",
+      "What’s one way you can rest or recharge tonight?",
     ];
   }, []);
 

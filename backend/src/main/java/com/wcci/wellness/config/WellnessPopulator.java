@@ -2,6 +2,7 @@ package com.wcci.wellness.config;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import org.springframework.boot.CommandLineRunner;
@@ -43,52 +44,33 @@ public class WellnessPopulator implements CommandLineRunner {
         public void run(String... args) {
 
                 // ---------- MEDITATION ----------
-                Meditation meditation1 = new Meditation(false, 5);
-                meditation1.setCreatedAt(LocalDate.now().minusDays(10));
-                Meditation meditation2 = new Meditation(true, 10);
-                meditation2.setCreatedAt(LocalDate.now().minusDays(9));
-                Meditation meditation3 = new Meditation(false, 7);
-                meditation3.setCreatedAt(LocalDate.now().minusDays(8));
-                Meditation meditation4 = new Meditation(true, 12);
-                meditation4.setCreatedAt(LocalDate.now().minusDays(7));
-                Meditation meditation5 = new Meditation(false, 8);
-                meditation5.setCreatedAt(LocalDate.now().minusDays(6));
-                Meditation meditation6 = new Meditation(true, 15);
-                meditation6.setCreatedAt(LocalDate.now().minusDays(5));
-                Meditation meditation7 = new Meditation(false, 6);
-                meditation7.setCreatedAt(LocalDate.now().minusDays(4));
-                Meditation meditation8 = new Meditation(true, 20);
-                meditation8.setCreatedAt(LocalDate.now().minusDays(3));
-                Meditation meditation9 = new Meditation(false, 10);
-                meditation9.setCreatedAt(LocalDate.now().minusDays(2));
-                Meditation meditation10 = new Meditation(true, 25);
-                meditation10.setCreatedAt(LocalDate.now().minusDays(1));
+                Meditation meditation1 = new Meditation(false, "", 5, OffsetDateTime.now().minusDays(10));                
+                Meditation meditation2 = new Meditation(true, "", 10, OffsetDateTime.now().minusDays(9));                
+                Meditation meditation3 = new Meditation(false, "", 7, OffsetDateTime.now().minusDays(8));                
+                Meditation meditation4 = new Meditation(true, "", 12, OffsetDateTime.now().minusDays(7));                
+                Meditation meditation5 = new Meditation(false, "", 8, OffsetDateTime.now().minusDays(6));                
+                Meditation meditation6 = new Meditation(true, "", 15, OffsetDateTime.now().minusDays(5));                
+                Meditation meditation7 = new Meditation(false, "", 6, OffsetDateTime.now().minusDays(4));                
+                Meditation meditation8 = new Meditation(true, "", 20, OffsetDateTime.now().minusDays(3));                
+                Meditation meditation9 = new Meditation(false, "", 10, OffsetDateTime.now().minusDays(2));                
+                Meditation meditation10 = new Meditation(true, "", 25, OffsetDateTime.now().minusDays(1));
+                
 
                 meditationRepository.saveAll(List.of(
                                 meditation1, meditation2, meditation3, meditation4, meditation5,
                                 meditation6, meditation7, meditation8, meditation9, meditation10));
 
                 // ---------- EXERCISE ----------
-                Exercise exercise1 = new Exercise(true, "Morning jog", 20);
-                exercise1.setCreatedAt(LocalDate.now().minusDays(10));
-                Exercise exercise2 = new Exercise(false, "Light stretching", 5);
-                exercise2.setCreatedAt(LocalDate.now().minusDays(9));
-                Exercise exercise3 = new Exercise(true, "Gym session", 45);
-                exercise3.setCreatedAt(LocalDate.now().minusDays(8));
-                Exercise exercise4 = new Exercise(false, "Yoga session", 30);
-                exercise4.setCreatedAt(LocalDate.now().minusDays(7));
-                Exercise exercise5 = new Exercise(true, "Evening walk", 15);
-                exercise5.setCreatedAt(LocalDate.now().minusDays(6));
-                Exercise exercise6 = new Exercise(false, "Bike ride", 25);
-                exercise6.setCreatedAt(LocalDate.now().minusDays(5));
-                Exercise exercise7 = new Exercise(true, "HIIT workout", 35);
-                exercise7.setCreatedAt(LocalDate.now().minusDays(4));
-                Exercise exercise8 = new Exercise(false, "Swimming", 50);
-                exercise8.setCreatedAt(LocalDate.now().minusDays(3));
-                Exercise exercise9 = new Exercise(true, "Pilates", 40);
-                exercise9.setCreatedAt(LocalDate.now().minusDays(2));
-                Exercise exercise10 = new Exercise(true, "Weight lifting", 60);
-                exercise10.setCreatedAt(LocalDate.now().minusDays(1));
+                Exercise exercise1 = new Exercise(true, "Morning jog", 20, OffsetDateTime.now().minusMinutes(10));                
+                Exercise exercise2 = new Exercise(false, "Light stretching", 5, OffsetDateTime.now().minusMinutes(9));                
+                Exercise exercise3 = new Exercise(true, "Gym session", 45, OffsetDateTime.now().minusMinutes(8));
+                Exercise exercise4 = new Exercise(false, "Yoga session", 30, OffsetDateTime.now().minusDays(7));
+                Exercise exercise5 = new Exercise(true, "Evening walk", 15, OffsetDateTime.now().minusDays(6));
+                Exercise exercise6 = new Exercise(false, "Bike ride", 25, OffsetDateTime.now().minusDays(5));
+                Exercise exercise7 = new Exercise(true, "HIIT workout", 35, OffsetDateTime.now().minusDays(4));
+                Exercise exercise8 = new Exercise(false, "Swimming", 50, OffsetDateTime.now().minusDays(3));
+                Exercise exercise9 = new Exercise(true, "Pilates", 40, OffsetDateTime.now().minusDays(2));
+                Exercise exercise10 = new Exercise(true, "Weight lifting", 60, OffsetDateTime.now().minusDays(1));
 
                 exerciseRepository.saveAll(List.of(
                                 exercise1, exercise2, exercise3, exercise4, exercise5,

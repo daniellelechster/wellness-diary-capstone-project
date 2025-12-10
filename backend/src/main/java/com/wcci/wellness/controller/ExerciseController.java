@@ -22,19 +22,15 @@ public class ExerciseController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Exercise> getExerciseById(@PathVariable("id") Long id) {
-        Exercise exercise = exerciseService.getExerciseById(id);
-        if (exercise != null) {
+        Exercise exercise = exerciseService.getExerciseById(id);        
             return ResponseEntity.ok(exercise);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
     }
 
     @GetMapping("/date/{date}")
-    public ResponseEntity<Exercise> getExerciseByDate(@PathVariable("date") String date) {
+    public ResponseEntity<List<Exercise>> getExercisesByDate(@PathVariable("date") String date) {
         LocalDate exerciseDate = LocalDate.parse(date);
-        Exercise exercise = exerciseService.getExerciseByDate(exerciseDate);
-        return ResponseEntity.ok(exercise);
+        List<Exercise> exercises = exerciseService.getExercisesByDate(exerciseDate);
+        return ResponseEntity.ok(exercises);
     }
 
     @GetMapping("/all")
@@ -43,14 +39,27 @@ public class ExerciseController {
     }
 
     @PostMapping
-    public ResponseEntity<Exercise> createExercise(@RequestBody Exercise exercise) {
+    public ResponseEntity<Exercise> addExercise(@RequestBody Exercise exercise) {        
         Exercise savedExercise = exerciseService.saveExercise(exercise);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedExercise);
     }
 
-    @PutMapping
-    public ResponseEntity<Exercise> createOrUpdateExercise(@RequestBody Exercise exercise) {
-        Exercise savedExercise = exerciseService.saveExercise(exercise);
-        return ResponseEntity.status(HttpStatus.OK).body(savedExercise);
+    @PutMapping("/{id}")
+    public ResponseEntity<Exercise> updateExercise(@PathVariable("id") Long id,
+                                                   @RequestBody Exercise exercise) {
+        Exercise existing = exerciseService.getExerciseById(id);
+        existing.setText(exercise.getText());
+        existing.setMinutes(Math.max(0, exercise.getMinutes()));
+        existing.setCompleted(existing.getMinutes() > 0);
+        Exercise updated = exerciseService.saveExercise(existing);
+        return ResponseEntity.ok(updated);
+    }
+
+    // ✅ Delete an exercise (frontend can call this when removing one)
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteExercise(@PathVariable("id") Long id) {
+        exerciseService.deleteExercise(id);
+        return ResponseEntity.noContent().build();
+
     }
 }

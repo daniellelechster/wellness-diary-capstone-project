@@ -1905,7 +1905,8 @@ h3 {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 350px;
+  min-height: 350px;
+  max-height: 520px;
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 15px;
@@ -1921,7 +1922,8 @@ h3 {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 500px;
+  min-height: 500px;
+  max-height: 720px;
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 15px;
@@ -2776,4 +2778,26 @@ h3 {
     opacity: 0;
     transform: translate(-50%, -5px);
   }
+}
+
+.exercise-item {
+  list-style: none;
+  margin: 4px 0;
+}
+
+.exercise-row {
+  display: flex;
+  justify-content: left; 
+  align-items: center;
+  gap: 8px;
+}
+
+.exercise-list {
+  margin-top: 10px;
+  padding: 0;
+}
+
+.exercise-list li {
+  list-style: none;
+  margin: 6px 0;
 }

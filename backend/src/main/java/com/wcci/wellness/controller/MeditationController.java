@@ -20,37 +20,58 @@ public class MeditationController {
         this.meditationService = meditationService;
     }
 
+    // ✅ Get meditation by ID
     @GetMapping("/{id}")
     public ResponseEntity<Meditation> getMeditationById(@PathVariable("id") Long id) {
         Meditation meditation = meditationService.getMeditationById(id);
-        if (meditation != null) {
-            return ResponseEntity.ok(meditation);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @GetMapping("/date/{date}")
-    public ResponseEntity<Meditation> getMeditationByDate(@PathVariable("date") String date) {
-        LocalDate meditationDate = LocalDate.parse(date);
-        Meditation meditation = meditationService.getMeditationByDate(meditationDate);
         return ResponseEntity.ok(meditation);
     }
 
+    // ✅ Get all meditations for a given date (returns a list now)
+    @GetMapping("/date/{date}")
+    public ResponseEntity<List<Meditation>> getMeditationsByDate(@PathVariable("date") String date) {
+        LocalDate meditationDate = LocalDate.parse(date);
+        List<Meditation> meditations = meditationService.getMeditationsByDate(meditationDate);
+        return ResponseEntity.ok(meditations);
+    }
+
+    // ✅ Default GET → today’s meditations
+    @GetMapping
+    public ResponseEntity<List<Meditation>> getTodaysMeditations() {
+        LocalDate today = LocalDate.now();
+        List<Meditation> meditations = meditationService.getMeditationsByDate(today);
+        return ResponseEntity.ok(meditations);
+    }
+
+    // ✅ Get all meditations (all dates)
     @GetMapping("/all")
     public ResponseEntity<List<Meditation>> getAllMeditations() {
         return ResponseEntity.ok(meditationService.getAllMeditations());
     }
-
+    
+    // ✅ Add a new meditation
     @PostMapping
-    public ResponseEntity<Meditation> saveMeditation(@RequestBody Meditation meditation) {
+    public ResponseEntity<Meditation> addMeditation(@RequestBody Meditation meditation) {        
         Meditation savedMeditation = meditationService.saveMeditation(meditation);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedMeditation);
     }
 
-    @PutMapping
-    public ResponseEntity<Meditation> createOrUpdateMeditation(@RequestBody Meditation meditation) {
-        Meditation savedMeditation = meditationService.saveMeditation(meditation);
-        return ResponseEntity.status(HttpStatus.OK).body(savedMeditation);
+    // ✅ Update an existing meditation
+    @PutMapping("/{id}")
+    public ResponseEntity<Meditation> updateMeditation(@PathVariable("id") Long id,
+                                                       @RequestBody Meditation meditation) {
+        Meditation existing = meditationService.getMeditationById(id);
+        existing.setText(meditation.getText());
+        existing.setMinutes(Math.max(0, meditation.getMinutes()));
+        existing.setCompleted(existing.getMinutes() > 0);
+        Meditation updated = meditationService.saveMeditation(existing);
+        return ResponseEntity.ok(updated);
+    }
+
+    // ✅ Delete a meditation
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMeditation(@PathVariable("id") Long id) {
+        meditationService.deleteMeditation(id);
+        return ResponseEntity.noContent().build();
     }
 }

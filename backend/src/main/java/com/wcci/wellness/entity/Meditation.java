@@ -1,6 +1,7 @@
 package com.wcci.wellness.entity;
 
-import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,16 +16,23 @@ public class Meditation {
     private Long id;
 
     private boolean completed;
+    private String text;
     private int minutes;
-    private LocalDate createdAt;
+    private OffsetDateTime createdAt;
 
     public Meditation() {
+        this.createdAt = OffsetDateTime.now(ZoneOffset.systemDefault().getRules().getOffset(java.time.Instant.now()));
     }
 
-    public Meditation(boolean completed, int minutes) {
+    public Meditation(boolean completed, String text, int minutes, OffsetDateTime createdAt) {
         this.completed = completed;
+        this.text = text;
         this.minutes = minutes;
-        this.createdAt = LocalDate.now();
+        this.createdAt = createdAt;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
@@ -47,11 +55,19 @@ public class Meditation {
         this.minutes = minutes;
     }
 
-    public LocalDate getCreatedAt() {
+    public OffsetDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(OffsetDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

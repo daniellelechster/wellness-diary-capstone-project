@@ -18,7 +18,6 @@ public class MoodController {
     public MoodController(MoodService moodService) {
         this.moodService = moodService;
     }
-
     
     @PostMapping
     public ResponseEntity<Mood> saveMood(@RequestBody Mood mood) {

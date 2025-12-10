@@ -35,13 +35,16 @@ function App() {
   const [meditation, setMeditation] = useState(null);
 
   // --- NEW: Exercise state ---
-  const [exercise, setExercise] = useState(null);
+  const [exercise, setExercise] = useState([]);
 
   // --- NEW: Water state ---
   const [hydration, setHydration] = useState(null);
 
   // --- NEW: Meals state ---
   const [meals, setMeals] = useState(null);
+
+  // normalize values to arrays: Array -> same, object -> [object], null/undefined -> []
+const normalizeToArray = (v) => (Array.isArray(v) ? v : v ? [v] : []);
 
   // Fetch goals once on load ---
   useEffect(() => {
@@ -71,21 +74,28 @@ function App() {
 
   // --- Fetch today's meditation once on load ---
   useEffect(() => {
-    const today = new Date().toISOString().split("T")[0];
+    const todayDate = new Date();
+        const today =
+          todayDate.getFullYear() +
+          "-" +
+          String(todayDate.getMonth() + 1).padStart(2, "0") +
+          "-" +
+          String(todayDate.getDate()).padStart(2, "0");
     fetch(`http://localhost:8080/api/wellness/meditation/date/${today}`)
-      .then((res) => res.json())
-      .then((data) => setMeditation(data))
-      .catch((err) => console.error("Error fetching meditation:", err));
+      .then((data) => {
+        const normalized = normalizeToArray(data);
+        console.log('App fetched meditation (normalized):', normalized);
+        setMeditation(normalized);
+      });
   }, []);
 
-  // --- NEW: Fetch today's exercise once on load ---
   useEffect(() => {
-    const today = new Date().toISOString().split("T")[0];
-    fetch(`http://localhost:8080/api/wellness/exercise/date/${today}`)
-      .then((res) => res.json())
-      .then((data) => setExercise(data))
-      .catch((err) => console.error("Error fetching exercise:", err));
-  }, []);
+  const today = new Date().toISOString().split("T")[0];
+  fetch(`http://localhost:8080/api/wellness/exercise/date/${today}`)
+    .then((res) => res.json())
+    .then((data) => setExercise(normalizeToArray(data)))
+    .catch((err) => console.error("Error fetching exercise:", err));
+}, []);
 
   // Fetch journals
   useEffect(() => {

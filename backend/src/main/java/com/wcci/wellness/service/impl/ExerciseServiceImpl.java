@@ -1,6 +1,8 @@
 package com.wcci.wellness.service.impl;
 
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -18,22 +20,19 @@ public class ExerciseServiceImpl implements ExerciseService {
         this.exerciseRepository = exerciseRepository;
     }
 
-    @SuppressWarnings("null")
     @Override
     public Exercise getExerciseById(Long id) {
         return exerciseRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Exercise entry not found with id: " + id));
     }
 
+    // ✅ Return all exercises for a given date
     @Override
-    public Exercise getExerciseByDate(LocalDate date) {
-        Exercise exercise = exerciseRepository.findByCreatedAt(date);
-        if (exercise == null) {
-            exercise = new Exercise(false, "", 0);
-            exercise.setCreatedAt(date);
-            exercise = exerciseRepository.save(exercise);
-        }
-        return exercise;
+    public List<Exercise> getExercisesByDate(LocalDate date) {
+        ZoneId zone = ZoneId.systemDefault();
+        OffsetDateTime start = date.atStartOfDay(zone).toOffsetDateTime();
+        OffsetDateTime end = date.plusDays(1).atStartOfDay(zone).toOffsetDateTime();
+        return exerciseRepository.findAllByCreatedAtBetween(start, end);
     }
 
     @Override
@@ -42,29 +41,15 @@ public class ExerciseServiceImpl implements ExerciseService {
     }
 
     @Override
-    public Exercise saveExercise(Exercise exercise) {
-        Exercise existing = exerciseRepository.findByCreatedAt(exercise.getCreatedAt());
-        if (existing != null) {
-            existing.setMinutes(exercise.getMinutes());
-            existing.setCompleted(exercise.isCompleted());
-            existing.setText(exercise.getText());
-            return exerciseRepository.save(existing);
-        } else {
-            return exerciseRepository.save(exercise);
-        }
-    }
-
-    @Override
-    public Exercise logMinutes(LocalDate date, int minutes) {
-        Exercise exercise = getExerciseByDate(date);
-        exercise.setMinutes(exercise.getMinutes() + minutes);
+    public Exercise saveExercise(Exercise exercise) {        
+        exercise.setMinutes(Math.max(0, exercise.getMinutes()));
+        exercise.setCompleted(exercise.getMinutes() > 0);
         return exerciseRepository.save(exercise);
     }
 
+    // ✅ Delete by id
     @Override
-    public Exercise toggleCompleted(LocalDate date) {
-        Exercise exercise = getExerciseByDate(date);
-        exercise.setCompleted(!exercise.isCompleted());
-        return exerciseRepository.save(exercise);
+    public void deleteExercise(Long id) {
+        exerciseRepository.deleteById(id);
     }
 }

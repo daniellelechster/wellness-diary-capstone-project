@@ -7,23 +7,41 @@ export default function Home({
   entries,
   goals = [],
   journals = [],
-  meditation,
-  exercise,
+  // meditation2 = [],
   hydration,
   meals,
 }) {
   const [todaysMood, setTodaysMood] = useState(null);
   const [journalEntry, setJournalEntry] = useState("");
+  const [meditation, setMeditation] = useState(null);
+  const [exercise, setExercise] = useState(null);
+   // const [exercise, setExercise] = useState(null);
+
+   // Helper: normalize prop to array and sum minutes
+const toArray = (val) => (val == null ? [] : Array.isArray(val) ? val : [val]);
+
+const sumMinutes = (items) =>
+  toArray(items).reduce((acc, it) => acc + (Number(it?.minutes) || 0), 0);
+
+// Compute totals
+const meditationTotal = sumMinutes(meditation);
+const exerciseTotal = sumMinutes(exercise);
 
   // --- Build wellness summary directly from props ---
   const wellnessSummary = {
-    meditation: meditation?.completed
-      ? `${meditation.minutes} min meditated`
-      : "Not completed",
+    meditation:
 
-    workout: exercise?.completed
-      ? `${exercise.minutes} min ${exercise.text || "exercise"}`
-      : "Not completed",
+      meditationTotal > 0
+        ? `${meditationTotal} ${meditationTotal === 1 ? "minute" :"minutes"}`
+        : "Not completed",
+
+
+
+    workout:
+      exerciseTotal > 0
+        ? `${exerciseTotal} ${exerciseTotal === 1 ? "minute" :"minutes"}`
+        : "Not completed",
+
 
     meals:
       meals &&
@@ -33,9 +51,38 @@ export default function Home({
 
     hydration:
       hydration?.glasses > 0
-        ? `${hydration.glasses} glasses of water`
+        ? `${hydration.glasses} ${hydration.glasses === 1 ? "glass" :"glasses"} of water`
         : "Not completed",
   };
+
+  useEffect(() => {
+      const todayDate = new Date();
+          const today =
+            todayDate.getFullYear() +
+            "-" +
+            String(todayDate.getMonth() + 1).padStart(2, "0") +
+            "-" +
+            String(todayDate.getDate()).padStart(2, "0");
+      fetch(`http://localhost:8080/api/wellness/meditation/date/${today}`)
+         .then((res) => res.json())
+         .then((data) => setMeditation(data))
+        .catch((err) => console.error("Error fetching meditation:", err));
+    }, []);
+
+  useEffect(() => {
+    const todayDate = new Date();
+        const today =
+          todayDate.getFullYear() +
+          "-" +
+          String(todayDate.getMonth() + 1).padStart(2, "0") +
+          "-" +
+          String(todayDate.getDate()).padStart(2, "0");
+                    
+    fetch(`http://localhost:8080/api/wellness/exercise/date/${today}`)
+      .then((res) => res.json())
+      .then((data) => setExercise(data))
+      .catch((err) => console.error("Error fetching exercise:", err));
+  }, []);
 
   // --- Update mood whenever entries changes ---
   useEffect(() => {
@@ -64,7 +111,7 @@ export default function Home({
         setJournalEntry("");
       }
     }
-  }, [journals]);
+  }, [journals]);  
 
   const getMoodEmoji = (mood) =>
     ["😒", "😢", "😣", "😕", "😐", "😏", "😊", "😄", "😍"][mood - 1] || "—";
@@ -250,14 +297,17 @@ export default function Home({
                 value: wellnessSummary?.meditation,
               },
               {
-                key: "workout",
+                key: "exercise",
                 label: "Workout",
                 value: wellnessSummary?.workout,
               },
               {
                 key: "meals",
                 label: "Healthy Eating",
-                value: wellnessSummary?.meals,
+                value: meals && (meals.breakfast || meals.lunch || meals.dinner || meals.snacks > 0)
+                  ? `Breakfast: ${meals.breakfast ? "✓" : "○"}, Lunch: ${meals.lunch ? "✓" : "○"}, Dinner: ${meals.dinner ? "✓" : "○"}, Snacks: ${meals.snacks || 0}`
+                  : "Not logged",
+
               },
               {
                 key: "hydration",
