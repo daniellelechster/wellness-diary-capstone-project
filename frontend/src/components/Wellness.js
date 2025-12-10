@@ -106,8 +106,6 @@ function Wellness({
     async function fetchMeditations() {
       try {
         setMeditationLoading(true);
-        // const today = new Date().toISOString();
-        // const today = new Date().toDateString();
         const todayDate = new Date();
         const today =
           todayDate.getFullYear() +
@@ -116,21 +114,15 @@ function Wellness({
           "-" +
           String(todayDate.getDate()).padStart(2, "0");
           const today2 =today;
-        //console.log("TEST" + today2);
         const res = await fetch(`http://localhost:8080/api/wellness/meditation/date/${today2}`);
-        // const res = await fetch("http://localhost:8080/api/wellness/meditation/date/2025-12-09");
         if (!res.ok) throw new Error("Failed to fetch meditations");
         const data = await res.json();
         console.log(data);
         const normalized = normalizeToArray(data);
-        setMeditationList(normalized);
-        // sync App-level state
+        setMeditationList(normalized);        
         setMeditation(normalized);
-
-       // if (data && typeof data === "object" && data.glasses !== undefined) {
-        // setMeditationList(Array.isArray(data) ? data : [data]);
         setMeditationError(null);
-        //}
+        
       } catch (err) {
         setMeditationError(err.message);
         setMeditationList([]);
@@ -172,7 +164,6 @@ function Wellness({
 
   // --- Exercise update hooked to backend ---
   const addExercise = async (text, minutes) => {
-    //const today = new Date().toISOString().split("T")[0];
     const safeMinutes = Math.max(0, Number(minutes) || 0);
 
     const payload = {
@@ -207,15 +198,6 @@ function Wellness({
           return [data, ...prevArr];
         });
       }
-
-
-//       console.log('Wellness setExercise called with:', data);
-//       setExercise(data);
-//       setExerciseList(prevList => [ ...prevList, data]);
-//       setExercise(prev => {
-//   const prevArr = Array.isArray(prev) ? prev : prev ? [prev] : [];
-//   return [...prevArr, data];
-// });
     
       setNewExerciseText("");
       setNewExerciseMinutes("");
@@ -243,8 +225,6 @@ function Wellness({
 
   const deleteExercise = async (id) => {
     try {
-      // setExerciseList(prevList => prevList.filter(ex => ex.id !== id));
-
       const res = await fetch(`http://localhost:8080/api/wellness/exercise/${id}`, {
         method: "DELETE",
       });
@@ -252,8 +232,6 @@ function Wellness({
         const errText = await res.text();
         throw new Error(`Failed to delete exercise: ${res.status} ${errText}`);
       }
-
-      // Preferred: re-fetch from server
       if (typeof refreshExercise === "function") {
         refreshExercise();
       } else if (typeof setExercise === "function") {
@@ -369,44 +347,6 @@ function Wellness({
     return nonHydrationPercent + hydrationContribution;
   };
 
-  // --- Load today's exercise from backend ---
-  // useEffect(() => {
-  //   async function fetchExercises() {
-  //     try {
-  //       setExerciseLoading(true);
-  //       const todayDate = new Date();
-  //       const today =
-  //         todayDate.getFullYear() +
-  //         "-" +
-  //         String(todayDate.getMonth() + 1).padStart(2, "0") +
-  //         "-" +
-  //         String(todayDate.getDate()).padStart(2, "0");
-
-  //       const res = await fetch(
-  //         `http://localhost:8080/api/wellness/exercise/date/${today}`
-  //       );
-  //       if (!res.ok) throw new Error("Failed to fetch exercise data");
-
-  //       const data = await res.json();
-  //       const normalized = normalizeToArray(data);
-  //     setExerciseList(normalized);
-  //     // sync App-level state (App expects an array)
-  //     setExercise(normalized);
-
-  //       // setExerciseList(Array.isArray(data) ? data : [data]);
-  //       setExerciseError(null);
-  // console.log("EXERCISETEST completed" + today);
-  //     } catch (err) {
-  //       setExerciseError(err.message);
-  //       setExerciseList([]);
-  //     } finally {
-  //       setExerciseLoading(false);
-  // console.log("EXERCISETEST Finally");
-  //     }
-  //   }
-  //   fetchExercises();
-  // }, []);
-
   return (
     <div className="wellness-container">
       <br></br>
@@ -454,7 +394,7 @@ function Wellness({
                   .filter(med => med.minutes > 0)
                   .map(med => (
                     <li key={med.id} className="meditation-row">
-                      <span>🧘 {med.text} — {med.minutes} min</span>
+                      <span>🧘 {med.text} - {med.minutes} {(med.minutes > 1 ? 'minutes' : 'minute')}</span> 
                       {med.createdAt && (
                         <p className="timestamp">
                           {new Date(med.createdAt).toLocaleDateString()} —{" "}
@@ -475,55 +415,6 @@ function Wellness({
 
       {/* 🏋️ Workout */}
       <h3>🏋️ Exercise & Movement</h3>
-      {/* <div className="exercise-card" style={{ backgroundImage: `url(${RunningImg})` }}>
-        {exerciseLoading ? (
-          <p>Loading exercise...</p>
-        ) : exerciseError ? (
-          <p className="error">{exerciseError}</p>
-        ) : (
-          <>
-            <div className="input-row">
-              <input
-                type="text"
-                value={newExerciseText}
-                onChange={(e) => setNewExerciseText(e.target.value)}
-                placeholder="Type (Running, Yoga)"
-              />
-              <input
-                type="number"
-                value={newExerciseMinutes}
-                onChange={(e) => setNewExerciseMinutes(Math.max(0, parseInt(e.target.value) || 0))}
-                placeholder="Minutes"
-              />
-              <button onClick={() => addExercise(newExerciseText, newExerciseMinutes)}>+ Add Exercise</button>
-            </div>
-
-            {exerciseList.length > 0 ? (
-              <ul className="exercise-list">
-                {exerciseList
-                  .filter(ex => ex.minutes > 0)
-                  .map((ex) => {
-                    * console.log(ex); 
-                    return (
-                    <li key={ex.id} className="exercise-row">
-                      <span>{ex.text} - {ex.minutes} minutes</span>
-                      {ex.createdAt && (
-                        <p className="timestamp">
-                          {formatDate(ex.createdAt)} —{" "}
-                          {formatTime(ex.createdAt)}
-                        </p>
-                      )}
-                      
-                      <button onClick={() => deleteExercise(ex.id)}>Delete</button>
-                    </li>
-                  )})}
-              </ul>
-            ) : (
-              <p>No exercises logged yet.</p>
-            )}
-          </>
-        )}
-      </div> */}
       <div
         className="exercise-card"
         style={{ backgroundImage: `url(${RunningImg})` }}
@@ -565,10 +456,10 @@ function Wellness({
                   .map((ex) => (
                     <li key={ex.id} className="exercise-row">
                       <span>
-                        {ex.text} - {ex.minutes} minutes
+                        {ex.text} - {ex.minutes} {(ex.minutes > 1 ? 'minutes' : 'minute')}
                       </span>
                       {ex.createdAt && (
-                        <p className="timestamp">
+                        <p>
                           {formatDate(ex.createdAt)} — {formatTime(ex.createdAt)}
                         </p>
                       )}
@@ -583,8 +474,6 @@ function Wellness({
           </>
         )}
       </div>
-
-
 
       {/* 🍽 Meals */}
       <h3>🍽 Meals & Nutrition</h3>

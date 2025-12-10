@@ -46,8 +46,6 @@ function App() {
   // normalize values to arrays: Array -> same, object -> [object], null/undefined -> []
 const normalizeToArray = (v) => (Array.isArray(v) ? v : v ? [v] : []);
 
-
-
   // Fetch goals once on load ---
   useEffect(() => {
     fetch("http://localhost:8080/api/wellness/goal/all")
@@ -76,7 +74,6 @@ const normalizeToArray = (v) => (Array.isArray(v) ? v : v ? [v] : []);
 
   // --- Fetch today's meditation once on load ---
   useEffect(() => {
-    // const today = new Date().toISOString().split("T")[0];
     const todayDate = new Date();
         const today =
           todayDate.getFullYear() +
@@ -92,24 +89,6 @@ const normalizeToArray = (v) => (Array.isArray(v) ? v : v ? [v] : []);
       });
   }, []);
 
-  // --- NEW: Fetch today's exercise once on load ---
-  // useEffect(() => {
-  //   const todayDate = new Date();
-  //       const today =
-  //         todayDate.getFullYear() +
-  //         "-" +
-  //         String(todayDate.getMonth() + 1).padStart(2, "0") +
-  //         "-" +
-  //         String(todayDate.getDate()).padStart(2, "0");
-  //         console.log("TODAY=" + today);
-  //   fetch(`http://localhost:8080/api/wellness/exercise/date/${today}`)
-  //     .then((data) => {
-  //       const normalized = Array.isArray(data) ? data : data ? [data] : [];
-  //       console.log('App fetched exercise (normalized):', normalized);
-  //       setExercise(normalized);
-  //     })
-  // }, []);
-
   useEffect(() => {
   const today = new Date().toISOString().split("T")[0];
   fetch(`http://localhost:8080/api/wellness/exercise/date/${today}`)
@@ -117,7 +96,6 @@ const normalizeToArray = (v) => (Array.isArray(v) ? v : v ? [v] : []);
     .then((data) => setExercise(normalizeToArray(data)))
     .catch((err) => console.error("Error fetching exercise:", err));
 }, []);
-
 
   // Fetch journals
   useEffect(() => {

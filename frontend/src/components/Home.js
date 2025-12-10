@@ -7,15 +7,14 @@ export default function Home({
   entries,
   goals = [],
   journals = [],
-  meditation2 = [],
-  exercise,
+  // meditation2 = [],
   hydration,
   meals,
 }) {
   const [todaysMood, setTodaysMood] = useState(null);
   const [journalEntry, setJournalEntry] = useState("");
   const [meditation, setMeditation] = useState(null);
-  const [Exercise, setExercise] = useState(null);
+  const [exercise, setExercise] = useState(null);
    // const [exercise, setExercise] = useState(null);
 
    // Helper: normalize prop to array and sum minutes
@@ -31,13 +30,16 @@ const exerciseTotal = sumMinutes(exercise);
   // --- Build wellness summary directly from props ---
   const wellnessSummary = {
     meditation:
-      meditationTotal > 0 ? `${meditationTotal} min meditated` : "Not completed",
+
+      meditationTotal > 0
+        ? `${meditationTotal} ${meditationTotal === 1 ? "minute" :"minutes"}`
+        : "Not completed",
 
 
 
-    workout: 
+    workout:
       exerciseTotal > 0
-        ? `${exerciseTotal} min workout`
+        ? `${exerciseTotal} ${exerciseTotal === 1 ? "minute" :"minutes"}`
         : "Not completed",
 
 
@@ -54,7 +56,6 @@ const exerciseTotal = sumMinutes(exercise);
   };
 
   useEffect(() => {
-      // const today = new Date().toISOString().split("T")[0];
       const todayDate = new Date();
           const today =
             todayDate.getFullYear() +
@@ -76,8 +77,7 @@ const exerciseTotal = sumMinutes(exercise);
           String(todayDate.getMonth() + 1).padStart(2, "0") +
           "-" +
           String(todayDate.getDate()).padStart(2, "0");
-          console.log("EXERCISETEST" + today);
-          
+                    
     fetch(`http://localhost:8080/api/wellness/exercise/date/${today}`)
       .then((res) => res.json())
       .then((data) => setExercise(data))
@@ -111,9 +111,7 @@ const exerciseTotal = sumMinutes(exercise);
         setJournalEntry("");
       }
     }
-  }, [journals]);
-
-  
+  }, [journals]);  
 
   const getMoodEmoji = (mood) =>
     ["😒", "😢", "😣", "😕", "😐", "😏", "😊", "😄", "😍"][mood - 1] || "—";
