@@ -44,7 +44,7 @@ function Calendar({ entries = {}, selectedDate, onDateSelect }) {
   const month = currentMonth.getMonth();
   const firstDay = new Date(year, month, 1);
   const lastDay = new Date(year, month + 1, 0);
-  const startWeekday = month === 10 ? 6 : firstDay.getDay();
+  const startWeekday = month === 10 ? 6 : firstDay.getDay(); // your November tweak
   const daysInMonth = lastDay.getDate();
 
   const calendarDays = Array.from(
@@ -52,7 +52,7 @@ function Calendar({ entries = {}, selectedDate, onDateSelect }) {
     (_, i) => {
       if (i < startWeekday) return null;
       const day = i - startWeekday + 1;
-      const dateStr = `${year}-${month + 1}-${pad(day)}`;
+      const dateStr = `${year}-${month + 1}-${pad(day)}`; // keep your original format
       const entry = entries[dateStr];
       return {
         day,
@@ -72,6 +72,7 @@ function Calendar({ entries = {}, selectedDate, onDateSelect }) {
       ? monthEntries.reduce((sum, e) => sum + (e.mood || 0), 0) /
         monthEntries.length
       : 0;
+
   const daysLogged = monthEntries.filter((e) => e.mood).length;
 
   const moodLevels = [
@@ -119,30 +120,54 @@ function Calendar({ entries = {}, selectedDate, onDateSelect }) {
         <button onClick={() => changeMonth(1)}>→</button>
       </div>
 
-      <div className="calendar-grid">
-        {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d, i) => (
-          <div key={i} className="calendar-weekday">
-            {d}
-          </div>
-        ))}
+      {/* Calendar + Legend wrapper */}
+      <div className="calendar-layout">
+        {/* LEFT: Calendar grid */}
+        <div className="calendar-main">
+          <div className="calendar-grid">
+            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d, i) => (
+              <div key={i} className="calendar-weekday">
+                {d}
+              </div>
+            ))}
 
-        {calendarDays.map((d, idx) =>
-          d === null ? (
-            <div key={idx} className="calendar-day empty" />
-          ) : (
-            <div
-              key={idx}
-              className={`calendar-day ${d.entry ? "logged" : ""}`}
-              style={d.entry ? { backgroundColor: d.moodColor } : {}}
-              onClick={() =>
-                onDateSelect &&
-                onDateSelect(`${year}-${pad(month + 1)}-${pad(d.day)}`)
-              }
-            >
-              {d.day}
-            </div>
-          )
-        )}
+            {calendarDays.map((d, idx) =>
+              d === null ? (
+                <div key={idx} className="calendar-day empty" />
+              ) : (
+                <div
+                  key={idx}
+                  className={`calendar-day ${d.entry ? "logged" : ""}`}
+                  style={d.entry ? { backgroundColor: d.moodColor } : {}}
+                  onClick={() =>
+                    onDateSelect &&
+                    onDateSelect(`${year}-${pad(month + 1)}-${pad(d.day)}`)
+                  }
+                >
+                  {d.day}
+                </div>
+              )
+            )}
+          </div>
+        </div>
+
+        {/* RIGHT (desktop) / BELOW (small screens): Mood legend */}
+        <div className="calendar-mood-legend">
+          <h4>Mood Legend</h4>
+          <div className="calendar-legend-grid">
+            {moodLevels.map(({ level, label, emoji }) => (
+              <div key={level} className="calendar-legend-item">
+                <div
+                  className="calendar-legend-color"
+                  style={{ backgroundColor: getMoodColor(level) }}
+                />
+                <span>
+                  {emoji} {label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       {selectedEntry && (
@@ -161,23 +186,6 @@ function Calendar({ entries = {}, selectedDate, onDateSelect }) {
           )}
         </div>
       )}
-
-      <div className="calendar-mood-legend">
-        <h4>Mood Legend</h4>
-        <div className="calendar-legend-grid">
-          {moodLevels.map(({ level, label, emoji }) => (
-            <div key={level} className="calendar-legend-item">
-              <div
-                className="calendar-legend-color"
-                style={{ backgroundColor: getMoodColor(level) }}
-              />
-              <span>
-                {emoji} {label}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   );
 }
