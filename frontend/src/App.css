@@ -10,20 +10,17 @@ body {
   background-attachment: fixed;
   background-size: cover;
   font-family: "Inter", sans-serif;
-  color: #ffffff;
   padding-top: 80px;
-  padding-bottom: 80px;
+  padding-bottom: 30px;
 }
 
 .home-background {
   background-image: url("./components/images/serene1.jpg");
   background-blend-mode: overlay;
-  background-attachment: fixed;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  font-family: "Inter", sans-serif;
   justify-content: center;
   font-family: "Inter", sans-serif;
   min-height: 100vh;
@@ -123,7 +120,6 @@ body {
   display: flex;
   list-style: none;
   align-items: center;
-  gap: -0.1rem;
   margin: 0;
   padding: 0;
   overflow: visible;
@@ -148,7 +144,6 @@ body {
 
 .nav-links li a.active {
   background-color: #f483ac;
-  color: #fff;
 }
 
 /* ------------------------- */
@@ -252,7 +247,6 @@ body {
     font-weight: bold;
     color: #333;
     text-decoration: none;
-    pointer-events: auto;
   }
 
   .hamburger {
@@ -284,7 +278,6 @@ body {
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    pointer-events: auto;
   }
 }
 
@@ -319,7 +312,6 @@ body {
   top: 100%;
   left: 0;
   background: #8d9491;
-  color: rgb(236, 234, 234);
   list-style: none;
   padding: 0.5rem 0;
   margin: 0;
@@ -361,7 +353,6 @@ body {
 
   .dropdown-menu {
     position: absolute;
-    background: none;
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
@@ -511,14 +502,6 @@ body {
   margin-right: 5px;
 }
 
-.home-small-text {
-  margin-right: 5px;
-}
-
-.home-small-text {
-  margin-right: 5px;
-}
-
 .home-icon {
   font-size: 20px;
 }
@@ -533,18 +516,18 @@ body {
   color: #3b82f6;
 }
 .home-icon.indigo {
-  color: ec4899;
+  color: #ec4899;
 }
 
 .home-small-text {
   font-size: 0.8rem;
   color: #151515;
+  margin-right: 5px;
 }
 
 .home-value {
   font-size: 1.2rem;
   font-weight: 500;
-  margin-top: none;
 }
 
 .home-subtext {
@@ -585,14 +568,11 @@ body {
 }
 
 .home-activity-complete {
-  border-color: #d1c6ab;
   background: #d1c6ab;
   border-radius: 20px;
 }
 
 .home-activity-activity-incomplete {
-  border-color: #d1c6ab;
-  background: #d1c6ab;
   border-radius: 20px;
 }
 
@@ -631,10 +611,28 @@ body {
   width: 100%;
   gap: 0.1rem 0.1rem;
 }
+.weather-block {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 0.1rem 0.1rem;
+}
 
 /* ============================
    CURRENT CONDITIONS
 ============================ */
+.weather-current {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: -10px;
+  gap: 0.2rem;
+  padding-right: 1rem;
+}
 .weather-current {
   flex: 1 1 0;
   display: flex;
@@ -657,7 +655,17 @@ body {
   flex-direction: column;
   gap: 0.2rem;
 }
+.weather-current-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
 
+.weather-temp {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
 .weather-temp {
   font-size: 2rem;
   font-weight: bold;
@@ -669,7 +677,17 @@ body {
   text-transform: capitalize;
   margin: 0;
 }
+.weather-description {
+  font-size: 0.5rem;
+  text-transform: capitalize;
+  margin: 0;
+}
 
+.weather-details {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin: 0;
+}
 .weather-details {
   font-size: 0.9rem;
   opacity: 0.8;
@@ -684,10 +702,26 @@ body {
   padding: 0 1rem;
   margin-left: -15px;
 }
+.weather-lunar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 1rem;
+  margin-left: -15px;
+}
 
+/* ============================
 /* ============================
    DIVIDERS (VERTICAL ON DESKTOP)
 ============================ */
+.weather-divider {
+  height: 200px;
+  width: 3px;
+  border: none;
+  border-right: 2px solid rgba(0, 0, 0, 0.25);
+  margin: 0 1rem;
+}
 .weather-divider {
   height: 200px;
   width: 3px;
@@ -704,7 +738,16 @@ body {
   flex-direction: column;
   gap: 0.2rem;
 }
+.weather-current,
+.weather-lunar,
+.weather-forecast-wrapper {
+  flex: 0.4 0.4 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
 
+/* ============================
 /* ============================
    HEADERS
 ============================ */
@@ -721,6 +764,7 @@ body {
 }
 
 /* ============================
+/* ============================
    MOON PHASE
 ============================ */
 .weather-text {
@@ -728,10 +772,22 @@ body {
   font-size: 0.95rem;
   margin: 0;
 }
+.weather-text {
+  opacity: 0.8;
+  font-size: 0.95rem;
+  margin: 0;
+}
 
+/* ============================
 /* ============================
    7-DAY FORECAST
 ============================ */
+.weather-forecast-grid {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 0.5rem;
+}
 .weather-forecast-grid {
   display: flex;
   flex-wrap: wrap;
@@ -749,7 +805,21 @@ body {
   border-radius: 10px;
   text-align: center;
 }
+.weather-forecast-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  text-align: center;
+}
 
+.weather-forecast-day {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
 .weather-forecast-day {
   font-weight: 600;
   margin-bottom: 0.3rem;
@@ -759,12 +829,21 @@ body {
   width: 50px;
   height: 50px;
 }
+.weather-forecast-icon {
+  width: 50px;
+  height: 50px;
+}
 
 .weather-forecast-text {
   margin: 0.2rem 0;
   font-size: 0.9rem;
 }
+.weather-forecast-text {
+  margin: 0.2rem 0;
+  font-size: 0.9rem;
+}
 
+/* ============================
 /* ============================
    LOADING / ERROR
 ============================ */
@@ -772,11 +851,23 @@ body {
   color: #ff8080;
   font-size: 0.95rem;
 }
+.weather-error-text {
+  color: #ff8080;
+  font-size: 0.95rem;
+}
 
+/* ============================
 /* ============================
    RESPONSIVE (MOBILE STACK)
 ============================ */
 @media (max-width: 900px) {
+  .weather-container,
+  .weather-block {
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
   .weather-container,
   .weather-block {
     flex-direction: column;
@@ -792,7 +883,18 @@ body {
     border-bottom: 5px solid rgba(14, 14, 14, 0.25);
     margin: 0;
   }
+  .weather-divider {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 5px solid rgba(14, 14, 14, 0.25);
+    margin: 0;
+  }
 
+  .weather-forecast-grid {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
   .weather-forecast-grid {
     flex-wrap: wrap;
     justify-content: center;
@@ -816,8 +918,6 @@ body {
 
 .about-container h2 {
   font-size: 2.5rem;
-  font-weight: bold;
-  color: rgb(143, 78, 43);
   margin: 0;
   color: #3a2b1e;
   font-weight: bold;
@@ -841,7 +941,6 @@ body {
 .member-block {
   background: #8d9491;
   padding: 30px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: left;
   border-radius: 14px;
@@ -849,6 +948,10 @@ body {
     inset 4px 4px 8px rgba(0, 0, 0, 0.35), 4px 6px 12px rgba(0, 0, 0, 0.2);
 }
 
+.member-block:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}
 .member-block:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
@@ -940,7 +1043,6 @@ body {
   max-width: 1000px;
   margin: 50px auto;
   padding: 50px;
-  border-radius: 12px;
   font-family: "Segoe UI", sans-serif;
   background-size: cover;
   background-position: center;
@@ -1110,6 +1212,19 @@ h3 {
 }
 
 /* Calendar */
+.calendar-layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.calendar-main {
+  flex: 2;
+}
+
 .calendar-page {
   padding: 0.5rem;
   font-family: Arial, sans-serif;
@@ -1140,8 +1255,8 @@ h3 {
   height: auto;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
-  padding: 8px 0;
+  gap: 0.5rem;
+  padding: 0 0;
   margin: 0 auto;
   margin-top: -15px;
   margin-bottom: 30px;
@@ -1167,15 +1282,14 @@ h3 {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 70px;
-  padding: 16px;
-  padding-top: 10px;
-  border-radius: 18px;
+  height: 50px;
   text-align: center;
   background: linear-gradient(to bottom, #ffffff, rgb(163, 180, 236));
   border-radius: 16px;
   padding: 2px 10px;
+  padding-top: 5px;
   margin: 0 5px;
+  margin-top: -18px;
   color: #181818;
   box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8),
     inset 4px 4px 8px rgba(0, 0, 0, 0.25), 0 8px 18px rgba(0, 0, 0, 0.2);
@@ -1184,11 +1298,13 @@ h3 {
 .calendar-stats p {
   font-size: 15px;
   margin-top: -50px;
+  line-height: 3;
 }
 
 .calendar-stats h4 {
   font-size: 15px;
-  margin-top: 15px;
+  margin: 6px;
+  line-height: 1;
 }
 
 .calendar-controls {
@@ -1208,7 +1324,6 @@ h3 {
   margin-right: 0.5rem;
   border: 1px solid #b9b8b8;
   border-radius: 6px;
-  cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease,
     border-color 0.3s ease;
   align-items: center;
@@ -1239,6 +1354,9 @@ h3 {
   border-style: double;
   cursor: pointer;
   background: #dad9d9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .calendar-day.logged {
@@ -1255,9 +1373,7 @@ h3 {
 }
 
 .calendar-mood-legend {
-  margin-top: 20px;
-  overflow-x: auto;
-  padding-bottom: 8px;
+  margin-top: 0;
 }
 
 .calendar-mood-legend h4 {
@@ -1268,32 +1384,32 @@ h3 {
 
 .calendar-legend-grid {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  gap: 30px;
+  align-items: flex-start;
+  gap: 10px;
   flex-wrap: wrap;
-  margin-top: 25px;
+  margin-top: 10px;
   box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3),
     inset 0 -2px 2px rgba(255, 255, 255, 0.4);
   background: linear-gradient(to bottom, rgba(251, 246, 246) 0%, #a2d2ff 60%);
   color: rgb(61, 61, 61);
-  padding: 15px;
-  border-radius: 50px;
+  padding: 12px;
+  border-radius: 20px;
 }
 
 .calendar-legend-item {
   display: flex;
   align-items: center;
   gap: 8px;
-  min-width: 100px;
-  flex: 0 0 auto;
+  width: 100%;
+  min-width: auto;
 }
 
 .calendar-legend-color {
   width: 20px;
   height: 20px;
   border-radius: 4px;
-  margin-bottom: 4px;
   flex-shrink: 0;
 }
 
@@ -1309,17 +1425,27 @@ h3 {
   }
 
   .calendar-stats {
-    max-width: 90%;
+    display: flex;
+    max-width: 220px;
     height: auto;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    padding: 12px;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0;
+    margin-top: 0;
   }
 
   .calendar-stats div {
-    width: 45%;
+    display: flex;
+    flex-direction: column;
+    width: 75%;
     height: auto;
-    margin: 0;
+    padding: 2px 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 1;
   }
 
   .calendar-grid {
@@ -1327,13 +1453,45 @@ h3 {
     gap: 5px;
   }
 
+  .calendar-image {
+    max-height: 150px;
+  }
+
+  .calendar-stats h4,
+  .calendar-stats p {
+    display: flex;
+    flex-direction: column;
+    font-size: 10px;
+    padding-top: 25px;
+    line-height: 1;
+  }
+
   .calendar-day {
-    padding: 3rem 0;
+    font-size: 0.9rem;
+  }
+
+  .calendar-mood-legend {
+    margin-top: 0;
+  }
+
+  .calendar-mood-legend h4 {
+    margin-top: 25px;
+    font-size: 25px;
+    text-decoration: underline;
   }
 }
 
 /* Small tablets & large phones */
 @media (max-width: 768px) {
+  .calendar-stats h4,
+  .calendar-stats p {
+    display: flex;
+    flex-direction: column;
+    font-size: 10px;
+    padding-top: 25px;
+    line-height: 1;
+  }
+
   .calendar-page {
     padding: 1.5rem 1rem;
   }
@@ -1343,25 +1501,12 @@ h3 {
     margin-top: -15px;
   }
 
-  .calendar-stats {
-    max-width: 100%;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .calendar-stats div {
-    width: 48%;
-    padding: 12px;
-  }
-
   .calendar-grid {
     grid-template-columns: repeat(7, minmax(35px, 1fr));
     gap: 4px;
   }
 
   .calendar-day {
-    padding: 2.5rem 0;
     font-size: 0.8rem;
   }
 }
@@ -1372,13 +1517,11 @@ h3 {
     max-height: 150px;
   }
 
-  .calendar-stats {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .calendar-stats div {
-    width: 90%;
+  .calendar-stats h4,
+  .calendar-stats p {
+    font-size: 10px;
+    padding-top: 25px;
+    line-height: 1;
   }
 
   /* Still 7 columns, just tiny but readable */
@@ -1388,7 +1531,6 @@ h3 {
   }
 
   .calendar-day {
-    padding: 1.2rem 0;
     font-size: 0.75rem;
   }
 }
@@ -1406,7 +1548,7 @@ h3 {
   .calendar-legend-grid {
     gap: 20px;
     padding: 12px;
-    border-radius: 40px;
+    border-radius: 20px;
   }
 
   .calendar-legend-item {
@@ -1421,32 +1563,23 @@ h3 {
 
 /* Tablets & small laptops */
 @media (max-width: 768px) {
-  .calendar-legend-grid {
-    gap: 16px;
-    padding: 10px;
-    flex-wrap: wrap;
+  .calendar-layout {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
   }
 
-  .calendar-legend-item {
-    min-width: 70px;
-  }
-
-  .calendar-mood-legend h4 {
-    font-size: 22px;
-  }
-
-  .calendar-legend-color {
-    width: 16px;
-    height: 16px;
+  .calendar-main {
+    width: 100%;
   }
 }
 
 /* Mobile phones */
 @media (max-width: 500px) {
   .calendar-mood-legend {
-    width: 100%;
-    overflow-x: auto;
-    padding-bottom: 10px;
+    width: 30%;
+    overflow-x: hidden;
+    padding-bottom: 0;
   }
 
   .calendar-legend-grid {
@@ -1455,7 +1588,7 @@ h3 {
     justify-content: center;
     gap: 12px;
     padding: 10px;
-    border-radius: 30px;
+    border-radius: 20px;
   }
 
   .calendar-legend-item {
@@ -2644,64 +2777,3 @@ h3 {
     transform: translate(-50%, -5px);
   }
 }
-
-/* =======================================================
-   WEATHER LOCATION PLUGIN
-   Drop-in add-on for existing weather widget
-======================================================= */
-
-.weather-location {
-  width: 100%;
-  text-align: center;
-  font-size: 1.2rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  margin-bottom: 0.6rem;
-
-  color: rgb(31, 31, 31);
-  background: radial-gradient(circle, #d1c4aa 0%, #a8c3a0 85%);
-  padding: 8px 16px;
-  border-radius: 20px;
-
-  box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.6),
-    inset -2px -2px 4px rgba(0, 0, 0, 0.25), 2px 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Mobile-friendly scaling */
-@media (max-width: 900px) {
-  .weather-location {
-    font-size: 1rem;
-    padding: 6px 12px;
-  }
-}
-
-.weather-location-text {
-  text-align: center;
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 15px;
-  letter-spacing: 0.3px;
-}
-
-.exercise-item {
-  list-style: none;
-  margin: 4px 0;
-}
-
-.exercise-row {
-  display: flex;
-  justify-content: left; 
-  align-items: center;
-  gap: 8px;
-}
-
-.exercise-list {
-  margin-top: 10px;
-  padding: 0;
-}
-
-.exercise-list li {
-  list-style: none;
-  margin: 6px 0;
-}
-
