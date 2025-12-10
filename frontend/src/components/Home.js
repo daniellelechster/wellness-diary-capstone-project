@@ -7,26 +7,29 @@ export default function Home({
   entries,
   goals = [],
   journals = [],
-  meditation,
+  meditation2 = [],
   exercise,
   hydration,
   meals,
 }) {
   const [todaysMood, setTodaysMood] = useState(null);
   const [journalEntry, setJournalEntry] = useState("");
+  const [meditation, setMeditation] = useState(null);
+  const [todaysExercise, setExercise] = useState(null);
+   // const [exercise, setExercise] = useState(null);
 
   // --- Build wellness summary directly from props ---
   const wellnessSummary = {
     meditation: Array.isArray(meditation) && meditation.length > 0
       ? `${meditation[0].minutes} min meditated`
-      : meditation?.completed
+      : meditation?.isCompleted
       ? `${meditation.minutes} min meditated`
       : "Not completed",
 
 
     workout: Array.isArray(exercise) && exercise.length > 0
       ? `${exercise[0].minutes} min ${exercise[0].text || "exercise"}`
-      : exercise?.completed
+      : exercise?.isCompleted
       ? `${exercise.minutes} min ${exercise.text || "exercise"}`
       : "Not completed",
 
@@ -41,6 +44,37 @@ export default function Home({
         ? `${hydration.glasses} ${hydration.glasses === 1 ? "glass" :"glasses"} of water`
         : "Not completed",
   };
+
+  useEffect(() => {
+      // const today = new Date().toISOString().split("T")[0];
+      const todayDate = new Date();
+          const today =
+            todayDate.getFullYear() +
+            "-" +
+            String(todayDate.getMonth() + 1).padStart(2, "0") +
+            "-" +
+            String(todayDate.getDate()).padStart(2, "0");
+      fetch(`http://localhost:8080/api/wellness/meditation/date/${today}`)
+         .then((res) => res.json())
+         .then((data) => setMeditation(data))
+        .catch((err) => console.error("Error fetching meditation:", err));
+    }, []);
+
+  useEffect(() => {
+    const todayDate = new Date();
+        const today =
+          todayDate.getFullYear() +
+          "-" +
+          String(todayDate.getMonth() + 1).padStart(2, "0") +
+          "-" +
+          String(todayDate.getDate()).padStart(2, "0");
+          console.log("EXERCISETEST" + today);
+          
+    fetch(`http://localhost:8080/api/wellness/exercise/date/${today}`)
+      .then((res) => res.json())
+      .then((data) => setExercise(data))
+      .catch((err) => console.error("Error fetching exercise:", err));
+  }, []);
 
   // --- Update mood whenever entries changes ---
   useEffect(() => {
@@ -255,7 +289,7 @@ export default function Home({
                 value: wellnessSummary?.meditation,
               },
               {
-                key: "workout",
+                key: "exercise",
                 label: "Workout",
                 value: wellnessSummary?.workout,
               },

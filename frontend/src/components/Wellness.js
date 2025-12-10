@@ -101,12 +101,26 @@ function Wellness({
     async function fetchMeditations() {
       try {
         setMeditationLoading(true);
-        const today = new Date().toISOString().split("T")[0];
-        const res = await fetch(`http://localhost:8080/api/wellness/meditation/date/${today}`);
+        // const today = new Date().toISOString();
+        // const today = new Date().toDateString();
+        const todayDate = new Date();
+        const today =
+          todayDate.getFullYear() +
+          "-" +
+          String(todayDate.getMonth() + 1).padStart(2, "0") +
+          "-" +
+          String(todayDate.getDate()).padStart(2, "0");
+          const today2 =today;
+        //console.log("TEST" + today2);
+        const res = await fetch(`http://localhost:8080/api/wellness/meditation/date/${today2}`);
+        // const res = await fetch("http://localhost:8080/api/wellness/meditation/date/2025-12-09");
         if (!res.ok) throw new Error("Failed to fetch meditations");
         const data = await res.json();
+        console.log(data);
+       // if (data && typeof data === "object" && data.glasses !== undefined) {
         setMeditationList(Array.isArray(data) ? data : [data]);
         setMeditationError(null);
+        //}
       } catch (err) {
         setMeditationError(err.message);
         setMeditationList([]);
@@ -115,7 +129,7 @@ function Wellness({
       }
     }
     fetchMeditations();
-  }, []);
+  }, [setMeditation]);
 
 
   // --- Meditation update hooked to backend ---
@@ -148,7 +162,7 @@ function Wellness({
 
   // --- Exercise update hooked to backend ---
   const addExercise = async (text, minutes) => {
-    const today = new Date().toISOString().split("T")[0];
+    //const today = new Date().toISOString().split("T")[0];
     const safeMinutes = Math.max(0, minutes);
 
     const payload = {
@@ -336,15 +350,17 @@ function Wellness({
         const data = await res.json();
         setExerciseList(Array.isArray(data) ? data : [data]);
         setExerciseError(null);
+  console.log("EXERCISETEST completed" + today);
       } catch (err) {
         setExerciseError(err.message);
         setExerciseList([]);
       } finally {
         setExerciseLoading(false);
+  console.log("EXERCISETEST Finally");
       }
     }
     fetchExercises();
-  }, []);
+  }, [setExercise]);
 
   return (
     <div className="wellness-container">

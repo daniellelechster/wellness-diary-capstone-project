@@ -94,12 +94,12 @@ function App() {
           String(todayDate.getMonth() + 1).padStart(2, "0") +
           "-" +
           String(todayDate.getDate()).padStart(2, "0");
-          
+          console.log("TODAY=" + today)
     fetch(`http://localhost:8080/api/wellness/exercise/date/${today}`)
       .then((res) => res.json())
       .then((data) => setExercise(data))
       .catch((err) => console.error("Error fetching exercise:", err));
-  }, []);
+  }, [setExercise]);
 
   // Fetch journals
   useEffect(() => {
