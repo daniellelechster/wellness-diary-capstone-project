@@ -84,13 +84,18 @@ const normalizeToArray = (v) => (Array.isArray(v) ? v : v ? [v] : []);
     fetch(`http://localhost:8080/api/wellness/meditation/date/${today}`)
       .then((data) => {
         const normalized = normalizeToArray(data);
-        console.log('App fetched meditation (normalized):', normalized);
         setMeditation(normalized);
       });
   }, []);
 
   useEffect(() => {
-  const today = new Date().toISOString().split("T")[0];
+  const todayDate = new Date();
+        const today =
+          todayDate.getFullYear() +
+          "-" +
+          String(todayDate.getMonth() + 1).padStart(2, "0") +
+          "-" +
+          String(todayDate.getDate()).padStart(2, "0");
   fetch(`http://localhost:8080/api/wellness/exercise/date/${today}`)
     .then((res) => res.json())
     .then((data) => setExercise(normalizeToArray(data)))
@@ -125,7 +130,13 @@ const normalizeToArray = (v) => (Array.isArray(v) ? v : v ? [v] : []);
 
   // --- NEW: Fetch water
   useEffect(() => {
-    const today = new Date().toISOString().split("T")[0];
+    const todayDate = new Date();
+        const today =
+          todayDate.getFullYear() +
+          "-" +
+          String(todayDate.getMonth() + 1).padStart(2, "0") +
+          "-" +
+          String(todayDate.getDate()).padStart(2, "0");
     fetch(`http://localhost:8080/api/wellness/water/date/${today}`)
       .then((res) => res.json())
       .then((data) => setHydration(data))
