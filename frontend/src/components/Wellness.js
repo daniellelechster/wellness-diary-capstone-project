@@ -113,16 +113,16 @@ function Wellness({
           String(todayDate.getMonth() + 1).padStart(2, "0") +
           "-" +
           String(todayDate.getDate()).padStart(2, "0");
-          const today2 =today;
-        const res = await fetch(`http://localhost:8080/api/wellness/meditation/date/${today2}`);
+
+        const res = await fetch(
+          `http://localhost:8080/api/wellness/meditation/date/${today}`
+        );
         if (!res.ok) throw new Error("Failed to fetch meditations");
         const data = await res.json();
-        console.log(data);
         const normalized = normalizeToArray(data);
-        setMeditationList(normalized);        
+        setMeditationList(normalized);
         setMeditation(normalized);
         setMeditationError(null);
-        
       } catch (err) {
         setMeditationError(err.message);
         setMeditationList([]);
@@ -132,7 +132,6 @@ function Wellness({
     }
     fetchMeditations();
   }, []);
-
 
   // --- Meditation update hooked to backend ---
   const updateMeditation = async (minutes) => {
@@ -155,7 +154,7 @@ function Wellness({
 
       const data = await res.json();
       setMeditation(data);
-      setMeditationList(prevList => [ ...prevList, data]);
+      setMeditationList((prevList) => [...prevList, data]);
       setNewMeditationMinutes("");
     } catch (err) {
       console.error("Meditation update failed:", err);
@@ -186,7 +185,6 @@ function Wellness({
       }
 
       const data = await res.json();
-      console.log("Wellness added exercise:", data);
 
       // Preferred: ask App to re-fetch today's exercises
       if (typeof refreshExercise === "function") {
@@ -198,7 +196,7 @@ function Wellness({
           return [data, ...prevArr];
         });
       }
-    
+
       setNewExerciseText("");
       setNewExerciseMinutes("");
     } catch (err) {
@@ -208,13 +206,16 @@ function Wellness({
 
   const deleteMeditation = async (id) => {
     try {
-      setMeditationList(prevList => prevList.filter(med => med.id !== id));
+      setMeditationList((prevList) => prevList.filter((med) => med.id !== id));
 
-      const res = await fetch(`http://localhost:8080/api/wellness/meditation/${id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `http://localhost:8080/api/wellness/meditation/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
       if (!res.ok) throw new Error("Failed to delete meditation");
-      setMeditation(prev => {
+      setMeditation((prev) => {
         if (!prev) return null;
       });
     } catch (err) {
@@ -222,12 +223,14 @@ function Wellness({
     }
   };
 
-
   const deleteExercise = async (id) => {
     try {
-      const res = await fetch(`http://localhost:8080/api/wellness/exercise/${id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `http://localhost:8080/api/wellness/exercise/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
       if (!res.ok) {
         const errText = await res.text();
         throw new Error(`Failed to delete exercise: ${res.status} ${errText}`);
@@ -244,7 +247,6 @@ function Wellness({
       console.error("Error deleting exercise:", err);
     }
   };
-
 
   // --- Meal toggle ---
   const toggleMeal = async (mealType) => {
@@ -324,12 +326,11 @@ function Wellness({
 
     // Meditation
     total += 1;
-    if (meditationList?.some(med => med.minutes > 0)) completed++;
+    if (meditationList?.some((med) => med.minutes > 0)) completed++;
 
     // Exercise
     total += 1;
     if ((exercise ?? []).some((ex) => Number(ex?.minutes) > 0)) completed++;
-
 
     // Meals (breakfast, lunch, dinner)
     total += 3;
@@ -370,7 +371,10 @@ function Wellness({
       {/* 🧘 Meditation */}
       <h3>🧠 Meditation & Mindfulness</h3>
       <br />
-      <div className="meditation-card" style={{ backgroundImage: `url(${meditationImg})` }}>
+      <div
+        className="meditation-card"
+        style={{ backgroundImage: `url(${meditationImg})` }}
+      >
         {meditationLoading ? (
           <p>Loading meditation ... </p>
         ) : meditationError ? (
@@ -381,27 +385,44 @@ function Wellness({
               <input
                 type="number"
                 value={newMeditationMinutes}
-                onChange={(e) => setNewMeditationMinutes(Math.max(0, parseInt(e.target.value) || 0))}
+                onChange={(e) =>
+                  setNewMeditationMinutes(
+                    Math.max(0, parseInt(e.target.value) || 0)
+                  )
+                }
                 placeholder="Minutes"
               />
-              <button onClick={() => updateMeditation(newMeditationMinutes)}>Log</button>
+              <button onClick={() => updateMeditation(newMeditationMinutes)}>
+                Log
+              </button>
             </div>
 
             {/* ✅ Show meditation list here */}
             {meditationList.length > 0 ? (
               <ul className="meditation-list">
                 {meditationList
-                  .filter(med => med.minutes > 0)
-                  .map(med => (
+                  .filter((med) => med.minutes > 0)
+                  .map((med) => (
                     <li key={med.id} className="meditation-row">
-                      <span>🧘 {med.text} - {med.minutes} {(med.minutes > 1 ? 'minutes' : 'minute')}</span> 
+                      <span>
+                        🧘 {med.text} - {med.minutes}{" "}
+                        {med.minutes > 1 ? "minutes" : "minute"}
+                      </span>
                       {med.createdAt && (
                         <p className="timestamp">
                           {new Date(med.createdAt).toLocaleDateString()} —{" "}
-                          {new Date(med.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                          {new Date(med.createdAt).toLocaleTimeString([], {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}
                         </p>
                       )}
-                      <button className="delete-btn" onClick={() => deleteMeditation(med.id)}>Delete</button>
+                      <button
+                        className="delete-btn"
+                        onClick={() => deleteMeditation(med.id)}
+                      >
+                        Delete
+                      </button>
                     </li>
                   ))}
               </ul>
@@ -411,7 +432,6 @@ function Wellness({
           </>
         )}
       </div>
-
 
       {/* 🏋️ Workout */}
       <h3>🏋️ Exercise & Movement</h3>
@@ -449,22 +469,26 @@ function Wellness({
               </button>
             </div>
 
-            {(normalizeToArray(exercise).length > 0) ? (
+            {normalizeToArray(exercise).length > 0 ? (
               <ul className="exercise-list">
                 {normalizeToArray(exercise)
                   .filter((ex) => ex.minutes > 0)
                   .map((ex) => (
                     <li key={ex.id} className="exercise-row">
                       <span>
-                        {ex.text} - {ex.minutes} {(ex.minutes > 1 ? 'minutes' : 'minute')}
+                        {ex.text} - {ex.minutes}{" "}
+                        {ex.minutes > 1 ? "minutes" : "minute"}
                       </span>
                       {ex.createdAt && (
                         <p>
-                          {formatDate(ex.createdAt)} — {formatTime(ex.createdAt)}
+                          {formatDate(ex.createdAt)} —{" "}
+                          {formatTime(ex.createdAt)}
                         </p>
                       )}
 
-                      <button onClick={() => deleteExercise(ex.id)}>Delete</button>
+                      <button onClick={() => deleteExercise(ex.id)}>
+                        Delete
+                      </button>
                     </li>
                   ))}
               </ul>
@@ -484,26 +508,26 @@ function Wellness({
       >
         <div className="meals-card">
           {["breakfast", "lunch", "dinner"].map((meal) => {
-            console.log(meals?.[`${meal}Timestamp`]);
-            return(
-            <div key={meal}>
-              <label>
-                <input
-                  type="checkbox"
-                  checked={meals?.[meal] || false}
-                  onChange={() => toggleMeal(meal)}
-                />{" "}
-                {meal.charAt(0).toUpperCase() + meal.slice(1)}
-              </label>
+            return (
+              <div key={meal}>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={meals?.[meal] || false}
+                    onChange={() => toggleMeal(meal)}
+                  />{" "}
+                  {meal.charAt(0).toUpperCase() + meal.slice(1)}
+                </label>
 
-              {meals?.[`${meal}Timestamp`] && (
-                <p className="timestamp">
-                  {formatDate(meals[`${meal}Timestamp`])} —{" "}
-                  {formatTime(meals[`${meal}Timestamp`])}
-                </p>
-              )}
-            </div>
-          )})}
+                {meals?.[`${meal}Timestamp`] && (
+                  <p className="timestamp">
+                    {formatDate(meals[`${meal}Timestamp`])} —{" "}
+                    {formatTime(meals[`${meal}Timestamp`])}
+                  </p>
+                )}
+              </div>
+            );
+          })}
 
           {/* Snacks */}
           <div className="snacks-row">
@@ -556,7 +580,7 @@ function Wellness({
             </div>
           </div>
 
-          <div className="water-buttons">            
+          <div className="water-buttons">
             {hydration?.glasses > 0 && (
               <button onClick={() => updateWater(-1)}>- Remove</button>
             )}
